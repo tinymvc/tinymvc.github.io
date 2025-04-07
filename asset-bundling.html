@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TinyMVC Documentation</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <header>
+        <a href="https://tinymvc.github.io" class="logo">
+            <span>TinyMVC</span> <sup class="version">v1.x</sup>
+        </a>
+        <a href="https://github.com/tinymvc/tinymvc" class="github-link">
+            <svg height="20" viewBox="0 0 16 16" width="20" style="margin-right: 5px;">
+                <path fill="currentColor" fill-rule="evenodd"
+                    d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z">
+                </path>
+            </svg>
+            GitHub
+        </a>
+    </header>
+
+    <div class="main-container">
+        <nav class="sidebar">
+            <a href="./index.html" style="display: block;margin-bottom: 5px;">Introduction</a>
+            <h2>Getting Started</h2>
+            <ul>
+                <li><a href="./installation.html">Installation</a></li>
+                <li><a href="./configuration.html">Configuration</a></li>
+                <li><a href="./quick-start.html">Quick Start</a></li>
+            </ul>
+
+            <h2>The Basics</h2>
+            <ul>
+                <li><a href="./routing.html">Routing</a></li>
+                <li><a href="./middleware.html">Middleware</a></li>
+                <li><a href="./controllers.html">Controllers</a></li>
+                <li><a href="./request.html">Request</a></li>
+                <li><a href="./response.html">Response</a></li>
+            </ul>
+
+            <h2>More Features</h2>
+            <ul>
+                <li><a href="./authentication.html">Authentication</a></li>
+                <li><a href="./authorization.html">Authorization</a></li>
+                <li><a href="./database.html">Database</a></li>
+                <li><a href="./queues.html">Queues</a></li>
+                <li><a href="./events.html">Events</a></li>
+                <li><a href="./encryption.html">Encryption</a></li>
+                <li><a href="./service-container.html">Service Container</a></li>
+                <li><a href="./service-provider.html">Service Provider</a></li>
+                <li><a href="./views.html">Views</a></li>
+                <li><a href="./asset-bundling.html" class="active">Asset Bundling</a></li>
+                <li><a href="./csrf-protection.html">CSRF Protection</a></li>
+                <li><a href="./localization.html">Localization</a></li>
+                <li><a href="./spark-cli.html">Spark CLI</a></li>
+                <li><a href="./helpers-and-utils.html">Helpers & Utils</a></li>
+                <li><a href="./contribution.html">❤️ Support or Contribution</a></li>
+            </ul>
+        </nav>
+        <div class="content">
+            <section id="asset-bundling">
+                <h2>Asset Bundling with Vite</h2>
+
+                <p>The TinyMVC framework comes with integrated Vite.js support for modern asset bundling, including:</p>
+                <ul>
+                    <li>JavaScript and CSS bundling</li>
+                    <li>Hot Module Replacement (HMR) during development</li>
+                    <li>TailwindCSS integration</li>
+                    <li>React support (when needed)</li>
+                    <li>Efficient production builds</li>
+                </ul>
+
+                <h3>Getting Started</h3>
+
+                <p>Your project comes pre-configured with Vite and TailwindCSS. To begin development:</p>
+
+                <pre><code>npm install
+npm run dev</code></pre>
+
+                <p>This will start the Vite development server with hot reloading enabled.</p>
+
+                <h3>Vite Configuration</h3>
+
+                <p>The framework includes a default Vite configuration (<code>vite.config.js</code>) with these
+                    features:</p>
+
+                <pre><code>import { defineConfig } from 'vite';
+import path from 'path';
+import tailwindcss from '@tailwindcss/vite';
+
+export default defineConfig(({ mode }) => ({
+    plugins: [tailwindcss()],
+    base: mode === 'production' ? '/assets/build/' : '/',
+    root: path.resolve(__dirname, './resources/app'),
+    server: {
+        strictPort: true,
+        port: 5133,
+    },
+    build: {
+        outDir: path.resolve(__dirname, './public/assets/build'),
+        emptyOutDir: true,
+        manifest: true,
+        rollupOptions: {
+            input: path.resolve(__dirname, './resources/app/app.js'),
+        },
+    },
+    resolve: {
+        alias: {
+            '@': path.resolve(__dirname, './resources/app'),
+        },
+    },
+}));</code></pre>
+
+                <div class="note">
+                    <strong>Note:</strong> The configuration automatically handles different paths for development and
+                    production environments.
+                </div>
+
+                <h3>Entry Point</h3>
+
+                <p>The main JavaScript entry point is located at <code>resources/app/app.js</code>:</p>
+
+                <pre><code>import './app.css';
+import Alpine from 'alpinejs';
+import axios from 'axios';
+
+window.Alpine = Alpine;
+window.axios = axios;
+window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+
+Alpine.start();</code></pre>
+
+                <p>This file initializes Alpine.js and Axios by default. You can modify it to include your own
+                    JavaScript logic.</p>
+
+                <h3>Including Assets in Views</h3>
+
+                <p>To include the bundled assets in your views, use the <code>vite()</code> helper:</p>
+
+                <pre><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+    &lt;title&gt;My App&lt;/title&gt;
+    &lt;?= vite(); // including vite's script/modules ?&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;?= $content ?&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+
+                <p>This helper automatically includes the correct scripts and stylesheets for both development and
+                    production environments.</p>
+
+                <h3>Working with Static Assets</h3>
+
+                <p>To include images, fonts, or other static assets:</p>
+
+                <ol>
+                    <li>Place them in the <code>resources/images</code> or <code>resources/fonts</code> directories</li>
+                    <li>Configure them in <code>app.js</code>:</li>
+                </ol>
+
+                <pre><code>import.meta.glob([
+    '../images/**',
+    '../fonts/**',
+]);</code></pre>
+
+                <p>Then reference them in your views:</p>
+
+                <pre><code>&lt;img src="&lt;?= vite()-&gt;asset('/images/logo.png') ?&gt;"&gt;</code></pre>
+
+                <h3>React Support</h3>
+
+                <p>When using React, add the React refresh tag before including Vite:</p>
+
+                <pre><code>&lt;?= vite()-&gt;reactRefreshTag() ?&gt;
+&lt;?= vite() ?&gt;</code></pre>
+
+                <div class="note">
+                    <strong>Note:</strong> Remember to install React dependencies when using this feature.
+                </div>
+
+                <h3>Production Build</h3>
+
+                <p>To create an optimized production build:</p>
+
+                <pre><code>npm run build</code></pre>
+
+                <p>This will generate minified assets in the <code>public/assets/build</code> directory.</p>
+
+                <h3>TailwindCSS Configuration</h3>
+
+                <p>The framework includes TailwindCSS configured to work with Vite.</p>
+                <p>Your CSS file (<code>resources/app/app.css</code>) should include Tailwind directives:</p>
+
+                <pre><code>@import 'tailwindcss';
+
+@source '../views/**/*.php';
+@source './**/*.js';</code></pre>
+                <a href="https://tailwindcss.com/" target="_blank">👉 Learn more about TailwindCSS</a>
+
+                <h3>Available NPM Scripts</h3>
+
+                <pre><code>{
+    "scripts": {
+        "dev": "vite",          // Start development server
+        "build": "vite build"   // Create production build
+    }
+}</code></pre>
+                <div class="note">
+                    <strong>Note:</strong> For development, make sure you clear ./public/assets/<b>build</b> folder
+                    before running the
+                    <code>npm run dev</code> command.
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-links">
+            <a href="https://github.com/tinymvc/tinymvc">GitHub</a>
+            <a href="https://github.com/tinymvc/tinymvc/issues">Issues</a>
+            <a href="https://github.com/tinymvc/tinymvc/discussions">Discussions</a>
+            <a href="https://github.com/tinymvc/tinymvc/blob/main/LICENSE">License</a>
+        </div>
+        <div class="copyright">
+            &copy; 2023 TinyMVC Framework by <a href="https://github.com/shahinmoyshan">Shahin Moyshan</a>.
+        </div>
+    </footer>
+</body>
+
+</html>

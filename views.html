@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TinyMVC Documentation</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <header>
+        <a href="https://tinymvc.github.io" class="logo">
+            <span>TinyMVC</span> <sup class="version">v1.x</sup>
+        </a>
+        <a href="https://github.com/tinymvc/tinymvc" class="github-link">
+            <svg height="20" viewBox="0 0 16 16" width="20" style="margin-right: 5px;">
+                <path fill="currentColor" fill-rule="evenodd"
+                    d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z">
+                </path>
+            </svg>
+            GitHub
+        </a>
+    </header>
+
+    <div class="main-container">
+        <nav class="sidebar">
+            <a href="./index.html" style="display: block;margin-bottom: 5px;">Introduction</a>
+            <h2>Getting Started</h2>
+            <ul>
+                <li><a href="./installation.html">Installation</a></li>
+                <li><a href="./configuration.html">Configuration</a></li>
+                <li><a href="./quick-start.html">Quick Start</a></li>
+            </ul>
+
+            <h2>The Basics</h2>
+            <ul>
+                <li><a href="./routing.html">Routing</a></li>
+                <li><a href="./middleware.html">Middleware</a></li>
+                <li><a href="./controllers.html">Controllers</a></li>
+                <li><a href="./request.html">Request</a></li>
+                <li><a href="./response.html">Response</a></li>
+            </ul>
+
+            <h2>More Features</h2>
+            <ul>
+                <li><a href="./authentication.html">Authentication</a></li>
+                <li><a href="./authorization.html">Authorization</a></li>
+                <li><a href="./database.html">Database</a></li>
+                <li><a href="./queues.html">Queues</a></li>
+                <li><a href="./events.html">Events</a></li>
+                <li><a href="./encryption.html">Encryption</a></li>
+                <li><a href="./service-container.html">Service Container</a></li>
+                <li><a href="./service-provider.html">Service Provider</a></li>
+                <li><a href="./views.html" class="active">Views</a></li>
+                <li><a href="./asset-bundling.html">Asset Bundling</a></li>
+                <li><a href="./csrf-protection.html">CSRF Protection</a></li>
+                <li><a href="./localization.html">Localization</a></li>
+                <li><a href="./spark-cli.html">Spark CLI</a></li>
+                <li><a href="./helpers-and-utils.html">Helpers & Utils</a></li>
+                <li><a href="./contribution.html">❤️ Support or Contribution</a></li>
+            </ul>
+        </nav>
+        <div class="content">
+            <section id="views">
+                <h2>View Templating</h2>
+
+                <p>TinyMVC provides a fast, lightweight templating system using plain PHP with additional conveniences
+                    for
+                    layouts, components, and data sharing.</p>
+
+                <h3>Basic Usage</h3>
+                <h4>Rendering Views</h4>
+                <pre><code>// In controllers
+return view('welcome', ['name' => 'John']);
+
+// Using View class directly
+return get(Response::class)->write(
+    get(View::class)
+        ->render('profile', ['user' => $user])
+);</code></pre>
+
+                <h4>Template Structure</h4>
+                <pre><code>views/
+├── layouts/
+│   └── app.php      # Main layout
+├── components/
+│   └── alert.php    # Reusable components
+└── pages/
+    ├── home.php     # Page templates
+    └── profile.php</code></pre>
+
+                <h3>Template Features</h3>
+                <h4>Passing Data</h4>
+                <pre><code>// Controller
+return view('profile', [
+    'user' => $user,
+    'title' => 'User Profile'
+]);
+
+// Template (profile.php)
+&lt;h1&gt;&lt;?= $title ?>&gt;&lt;/h1&gt;
+&lt;p&gt;Welcome, &lt;?= $user->name ?>&gt;&lt;/p&gt;</code></pre>
+
+                <h4>Layouts</h4>
+                <pre><code>// Using layout
+return view('pages/home');
+
+// Page template (pages/home.php)
+&lt;?php $view->layout('layouts/app'); ?&gt;
+&lt;section&gt;
+    &lt;h1&gt;Home&lt;/h1&gt;
+    &lt;p&gt;Welcome to the home page!&lt;/p&gt;
+&lt;section/&gt;
+
+// Layout template (layouts/app.php)
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+    &lt;title&gt;My App&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;?= $content ?>&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+
+                <h4>Components</h4>
+                <pre><code>// In template
+&lt;?= $view->component('alert', ['type' => 'success', 'message' => 'Updated!']) ?&gt;
+
+// Component (components/alert.php)
+&lt;div class="alert alert-&lt;?= $type ?&gt;"&gt;
+    &lt;?= $message ?&gt;
+&lt;/div&gt;</code></pre>
+
+                <h3>Automatic Context</h3>
+                <p>These variables are always available in templates:</p>
+                <pre><code>$app       // Application instance
+$request   // Current Request object  
+$session   // Session object
+$errors    // Validation errors
+$view      // Current View instance</code></pre>
+
+                <h3>View Methods</h3>
+                <pre><code>// Set/get view data
+$view->set('key', 'value');
+$value = $view->get('key');
+
+// Check for data
+if ($view->has('user')) {
+    // ...
+}
+
+// Merge additional context
+$view->mergeContext(['settings' => $settings]);
+
+// Include partials
+&lt;?= $view->include('partials/header') ?&gt;
+
+// Check if template exists
+if ($view->templateExists('special-page')) {
+    // ...
+}</code></pre>
+
+                <h3>Best Practices</h3>
+                <div class="note">
+                    <ul>
+                        <li>Keep templates focused on presentation only</li>
+                        <li>Use components for reusable UI elements</li>
+                        <li>Pass only necessary data to views</li>
+                        <li>Store complex logic in view composers</li>
+                        <li>Use layouts for consistent page structures</li>
+                    </ul>
+                </div>
+
+                <h3>Advanced Patterns</h3>
+                <h4>View Composers</h4>
+                <pre><code>// In service provider
+view()->mergeContext([
+    'categories' => Category::all(),
+    'stats' => SiteStats::get()
+]);
+
+// Or create dedicated composer class
+class ProfileComposer
+{
+    public function compose(View $view)
+    {
+        $view->set('friends', User::friends(auth()->id()));
+    }
+}</code></pre>
+
+                <h4>Error Handling</h4>
+                <pre><code>// Access validation errors
+&lt;?php if ($errors->has('email')): ?&gt;
+    &lt;div class="error"&gt;&lt;?= $errors->first('email') ?&gt;&lt;/div&gt;
+&lt;?php endif ?&gt;</code></pre>
+
+                <h4>AJAX Responses</h4>
+                <pre><code>if ($request->isAjax()) {
+    return response()->json([
+        'html' => view('partials/updates', $data)
+    ]);
+}</code></pre>
+
+                <h3>Full Example</h3>
+                <pre><code>// Controller
+public function show($id)
+{
+    return view('products/show', [
+        'product' => Product::find($id),
+        'related' => Product::related($id)
+    ]);
+}
+
+// Template (products/show.php)
+&lt;?php $view->layout('layouts/store'); ?&gt;
+&lt;?= $view->include('partials/product-header') ?&gt;
+
+&lt;div class="product-details"&gt;
+    &lt;h1&gt;&lt;?= $product->name ?&gt;&lt;/h1&gt;
+    &lt;?= $view->component('price', ['amount' => $product->price]) ?&gt;
+&lt;/div&gt;
+
+&lt;?php if (!empty($related)): ?&gt;
+    &lt;h2&gt;Related Products&lt;/h2&gt;
+    &lt;?= $view->include('partials/product-grid', ['products' => $related]) ?&gt;
+&lt;?php endif ?&gt;
+
+// Layout (layouts/store.php)
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+    &lt;title&gt;&lt;?= $title ?? 'Store' ?&gt;&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;?= $view->include('partials/nav') ?&gt;
+    &lt;main&gt;
+        &lt;?= $content ?&gt;
+    &lt;/main&gt;
+    &lt;?= $view->include('partials/footer') ?&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+            </section>
+
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-links">
+            <a href="https://github.com/tinymvc/tinymvc">GitHub</a>
+            <a href="https://github.com/tinymvc/tinymvc/issues">Issues</a>
+            <a href="https://github.com/tinymvc/tinymvc/discussions">Discussions</a>
+            <a href="https://github.com/tinymvc/tinymvc/blob/main/LICENSE">License</a>
+        </div>
+        <div class="copyright">
+            &copy; 2023 TinyMVC Framework by <a href="https://github.com/shahinmoyshan">Shahin Moyshan</a>.
+        </div>
+    </footer>
+</body>
+
+</html>

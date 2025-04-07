@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TinyMVC Documentation</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <header>
+        <a href="https://tinymvc.github.io" class="logo">
+            <span>TinyMVC</span> <sup class="version">v1.x</sup>
+        </a>
+        <a href="https://github.com/tinymvc/tinymvc" class="github-link">
+            <svg height="20" viewBox="0 0 16 16" width="20" style="margin-right: 5px;">
+                <path fill="currentColor" fill-rule="evenodd"
+                    d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z">
+                </path>
+            </svg>
+            GitHub
+        </a>
+    </header>
+
+    <div class="main-container">
+        <nav class="sidebar">
+            <a href="./index.html" style="display: block;margin-bottom: 5px;">Introduction</a>
+            <h2>Getting Started</h2>
+            <ul>
+                <li><a href="./installation.html">Installation</a></li>
+                <li><a href="./configuration.html">Configuration</a></li>
+                <li><a href="./quick-start.html">Quick Start</a></li>
+            </ul>
+
+            <h2>The Basics</h2>
+            <ul>
+                <li><a href="./routing.html">Routing</a></li>
+                <li><a href="./middleware.html">Middleware</a></li>
+                <li><a href="./controllers.html">Controllers</a></li>
+                <li><a href="./request.html">Request</a></li>
+                <li><a href="./response.html">Response</a></li>
+            </ul>
+
+            <h2>More Features</h2>
+            <ul>
+                <li><a href="./authentication.html">Authentication</a></li>
+                <li><a href="./authorization.html">Authorization</a></li>
+                <li><a href="./database.html">Database</a></li>
+                <li><a href="./queues.html">Queues</a></li>
+                <li><a href="./events.html">Events</a></li>
+                <li><a href="./encryption.html">Encryption</a></li>
+                <li><a href="./service-container.html">Service Container</a></li>
+                <li><a href="./service-provider.html">Service Provider</a></li>
+                <li><a href="./views.html">Views</a></li>
+                <li><a href="./asset-bundling.html">Asset Bundling</a></li>
+                <li><a href="./csrf-protection.html">CSRF Protection</a></li>
+                <li><a href="./localization.html">Localization</a></li>
+                <li><a href="./spark-cli.html" class="active">Spark CLI</a></li>
+                <li><a href="./helpers-and-utils.html">Helpers & Utils</a></li>
+                <li><a href="./contribution.html">❤️ Support or Contribution</a></li>
+            </ul>
+        </nav>
+        <div class="content">
+
+            <section id="spark-cli">
+                <h2>Spark CLI Tool</h2>
+
+                <p>The TinyMVC framework includes Spark CLI, a command-line interface,
+                    providing helpful commands for development and maintenance tasks.</p>
+
+                <h3>Basic Usage</h3>
+
+                <p>Run Spark CLI commands using the following syntax:</p>
+
+                <pre><code>php spark [command] [options] [arguments]</code></pre>
+
+                <p>To see all available commands:</p>
+
+                <pre><code>php spark help</code></pre>
+
+                <h3>Available Commands</h3>
+
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Command</th>
+                            <th>Description</th>
+                            <th>Usage</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><code>help</code></td>
+                            <td>Show command help</td>
+                            <td><code>php spark help [command]</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>key:generate</code></td>
+                            <td>Generate a new encryption key</td>
+                            <td><code>php spark key:generate</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>make:controller</code></td>
+                            <td>Create a new controller class</td>
+                            <td><code>php spark make:controller UserController</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>make:middleware</code></td>
+                            <td>Create a new middleware class</td>
+                            <td><code>php spark make:middleware AuthMiddleware</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>make:migration</code></td>
+                            <td>Create a new database migration file</td>
+                            <td><code>php spark make:migration users</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>make:model</code></td>
+                            <td>Create a new model class</td>
+                            <td><code>php spark make:model User</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>make:provider</code></td>
+                            <td>Create a new service provider class</td>
+                            <td><code>php spark make:provider CustomServiceProvider</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>make:view</code></td>
+                            <td>Create a new view template</td>
+                            <td><code>php spark make:view users/profile</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>migrate:fresh</code></td>
+                            <td>Rollback all migrations and re-run them</td>
+                            <td><code>php spark migrate:fresh</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>migrate:run</code></td>
+                            <td>Run the database migrations</td>
+                            <td><code>php spark migrate:run</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>migrate:rollback</code></td>
+                            <td>Rollback to last migration (optional steps)</td>
+                            <td><code>php spark migrate:rollback [steps]</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>queue:clear</code></td>
+                            <td>Clear all queued jobs</td>
+                            <td><code>php spark queue:clear</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>queue:run</code></td>
+                            <td>Run the queued jobs</td>
+                            <td><code>php spark queue:run</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>route:list</code></td>
+                            <td>Show all available routes</td>
+                            <td><code>php spark route:list</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>serve</code></td>
+                            <td>Run PHP built-in development server</td>
+                            <td><code>php spark serve</code></td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h3>Creating Custom Commands</h3>
+
+                <p>You can easily add custom commands by defining them in <code>router/commands.php</code>:</p>
+
+                <pre><code>&lt;?php
+use Spark\Console\Prompt;
+
+command('greet', function (Prompt $prompt) {
+    $name = $prompt->ask('What is your name?');
+    $prompt->message("Hello, {$name}!", 'success');
+})->description('Show a Greeting Message');</code></pre>
+
+                <p>Command structure:</p>
+                <ol>
+                    <li><code>command('name', callable)</code> - Defines the command name and handler</li>
+                    <li>The handler will be injected with any dependencies automatically.</li>
+                    <li><code>->description()</code> - Sets the command description shown in help</li>
+                </ol>
+
+                <h4>Prompt Methods</h4>
+
+                <p>The <code>Prompt</code> class provides these interaction methods:</p>
+
+                <pre><code>$prompt->ask('Question'); // Basic input
+$prompt->confirm('Proceed?'); // Yes/No confirmation
+$prompt->message('Text', 'success'); // Colored output (success/error/info)</code></pre>
+
+                <h3>Command Structure</h3>
+
+                <p>For more complex commands, you can create command classes:</p>
+
+                <pre><code>command('complex:task', ComplexTaskCommand::class)
+    ->description('Perform a complex task');</code></pre>
+
+                <p>Where <code>ComplexTaskCommand</code> implements <code>__invoke(array $args)</code>:</p>
+
+                <pre><code>class ComplexTaskCommand {
+    public function __construct(private Prompt $prompt) {
+        
+    }
+
+    public function __invoke(array $args) {
+        // Command logic here
+    }
+}</code></pre>
+
+                <h3>Best Practices</h3>
+
+                <ul>
+                    <li>Keep command names consistent (verb:noun format)</li>
+                    <li>Provide clear descriptions for all commands</li>
+                    <li>Use the Prompt class for all user interaction</li>
+                    <li>Group related commands in command classes when they become complex</li>
+                    <li>Document your custom commands in your project documentation</li>
+                </ul>
+
+                <div class="note">
+                    <strong>Tip:</strong> You can chain additional methods to commands like
+                    <code>->help('Additional help text')</code> to provide more detailed documentation for your custom
+                    commands.
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-links">
+            <a href="https://github.com/tinymvc/tinymvc">GitHub</a>
+            <a href="https://github.com/tinymvc/tinymvc/issues">Issues</a>
+            <a href="https://github.com/tinymvc/tinymvc/discussions">Discussions</a>
+            <a href="https://github.com/tinymvc/tinymvc/blob/main/LICENSE">License</a>
+        </div>
+        <div class="copyright">
+            &copy; 2023 TinyMVC Framework by <a href="https://github.com/shahinmoyshan">Shahin Moyshan</a>.
+        </div>
+    </footer>
+</body>
+
+</html>

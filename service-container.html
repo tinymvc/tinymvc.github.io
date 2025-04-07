@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TinyMVC Documentation</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <header>
+        <a href="https://tinymvc.github.io" class="logo">
+            <span>TinyMVC</span> <sup class="version">v1.x</sup>
+        </a>
+        <a href="https://github.com/tinymvc/tinymvc" class="github-link">
+            <svg height="20" viewBox="0 0 16 16" width="20" style="margin-right: 5px;">
+                <path fill="currentColor" fill-rule="evenodd"
+                    d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z">
+                </path>
+            </svg>
+            GitHub
+        </a>
+    </header>
+
+    <div class="main-container">
+        <nav class="sidebar">
+            <a href="./index.html" style="display: block;margin-bottom: 5px;">Introduction</a>
+            <h2>Getting Started</h2>
+            <ul>
+                <li><a href="./installation.html">Installation</a></li>
+                <li><a href="./configuration.html">Configuration</a></li>
+                <li><a href="./quick-start.html">Quick Start</a></li>
+            </ul>
+
+            <h2>The Basics</h2>
+            <ul>
+                <li><a href="./routing.html">Routing</a></li>
+                <li><a href="./middleware.html">Middleware</a></li>
+                <li><a href="./controllers.html">Controllers</a></li>
+                <li><a href="./request.html">Request</a></li>
+                <li><a href="./response.html">Response</a></li>
+            </ul>
+
+            <h2>More Features</h2>
+            <ul>
+                <li><a href="./authentication.html">Authentication</a></li>
+                <li><a href="./authorization.html">Authorization</a></li>
+                <li><a href="./database.html">Database</a></li>
+                <li><a href="./queues.html">Queues</a></li>
+                <li><a href="./events.html">Events</a></li>
+                <li><a href="./encryption.html">Encryption</a></li>
+                <li><a href="./service-container.html" class="active">Service Container</a></li>
+                <li><a href="./service-provider.html">Service Provider</a></li>
+                <li><a href="./views.html">Views</a></li>
+                <li><a href="./asset-bundling.html">Asset Bundling</a></li>
+                <li><a href="./csrf-protection.html">CSRF Protection</a></li>
+                <li><a href="./localization.html">Localization</a></li>
+                <li><a href="./spark-cli.html">Spark CLI</a></li>
+                <li><a href="./helpers-and-utils.html">Helpers & Utils</a></li>
+                <li><a href="./contribution.html">❤️ Support or Contribution</a></li>
+            </ul>
+        </nav>
+        <div class="content">
+            <section id="service-container">
+                <h2>Service Container</h2>
+
+                <p>TinyMVC's service container is a powerful tool for managing class dependencies and performing
+                    dependency
+                    injection.</p>
+
+                <h3>Basic Usage</h3>
+                <h4>Binding Dependencies</h4>
+                <pre><code>// Bind interface to implementation
+container()->bind(LoggerInterface::class, FileLogger::class);
+
+// Bind with closure
+container()->bind('cache', function() {
+    return new RedisCache(config('redis'));
+});
+
+// Singleton binding (same instance each time)
+container()->singleton(Database::class, function() {
+    return new Database(config('database'));
+});</code></pre>
+
+                <h4>Resolving Dependencies</h4>
+                <pre><code>// Get instance from container
+$logger = container()->get(LoggerInterface::class);
+
+// Using helper function
+$cache = get('cache');
+
+// Automatic resolution
+$userService = get(UserService::class);</code></pre>
+
+                <h3>Helper Functions</h3>
+                <pre><code>// Check if binding exists
+if (has(LoggerInterface::class)) {
+    // ...
+}
+
+// Bind interface to implementation
+bind(LoggerInterface::class, FileLogger::class);
+
+// Singleton binding
+singleton(Database::class, function() {
+    return new Database(config('database'));
+});
+
+// Get instance
+$db = get(Database::class);
+// or, use app helper function
+$db = app(Database::class);
+</code></pre>
+
+                <h3>Dependency Injection</h3>
+                <p>The container automatically resolves class dependencies:</p>
+                <pre><code>class UserController
+{
+    public function __construct(
+        private UserRepository $users,
+        private LoggerInterface $logger
+    ) {}
+}
+
+// Controller will be automatically resolved with dependencies
+$controller = get(UserController::class);</code></pre>
+
+                <h3>Method Injection</h3>
+                <pre><code>// Call class method with dependency injection
+$result = container()->call('UserController@store', [
+    'request' => $specificRequest // Specific parameter
+]);
+
+// Call closure with dependency injection
+container()->call(function(UserRepository $users, Request $request) {
+    // ...
+});</code></pre>
+
+                <h3>Aliases</h3>
+                <pre><code>// Create alias
+container()->alias('db', Database::class);
+
+// Resolve using alias
+$db = get('db');</code></pre>
+
+                <h3>Practical Examples</h3>
+                <h4>Database Service Setup</h4>
+                <pre><code>// In service provider
+singleton(Connection::class, function() {
+    return new PDOConnection(config('database'));
+});
+
+// In controller
+class UserController
+{
+    public function __construct(private Connection $db) {}
+    
+    public function index()
+    {
+        $users = $this->db->query('SELECT * FROM users');
+        // ...
+    }
+}</code></pre>
+
+                <h4>Custom Logger Binding</h4>
+                <pre><code>// Bind interface to environment-specific implementation
+if (config('app.env') === 'production') {
+    bind(LoggerInterface::class, CloudLogger::class);
+} else {
+    bind(LoggerInterface::class, FileLogger::class);
+}
+
+// Resolved automatically
+class OrderService
+{
+    public function __construct(private LoggerInterface $logger) {}
+}</code></pre>
+
+                <div class="note">
+                    <strong>Best Practices:</strong>
+                    <ul>
+                        <li>Use interfaces for important dependencies</li>
+                        <li>Register bindings in service providers</li>
+                        <li>Use singleton for services that should maintain state</li>
+                        <li>Prefer constructor injection over direct container access</li>
+                    </ul>
+                </div>
+
+                <h3>Troubleshooting</h3>
+                <pre><code># Common issues:
+# - "Class not found" → Check binding exists and class is autoloadable
+# - "Cannot instantiate interface" → Forgot to bind implementation
+# - "Circular dependency" → Two classes depend on each other
+
+# Debug bindings
+dd(container()->debug());
+
+# Check if binding exists
+if (has(LoggerInterface::class)) {
+    // ...
+}</code></pre>
+            </section>
+
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-links">
+            <a href="https://github.com/tinymvc/tinymvc">GitHub</a>
+            <a href="https://github.com/tinymvc/tinymvc/issues">Issues</a>
+            <a href="https://github.com/tinymvc/tinymvc/discussions">Discussions</a>
+            <a href="https://github.com/tinymvc/tinymvc/blob/main/LICENSE">License</a>
+        </div>
+        <div class="copyright">
+            &copy; 2023 TinyMVC Framework by <a href="https://github.com/shahinmoyshan">Shahin Moyshan</a>.
+        </div>
+    </footer>
+</body>
+
+</html>

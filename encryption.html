@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TinyMVC Documentation</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <header>
+        <a href="https://tinymvc.github.io" class="logo">
+            <span>TinyMVC</span> <sup class="version">v1.x</sup>
+        </a>
+        <a href="https://github.com/tinymvc/tinymvc" class="github-link">
+            <svg height="20" viewBox="0 0 16 16" width="20" style="margin-right: 5px;">
+                <path fill="currentColor" fill-rule="evenodd"
+                    d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z">
+                </path>
+            </svg>
+            GitHub
+        </a>
+    </header>
+
+    <div class="main-container">
+        <nav class="sidebar">
+            <a href="./index.html" style="display: block;margin-bottom: 5px;">Introduction</a>
+            <h2>Getting Started</h2>
+            <ul>
+                <li><a href="./installation.html">Installation</a></li>
+                <li><a href="./configuration.html">Configuration</a></li>
+                <li><a href="./quick-start.html">Quick Start</a></li>
+            </ul>
+
+            <h2>The Basics</h2>
+            <ul>
+                <li><a href="./routing.html">Routing</a></li>
+                <li><a href="./middleware.html">Middleware</a></li>
+                <li><a href="./controllers.html">Controllers</a></li>
+                <li><a href="./request.html">Request</a></li>
+                <li><a href="./response.html">Response</a></li>
+            </ul>
+
+            <h2>More Features</h2>
+            <ul>
+                <li><a href="./authentication.html">Authentication</a></li>
+                <li><a href="./authorization.html">Authorization</a></li>
+                <li><a href="./database.html">Database</a></li>
+                <li><a href="./queues.html">Queues</a></li>
+                <li><a href="./events.html">Events</a></li>
+                <li><a href="./encryption.html" class="active">Encryption</a></li>
+                <li><a href="./service-container.html">Service Container</a></li>
+                <li><a href="./service-provider.html">Service Provider</a></li>
+                <li><a href="./views.html">Views</a></li>
+                <li><a href="./asset-bundling.html">Asset Bundling</a></li>
+                <li><a href="./csrf-protection.html">CSRF Protection</a></li>
+                <li><a href="./localization.html">Localization</a></li>
+                <li><a href="./spark-cli.html">Spark CLI</a></li>
+                <li><a href="./helpers-and-utils.html">Helpers & Utils</a></li>
+                <li><a href="./contribution.html">❤️ Support or Contribution</a></li>
+            </ul>
+        </nav>
+        <div class="content">
+            <section id="hashing-encryption">
+                <h2>Hashing and Encryption</h2>
+
+                <p>TinyMVC provides robust security utilities for hashing, password management, and encryption through
+                    the
+                    <code>Hash</code> class.
+                </p>
+
+                <h3>Configuration</h3>
+                <p>Set your application key in <code>env.php</code>:</p>
+                <pre><code>// Security settings
+'app_key' => 'e32e4a35fce965947481cdad2db2a4e4', // 32+ character key</code></pre>
+
+                <div class="note">
+                    <strong>Important:</strong> Generate a new application key if not set:
+                    <pre><code>php spark key:generate</code></pre>
+                </div>
+
+                <h3>Basic Hashing</h3>
+                <pre><code>// Create a hash
+$hash = hashing()->make('plain-text');
+
+// Validate a hash
+if (hashing()->validate('plain-text', $storedHash)) {
+    // Hashes match
+}</code></pre>
+
+                <h3>Password Management</h3>
+                <pre><code>// Hash a password (uses Argon2id)
+$hashedPassword = hashing()->hashPassword('user-password');
+
+// Verify password
+if (hashing()->validatePassword('input-password', $storedHash)) {
+    // Password correct
+}</code></pre>
+
+                <h3>Encryption/Decryption</h3>
+                <pre><code>// Encrypt sensitive data
+$encrypted = hashing()->encrypt('sensitive-data');
+
+// Decrypt data
+try {
+    $decrypted = hashing()->decrypt($encrypted);
+} catch (DecryptionFailedException $e) {
+    // Handle decryption failure
+}</code></pre>
+
+                <h3>Dependency Injection</h3>
+                <pre><code>// Inject Hash class
+public function __construct(Hash $hash)
+{
+    $this->hash = $hash;
+}
+
+public function storeData($data)
+{
+    $encrypted = $this->hash->encrypt($data);
+    // ...
+}</code></pre>
+
+                <h3>Security Best Practices</h3>
+                <div class="note">
+                    <ul>
+                        <li>Always use the provided methods rather than raw PHP functions</li>
+                        <li>Never store encryption keys in version control</li>
+                        <li>Rotate your application key periodically</li>
+                        <li>Use different keys for different environments</li>
+                        <li>Always catch encryption/decryption exceptions</li>
+                    </ul>
+                </div>
+
+                <h3>Advanced Usage</h3>
+                <h4>Custom Hashing Algorithms</h4>
+                <pre><code>// Use SHA-512 instead of default SHA-256
+$hash = hashing()->make('data', 'sha512');</code></pre>
+
+                <h4>Password Hash Options</h4>
+                <pre><code>// Custom Argon2 parameters (in service provider)
+$container->singleton(Hash::class, function() {
+    $hash = new Hash(config('app_key'));
+    $hash->setPasswordOptions([
+        'memory_cost' => 131072,  // 128MB
+        'time_cost' => 6,         // 6 iterations
+        'threads' => 3            // 3 threads
+    ]);
+    $hash->setPasswordAlgorithm(PASSWORD_ARGON2ID);
+    return $hash;
+});</code></pre>
+
+                <h3>Full Examples</h3>
+                <h4>User Registration</h4>
+                <pre><code>public function register(Request $request)
+{
+    $user = User::create([
+        'name' => $request->name,
+        'email' => $request->email,
+        'password' => hashing()->hashPassword($request->password),
+        'api_token' => hashing()->encrypt(random_bytes(32))
+    ]);
+    
+    return response()->json($user);
+}</code></pre>
+
+                <h4>Data Encryption Workflow</h4>
+                <pre><code>// Store encrypted data
+$creditCard = [
+    'number' => hashing()->encrypt($request->number),
+    'expiry' => hashing()->encrypt($request->expiry),
+    'cvv' => hashing()->encrypt($request->cvv)
+];
+PaymentMethod::create($creditCard);
+
+// Retrieve and decrypt
+$method = PaymentMethod::find(1);
+try {
+    $cardNumber = hashing()->decrypt($method->number);
+} catch (DecryptionFailedException $e) {
+    abort(500);
+}</code></pre>
+
+                <h3>Troubleshooting</h3>
+                <pre><code># Common issues:
+# - "Encryption key not provided" → Set app_key in env.php
+# - "Invalid encrypted data format" → Corrupted encrypted data
+# - "Decryption failed" → Wrong key or corrupted data</code></pre>
+            </section>
+
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-links">
+            <a href="https://github.com/tinymvc/tinymvc">GitHub</a>
+            <a href="https://github.com/tinymvc/tinymvc/issues">Issues</a>
+            <a href="https://github.com/tinymvc/tinymvc/discussions">Discussions</a>
+            <a href="https://github.com/tinymvc/tinymvc/blob/main/LICENSE">License</a>
+        </div>
+        <div class="copyright">
+            &copy; 2023 TinyMVC Framework by <a href="https://github.com/shahinmoyshan">Shahin Moyshan</a>.
+        </div>
+    </footer>
+</body>
+
+</html>

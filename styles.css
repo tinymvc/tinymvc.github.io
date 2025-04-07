@@ -1,0 +1,374 @@
+:root {
+    --sidebar-width: 280px;
+    --primary-color: #44596e;
+    --accent-color: #4f8ef7;
+    --header-height: 60px;
+    --footer-height: 80px;
+    --content-max-width: 860px;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    background: #f8fafc;
+    color: #2d3748;
+}
+
+/* Header Styles */
+header {
+    height: var(--header-height);
+    background: white;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 2rem;
+    position: fixed;
+    width: 100%;
+    z-index: 100;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    font-weight: 600;
+    font-size: 1.65rem;
+    color: var(--primary-color);
+    text-decoration: none;
+}
+
+.logo img {
+    height: 30px;
+    margin-right: 10px;
+}
+
+.github-link {
+    color: var(--primary-color);
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+}
+
+.github-link:hover {
+    color: var(--accent-color);
+}
+
+/* Main Content Layout */
+.main-container {
+    display: flex;
+    flex: 1;
+    padding-top: var(--header-height);
+    justify-content: center;
+}
+
+/* Sidebar Styles */
+.sidebar {
+    width: var(--sidebar-width);
+    background: white;
+    border-right: 1px solid #e2e8f0;
+    padding: 2rem 1rem;
+    overflow-y: auto;
+    position: fixed;
+    height: calc(100vh - var(--header-height));
+    top: var(--header-height);
+    left: 0;
+}
+
+.sidebar>h2 {
+    margin-top: 0px;
+    border: none;
+}
+
+.sidebar h2 {
+    font-size: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: #718096;
+    margin-bottom: 1rem;
+    padding-left: 0.5rem;
+}
+
+.content ul {
+    padding-left: 1.25rem;
+}
+
+.content ul:not(:last-child) {
+    margin-bottom: 1.5rem;
+}
+
+.logo .version {
+    font-size: 12px;
+    opacity: 0.85;
+    margin-left: 5px;
+    margin-bottom: -15px;
+}
+
+.sidebar ul {
+    list-style: none;
+    margin-bottom: 2rem;
+}
+
+.sidebar li {
+    margin: 0.25rem 0;
+}
+
+.sidebar a {
+    display: block;
+    color: #4a5568;
+    text-decoration: none;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    font-size: 0.95rem;
+    transition: all 0.2s;
+}
+
+.sidebar a:hover,
+.sidebar a.active {
+    background: #edf2f7;
+    color: var(--primary-color);
+}
+
+/* Content Styles */
+.content {
+    flex: 1;
+    margin-left: var(--sidebar-width);
+    padding: 2rem 4rem;
+    max-width: var(--content-max-width);
+    line-height: 1.6;
+}
+
+a {
+    color: var(--primary-color);
+    text-decoration: none;
+    transition: all 0.2s;
+    font-weight: 500;
+}
+
+a:hover {
+    color: var(--accent-color);
+}
+
+h1 {
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+    color: var(--primary-color);
+    font-weight: 600;
+}
+
+.content section>h2 {
+    margin-top: 0px;
+    border: none;
+}
+
+h2 {
+    font-size: 1.86rem;
+    margin: 3rem 0 1.5rem;
+    color: var(--primary-color);
+    font-weight: 500;
+    padding-top: 1rem;
+    border-top: 1px solid #e2e8f0;
+}
+
+h3 {
+    font-size: 1.4rem;
+    margin: 2rem 0 1rem;
+    color: #2d3748;
+    font-weight: 500;
+}
+
+p {
+    margin-bottom: 1.5rem;
+    line-height: 1.7;
+}
+
+code {
+    background: #f3f4f6;
+    padding: 0.2em 0.4em;
+    border-radius: 3px;
+    font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+    font-size: 0.9em;
+}
+
+pre {
+    background: #1a202c;
+    color: #cbd5e0;
+    padding: 1.25rem;
+    border-radius: 6px;
+    overflow-x: auto;
+    margin: 1.5rem 0;
+    font-size: 0.9rem;
+    line-height: 1.5;
+}
+
+pre code {
+    background: none;
+    padding: 0;
+    font-size: inherit;
+    color: inherit;
+}
+
+.note,
+.note-warning,
+.tip {
+    background: #e3f2fd;
+    border-left: 4px solid #2196f3;
+    padding: 1rem;
+    margin: 1.5rem 0;
+    border-radius: 4px;
+}
+
+.note-warning {
+    background: #fff3cd;
+    border-left: 4px solid #ffc107;
+}
+
+.tip {
+    background: #e8f5e9;
+    border-left: 4px solid #4caf50;
+}
+
+/* Footer Styles */
+footer {
+    background: white;
+    border-top: 1px solid #e2e8f0;
+    padding: 1.5rem 2rem;
+    text-align: center;
+    font-size: 0.9rem;
+    color: #718096;
+}
+
+.footer-links {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+.footer-links a {
+    color: #4a5568;
+    text-decoration: none;
+}
+
+.footer-links a:hover {
+    color: var(--accent-color);
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .main-container {
+        flex-direction: column;
+    }
+
+    .sidebar {
+        width: 100%;
+        position: static;
+        height: auto;
+        border-right: none;
+        border-bottom: 1px solid #e2e8f0;
+    }
+
+    .content {
+        margin-left: 0;
+        padding: 2rem;
+    }
+}
+
+table.table {
+    border: 1px solid var(--primary-color);
+    width: 100%;
+    margin-bottom: 25px;
+    border-collapse: collapse;
+}
+
+table.table th,
+table.table td {
+    border: 1px solid var(--primary-color);
+    padding: 5px 10px;
+    text-align: left;
+    font-size: 14px;
+    line-height: 1.5;
+    color: var(--primary-color);
+}
+
+h3,
+h4,
+h5 {
+    margin-bottom: 10px;
+}
+
+.github-button {
+    display: inline-block;
+    background: #24292e;
+    color: white;
+    padding: 8px 16px;
+    border-radius: 4px;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.contact-table {
+    width: 100%;
+    max-width: 600px;
+    border-collapse: collapse;
+    margin-bottom: 1.5rem;
+}
+
+.contact-table th,
+.contact-table td {
+    padding: 8px;
+    border-bottom: 1px solid #eee;
+    text-align: left;
+}
+
+.contact-table tr:last-child th,
+.contact-table tr:last-child td {
+    border-bottom: none;
+}
+
+.contact-table th {
+    width: 120px;
+}
+
+.developer-story,
+.contribution-guide,
+.support-contact {
+    margin-top: 3rem;
+    border-top: 1px solid #eee;
+}
+
+.intro-content {
+    line-height: 1.6;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.features li {
+    margin: 8px 0;
+    padding-left: 10px;
+}
+
+.callout {
+    background: #f8f9fa;
+    padding: 15px;
+    border-radius: 8px;
+    margin: 20px 0;
+}
+
+.cta {
+    margin-top: 30px;
+    text-align: center;
+}
+
+.cta a {
+    color: #2c3e50;
+    font-weight: 500;
+    text-decoration: underline;
+}

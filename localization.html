@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TinyMVC Documentation</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <header>
+        <a href="https://tinymvc.github.io" class="logo">
+            <span>TinyMVC</span> <sup class="version">v1.x</sup>
+        </a>
+        <a href="https://github.com/tinymvc/tinymvc" class="github-link">
+            <svg height="20" viewBox="0 0 16 16" width="20" style="margin-right: 5px;">
+                <path fill="currentColor" fill-rule="evenodd"
+                    d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z">
+                </path>
+            </svg>
+            GitHub
+        </a>
+    </header>
+
+    <div class="main-container">
+        <nav class="sidebar">
+            <a href="./index.html" style="display: block;margin-bottom: 5px;">Introduction</a>
+            <h2>Getting Started</h2>
+            <ul>
+                <li><a href="./installation.html">Installation</a></li>
+                <li><a href="./configuration.html">Configuration</a></li>
+                <li><a href="./quick-start.html">Quick Start</a></li>
+            </ul>
+
+            <h2>The Basics</h2>
+            <ul>
+                <li><a href="./routing.html">Routing</a></li>
+                <li><a href="./middleware.html">Middleware</a></li>
+                <li><a href="./controllers.html">Controllers</a></li>
+                <li><a href="./request.html">Request</a></li>
+                <li><a href="./response.html">Response</a></li>
+            </ul>
+
+            <h2>More Features</h2>
+            <ul>
+                <li><a href="./authentication.html">Authentication</a></li>
+                <li><a href="./authorization.html">Authorization</a></li>
+                <li><a href="./database.html">Database</a></li>
+                <li><a href="./queues.html">Queues</a></li>
+                <li><a href="./events.html">Events</a></li>
+                <li><a href="./encryption.html">Encryption</a></li>
+                <li><a href="./service-container.html">Service Container</a></li>
+                <li><a href="./service-provider.html">Service Provider</a></li>
+                <li><a href="./views.html">Views</a></li>
+                <li><a href="./asset-bundling.html">Asset Bundling</a></li>
+                <li><a href="./csrf-protection.html">CSRF Protection</a></li>
+                <li><a href="./localization.html" class="active">Localization</a></li>
+                <li><a href="./spark-cli.html">Spark CLI</a></li>
+                <li><a href="./helpers-and-utils.html">Helpers & Utils</a></li>
+                <li><a href="./contribution.html">❤️ Support or Contribution</a></li>
+            </ul>
+        </nav>
+        <div class="content">
+            <section id="localization">
+                <h2>Localization and Translation</h2>
+
+                <p>The TinyMVC framework provides a comprehensive translation system for multilingual applications,
+                    supporting text translation, pluralization, and variable substitution.</p>
+
+                <h3>Translation Files</h3>
+
+                <p>Translation files are stored in <code>/resources/languages/</code> directory, organized by language
+                    codes (e.g., <code>en.php</code>, <code>bd.php</code>). Each file returns an associative array of
+                    translations.</p>
+
+                <pre><code>&lt;?php
+// resources/languages/en.php
+return [
+    'hello' => 'Hello!',
+    'welcome' => 'Welcome, %s!',
+    'apple_count' => ['%d apple', '%d apples'],
+    'profile_updated' => 'Your profile was updated on %s'
+];</code></pre>
+
+                <h3>Basic Usage</h3>
+
+                <p>Use the <code>__()</code> helper function for translations:</p>
+
+                <pre><code>// Simple translation
+echo __('hello'); // Outputs: Hello!
+
+// With variable substitution
+echo __('welcome', 'John'); // Outputs: Welcome, John!
+
+// With HTML escaping
+echo __e('welcome', '&lt;John&gt;'); // Outputs: Welcome, &amp;lt;John&amp;gt;!</code></pre>
+
+                <h3>Pluralization</h3>
+
+                <p>For plural forms, provide an array with singular and plural versions in your translation file:</p>
+
+                <pre><code>// In your language file
+'apple_count' => ['%d apple', '%d apples']</code></pre>
+
+                <p>Usage:</p>
+
+                <pre><code>echo __('apple_count', 1); // Outputs: 1 apple
+echo __('apple_count', 5); // Outputs: 5 apples</code></pre>
+
+                <h3>Advanced Variable Substitution</h3>
+
+                <p>You can use multiple placeholders and provide different arguments for singular and plural forms:</p>
+
+                <pre><code>// In your language file
+'user_action' => [
+    '%s has %d message', 
+    '%s has %d messages'
+]</code></pre>
+
+                <p>Usage:</p>
+
+                <pre><code>echo __('user_action', 1, ['John', 1]); 
+// Outputs: John has 1 message
+
+echo __('user_action', 2, ['Jane', 2]); 
+// Outputs: Jane has 2 messages</code></pre>
+
+                <h3>Adding Translation Files</h3>
+
+                <p>You can add additional translation files in a service provider:</p>
+
+                <pre><code>public function register()
+{
+    $translator = $this->app->get(Translator::class);
+    $translator->addLanguageFile(lang_dir('admin/notice/fr.php'));
+}</code></pre>
+
+                <h3>Configuration</h3>
+
+                <p>The default language is set in your configuration:</p>
+
+                <pre><code>// In your env.php or config file
+'lang' => 'en',
+'lang_dir' => '/resources/languages'</code></pre>
+
+                <h3>Translator Class Methods</h3>
+
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Method</th>
+                            <th>Description</th>
+                            <th>Example</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><code>translate()</code></td>
+                            <td>Main translation method</td>
+                            <td><code>$translator->translate('hello', 'John')</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>addLanguageFile()</code></td>
+                            <td>Adds a language file to load</td>
+                            <td><code>$translator->addLanguageFile('path/to/file.php')</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>mergeTranslatedTexts()</code></td>
+                            <td>Merges additional translations</td>
+                            <td><code>$translator->mergeTranslatedTexts(['new' => 'New text'])</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>setTranslatedTexts()</code></td>
+                            <td>Replaces all translations</td>
+                            <td><code>$translator->setTranslatedTexts([])</code></td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h3>Best Practices</h3>
+
+                <ul>
+                    <li>Use consistent keys across all language files</li>
+                    <li>Keep translations organized by module/feature when possible</li>
+                    <li>Use <code>__e()</code> for any user-facing text that will be rendered in HTML</li>
+                    <li>For complex pluralization rules, consider implementing a custom solution</li>
+                    <li>Load only necessary language files for better performance</li>
+                </ul>
+
+                <div class="note">
+                    <strong>Note:</strong> The translator automatically loads the default language file on
+                    initialization and can lazy-load additional files when translations are requested.
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-links">
+            <a href="https://github.com/tinymvc/tinymvc">GitHub</a>
+            <a href="https://github.com/tinymvc/tinymvc/issues">Issues</a>
+            <a href="https://github.com/tinymvc/tinymvc/discussions">Discussions</a>
+            <a href="https://github.com/tinymvc/tinymvc/blob/main/LICENSE">License</a>
+        </div>
+        <div class="copyright">
+            &copy; 2023 TinyMVC Framework by <a href="https://github.com/shahinmoyshan">Shahin Moyshan</a>.
+        </div>
+    </footer>
+</body>
+
+</html>

@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TinyMVC Documentation</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <header>
+        <a href="https://tinymvc.github.io" class="logo">
+            <span>TinyMVC</span> <sup class="version">v1.x</sup>
+        </a>
+        <a href="https://github.com/tinymvc/tinymvc" class="github-link">
+            <svg height="20" viewBox="0 0 16 16" width="20" style="margin-right: 5px;">
+                <path fill="currentColor" fill-rule="evenodd"
+                    d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z">
+                </path>
+            </svg>
+            GitHub
+        </a>
+    </header>
+
+    <div class="main-container">
+        <nav class="sidebar">
+            <a href="./index.html" style="display: block;margin-bottom: 5px;">Introduction</a>
+            <h2>Getting Started</h2>
+            <ul>
+                <li><a href="./installation.html">Installation</a></li>
+                <li><a href="./configuration.html">Configuration</a></li>
+                <li><a href="./quick-start.html">Quick Start</a></li>
+            </ul>
+
+            <h2>The Basics</h2>
+            <ul>
+                <li><a href="./routing.html">Routing</a></li>
+                <li><a href="./middleware.html">Middleware</a></li>
+                <li><a href="./controllers.html">Controllers</a></li>
+                <li><a href="./request.html">Request</a></li>
+                <li><a href="./response.html">Response</a></li>
+            </ul>
+
+            <h2>More Features</h2>
+            <ul>
+                <li><a href="./authentication.html" class="active">Authentication</a></li>
+                <li><a href="./authorization.html">Authorization</a></li>
+                <li><a href="./database.html">Database</a></li>
+                <li><a href="./queues.html">Queues</a></li>
+                <li><a href="./events.html">Events</a></li>
+                <li><a href="./encryption.html">Encryption</a></li>
+                <li><a href="./service-container.html">Service Container</a></li>
+                <li><a href="./service-provider.html">Service Provider</a></li>
+                <li><a href="./views.html">Views</a></li>
+                <li><a href="./asset-bundling.html">Asset Bundling</a></li>
+                <li><a href="./csrf-protection.html">CSRF Protection</a></li>
+                <li><a href="./localization.html">Localization</a></li>
+                <li><a href="./spark-cli.html">Spark CLI</a></li>
+                <li><a href="./helpers-and-utils.html">Helpers & Utils</a></li>
+                <li><a href="./contribution.html">❤️ Support or Contribution</a></li>
+            </ul>
+        </nav>
+
+        <div class="content">
+
+
+            <section id="authentication">
+                <h2>Authentication</h2>
+
+                <p>TinyMVC provides a complete authentication system with session management, remember me functionality,
+                    and
+                    route protection.</p>
+
+                <h3>Configuration</h3>
+                <p>Register the Auth service in your <code>AppServiceProvider</code>:</p>
+                <pre><code>use Spark\Http\Auth;
+use App\Models\User;
+
+$container->singleton(Auth::class, function(Container $container) {
+    return new Auth(
+        $container->get(Session::class),
+        User::class,
+        [
+            'cache_enabled' => false,
+            'guest_route' => 'admin.auth.login',
+            'logged_in_route' => 'admin.dashboard',
+            'cookie_name' => 'remember_me',
+            'cookie_expire' => '30 days'
+        ]
+    );
+});</code></pre>
+
+                <h3>Basic Authentication</h3>
+                <h4>Logging In</h4>
+                <pre><code>// In your login controller
+public function login(Auth $auth)
+{
+    $user = User::where('email', request('email'))->first();
+    
+    if ($user && password_verify(request('password'), $user->password)) {
+        $auth->login($user, request('remember'));
+        return redirect($auth->getLoggedInRoute());
+    }
+    
+    return response()->with('error', 'Invalid credentials')->back();
+}</code></pre>
+
+                <h4>Logging Out</h4>
+                <pre><code>public function logout(Auth $auth)
+{
+    $auth->logout();
+    return redirect($auth->getGuestRoute());
+}</code></pre>
+
+                <h3>Authentication Helpers</h3>
+                <pre><code>// Check if user is guest
+if (is_guest()) {
+    return redirect('login');
+}
+
+// Get current user
+$user = user();
+
+// Access user properties
+$name = user('name');
+$email = user('email');
+
+// Set temporary user data
+user()->temp_data = 'value';</code></pre>
+
+                <h3>Protecting Routes</h3>
+                <p>Use middleware to protect routes:</p>
+                <pre><code>Route::group(['middleware' => 'auth'], function() {
+    Route::get('dashboard', [DashboardController::class, 'index']);
+});</code></pre>
+
+                <h3>Remember Me Functionality</h3>
+                <p>Enable "remember me" by setting cookie configuration:</p>
+                <pre><code>new Auth(
+    $session,
+    User::class,
+    [
+        'cookie_name' => 'remember_token',
+        'cookie_expire' => '30 days'
+    ]
+);</code></pre>
+
+                <h3>Advanced Features</h3>
+                <h4>Refreshing User Data</h4>
+                <pre><code>// Refresh user data from database
+$auth->refresh();</code></pre>
+
+                <h4>Clearing Cache</h4>
+                <pre><code>// Clear cached user data
+$auth->clearCache();</code></pre>
+
+                <h3>Redirect Paths</h3>
+                <pre><code>// Get redirect paths
+$loginRoute = $auth->getGuestRoute();
+$dashboardRoute = $auth->getLoggedInRoute();</code></pre>
+
+                <h3>User Access</h3>
+                <pre><code>// Access user properties directly
+$name = $auth->name;
+$email = $auth->email;
+
+// Call user methods
+$auth->updateProfile($data);</code></pre>
+
+                <p>
+                    <strong>Security Tip:</strong> Always hash passwords before storing them in the database. TinyMVC
+                    recommends using PHP's <code>Hash</code> Encryption Class.
+                </p>
+                <div class="note">
+                    <strong>Tip:</strong> Always use <code>auth()</code> helper to access the Auth service.
+                </div>
+
+                <h3>Full Authentication Example</h3>
+                <pre><code>// Login Controller
+public function authenticate(Auth $auth, Hash $hash)
+{
+    $credentials = request()->validate([
+        'email' => ['required', 'email'],
+        'password' => ['required']
+    ]);
+
+    $user = User::where('email', $credentials['email'])->first();
+
+    if ($user && $hash->validatePassword($credentials['password'], $user->password)) {
+        $auth->login($user, request('remember_me'));
+        return redirect()->intended($auth->getLoggedInRoute());
+    }
+
+    return response()->with('error', 'Invalid credentials')->back();
+}
+
+// Protected Dashboard Controller
+public function dashboard(Auth $auth)
+{
+    return view('dashboard', [
+        'user' => $auth->getUser()
+    ]);
+}</code></pre>
+            </section>
+
+
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-links">
+            <a href="https://github.com/tinymvc/tinymvc">GitHub</a>
+            <a href="https://github.com/tinymvc/tinymvc/issues">Issues</a>
+            <a href="https://github.com/tinymvc/tinymvc/discussions">Discussions</a>
+            <a href="https://github.com/tinymvc/tinymvc/blob/main/LICENSE">License</a>
+        </div>
+        <div class="copyright">
+            &copy; 2023 TinyMVC Framework by <a href="https://github.com/shahinmoyshan">Shahin Moyshan</a>.
+        </div>
+    </footer>
+</body>
+
+</html>

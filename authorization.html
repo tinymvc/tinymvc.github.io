@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TinyMVC Documentation</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <header>
+        <a href="https://tinymvc.github.io" class="logo">
+            <span>TinyMVC</span> <sup class="version">v1.x</sup>
+        </a>
+        <a href="https://github.com/tinymvc/tinymvc" class="github-link">
+            <svg height="20" viewBox="0 0 16 16" width="20" style="margin-right: 5px;">
+                <path fill="currentColor" fill-rule="evenodd"
+                    d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z">
+                </path>
+            </svg>
+            GitHub
+        </a>
+    </header>
+
+    <div class="main-container">
+        <nav class="sidebar">
+            <a href="./index.html" style="display: block;margin-bottom: 5px;">Introduction</a>
+            <h2>Getting Started</h2>
+            <ul>
+                <li><a href="./installation.html">Installation</a></li>
+                <li><a href="./configuration.html">Configuration</a></li>
+                <li><a href="./quick-start.html">Quick Start</a></li>
+            </ul>
+
+            <h2>The Basics</h2>
+            <ul>
+                <li><a href="./routing.html">Routing</a></li>
+                <li><a href="./middleware.html">Middleware</a></li>
+                <li><a href="./controllers.html">Controllers</a></li>
+                <li><a href="./request.html">Request</a></li>
+                <li><a href="./response.html">Response</a></li>
+            </ul>
+
+            <h2>More Features</h2>
+            <ul>
+                <li><a href="./authentication.html">Authentication</a></li>
+                <li><a href="./authorization.html" class="active">Authorization</a></li>
+                <li><a href="./database.html">Database</a></li>
+                <li><a href="./queues.html">Queues</a></li>
+                <li><a href="./events.html">Events</a></li>
+                <li><a href="./encryption.html">Encryption</a></li>
+                <li><a href="./service-container.html">Service Container</a></li>
+                <li><a href="./service-provider.html">Service Provider</a></li>
+                <li><a href="./views.html">Views</a></li>
+                <li><a href="./asset-bundling.html">Asset Bundling</a></li>
+                <li><a href="./csrf-protection.html">CSRF Protection</a></li>
+                <li><a href="./localization.html">Localization</a></li>
+                <li><a href="./spark-cli.html">Spark CLI</a></li>
+                <li><a href="./helpers-and-utils.html">Helpers & Utils</a></li>
+                <li><a href="./contribution.html">❤️ Support or Contribution</a></li>
+            </ul>
+        </nav>
+        <div class="content">
+
+            <section id="authorization">
+                <h2>Authorization</h2>
+
+                <p>TinyMVC provides a simple yet powerful authorization system through the Gate class, allowing you to
+                    define abilities and check user permissions throughout your application.</p>
+
+                <h3>Defining Abilities</h3>
+                <p>Abilities are defined using closures that determine if a user can perform an action:</p>
+                <pre><code>// In your service provider or bootstrap file
+gate()->define('edit-post', function (?User $user, Post $post) {
+    // Guests can't edit posts
+    if (!$user) {
+        return false;
+    }
+    
+    // Admins can edit any post
+    if ($user->is_admin) {
+        return true;
+    }
+    
+    // Users can only edit their own posts
+    return $user->id === $post->user_id;
+});</code></pre>
+
+                <h3>Checking Abilities</h3>
+                <p>Use the helper functions to check permissions:</p>
+                <pre><code>// Check if user can edit a post
+if (can('edit-post', $post)) {
+    // Show edit button
+}
+
+// Alternative check
+if (cannot('edit-post', $post)) {
+    abort(403);
+}
+
+// Force authorization check (throws exception if denied)
+authorize('edit-post', $post);</code></pre>
+
+                <h3>Before Callbacks</h3>
+                <p>Register callbacks that run before all ability checks:</p>
+                <pre><code>// Give admin full access
+gate()->before(function (?User $user, string $ability) {
+    if ($user && $user->is_admin) {
+        return true;
+    }
+    
+    return null; // Continue with normal checks
+});</code></pre>
+
+                <h3>Controller Authorization</h3>
+                <p>Authorize actions in controllers:</p>
+                <pre><code>public function update(Post $post)
+{
+    authorize('edit-post', $post);
+    
+    // Update the post...
+}</code></pre>
+
+                <div class="note">
+                    <strong>Best Practice:</strong> Keep your ability definitions organized by registering them in a
+                    service
+                    provider or dedicated authorization file.
+                </div>
+
+                <h3>Full Example</h3>
+                <pre><code>// Define abilities
+gate()->define('manage-users', function (User $user) {
+    return $user->is_admin;
+});
+
+gate()->define('edit-settings', function (User $user, Account $account) {
+    return $user->id === $account->owner_id;
+});
+
+// In controller
+public function edit(Account $account)
+{
+    authorize('edit-settings', $account);
+    
+    return view('account.edit', compact('account'));
+}
+
+// In view
+&lt;?php if(can('manage-users')): ?&gt;
+    &lt;a href="/admin/users"&gt;Manage Users&lt;/a&gt;
+&lt;?php endif ?&gt;</code></pre>
+            </section>
+
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-links">
+            <a href="https://github.com/tinymvc/tinymvc">GitHub</a>
+            <a href="https://github.com/tinymvc/tinymvc/issues">Issues</a>
+            <a href="https://github.com/tinymvc/tinymvc/discussions">Discussions</a>
+            <a href="https://github.com/tinymvc/tinymvc/blob/main/LICENSE">License</a>
+        </div>
+        <div class="copyright">
+            &copy; 2023 TinyMVC Framework by <a href="https://github.com/shahinmoyshan">Shahin Moyshan</a>.
+        </div>
+    </footer>
+</body>
+
+</html>

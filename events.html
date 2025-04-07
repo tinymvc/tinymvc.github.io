@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TinyMVC Documentation</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <header>
+        <a href="https://tinymvc.github.io" class="logo">
+            <span>TinyMVC</span> <sup class="version">v1.x</sup>
+        </a>
+        <a href="https://github.com/tinymvc/tinymvc" class="github-link">
+            <svg height="20" viewBox="0 0 16 16" width="20" style="margin-right: 5px;">
+                <path fill="currentColor" fill-rule="evenodd"
+                    d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z">
+                </path>
+            </svg>
+            GitHub
+        </a>
+    </header>
+
+    <div class="main-container">
+        <nav class="sidebar">
+            <a href="./index.html" style="display: block;margin-bottom: 5px;">Introduction</a>
+            <h2>Getting Started</h2>
+            <ul>
+                <li><a href="./installation.html">Installation</a></li>
+                <li><a href="./configuration.html">Configuration</a></li>
+                <li><a href="./quick-start.html">Quick Start</a></li>
+            </ul>
+
+            <h2>The Basics</h2>
+            <ul>
+                <li><a href="./routing.html">Routing</a></li>
+                <li><a href="./middleware.html">Middleware</a></li>
+                <li><a href="./controllers.html">Controllers</a></li>
+                <li><a href="./request.html">Request</a></li>
+                <li><a href="./response.html">Response</a></li>
+            </ul>
+
+            <h2>More Features</h2>
+            <ul>
+                <li><a href="./authentication.html">Authentication</a></li>
+                <li><a href="./authorization.html">Authorization</a></li>
+                <li><a href="./database.html">Database</a></li>
+                <li><a href="./queues.html">Queues</a></li>
+                <li><a href="./events.html" class="active">Events</a></li>
+                <li><a href="./encryption.html">Encryption</a></li>
+                <li><a href="./service-container.html">Service Container</a></li>
+                <li><a href="./service-provider.html">Service Provider</a></li>
+                <li><a href="./views.html">Views</a></li>
+                <li><a href="./asset-bundling.html">Asset Bundling</a></li>
+                <li><a href="./csrf-protection.html">CSRF Protection</a></li>
+                <li><a href="./localization.html">Localization</a></li>
+                <li><a href="./spark-cli.html">Spark CLI</a></li>
+                <li><a href="./helpers-and-utils.html">Helpers & Utils</a></li>
+                <li><a href="./contribution.html">❤️ Support or Contribution</a></li>
+            </ul>
+        </nav>
+        <div class="content">
+            <section id="event-dispatcher">
+                <h2>Event Dispatcher</h2>
+
+                <p>TinyMVC provides a robust event system that allows components to communicate with each other by
+                    dispatching events and listening to them.</p>
+
+                <h3>Basic Usage</h3>
+                <h4>Registering Event Listeners</h4>
+                <pre><code>// Register a single listener
+event()->addListener('user.created', function($user) {
+    // Handle user creation
+});
+
+// Register multiple listeners at once
+event([
+    'user.created' => [
+        function($user) { /* Send welcome email */ },
+        function($user) { /* Add to mailing list */ }
+    ],
+    'order.placed' => function($order) {
+        // Process order
+    }
+]);</code></pre>
+
+                <h4>Dispatching Events</h4>
+                <pre><code>// Simple event dispatch
+event('user.created', $newUser);
+
+// With multiple parameters
+event('order.updated', $order, $oldStatus, $newStatus);</code></pre>
+
+                <h3>Conditional Dispatching</h3>
+                <pre><code>// Dispatch only if condition is true
+event()->dispatchIf('user.promoted', $user->isEligibleForPromotion(), $user);
+
+// Dispatch unless condition is true
+event()->dispatchUnless('user.suspended', $user->isAdmin(), $user);</code></pre>
+
+                <h3>Managing Listeners</h3>
+                <pre><code>// Get all registered listeners
+$listeners = event()->getListeners();
+
+// Clear all listeners
+event()->clearListeners();</code></pre>
+
+                <h3>Practical Examples</h3>
+                <h4>User Registration Flow</h4>
+                <pre><code>// In your service provider or bootstrap file
+event([
+    'user.registered' => [
+        function($user) {
+            // Send welcome email
+            mailer(
+                to: $user->email,
+                subject: 'Welcome',
+                body: 'Welcome to our app!'
+            )->send();
+        },
+        function($user) {
+            // Create user profile
+            Profile::create(['user_id' => $user->id]);
+        }
+    ]
+]);
+
+// In your registration controller
+public function register(Request $request)
+{
+    $user = User::create($request->all());
+    event('user.registered', $user);
+    return redirect('/dashboard');
+}</code></pre>
+
+                <h4>Order Processing</h4>
+                <pre><code>// Define order events
+event([
+    'order.created' => function($order) {
+        Inventory::reserve($order->items);
+    },
+    'order.shipped' => function($order) {
+        NotifyCustomer::dispatch($order);
+        Analytics::track('order_shipped', $order);
+    }
+]);
+
+// In your order controller
+public function shipOrder(Order $order)
+{
+    $order->update(['status' => 'shipped']);
+    event('order.shipped', $order);
+}</code></pre>
+
+
+                <div class="note">
+                    <strong>Best Practices:</strong>
+                    <ul>
+                        <li>Keep event listeners focused on a single responsibility</li>
+                        <li>Use descriptive event names (e.g., 'user.updated' rather than 'update')</li>
+                        <li>Consider using dedicated classes for complex event handlers</li>
+                        <li>Document your events and their expected payloads</li>
+                    </ul>
+                </div>
+
+                <h3>Troubleshooting</h3>
+                <pre><code>// Debugging event listeners
+$listeners = event()->getListeners();
+dd($listeners);
+
+// Verify event is being dispatched
+event(['test.event' => fn() => dump('Test event received')]);
+event('test.event'); // dispatch it</code></pre>
+            </section>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-links">
+            <a href="https://github.com/tinymvc/tinymvc">GitHub</a>
+            <a href="https://github.com/tinymvc/tinymvc/issues">Issues</a>
+            <a href="https://github.com/tinymvc/tinymvc/discussions">Discussions</a>
+            <a href="https://github.com/tinymvc/tinymvc/blob/main/LICENSE">License</a>
+        </div>
+        <div class="copyright">
+            &copy; 2023 TinyMVC Framework by <a href="https://github.com/shahinmoyshan">Shahin Moyshan</a>.
+        </div>
+    </footer>
+</body>
+
+</html>

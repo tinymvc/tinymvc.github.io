@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TinyMVC Documentation</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <header>
+        <a href="https://tinymvc.github.io" class="logo">
+            <span>TinyMVC</span> <sup class="version">v1.x</sup>
+        </a>
+        <a href="https://github.com/tinymvc/tinymvc" class="github-link">
+            <svg height="20" viewBox="0 0 16 16" width="20" style="margin-right: 5px;">
+                <path fill="currentColor" fill-rule="evenodd"
+                    d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z">
+                </path>
+            </svg>
+            GitHub
+        </a>
+    </header>
+
+    <div class="main-container">
+        <nav class="sidebar">
+            <a href="./index.html" style="display: block;margin-bottom: 5px;">Introduction</a>
+            <h2>Getting Started</h2>
+            <ul>
+                <li><a href="./installation.html">Installation</a></li>
+                <li><a href="./configuration.html">Configuration</a></li>
+                <li><a href="./quick-start.html">Quick Start</a></li>
+            </ul>
+
+            <h2>The Basics</h2>
+            <ul>
+                <li><a href="./routing.html">Routing</a></li>
+                <li><a href="./middleware.html">Middleware</a></li>
+                <li><a href="./controllers.html" class="active">Controllers</a></li>
+                <li><a href="./request.html">Request</a></li>
+                <li><a href="./response.html">Response</a></li>
+            </ul>
+
+            <h2>More Features</h2>
+            <ul>
+                <li><a href="./authentication.html">Authentication</a></li>
+                <li><a href="./authorization.html">Authorization</a></li>
+                <li><a href="./database.html">Database</a></li>
+                <li><a href="./queues.html">Queues</a></li>
+                <li><a href="./events.html">Events</a></li>
+                <li><a href="./encryption.html">Encryption</a></li>
+                <li><a href="./service-container.html">Service Container</a></li>
+                <li><a href="./service-provider.html">Service Provider</a></li>
+                <li><a href="./views.html">Views</a></li>
+                <li><a href="./asset-bundling.html">Asset Bundling</a></li>
+                <li><a href="./csrf-protection.html">CSRF Protection</a></li>
+                <li><a href="./localization.html">Localization</a></li>
+                <li><a href="./spark-cli.html">Spark CLI</a></li>
+                <li><a href="./helpers-and-utils.html">Helpers & Utils</a></li>
+                <li><a href="./contribution.html">❤️ Support or Contribution</a></li>
+            </ul>
+        </nav>
+
+        <div class="content">
+
+            <section id="controllers">
+                <h2>HTTP Controllers</h2>
+
+                <p>Controllers help organize your request handling logic into classes rather than defining everything in
+                    route files. Controllers are stored in the <code>app/Http/Controllers</code> directory.</p>
+
+                <h3>Basic Controllers</h3>
+                <p>Example of a basic controller class:</p>
+                <pre><code>&lt;?php
+        
+namespace App\Http\Controllers;
+
+use App\Models\User;
+
+class UserController
+{
+    /**
+    * Retrieve the user for the given ID.
+    *
+    * @param  int  $id
+    * @return Response
+    */
+    public function show($id)
+    {
+        $user = User::find($id);
+        return view('admin/user', ['user' => $user]);
+    }
+}</code></pre>
+
+                <h3>Routing to Controllers</h3>
+                <p>Route to controller actions using this syntax:</p>
+                <pre><code>use App\Http\Controllers\UserController;
+        
+Route::get('user/{id}', [UserController::class, 'show']);</code></pre>
+
+                <div class="note">
+                    <strong>Note:</strong> Route parameters will automatically be passed to your controller methods in
+                    the
+                    order they appear in the route.
+                </div>
+
+                <h3>Controller Organization</h3>
+                <p>You can organize controllers using subdirectories:</p>
+                <pre><code>app/Http/Controllers/
+├── Admin/
+│   ├── UserController.php
+│   └── DashboardController.php
+└── Auth/
+    ├── LoginController.php
+    └── RegisterController.php</code></pre>
+
+                <p>Reference nested controllers using namespace syntax:</p>
+                <pre><code>Route::get('admin/users', [Admin\UserController::class, 'index']);</code></pre>
+
+                <div class="note">
+                    <strong>Tip:</strong> Use <code>php spark make:controller Photo</code> to generate
+                    a new controller.
+                </div>
+
+                <h3>Dependency Injection & Controllers</h3>
+
+                <p>TinyMVC's service container automatically resolves controller dependencies through constructor and
+                    method
+                    injection.</p>
+
+                <h4>Constructor Injection</h4>
+                <p>Type-hint dependencies in your controller's constructor:</p>
+                <pre><code>&lt;?php
+
+namespace App\Http\Controllers;
+
+use Spark\Http\Auth;
+
+class UserController
+{
+    /**
+     * Create a new controller instance.
+     *
+     * @param  UserRepository  $users
+     * @return void
+     */
+    public function __construct(private Auth $auth)
+    {
+    }
+}</code></pre>
+
+                <div class="note">
+                    <strong>Note:</strong> The service container will automatically resolve and inject dependencies
+                    declared
+                    in your constructor.
+                </div>
+
+                <h4>Method Injection</h4>
+                <p>Inject dependencies directly into controller methods:</p>
+                <pre><code>&lt;?php
+
+namespace App\Http\Controllers;
+
+use Spark\Http\Request;
+
+class UserController
+{
+    /**
+     * Store a new user.
+     *
+     * @param  Request  $request
+     * @return Response
+     */
+    public function store(Request $request)
+    {
+        $attributes = $request->validate(['name' => 'required']);
+        // Logic here
+    }
+}</code></pre>
+
+                <h4>Combining Route Parameters and Dependency Injection</h4>
+                <p>When your route has parameters, list them after injected dependencies:</p>
+
+                <p>Route definition:</p>
+                <pre><code>Route::put('user/{id}', [UserController::class, 'update']);</code></pre>
+
+                <p>Controller method implementation:</p>
+                <pre><code>&lt;?php
+
+namespace App\Http\Controllers;
+
+use Spark\Http\Request;
+
+class UserController
+{
+    /**
+     * Update the specified user.
+     *
+     * @param  Request  $request
+     * @param  string  $id
+     * @return Response
+     */
+    public function update(Request $request, $id)
+    {
+        // $id comes from route parameter
+        // $request is injected automatically
+    }
+}</code></pre>
+
+                <div class="note">
+                    <strong>Best Practice:</strong> Use method injection for request-specific dependencies and
+                    constructor
+                    injection for dependencies needed across all controller methods.
+                </div>
+
+                <h4>Additional Injection Examples</h4>
+                <p>You can combine multiple dependency types:</p>
+                <pre><code>public function edit(
+    Request $request,
+    UserRepository $repository,
+    $userId,
+    ProfileService $profile
+) {
+    // $request - Injected
+    // $repository - Injected
+    // $userId - Route parameter
+    // $profile - Injected
+}</code></pre>
+
+            </section>
+
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-links">
+            <a href="https://github.com/tinymvc/tinymvc">GitHub</a>
+            <a href="https://github.com/tinymvc/tinymvc/issues">Issues</a>
+            <a href="https://github.com/tinymvc/tinymvc/discussions">Discussions</a>
+            <a href="https://github.com/tinymvc/tinymvc/blob/main/LICENSE">License</a>
+        </div>
+        <div class="copyright">
+            &copy; 2023 TinyMVC Framework by <a href="https://github.com/shahinmoyshan">Shahin Moyshan</a>.
+        </div>
+    </footer>
+</body>
+
+</html>

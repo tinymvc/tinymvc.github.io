@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TinyMVC Documentation</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <header>
+        <a href="https://tinymvc.github.io" class="logo">
+            <span>TinyMVC</span> <sup class="version">v1.x</sup>
+        </a>
+        <a href="https://github.com/tinymvc/tinymvc" class="github-link">
+            <svg height="20" viewBox="0 0 16 16" width="20" style="margin-right: 5px;">
+                <path fill="currentColor" fill-rule="evenodd"
+                    d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z">
+                </path>
+            </svg>
+            GitHub
+        </a>
+    </header>
+
+    <div class="main-container">
+        <nav class="sidebar">
+            <a href="./index.html" style="display: block;margin-bottom: 5px;">Introduction</a>
+            <h2>Getting Started</h2>
+            <ul>
+                <li><a href="./installation.html">Installation</a></li>
+                <li><a href="./configuration.html">Configuration</a></li>
+                <li><a href="./quick-start.html">Quick Start</a></li>
+            </ul>
+
+            <h2>The Basics</h2>
+            <ul>
+                <li><a href="./routing.html">Routing</a></li>
+                <li><a href="./middleware.html">Middleware</a></li>
+                <li><a href="./controllers.html">Controllers</a></li>
+                <li><a href="./request.html">Request</a></li>
+                <li><a href="./response.html">Response</a></li>
+            </ul>
+
+            <h2>More Features</h2>
+            <ul>
+                <li><a href="./authentication.html">Authentication</a></li>
+                <li><a href="./authorization.html">Authorization</a></li>
+                <li><a href="./database.html">Database</a></li>
+                <li><a href="./queues.html">Queues</a></li>
+                <li><a href="./events.html">Events</a></li>
+                <li><a href="./encryption.html">Encryption</a></li>
+                <li><a href="./service-container.html">Service Container</a></li>
+                <li><a href="./service-provider.html">Service Provider</a></li>
+                <li><a href="./views.html">Views</a></li>
+                <li><a href="./asset-bundling.html">Asset Bundling</a></li>
+                <li><a href="./csrf-protection.html" class="active">CSRF Protection</a></li>
+                <li><a href="./localization.html">Localization</a></li>
+                <li><a href="./spark-cli.html">Spark CLI</a></li>
+                <li><a href="./helpers-and-utils.html">Helpers & Utils</a></li>
+                <li><a href="./contribution.html">❤️ Support or Contribution</a></li>
+            </ul>
+        </nav>
+        <div class="content">
+            <section id="csrf-protection">
+                <h2>CSRF Protection</h2>
+
+                <p>The TinyMVC framework provides built-in CSRF (Cross-Site Request Forgery) protection middleware to
+                    secure your application against malicious requests.</p>
+
+                <h3>CSRF Middleware Configuration</h3>
+
+                <p>The framework comes with a base CSRF middleware that can be extended. The default configuration is
+                    located at:</p>
+
+                <pre><code>app/Http/Middlewares/CsrfProtectionMiddleware.php</code></pre>
+
+                <p>Example configuration:</p>
+
+                <pre><code>&lt;?php
+
+namespace App\Http\Middlewares;
+
+use Spark\Foundation\Http\Middlewares\CsrfProtection;
+
+class CsrfProtectionMiddleware extends CsrfProtection
+{
+    /**
+    * URIs that should be excluded from CSRF verification
+    * @var array
+    */
+    protected array $except = [
+        '/api/*' // Exclude all API routes from CSRF protection
+    ];
+}</code></pre>
+
+                <h3>Registering CSRF Middleware</h3>
+
+                <p>The middleware is registered in <code>bootstrap/middlewares.php</code>:</p>
+
+                <pre><code>return [
+    'csrf' => \App\Http\Middlewares\CsrfProtectionMiddleware::class,
+    // Other middlewares...
+];</code></pre>
+
+                <h4>Global Registration</h4>
+
+                <p>To apply CSRF protection to all routes, register it globally in <code>bootstrap/app.php</code>:</p>
+
+                <pre><code>->withMiddleware(function (Middleware $middleware) {
+    $middleware->merge(require __DIR__ . '/middlewares.php');
+    $middleware->queue(['csrf']);
+})</code></pre>
+
+                <h4>Route-Specific Registration</h4>
+
+                <p>To apply CSRF protection to specific routes:</p>
+
+                <pre><code>// Single route
+Route::post('/profile/create', CreateUserProfile::class)->middleware('csrf');
+
+// Route group
+Route::group(['middleware' => ['csrf']], function() {
+    Route::post('/profile/create', CreateUserProfile::class);
+});</code></pre>
+
+                <h3>Working with CSRF Tokens</h3>
+
+                <p>The framework provides helper functions for CSRF tokens:</p>
+
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Helper</th>
+                            <th>Description</th>
+                            <th>Example</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><code>csrf_token()</code></td>
+                            <td>Returns the current CSRF token</td>
+                            <td><code>&lt;?= csrf_token() ?&gt;</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>csrf()</code></td>
+                            <td>Generates a hidden input field with the CSRF token</td>
+                            <td><code>&lt;?= csrf() ?&gt;</code></td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h4>Form Example</h4>
+
+                <pre><code>&lt;form method="POST" action="/submit"&gt;
+    &lt;?= csrf() ?&gt;
+    &lt;!-- Other form fields --&gt;
+    &lt;button type="submit"&gt;Submit&lt;/button&gt;
+&lt;/form&gt;</code></pre>
+
+                <h3>AJAX Requests</h3>
+
+                <p>For AJAX requests using Axios, the framework automatically handles CSRF protection:</p>
+
+                <ul>
+                    <li>The encrypted CSRF token is stored in a cookie named <code>XSRF-TOKEN</code></li>
+                    <li>Axios automatically reads this cookie and includes it in requests as <code>X-XSRF-TOKEN</code>
+                        header</li>
+                    <li>No additional configuration is needed for Axios requests</li>
+                </ul>
+
+                <div class="note">
+                    <strong>Note:</strong> The CSRF token cookie is HttpOnly and Secure when served over HTTPS.
+                </div>
+            </section>
+
+            <section id="cors-middleware">
+                <h2>CORS Middleware</h2>
+
+                <p>The framework includes a CORS (Cross-Origin Resource Sharing) middleware for handling cross-origin
+                    requests, particularly useful for APIs.</p>
+
+                <h3>CORS Middleware Configuration</h3>
+
+                <p>The default CORS middleware is located at:</p>
+
+                <pre><code>app/Http/Middlewares/CorsControlMiddleware.php</code></pre>
+
+                <p>Example configuration:</p>
+
+                <pre><code>&lt;?php
+
+namespace App\Http\Middlewares;
+
+use Spark\Foundation\Http\Middlewares\CorsAccessControl;
+
+class CorsControlMiddleware extends CorsAccessControl
+{
+    protected array $allowed = [
+        'origin' => '*',
+        'methods' => ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
+        'headers' => ['Content-Type', 'Authorization', 'X-Requested-With'],
+        'credentials' => 'true',
+        'age' => 86400,
+    ];
+}</code></pre>
+
+                <h4>Configuration Options</h4>
+
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Option</th>
+                            <th>Description</th>
+                            <th>Default</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><code>origin</code></td>
+                            <td>Allowed origins (use '*' for all or specify domains)</td>
+                            <td><code>*</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>methods</code></td>
+                            <td>Allowed HTTP methods</td>
+                            <td><code>['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS']</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>headers</code></td>
+                            <td>Allowed headers</td>
+                            <td><code>['Content-Type', 'Authorization', 'X-Requested-With']</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>credentials</code></td>
+                            <td>Whether to allow credentials</td>
+                            <td><code>true</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>age</code></td>
+                            <td>Max age of the CORS preflight request (seconds)</td>
+                            <td><code>86400</code> (24 hours)</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h3>Registering CORS Middleware</h3>
+
+                <p>Similar to CSRF middleware, CORS middleware can be registered:</p>
+
+                <h4>Global Registration</h4>
+
+                <pre><code>->withMiddleware(function (Middleware $middleware) {
+    $middleware->merge(require __DIR__ . '/middlewares.php');
+    $middleware->queue(['cors']);
+})</code></pre>
+
+                <h4>Route-Specific Registration</h4>
+
+                <pre><code>// API route group
+Route::group(['middleware' => ['cors']], function() {
+    Route::get('/api/data', ApiController::class);
+});</code></pre>
+
+                <div class="note">
+                    <strong>Best Practice:</strong> For API routes, you might want to disable CSRF protection (as shown
+                    in the CSRF middleware's <code>$except</code> array) while enabling CORS middleware.
+                </div>
+
+                <h3>Combining CSRF and CORS</h3>
+
+                <p>For web routes that need both CSRF protection and CORS:</p>
+
+                <pre><code>Route::group(['middleware' => ['csrf', 'cors']], function() {
+    // Your routes here
+});</code></pre>
+            </section>
+
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-links">
+            <a href="https://github.com/tinymvc/tinymvc">GitHub</a>
+            <a href="https://github.com/tinymvc/tinymvc/issues">Issues</a>
+            <a href="https://github.com/tinymvc/tinymvc/discussions">Discussions</a>
+            <a href="https://github.com/tinymvc/tinymvc/blob/main/LICENSE">License</a>
+        </div>
+        <div class="copyright">
+            &copy; 2023 TinyMVC Framework by <a href="https://github.com/shahinmoyshan">Shahin Moyshan</a>.
+        </div>
+    </footer>
+</body>
+
+</html>

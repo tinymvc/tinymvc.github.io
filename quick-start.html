@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TinyMVC Documentation</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <header>
+        <a href="https://tinymvc.github.io" class="logo">
+            <span>TinyMVC</span> <sup class="version">v1.x</sup>
+        </a>
+        <a href="https://github.com/tinymvc/tinymvc" class="github-link">
+            <svg height="20" viewBox="0 0 16 16" width="20" style="margin-right: 5px;">
+                <path fill="currentColor" fill-rule="evenodd"
+                    d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z">
+                </path>
+            </svg>
+            GitHub
+        </a>
+    </header>
+
+    <div class="main-container">
+        <nav class="sidebar">
+            <a href="./index.html" style="display: block;margin-bottom: 5px;">Introduction</a>
+            <h2>Getting Started</h2>
+            <ul>
+                <li><a href="./installation.html">Installation</a></li>
+                <li><a href="./configuration.html">Configuration</a></li>
+                <li><a href="./quick-start.html" class="active">Quick Start</a></li>
+            </ul>
+
+            <h2>The Basics</h2>
+            <ul>
+                <li><a href="./routing.html">Routing</a></li>
+                <li><a href="./middleware.html">Middleware</a></li>
+                <li><a href="./controllers.html">Controllers</a></li>
+                <li><a href="./request.html">Request</a></li>
+                <li><a href="./response.html">Response</a></li>
+            </ul>
+
+            <h2>More Features</h2>
+            <ul>
+                <li><a href="./authentication.html">Authentication</a></li>
+                <li><a href="./authorization.html">Authorization</a></li>
+                <li><a href="./database.html">Database</a></li>
+                <li><a href="./queues.html">Queues</a></li>
+                <li><a href="./events.html">Events</a></li>
+                <li><a href="./encryption.html">Encryption</a></li>
+                <li><a href="./service-container.html">Service Container</a></li>
+                <li><a href="./service-provider.html">Service Provider</a></li>
+                <li><a href="./views.html">Views</a></li>
+                <li><a href="./asset-bundling.html">Asset Bundling</a></li>
+                <li><a href="./csrf-protection.html">CSRF Protection</a></li>
+                <li><a href="./localization.html">Localization</a></li>
+                <li><a href="./spark-cli.html">Spark CLI</a></li>
+                <li><a href="./helpers-and-utils.html">Helpers & Utils</a></li>
+                <li><a href="./contribution.html">❤️ Support or Contribution</a></li>
+            </ul>
+        </nav>
+        <div class="content">
+            <section id="quick-start">
+                <h2>Quick Start Guide</h2>
+
+                <p>This guide will walk you through creating your first route, controller, and view in the TinyMVC
+                    framework.</p>
+
+                <div class="note">
+                    <strong>Note:</strong> Make sure you've completed the <a href="./installation.html">installation</a>
+                    steps before beginning. <br>
+                    or just run the command:
+                    <code>composer create-project tinymvc/tinymvc myapp</code>
+                </div>
+
+                <h3>1. Create Your First Route</h3>
+
+                <p>Routes define the entry points to your application. Let's create a simple route that welcomes users
+                    by name.</p>
+
+                <p>Open or create the file <code>routes/web.php</code> and add:</p>
+
+                <pre><code>&lt;?php
+use Spark\Http\Route;
+use App\Http\Controllers\WelcomeController;
+
+// Simple GET route with a name parameter
+Route::get('/hello/{name}', [WelcomeController::class, 'welcome']);</code></pre>
+
+                <div class="note">
+                    <strong>Route Parameters:</strong> The <code>{name}</code> in the URL is a dynamic parameter that
+                    will be passed to your controller.
+                </div>
+
+                <h3>2. Generate a Controller</h3>
+
+                <p>Controllers handle the application logic. Let's create one using the Spark CLI:</p>
+
+                <pre><code>php spark make:controller WelcomeController</code></pre>
+
+                <p>This will create a new controller at <code>app/Http/Controllers/WelcomeController.php</code>.</p>
+
+                <p>Edit the controller to add our welcome method:</p>
+
+                <pre><code>&lt;?php
+
+namespace App\Http\Controllers;
+
+class WelcomeController
+{
+    /**
+     * Welcome a user by name
+     *
+     * @param string $name The name to welcome
+     * @return \Spark\Http\Response
+     */
+    public function welcome(string $name)
+    {
+        return view('welcome', ['name' => $name]);
+    }
+}</code></pre>
+
+                <div class="note">
+                    <strong>About Controllers:</strong>
+                    <ul>
+                        <li>Method parameters are automatically injected from route parameters</li>
+                        <li>The <code>view()</code> helper renders templates with the provided data</li>
+                    </ul>
+                </div>
+
+                <h3>3. Create a View</h3>
+
+                <p>Views handle the presentation layer. Let's generate and customize one:</p>
+
+                <p>First, create the view file using Spark CLI:</p>
+
+                <pre><code>php spark make:view welcome</code></pre>
+
+                <p>This creates <code>resources/views/welcome.php</code>. Edit it to display our welcome message:</p>
+
+                <pre><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+    &lt;title&gt;Welcome to My App&lt;/title&gt;
+    &lt;?= vite() // Include Vite assets if needed ?&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h1&gt;Welcome, &lt;?= e($name) ?&gt;!&lt;/h1&gt;
+    
+    &lt;?php if ($name === 'Admin'): ?&gt;
+        &lt;p class="alert"&gt;Special message for admin users&lt;/p&gt;
+    &lt;?php endif ?&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+
+                <div class="note">
+                    <strong>View Best Practices:</strong>
+                    <ul>
+                        <li>Always escape output with <code>e()</code> or <code>__e()</code> to prevent XSS</li>
+                        <li>Keep complex logic in controllers, not views</li>
+                        <li>Use PHP alternative syntax for control structures in views</li>
+                    </ul>
+                </div>
+
+                <h3>4. Test Your Application</h3>
+
+                <p>Start the development server:</p>
+
+                <pre><code>php spark serve</code></pre>
+
+                <p>Visit your route in the browser:</p>
+
+                <pre><code>http://localhost:8000/hello/YourName</code></pre>
+
+                <p>You should see the welcome message with your name!</p>
+
+                <h3>Next Steps</h3>
+
+                <p>Now that you have a basic route working, consider exploring:</p>
+
+                <ul>
+                    <li><a href="./routing.html">Advanced Routing</a> - Middleware, route groups, etc.</li>
+                    <li><a href="./database.html">Database Integration</a> - Connect to a database</li>
+                    <li><a href="./authentication.html">Authentication</a> - User login system</li>
+                    <li><a href="./asset-bundling.html">Asset Compilation</a> - CSS/JavaScript bundling</li>
+                </ul>
+
+                <h3>Troubleshooting</h3>
+
+                <p>If you encounter issues:</p>
+
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Issue</th>
+                            <th>Solution</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Route not found</td>
+                            <td>Check <code>routes/web.php</code> exists and has correct syntax</td>
+                        </tr>
+                        <tr>
+                            <td>Controller not found</td>
+                            <td>Verify namespace in controller matches file location</td>
+                        </tr>
+                        <tr>
+                            <td>View not found</td>
+                            <td>Ensure view file exists in <code>resources/views/</code></td>
+                        </tr>
+                        <tr>
+                            <td>Server not starting</td>
+                            <td>Check if port 8000 is available or specify another:
+                                <code>php spark serve --port=8080</code>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div class="tip">
+                    <strong>Development Tip:</strong> Use <code>php spark route:list</code> to see all registered routes
+                    and their associated controllers.
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-links">
+            <a href="https://github.com/tinymvc/tinymvc">GitHub</a>
+            <a href="https://github.com/tinymvc/tinymvc/issues">Issues</a>
+            <a href="https://github.com/tinymvc/tinymvc/discussions">Discussions</a>
+            <a href="https://github.com/tinymvc/tinymvc/blob/main/LICENSE">License</a>
+        </div>
+        <div class="copyright">
+            &copy; 2023 TinyMVC Framework by <a href="https://github.com/shahinmoyshan">Shahin Moyshan</a>.
+        </div>
+    </footer>
+</body>
+
+</html>

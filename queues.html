@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TinyMVC Documentation</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <header>
+        <a href="https://tinymvc.github.io" class="logo">
+            <span>TinyMVC</span> <sup class="version">v1.x</sup>
+        </a>
+        <a href="https://github.com/tinymvc/tinymvc" class="github-link">
+            <svg height="20" viewBox="0 0 16 16" width="20" style="margin-right: 5px;">
+                <path fill="currentColor" fill-rule="evenodd"
+                    d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z">
+                </path>
+            </svg>
+            GitHub
+        </a>
+    </header>
+
+    <div class="main-container">
+        <nav class="sidebar">
+            <a href="./index.html" style="display: block;margin-bottom: 5px;">Introduction</a>
+            <h2>Getting Started</h2>
+            <ul>
+                <li><a href="./index.html" class="active">Installation</a></li>
+                <li><a href="./configuration.html">Configuration</a></li>
+                <li><a href="./quick-start.html">Quick Start</a></li>
+            </ul>
+
+            <h2>The Basics</h2>
+            <ul>
+                <li><a href="./routing.html">Routing</a></li>
+                <li><a href="./middleware.html">Middleware</a></li>
+                <li><a href="./controllers.html">Controllers</a></li>
+                <li><a href="./request.html">Request</a></li>
+                <li><a href="./response.html">Response</a></li>
+            </ul>
+
+            <h2>More Features</h2>
+            <ul>
+                <li><a href="./authentication.html">Authentication</a></li>
+                <li><a href="./authorization.html">Authorization</a></li>
+                <li><a href="./database.html">Database</a></li>
+                <li><a href="./queues.html" class="active">Queues</a></li>
+                <li><a href="./events.html">Events</a></li>
+                <li><a href="./encryption.html">Encryption</a></li>
+                <li><a href="./service-container.html">Service Container</a></li>
+                <li><a href="./service-provider.html">Service Provider</a></li>
+                <li><a href="./views.html">Views</a></li>
+                <li><a href="./asset-bundling.html">Asset Bundling</a></li>
+                <li><a href="./csrf-protection.html">CSRF Protection</a></li>
+                <li><a href="./localization.html">Localization</a></li>
+                <li><a href="./spark-cli.html">Spark CLI</a></li>
+                <li><a href="./helpers-and-utils.html">Helpers & Utils</a></li>
+                <li><a href="./contribution.html">❤️ Support or Contribution</a></li>
+            </ul>
+        </nav>
+        <div class="content">
+
+            <section id="queue-jobs">
+                <h2>Queue Jobs</h2>
+
+                <p>TinyMVC provides a simple yet powerful queue system for processing background jobs. Jobs can be
+                    scheduled
+                    for immediate or future execution with various priority levels.</p>
+
+                <h3>Creating Jobs</h3>
+                <p>Create jobs using the <code>job()</code> helper or by implementing <code>JobContract</code>:</p>
+                <pre><code>// Simple job
+job(function() {
+    // Process data
+    mailer(
+        to: 'example@gmail.com', 
+        subject: 'Data processed',
+        body: 'Data processed successfully.'
+    )->send();
+})->dispatch();</code></pre>
+
+                <h3>Job Configuration</h3>
+                <pre><code>// Scheduled job
+job(function() {
+    // Send weekly report
+})->schedule('next monday 8:00')->dispatch();
+
+// Recurring job
+job(function() {
+    // Cleanup temporary files
+})->repeat('daily')->dispatch();
+
+// Priority job
+job(function() {
+    // Process critical payment
+})->priority(100)->dispatch();</code></pre>
+
+                <h3>Job Lifecycle</h3>
+                <pre><code>job(function() {
+    // Main job logic
+})
+->before(function() {
+    // Prepare resources
+})
+->after(function() {
+    // Cleanup resources
+})
+->catch(function($exception) {
+    // Handle failures
+})
+->dispatch();</code></pre>
+
+                <h3>Dispatching Jobs</h3>
+                <p>Use either the job helper or dispatch helper:</p>
+                <pre><code>// Using job() helper
+job(fn() => processData())->dispatch();
+
+// Using dispatch() helper
+dispatch(fn() => sendEmails());</code></pre>
+
+                <h3>Running Queue Workers</h3>
+                <h4>Local Development</h4>
+                <pre><code># Process all queued jobs
+php spark queue:run
+
+# Clear all queued jobs
+php spark queue:clear</code></pre>
+
+                <h4>Production Deployment</h4>
+                <p>For production servers, set up a cron job to run the queue worker periodically:</p>
+
+                <h5>cPanel Setup</h5>
+                <ol>
+                    <li>Go to cPanel → Cron Jobs</li>
+                    <li>Add a new cron job with timing (e.g. every 5 minutes): <code>*/5 * * * *</code></li>
+                    <li>Set the command to:
+                        <code>cd /home/yourusername/public_html &amp;&amp; php spark queue:run</code>
+                    </li>
+                </ol>
+
+                <h5>Linux Server Setup</h5>
+                <pre><code># Edit crontab
+crontab -e
+
+# Add this line to run every 5 minutes
+*/5 * * * * cd /var/www/your-project &amp;&amp; php spark queue:run >> /var/log/your-project-queue.log 2>&amp;1</code></pre>
+
+                <h5>Windows Server Setup</h5>
+                <p>Create a scheduled task that runs every 5 minutes with this command:</p>
+                <pre><code>cd C:\path\to\your\project &amp; php spark queue:run</code></pre>
+
+                <h3>Best Practices</h3>
+                <div class="note">
+                    <strong>Production Recommendations:</strong>
+                    <ul>
+                        <li>Run the queue worker every 5-10 minutes in production</li>
+                        <li>Log job output for debugging</li>
+                        <li>Use <code>catch()</code> to handle job failures gracefully</li>
+                        <li>Monitor queue length and processing time</li>
+                    </ul>
+                </div>
+
+                <h3>Advanced Examples</h3>
+                <pre><code>// Complex job with all options
+job(function() use ($orderId) {
+    $order = Order::find($orderId);
+    $order->processPayment();
+    $order->sendConfirmation();
+})
+->priority(200)
+->schedule('+30 minutes')
+->before(function() {
+    db()->beginTransaction();
+})
+->after(function() {
+    db()->commit();
+})
+->catch(function($e) {
+    db()->rollback();
+    notifyAdmins("Order processing failed: " . $e->getMessage());
+})
+->dispatch();</code></pre>
+
+                <h3>Troubleshooting</h3>
+                <pre><code># Check if jobs are being queued
+# (Verify your storage/queue.json file has job records)
+
+# Test job execution manually
+php spark queue:run
+
+# Clear stuck jobs (if needed)
+php spark queue:clear
+
+# Verify cron is running
+tail -f /var/log/cron.log</code></pre>
+            </section>
+
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-links">
+            <a href="https://github.com/tinymvc/tinymvc">GitHub</a>
+            <a href="https://github.com/tinymvc/tinymvc/issues">Issues</a>
+            <a href="https://github.com/tinymvc/tinymvc/discussions">Discussions</a>
+            <a href="https://github.com/tinymvc/tinymvc/blob/main/LICENSE">License</a>
+        </div>
+        <div class="copyright">
+            &copy; 2023 TinyMVC Framework by <a href="https://github.com/shahinmoyshan">Shahin Moyshan</a>.
+        </div>
+    </footer>
+</body>
+
+</html>

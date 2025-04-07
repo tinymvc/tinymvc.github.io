@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TinyMVC Documentation</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <header>
+        <a href="https://tinymvc.github.io" class="logo">
+            <span>TinyMVC</span> <sup class="version">v1.x</sup>
+        </a>
+        <a href="https://github.com/tinymvc/tinymvc" class="github-link">
+            <svg height="20" viewBox="0 0 16 16" width="20" style="margin-right: 5px;">
+                <path fill="currentColor" fill-rule="evenodd"
+                    d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z">
+                </path>
+            </svg>
+            GitHub
+        </a>
+    </header>
+
+    <div class="main-container">
+        <nav class="sidebar">
+            <a href="./index.html" style="display: block;margin-bottom: 5px;">Introduction</a>
+            <h2>Getting Started</h2>
+            <ul>
+                <li><a href="./installation.html">Installation</a></li>
+                <li><a href="./configuration.html" class="active">Configuration</a></li>
+                <li><a href="./quick-start.html">Quick Start</a></li>
+            </ul>
+
+            <h2>The Basics</h2>
+            <ul>
+                <li><a href="./routing.html">Routing</a></li>
+                <li><a href="./middleware.html">Middleware</a></li>
+                <li><a href="./controllers.html">Controllers</a></li>
+                <li><a href="./request.html">Request</a></li>
+                <li><a href="./response.html">Response</a></li>
+            </ul>
+
+            <h2>More Features</h2>
+            <ul>
+                <li><a href="./authentication.html">Authentication</a></li>
+                <li><a href="./authorization.html">Authorization</a></li>
+                <li><a href="./database.html">Database</a></li>
+                <li><a href="./queues.html">Queues</a></li>
+                <li><a href="./events.html">Events</a></li>
+                <li><a href="./encryption.html">Encryption</a></li>
+                <li><a href="./service-container.html">Service Container</a></li>
+                <li><a href="./service-provider.html">Service Provider</a></li>
+                <li><a href="./views.html">Views</a></li>
+                <li><a href="./asset-bundling.html">Asset Bundling</a></li>
+                <li><a href="./csrf-protection.html">CSRF Protection</a></li>
+                <li><a href="./localization.html">Localization</a></li>
+                <li><a href="./spark-cli.html">Spark CLI</a></li>
+                <li><a href="./helpers-and-utils.html">Helpers & Utils</a></li>
+                <li><a href="./contribution.html">❤️ Support or Contribution</a></li>
+            </ul>
+        </nav>
+        <div class="content">
+            <section id="configuration">
+                <h2>Configuration</h2>
+
+                <p>TinyMVC uses a centralized configuration system through the <code>env.php</code> file, which contains
+                    all application settings.</p>
+
+                <h3>Configuration File</h3>
+                <p>The main configuration file is located at <code>env.php</code> (created from
+                    <code>env.example.php</code>):
+                </p>
+                <pre><code>&lt;?php
+
+return [
+     // Debugging settings
+    'debug' => true,
+
+    // Directory paths
+    'storage_dir' => __DIR__ . '/storage',
+    'cache_dir' => __DIR__ . '/storage/cache', 
+    'upload_dir' => __DIR__ . '/public/uploads',
+    'views_dir' => __DIR__ . '/resources/views',
+    'lang_dir' => __DIR__ . '/resources/languages',
+
+    // URL settings
+    'media_url' => '/uploads/',
+    'asset_url' => '/assets/',
+
+    // Localization settings
+    'lang' => 'en',
+
+    // Security settings
+    'app_key' => 'e32e4a35fce965947481cdad2db2a4e4',
+
+    // Database connection settings
+    'database' => [
+        'driver' => 'sqlite',
+        'file' => __DIR__ . '/database/sqlite.db',
+    ],
+
+    // Mail server configurations
+    'mail' => [
+        'mailer' => [
+            'address' => '{MAILER_ADDRESS}',
+            'name' => '{MAILER_NAME}'
+        ],
+        'reply' => [
+            'address' => '{REPLY_ADDRESS}',
+            'name' => '{REPLY_NAME}'
+        ],
+        'smtp' => [
+            'enabled' => false,
+            'host' => '{SMTP_HOST}',
+            'port' => 2525,
+            'username' => '{SMTP_USERNAME}',
+            'password' => '{SMTP_PASSWORD}',
+            'encryption' => 'tls|ssl',
+        ],
+    ],
+];</code></pre>
+
+                <h3>Accessing Configuration</h3>
+                <h4>Using Helper Function</h4>
+                <pre><code>// Get configuration value
+$debug = config('debug');
+
+// Get nested value
+$dbDriver = config('database.driver');
+
+// Get with default value
+$timezone = config('app.timezone', 'UTC');</code></pre>
+
+                <h4>Using Application Methods</h4>
+                <pre><code>// In service providers or controllers
+$debug = app()->getEnv('debug');
+
+// Get nested value using dot notation
+$dbHost = app()->getEnv('database.host');</code></pre>
+
+                <h3>Modifying Configuration</h3>
+                <pre><code>// Set single value
+config(['debug' => false]);
+
+// Set nested value
+config(['database.host' => '127.0.0.1']);
+
+// Using application methods
+app()->setEnv('debug', false);
+app()->mergeEnv([
+    'database' => [
+        'host' => '127.0.0.1',
+        'port' => 3306
+    ]
+]);</code></pre>
+
+                <h3>Configuration Structure</h3>
+                <div class="note">
+                    <p>Standard configuration sections include:</p>
+                    <ul>
+                        <li><strong>Debugging</strong>: Application debug mode</li>
+                        <li><strong>Directories</strong>: Paths to important directories</li>
+                        <li><strong>URLs</strong>: Base URLs for assets and media</li>
+                        <li><strong>Localization</strong>: Default language settings</li>
+                        <li><strong>Security</strong>: Encryption keys and security settings</li>
+                        <li><strong>Database</strong>: Connection parameters</li>
+                        <li><strong>Mail</strong>: Email server configurations</li>
+                    </ul>
+                </div>
+
+                <h3>Environment Setup</h3>
+                <ol>
+                    <li>Copy <code>env.example.php</code> to <code>env.php</code></li>
+                    <li>Update values with your actual configuration</li>
+                    <li>Generate application key: <code>php spark key:generate</code></li>
+                    <li>Never commit <code>env.php</code> to version control</li>
+                </ol>
+
+                <h3>Best Practices</h3>
+                <div class="note">
+                    <ul>
+                        <li>Keep sensitive data (keys, passwords) in <code>env.php</code></li>
+                        <li>Use different configurations for development/production</li>
+                        <li>Group related settings in nested arrays</li>
+                        <li>Set defaults in code for optional configuration</li>
+                    </ul>
+                </div>
+
+                <h3>Full Example</h3>
+                <pre><code>// Setting configuration in service provider
+public function register(Container $container)
+{
+    // Override mail configuration
+    config([
+        'mail' => [
+            'smtp' => [
+                'host' => 'mail.production.com',
+                'port' => 465,
+                'encryption' => 'ssl'
+            ]
+        ]
+    ]);
+    
+    // Conditionally set debug mode
+    config(['debug' => config('app.env') !== 'production']);
+}
+
+// Accessing configuration in controller
+public function index()
+{
+    return view('welcome', [
+        'assetUrl' => config('asset_url'),
+        'debugMode' => config('debug', false)
+    ]);
+}</code></pre>
+                <br>
+                <hr><br>
+                <p><a href="./quick-start.html">Quick Start</a> - Get started with TinyMVC</p>
+            </section>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-links">
+            <a href="https://github.com/tinymvc/tinymvc">GitHub</a>
+            <a href="https://github.com/tinymvc/tinymvc/issues">Issues</a>
+            <a href="https://github.com/tinymvc/tinymvc/discussions">Discussions</a>
+            <a href="https://github.com/tinymvc/tinymvc/blob/main/LICENSE">License</a>
+        </div>
+        <div class="copyright">
+            &copy; 2023 TinyMVC Framework by <a href="https://github.com/shahinmoyshan">Shahin Moyshan</a>.
+        </div>
+    </footer>
+</body>
+
+</html>
