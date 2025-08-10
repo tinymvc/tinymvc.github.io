@@ -25,7 +25,8 @@
 
     <div class="main-container">
         <nav class="sidebar">
-            <a href="/" style="display: block;margin-bottom: 5px;">Introduction</a>
+            <a href="/">Introduction</a>
+
             <h2>Getting Started</h2>
             <ul>
                 <li><a href="/installation">Installation</a></li>
@@ -36,30 +37,54 @@
             <h2>The Basics</h2>
             <ul>
                 <li><a href="/routing" class="active">Routing</a></li>
-                <li><a href="/middleware">Middleware</a></li>
                 <li><a href="/controllers">Controllers</a></li>
                 <li><a href="/request">Request</a></li>
                 <li><a href="/response">Response</a></li>
+                <li><a href="/blade">Blade</a></li>
             </ul>
 
-            <h2>More Features</h2>
+            <h2>Database</h2>
             <ul>
+                <li><a href="/database">DB</a></li>
+                <li><a href="/query-builder">Query Builder</a></li>
+                <li><a href="/migrations">Migrations</a></li>
+                <li><a href="/models">Models</a></li>
+            </ul>
+
+            <h2>Security</h2>
+            <ul>
+                <li><a href="/middleware">Middleware</a></li>
+                <li><a href="/csrf-protection">CSRF Protection</a></li>
                 <li><a href="/authentication">Authentication</a></li>
                 <li><a href="/authorization">Authorization</a></li>
-                <li><a href="/database">Database</a></li>
+            </ul>
+
+            <h2>Features</h2>
+            <ul>
+                <li><a href="/container">Container</a></li>
+                <li><a href="/encryption">Encryption</a></li>
                 <li><a href="/queues">Queues</a></li>
                 <li><a href="/events">Events</a></li>
-                <li><a href="/encryption">Encryption</a></li>
-                <li><a href="/service-container">Service Container</a></li>
-                <li><a href="/service-provider">Service Provider</a></li>
-                <li><a href="/views">Views</a></li>
-                <li><a href="/asset-bundling">Asset Bundling</a></li>
-                <li><a href="/csrf-protection">CSRF Protection</a></li>
+                <li><a href="/asset-bundling">Asset Bundling (Vite)</a></li>
                 <li><a href="/localization">Localization</a></li>
+                <li><a href="/session">Session</a></li>
                 <li><a href="/spark-cli">Spark CLI</a></li>
-                <li><a href="/helpers-and-utils">Helpers & Utils</a></li>
-                <li><a href="/contribution">❤️ Support or Contribution</a></li>
+                <li><a href="/laravel-supports">Laravel Supports</a></li>
             </ul>
+
+            <h2>Utilities</h2>
+            <ul>
+                <li><a href="/">Http (cURL)</a></li>
+                <li><a href="/">Uploader</a></li>
+                <li><a href="/">Paginator</a></li>
+                <li><a href="/">Mail</a></li>
+                <li><a href="/">Cache</a></li>
+                <li><a href="/">Image</a></li>
+                <li><a href="/">File Manager</a></li>
+                <li><a href="/">Carbon Time</a></li>
+            </ul>
+
+            <a href="/contribution">❤️ Contribution</a>
         </nav>
         <div class="content">
 
@@ -68,13 +93,18 @@
 
                 <h3>Basic Routing</h3>
                 <p>Define routes in <code>routes/web.php</code> using URI and closure:</p>
-                <pre><code>Route::get('foo', function () {
-    return response('Hello World');
+                <pre><code>Route::get('foo', function (Request $request) {
+    if ($request->has('name')) {
+        return sprintf('Hello %s', $request->input('name'));
+    }
+    return 'Hello World';
 });
 
-Route::post('foo', function () {
-    // Handle POST request
-});</code></pre>
+Route::post('foo', [SomeController::class, 'store']);</code></pre>
+                <div class="note">
+                    <strong>Note:</strong> All the dependencies and route parameters are automatically resolved by the
+                    container.
+                </div>
 
                 <h3>Available Router Methods</h3>
                 <p>Register routes for any HTTP verb:</p>
@@ -85,12 +115,16 @@ Route::patch($uri, $callback);
 Route::delete($uri, $callback);
 Route::any($uri, $callback);
 Route::options($uri, $callback);
-Route::view($uri, $callback);</code></pre>
+Route::match(['get', 'post'], $uri, $callback);
+Route::redirect($from, $to);
+Route::resource($name, $controller);
+Route::view($uri, $callback);
+Route::group($attributes, $closure);</code></pre>
 
                 <h3>Route Parameters</h3>
                 <h4>Required Parameters</h4>
                 <pre><code>Route::get('user/{id}', function ($id) {
-    return response('User '.$id);
+    return "User {$id}";
 });</code></pre>
 
                 <p>Multiple parameters example:</p>
@@ -103,15 +137,16 @@ Route::view($uri, $callback);</code></pre>
 
                 <h3>Generating URLs To Named Routes</h3>
                 <pre><code>// Basic route URL
-$url = route_url('profile');
+$url = route_url('profile'); // returns string (Recommended)
+$url = route('profile'); // returns Url object
 
 // Parameterized route URL
 $url = route_url('post.comment', ['postId' => 1, 'commentId' => 2]);</code></pre>
 
                 <h3>Route Groups</h3>
                 <p>Group routes with shared attributes:</p>
-                <pre><code>Route::group(['middleware' => ['csrf'], 'path' => '/admin'], function($router) {
-    $router->get('/dashboard', [AdminController::class, 'dashboard']);
+                <pre><code>Route::group(['middleware' => ['role:admin'], 'path' => '/admin'], function() {
+    Route::get('/dashboard', [AdminController::class, 'dashboard']);
     // More routes...
 });</code></pre>
 

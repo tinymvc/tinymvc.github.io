@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TinyMVC Documentation</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <header>
+        <a href="https://tinymvc.github.io" class="logo">
+            <span>TinyMVC</span> <sup class="version">v1.x</sup>
+        </a>
+        <a href="https://github.com/tinymvc/tinymvc" class="github-link">
+            <svg height="20" viewBox="0 0 16 16" width="20" style="margin-right: 5px;">
+                <path fill="currentColor" fill-rule="evenodd"
+                    d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z">
+                </path>
+            </svg>
+            GitHub
+        </a>
+    </header>
+
+    <div class="main-container">
+        <nav class="sidebar">
+            <a href="/">Introduction</a>
+
+            <h2>Getting Started</h2>
+            <ul>
+                <li><a href="/installation">Installation</a></li>
+                <li><a href="/configuration">Configuration</a></li>
+                <li><a href="/quick-start">Quick Start</a></li>
+            </ul>
+
+            <h2>The Basics</h2>
+            <ul>
+                <li><a href="/routing">Routing</a></li>
+                <li><a href="/controllers">Controllers</a></li>
+                <li><a href="/request">Request</a></li>
+                <li><a href="/response">Response</a></li>
+                <li><a href="/blade">Blade</a></li>
+            </ul>
+
+            <h2>Database</h2>
+            <ul>
+                <li><a href="/database">DB</a></li>
+                <li><a href="/query-builder">Query Builder</a></li>
+                <li><a href="/migrations">Migrations</a></li>
+                <li><a href="/models" class="active">Models</a></li>
+            </ul>
+
+            <h2>Security</h2>
+            <ul>
+                <li><a href="/middleware">Middleware</a></li>
+                <li><a href="/csrf-protection">CSRF Protection</a></li>
+                <li><a href="/authentication">Authentication</a></li>
+                <li><a href="/authorization">Authorization</a></li>
+            </ul>
+
+            <h2>Features</h2>
+            <ul>
+                <li><a href="/container">Container</a></li>
+                <li><a href="/encryption">Encryption</a></li>
+                <li><a href="/queues">Queues</a></li>
+                <li><a href="/events">Events</a></li>
+                <li><a href="/asset-bundling">Asset Bundling (Vite)</a></li>
+                <li><a href="/localization">Localization</a></li>
+                <li><a href="/session">Session</a></li>
+                <li><a href="/spark-cli">Spark CLI</a></li>
+                <li><a href="/laravel-supports">Laravel Supports</a></li>
+            </ul>
+
+            <h2>Utilities</h2>
+            <ul>
+                <li><a href="/">Http (cURL)</a></li>
+                <li><a href="/">Uploader</a></li>
+                <li><a href="/">Paginator</a></li>
+                <li><a href="/">Mail</a></li>
+                <li><a href="/">Cache</a></li>
+                <li><a href="/">Image</a></li>
+                <li><a href="/">File Manager</a></li>
+                <li><a href="/">Carbon Time</a></li>
+            </ul>
+
+            <a href="/contribution">❤️ Contribution</a>
+        </nav>
+        <div class="content">
+
+            <section id="database">
+                <h2>Database Models</h2>
+
+                <p>TinyMVC provides an active record implementation through the Model class, allowing you to interact
+                    with
+                    your database tables using object-oriented syntax.</p>
+
+                <h3>Creating Models</h3>
+                <p>Models are stored in the <code>app/Models</code> folder and extend the base
+                    <code>Spark\Database\Model</code> class:
+                </p>
+                <pre><code>&lt;?php
+
+namespace App\Models;
+
+use Spark\Database\Model;
+
+class User extends Model
+{
+    /**
+     * The database table name
+     */
+    public static string $table = 'users';
+
+    /**
+     * Fields that are not mass assignable
+     */
+    protected array $guarded = [];
+}</code></pre>
+
+                <h3>Basic CRUD Operations</h3>
+                <h4>Creating Records</h4>
+                <pre><code>// Create and save in one step
+$user = User::create([
+    'name' => 'John Doe',
+    'email' => 'john@example.com'
+]);
+
+// Or create then save
+$user = new User();
+$user->name = 'John Doe';
+$user->email = 'john@example.com';
+$user->save();</code></pre>
+
+                <h4>Reading Records</h4>
+                <pre><code>// Find by ID
+$user = User::find(1);
+
+// Get all records
+$users = User::all();
+
+// Get first record
+$user = User::first();
+
+// Get last record
+$user = User::last();</code></pre>
+
+                <h4>Updating Records</h4>
+                <pre><code>// Find then update
+$user = User::find(1);
+$user->name = 'Updated Name';
+$user->save();
+
+// Mass update
+User::where('status', 'pending')
+    ->update(['status' => 'active']);</code></pre>
+
+                <h4>Deleting Records</h4>
+                <pre><code>// Find then delete
+$user = User::find(1);
+$user->remove();
+
+// Destroy
+User::destroy(1);
+
+// Direct delete
+User::where('last_login', '<', '2020-01-01')->delete();</code></pre>
+
+                <h3>Query Builder Integration</h3>
+                <p>Models inherit all QueryBuilder methods:</p>
+                <pre><code>// Complex queries
+$users = User::where('status', 'active')
+    ->where('created_at', '>', '2023-01-01')
+    ->orderAsc('name')
+    ->all();
+
+// Joins
+$posts = Post::select(['p.*', 'u.name as author'])
+    ->as('p')
+    ->join('users as u', 'u.id = p.user_id')
+    ->where('p.published', 1)
+    ->all();</code></pre>
+
+                <h3>Pagination</h3>
+                <p>The paginate method makes it easy to paginate query results:</p>
+                <pre><code>// Basic pagination (10 items per page)
+$users = User::paginate();
+
+// Custom pagination (25 items per page)
+$users = User::paginate(25);
+
+// Displaying paginated results
+foreach ($users->getData() as $user) {
+    echo $user->name;
+}
+
+// Rendering pagination links
+echo $users->links();</code></pre>
+
+                <h4>Pagination Methods</h4>
+                <pre><code>// Check if data exists
+if ($users->hasData()) {
+    // Process data
+}
+
+// Get paginated data
+$data = $users->getData();
+
+// Custom pagination links
+if ($users->hasLinks()) {
+    echo $users->links(
+        links: 3, // Number of links to show
+        classes: [
+            'container' => 'pagination',
+            'item' => 'page-item',
+            'link' => 'page-link'
+        ],
+        entity: [
+            'previous' => '&laquo;',
+            'next' => '&raquo;'
+        ]
+    );
+}</code></pre>
+
+                <h3>Mass Assignment</h3>
+                <p>Control which fields can be mass assigned:</p>
+                <pre><code>class User extends Model
+{
+    // Only these fields can be mass assigned
+    protected array $fillable = ['name', 'email'];
+    
+    // Or specify guarded fields (opposite of fillable)
+    protected array $guarded = ['id', 'is_admin'];
+}</code></pre>
+
+                <h3>Model Methods</h3>
+                <pre><code>// Convert model to array
+$array = $user->toArray();
+
+// Create model from array
+$user = User::load(['name' => 'John', 'email' => 'john@example.com']);
+
+// Get query builder instance
+$query = User::query();</code></pre>
+
+                <h3>Full Example</h3>
+                <pre><code>// Blog controller example
+public function index()
+{
+    $posts = Post::with('author')
+        ->where('published', 1)
+        ->orderDesc('created_at')
+        ->paginate(15);
+
+    return view('posts.index', ['posts' => $posts]);
+}
+
+// User registration example
+public function store(Hash $hash)
+{
+    $inserted = User::insert([
+        'name' => request('name'),
+        'email' => request('email'),
+        'password' => $hash->hashPassword(request('password'))
+    ]);
+
+    return response()
+        ->with('message', 'Registration successful!')
+        ->redirect('/dashboard');
+}</code></pre>
+
+                <h2>ORM Relationships</h2>
+
+                <p>TinyMVC provides powerful ORM capabilities, allowing you to define and work with model relationships.
+                </p>
+
+                <h3>Defining Relationships</h3>
+                <p>Relationships are defined in your model:</p>
+                <pre><code>&lt;?php
+
+namespace App\Models;
+
+use Spark\Database\Model;
+use Spark\Database\Relation\HasMany;
+use Spark\Database\Relation\HasOne;
+use Spark\Database\Relation\BelongsToMany;
+
+
+class User extends Model
+{
+    public function posts(): HasMany
+    {
+        return $this->hasMany(Post::class);
+    }
+
+    public function profile(): HasOne
+    {
+        return $this->hasOne(Profile::class);
+    }
+
+    public function roles(): BelongsToMany
+    {
+        return $this->belongsToMany(Role::class);
+    }
+}</code></pre>
+
+                <h3>Relationship Types</h3>
+
+                <h4>One-to-One</h4>
+                <pre><code>public function profile(): HasOne
+{
+    return $this->hasOne(Profile::class);
+}
+
+public function user(): BelongsTo
+{
+    return $this->belongsTo(User::class);
+}</code></pre>
+
+                <h4>One-to-Many</h4>
+                <pre><code>public function posts(): HasMany
+{
+    return $this->hasMany(Post::class);
+}</code></pre>
+
+                <h4>Many-to-Many</h4>
+                <pre><code>public function roles(): BelongsToMany
+{
+    return $this->belongsToMany(Role::class);
+}</code></pre>
+                <h3>Loading Relationships</h3>
+
+                <h4>Eager Loading (with)</h4>
+                <pre><code>// Load single relationship
+$users = User::with('posts')->all();
+
+// Load multiple relationships
+$users = User::with(['posts', 'profile'])->all();</code></pre>
+
+                <h4>Lazy Loading</h4>
+                <pre><code>$user = User::find(1);
+
+// Access relationship (loaded when first accessed)
+$posts = $user->posts;
+$profile = $user->profile;</code></pre>
+
+                <h4>Manual Relationship Loading</h4>
+                <pre><code>$post = Post::findOrFail(1);
+
+// Load user and comments for the post
+$post->attachRelation('user', 'comments');</code></pre>
+
+                <h3>Full Example</h3>
+                <pre><code>// Blog controller with eager loading
+public function show($userId)
+{
+    $user = User::with(['posts', 'profile'])
+        ->where('id', $userId)
+        ->first();
+    
+    return view('users.show', compact('user'));
+}
+
+// Accessing relationships in views
+&lt;h1&gt;{{ $user->name }}&lt;/h1&gt;
+&lt;h2&gt;Profile&lt;/h2&gt;
+&lt;p&gt;{{ $user->profile->bio }}&lt;/p&gt;
+
+&lt;h2&gt;Posts&lt;/h2&gt;
+@foreach ($user->posts as $post)
+    &lt;article&gt;
+        &lt;h3&gt;{{ $post->title }}&lt;/h3&gt;
+        &lt;p&gt;{{ $post->excerpt }}&lt;/p&gt;
+    &lt;/article&gt;
+@endforeach</code></pre>
+
+                <div class="note">
+                    <strong>Performance Tip:</strong> Always use eager loading (<code>with()</code>) when you know
+                    you'll need related data to avoid the N+1 query problem.
+                </div>
+            </section>
+
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-links">
+            <a href="https://github.com/tinymvc/tinymvc">GitHub</a>
+            <a href="https://github.com/tinymvc/tinymvc/issues">Issues</a>
+            <a href="https://github.com/tinymvc/tinymvc/discussions">Discussions</a>
+            <a href="https://github.com/tinymvc/tinymvc/blob/main/LICENSE">License</a>
+        </div>
+        <div class="copyright">
+            &copy; 2023 TinyMVC Framework by <a href="https://github.com/shahinmoyshan">Shahin Moyshan</a>.
+        </div>
+    </footer>
+</body>
+
+</html>

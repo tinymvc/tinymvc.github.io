@@ -25,7 +25,8 @@
 
     <div class="main-container">
         <nav class="sidebar">
-            <a href="/" style="display: block;margin-bottom: 5px;">Introduction</a>
+            <a href="/">Introduction</a>
+
             <h2>Getting Started</h2>
             <ul>
                 <li><a href="/installation">Installation</a></li>
@@ -36,30 +37,54 @@
             <h2>The Basics</h2>
             <ul>
                 <li><a href="/routing">Routing</a></li>
-                <li><a href="/middleware">Middleware</a></li>
                 <li><a href="/controllers">Controllers</a></li>
                 <li><a href="/request">Request</a></li>
                 <li><a href="/response">Response</a></li>
+                <li><a href="/blade">Blade</a></li>
             </ul>
 
-            <h2>More Features</h2>
+            <h2>Database</h2>
             <ul>
+                <li><a href="/database">DB</a></li>
+                <li><a href="/query-builder">Query Builder</a></li>
+                <li><a href="/migrations">Migrations</a></li>
+                <li><a href="/models">Models</a></li>
+            </ul>
+
+            <h2>Security</h2>
+            <ul>
+                <li><a href="/middleware">Middleware</a></li>
+                <li><a href="/csrf-protection">CSRF Protection</a></li>
                 <li><a href="/authentication">Authentication</a></li>
                 <li><a href="/authorization">Authorization</a></li>
-                <li><a href="/database">Database</a></li>
+            </ul>
+
+            <h2>Features</h2>
+            <ul>
+                <li><a href="/container">Container</a></li>
+                <li><a href="/encryption">Encryption</a></li>
                 <li><a href="/queues">Queues</a></li>
                 <li><a href="/events">Events</a></li>
-                <li><a href="/encryption">Encryption</a></li>
-                <li><a href="/service-container">Service Container</a></li>
-                <li><a href="/service-provider">Service Provider</a></li>
-                <li><a href="/views">Views</a></li>
-                <li><a href="/asset-bundling">Asset Bundling</a></li>
-                <li><a href="/csrf-protection">CSRF Protection</a></li>
+                <li><a href="/asset-bundling">Asset Bundling (Vite)</a></li>
                 <li><a href="/localization">Localization</a></li>
+                <li><a href="/session">Session</a></li>
                 <li><a href="/spark-cli">Spark CLI</a></li>
-                <li><a href="/helpers-and-utils">Helpers & Utils</a></li>
-                <li><a href="/contribution">❤️ Support or Contribution</a></li>
+                <li><a href="/laravel-supports">Laravel Supports</a></li>
             </ul>
+
+            <h2>Utilities</h2>
+            <ul>
+                <li><a href="/">Http (cURL)</a></li>
+                <li><a href="/">Uploader</a></li>
+                <li><a href="/">Paginator</a></li>
+                <li><a href="/">Mail</a></li>
+                <li><a href="/">Cache</a></li>
+                <li><a href="/">Image</a></li>
+                <li><a href="/">File Manager</a></li>
+                <li><a href="/">Carbon Time</a></li>
+            </ul>
+
+            <a href="/contribution">❤️ Contribution</a>
         </nav>
         <div class="content">
             <section id="quick-start">
@@ -70,24 +95,26 @@
 
                 <div class="note">
                     <strong>Note:</strong> Make sure you've completed the <a href="/installation">installation</a>
-                    steps before beginning. <br>
-                    or just run the command:
-                    <code>composer create-project tinymvc/tinymvc myapp</code>
+                    steps before beginning
                 </div>
+
+                <p>Or, just run the following command:</p>
+
+                <pre>composer create-project tinymvc/tinymvc myapp</pre>
 
                 <h3>1. Create Your First Route</h3>
 
                 <p>Routes define the entry points to your application. Let's create a simple route that welcomes users
                     by name.</p>
 
-                <p>Open or create the file <code>routes/web.php</code> and add:</p>
+                <p>Open the file <code>routes/web.php</code> and add:</p>
 
                 <pre><code>&lt;?php
 use Spark\Http\Route;
-use App\Http\Controllers\WelcomeController;
+use App\Http\Controllers\HomeController;
 
 // Simple GET route with a name parameter
-Route::get('/hello/{name}', [WelcomeController::class, 'welcome']);</code></pre>
+Route::get('/hello/{name}', [HomeController::class, 'index']);</code></pre>
 
                 <div class="note">
                     <strong>Route Parameters:</strong> The <code>{name}</code> in the URL is a dynamic parameter that
@@ -98,9 +125,9 @@ Route::get('/hello/{name}', [WelcomeController::class, 'welcome']);</code></pre>
 
                 <p>Controllers handle the application logic. Let's create one using the Spark CLI:</p>
 
-                <pre><code>php spark make:controller WelcomeController</code></pre>
+                <pre><code>php spark make:controller HomeController</code></pre>
 
-                <p>This will create a new controller at <code>app/Http/Controllers/WelcomeController.php</code>.</p>
+                <p>This will create a new controller at <code>app/Http/Controllers/HomeController.php</code>.</p>
 
                 <p>Edit the controller to add our welcome method:</p>
 
@@ -108,7 +135,7 @@ Route::get('/hello/{name}', [WelcomeController::class, 'welcome']);</code></pre>
 
 namespace App\Http\Controllers;
 
-class WelcomeController
+class HomeController extends Controller
 {
     /**
      * Welcome a user by name
@@ -116,9 +143,9 @@ class WelcomeController
      * @param string $name The name to welcome
      * @return \Spark\Http\Response
      */
-    public function welcome(string $name)
+    public function index(string $name)
     {
-        return view('welcome', ['name' => $name]);
+        return view('greet', ['name' => $name]);
     }
 }</code></pre>
 
@@ -136,31 +163,32 @@ class WelcomeController
 
                 <p>First, create the view file using Spark CLI:</p>
 
-                <pre><code>php spark make:view welcome</code></pre>
+                <pre><code>php spark make:view greet</code></pre>
 
-                <p>This creates <code>resources/views/welcome.php</code>. Edit it to display our welcome message:</p>
+                <p>This creates <code>resources/views/greet.blade.php</code>. Edit it to display our welcome message:
+                </p>
 
                 <pre><code>&lt;!DOCTYPE html&gt;
 &lt;html&gt;
 &lt;head&gt;
     &lt;title&gt;Welcome to My App&lt;/title&gt;
-    &lt;?= vite() // Include Vite assets if needed ?&gt;
 &lt;/head&gt;
 &lt;body&gt;
-    &lt;h1&gt;Welcome, &lt;?= e($name) ?&gt;!&lt;/h1&gt;
+    &lt;h1&gt;Welcome, {{ $name }}!&lt;/h1&gt;
     
-    &lt;?php if ($name === 'Admin'): ?&gt;
+    @if ($name === 'admin')
         &lt;p class="alert"&gt;Special message for admin users&lt;/p&gt;
-    &lt;?php endif ?&gt;
+    @endif
 &lt;/body&gt;
 &lt;/html&gt;</code></pre>
 
                 <div class="note">
                     <strong>View Best Practices:</strong>
                     <ul>
-                        <li>Always escape output with <code>e()</code> or <code>__e()</code> to prevent XSS</li>
+                        <li>Always escape output with <code>{{  }}</code> or <code>{{ __() }}</code> to prevent XSS</li>
                         <li>Keep complex logic in controllers, not views</li>
-                        <li>Use PHP alternative syntax for control structures in views</li>
+                        <li>Use partials for reusable view parts. (header, footer)</li>
+                        <li>Use components for encapsulating reusable UI elements</li>
                     </ul>
                 </div>
 
@@ -222,7 +250,7 @@ class WelcomeController
 
                 <div class="tip">
                     <strong>Development Tip:</strong> Use <code>php spark route:list</code> to see all registered routes
-                    and their associated controllers.
+                    with their name, and allowed methods.
                 </div>
             </section>
         </div>

@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TinyMVC Documentation</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <header>
+        <a href="https://tinymvc.github.io" class="logo">
+            <span>TinyMVC</span> <sup class="version">v1.x</sup>
+        </a>
+        <a href="https://github.com/tinymvc/tinymvc" class="github-link">
+            <svg height="20" viewBox="0 0 16 16" width="20" style="margin-right: 5px;">
+                <path fill="currentColor" fill-rule="evenodd"
+                    d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z">
+                </path>
+            </svg>
+            GitHub
+        </a>
+    </header>
+
+    <div class="main-container">
+        <nav class="sidebar">
+            <a href="/">Introduction</a>
+
+            <h2>Getting Started</h2>
+            <ul>
+                <li><a href="/installation">Installation</a></li>
+                <li><a href="/configuration">Configuration</a></li>
+                <li><a href="/quick-start">Quick Start</a></li>
+            </ul>
+
+            <h2>The Basics</h2>
+            <ul>
+                <li><a href="/routing">Routing</a></li>
+                <li><a href="/controllers">Controllers</a></li>
+                <li><a href="/request">Request</a></li>
+                <li><a href="/response">Response</a></li>
+                <li><a href="/blade">Blade</a></li>
+            </ul>
+
+            <h2>Database</h2>
+            <ul>
+                <li><a href="/database">DB</a></li>
+                <li><a href="/query-builder">Query Builder</a></li>
+                <li><a href="/migrations" class="active">Migrations</a></li>
+                <li><a href="/models">Models</a></li>
+            </ul>
+
+            <h2>Security</h2>
+            <ul>
+                <li><a href="/middleware">Middleware</a></li>
+                <li><a href="/csrf-protection">CSRF Protection</a></li>
+                <li><a href="/authentication">Authentication</a></li>
+                <li><a href="/authorization">Authorization</a></li>
+            </ul>
+
+            <h2>Features</h2>
+            <ul>
+                <li><a href="/container">Container</a></li>
+                <li><a href="/encryption">Encryption</a></li>
+                <li><a href="/queues">Queues</a></li>
+                <li><a href="/events">Events</a></li>
+                <li><a href="/asset-bundling">Asset Bundling (Vite)</a></li>
+                <li><a href="/localization">Localization</a></li>
+                <li><a href="/session">Session</a></li>
+                <li><a href="/spark-cli">Spark CLI</a></li>
+                <li><a href="/laravel-supports">Laravel Supports</a></li>
+            </ul>
+
+            <h2>Utilities</h2>
+            <ul>
+                <li><a href="/">Http (cURL)</a></li>
+                <li><a href="/">Uploader</a></li>
+                <li><a href="/">Paginator</a></li>
+                <li><a href="/">Mail</a></li>
+                <li><a href="/">Cache</a></li>
+                <li><a href="/">Image</a></li>
+                <li><a href="/">File Manager</a></li>
+                <li><a href="/">Carbon Time</a></li>
+            </ul>
+
+            <a href="/contribution">❤️ Contribution</a>
+        </nav>
+        <div class="content">
+
+            <section id="database">
+                <h2>Creating Migrations</h2>
+                <p>Generate a new migration file using the Spark CLI:</p>
+                <pre><code>php spark make:migration users</code></pre>
+
+                <p>This creates a new file in <code>database/migrations/</code> with timestamp prefix:</p>
+                <pre><code>&lt;?php
+
+use Spark\Database\Schema\Blueprint;
+use Spark\Database\Schema\Schema;
+
+return new class {
+    public function up(): void
+    {
+        Schema::create('users', function (Blueprint $table) {
+            $table->id();
+            $table->string('name');
+            $table->string('email')->unique()->required();
+            $table->string('password')->required();
+            $table->timestamps();
+        });
+    }
+
+    public function down(): void
+    {
+        Schema::dropIfExists('users');
+    }
+};</code></pre>
+
+                <h3>Running Migrations</h3>
+                <pre><code># Run all pending migrations
+php spark migrate:run
+
+# Rollback the last migration
+php spark migrate:rollback
+
+# Rollback multiple migrations
+php spark migrate:rollback 2
+
+# Reset and re-run all migrations
+php spark migrate:fresh</code></pre>
+
+                <h3>Schema Builder</h3>
+                <h4>Column Types</h4>
+                <pre><code>$table->id(); // Auto-incrementing ID
+$table->string('name', 100); // String with optional length
+$table->text('description'); // Long text
+$table->integer('votes'); // Integer
+$table->boolean('active'); // Boolean
+$table->decimal('amount', 8, 2); // Decimal with precision
+$table->date('created_at'); // Date only
+$table->dateTime('updated_at'); // Date and time
+$table->timestamp('published_at'); // Timestamp
+$table->enum('status', ['active', 'pending']); // Enumeration</code></pre>
+
+                <h4>Column Modifiers</h4>
+                <pre><code>$table->string('email')->unique(); // Unique constraint
+$table->string('name')->nullable(); // Allows NULL values
+$table->integer('count')->default(0); // Default value
+$table->string('ip')->required(); // NOT NULL constraint
+$table->integer('views')->unsigned(); // Unsigned integer</code></pre>
+
+                <h4>Indexes</h4>
+                <pre><code>// Single column index
+$table->string('email')->unique();
+
+// Composite index
+$table->index(['account_id', 'created_at']);
+
+// Primary key
+$table->primary(['id', 'parent_id']);</code></pre>
+
+                <h4>Foreign Keys</h4>
+                <pre><code>// Simple foreign key
+$table->foreignId('user_id')->constrained();
+
+// Custom foreign key
+$table->foreign('author_id')->references('id')->on('authors');
+
+// With actions
+$table->foreign('user_id')
+    ->references('id')
+    ->on('users')
+    ->onDelete('cascade');</code></pre>
+
+                <h3>Modifying Tables</h3>
+                <pre><code>Schema::table('users', function (Blueprint $table) {
+    $table->dropColumn('old_column');
+    $table->dropIndex(['email', 'status']);
+    $table->dropForeign('user_id', 'users');
+});</code></pre>
+
+                <h3>Migration Structure</h3>
+                <div class="note">
+                    <p>Each migration class contains two methods:</p>
+                    <ul>
+                        <li><code>up()</code> - Runs when migrating forward</li>
+                        <li><code>down()</code> - Runs when rolling back</li>
+                    </ul>
+                </div>
+
+                <h3>Best Practices</h3>
+                <div class="note">
+                    <ul>
+                        <li>Keep migrations focused on one schema change</li>
+                        <li>Always implement the <code>down()</code> method</li>
+                        <li>Use descriptive migration names</li>
+                        <li>Test migrations in development before production</li>
+                        <li>Consider data migrations for large changes</li>
+                    </ul>
+                </div>
+
+                <h3>Full Example</h3>
+                <pre><code>&lt;?php
+
+use Spark\Database\Schema\Blueprint;
+use Spark\Database\Schema\Schema;
+
+return new class {
+    public function up(): void
+    {
+        Schema::create('posts', function (Blueprint $table) {
+            $table->id();
+            $table->foreignId('user_id')
+                ->constrained('users')
+                ->cascadeOnDelete();
+            $table->string('title');
+            $table->string('slug')->unique();
+            $table->text('content');
+            $table->boolean('published')->default(false);
+            $table->timestamp('published_at')->nullable();
+            $table->timestamps();
+            
+            $table->index(['title', 'published_at']);
+        });
+
+        Schema::create('comments', function (Blueprint $table) {
+            $table->id();
+            $table->foreignId('post_id')->constrained('posts');
+            $table->foreignId('user_id')->constrained('users');
+            $table->text('body');
+            $table->timestamps();
+        });
+    }
+
+    public function down(): void
+    {
+        Schema::dropIfExists('comments');
+        Schema::dropIfExists('posts');
+    }
+};</code></pre>
+
+            </section>
+
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-links">
+            <a href="https://github.com/tinymvc/tinymvc">GitHub</a>
+            <a href="https://github.com/tinymvc/tinymvc/issues">Issues</a>
+            <a href="https://github.com/tinymvc/tinymvc/discussions">Discussions</a>
+            <a href="https://github.com/tinymvc/tinymvc/blob/main/LICENSE">License</a>
+        </div>
+        <div class="copyright">
+            &copy; 2023 TinyMVC Framework by <a href="https://github.com/shahinmoyshan">Shahin Moyshan</a>.
+        </div>
+    </footer>
+</body>
+
+</html>

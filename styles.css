@@ -96,6 +96,24 @@ header {
     padding-left: 0.5rem;
 }
 
+/* Scrollbar */
+.sidebar::-webkit-scrollbar {
+    width: 4px;
+}
+
+.sidebar::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.sidebar::-webkit-scrollbar-thumb {
+    background: transparent;
+    border-radius: 3px;
+}
+
+.sidebar:hover::-webkit-scrollbar-thumb {
+    background: #9ca3af;
+}
+
 .content ul {
     padding-left: 1.25rem;
 }

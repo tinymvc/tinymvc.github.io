@@ -1,0 +1,649 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TinyMVC Documentation</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <header>
+        <a href="https://tinymvc.github.io" class="logo">
+            <span>TinyMVC</span> <sup class="version">v1.x</sup>
+        </a>
+        <a href="https://github.com/tinymvc/tinymvc" class="github-link">
+            <svg height="20" viewBox="0 0 16 16" width="20" style="margin-right: 5px;">
+                <path fill="currentColor" fill-rule="evenodd"
+                    d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z">
+                </path>
+            </svg>
+            GitHub
+        </a>
+    </header>
+
+    <div class="main-container">
+        <nav class="sidebar">
+            <a href="/">Introduction</a>
+
+            <h2>Getting Started</h2>
+            <ul>
+                <li><a href="/installation">Installation</a></li>
+                <li><a href="/configuration">Configuration</a></li>
+                <li><a href="/quick-start">Quick Start</a></li>
+            </ul>
+
+            <h2>The Basics</h2>
+            <ul>
+                <li><a href="/routing">Routing</a></li>
+                <li><a href="/controllers">Controllers</a></li>
+                <li><a href="/request">Request</a></li>
+                <li><a href="/response">Response</a></li>
+                <li><a href="/blade" class="active">Blade</a></li>
+            </ul>
+
+            <h2>Database</h2>
+            <ul>
+                <li><a href="/database">DB</a></li>
+                <li><a href="/query-builder">Query Builder</a></li>
+                <li><a href="/migrations">Migrations</a></li>
+                <li><a href="/models">Models</a></li>
+            </ul>
+
+            <h2>Security</h2>
+            <ul>
+                <li><a href="/middleware">Middleware</a></li>
+                <li><a href="/csrf-protection">CSRF Protection</a></li>
+                <li><a href="/authentication">Authentication</a></li>
+                <li><a href="/authorization">Authorization</a></li>
+            </ul>
+
+            <h2>Features</h2>
+            <ul>
+                <li><a href="/container">Container</a></li>
+                <li><a href="/encryption">Encryption</a></li>
+                <li><a href="/queues">Queues</a></li>
+                <li><a href="/events">Events</a></li>
+                <li><a href="/asset-bundling">Asset Bundling (Vite)</a></li>
+                <li><a href="/localization">Localization</a></li>
+                <li><a href="/session">Session</a></li>
+                <li><a href="/spark-cli">Spark CLI</a></li>
+                <li><a href="/laravel-supports">Laravel Supports</a></li>
+            </ul>
+
+            <h2>Utilities</h2>
+            <ul>
+                <li><a href="/">Http (cURL)</a></li>
+                <li><a href="/">Uploader</a></li>
+                <li><a href="/">Paginator</a></li>
+                <li><a href="/">Mail</a></li>
+                <li><a href="/">Cache</a></li>
+                <li><a href="/">Image</a></li>
+                <li><a href="/">File Manager</a></li>
+                <li><a href="/">Carbon Time</a></li>
+            </ul>
+
+            <a href="/contribution">❤️ Contribution</a>
+        </nav>
+        <div class="content">
+            <section id="views">
+                <h2>Blade Templating</h2>
+
+                <p>TinyMVC provides a fast, lightweight laravel like <b>Blade</b> templating system with
+                    additional conveniences for layouts, components, and data sharing.</p>
+
+                <h3>Basic Usage</h3>
+                <h4>Rendering Views</h4>
+                <pre><code>// In controllers
+return view('welcome', ['name' => 'John']);
+
+// with context
+$user = User::findOrFail($id);
+$posts = Post::where('user_id', $id)->get();
+return view('welcome', compact('user', 'posts'));
+</code></pre>
+
+                <h4>Template Structure</h4>
+                <pre><code>views/
+├── layouts/
+│   └── app.blade.php      # Main layout
+├── components/
+│   └── alert.blade.php    # Reusable components
+└── pages/
+    ├── home.blade.php     # Page templates
+    └── profile.blade.php</code></pre>
+
+                <h3>Spark CLI</h3>
+                <p>Use the Spark CLI to generate views, and components.</p>
+                <pre><code>php spark make:view welcome
+php spark make:component alert</code></pre>
+
+                <h3>Template Features</h3>
+                <h4>Passing Data</h4>
+                <pre><code>// Controller
+return view('profile', [
+    'user' => $user,
+    'title' => 'User Profile'
+]);
+
+// Template (profile.blade.php)
+&lt;h1&gt;{{ $title }}&lt;/h1&gt;
+&lt;p&gt;Welcome, {{ $user->name }}&gt;&lt;/p&gt;</code></pre>
+
+                <h4>Layouts</h4>
+                <pre><code>// Using layout
+return view('pages.home');
+
+// Page template (pages/home.blade.php)
+@extends('layouts.app')
+
+@section('content')
+    &lt;section&gt;
+        &lt;h1&gt;Home&lt;/h1&gt;
+        &lt;p&gt;Welcome to the home page!&lt;/p&gt;
+    &lt;section/&gt;
+@endsection
+
+// Layout template (layouts/app.blade.php)
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+    &lt;title&gt;My App&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    @yield('content')
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+
+                <h4>Components</h4>
+                <pre><code>// In template
+&lt;x-alert type="success" message="Updated!" /&gt;
+
+// Component (components/alert.blade.php)
+&lt;div class="alert alert-{{ $type }}"&gt;
+    {{ $message }}
+&lt;/div&gt;
+
+// Component with slot and dynamic parameters
+&lt;x-user-card :$user :profileUrl="route('profile', ['username' => $user->username])"&gt;
+    // user html slot content
+&lt;/x-user-card&gt;
+
+// Component (components/user-card.blade.php)
+&lt;div class="user-card"&gt;
+    &lt;a href="{{ $profileUrl }}"&gt;
+        &lt;h2&gt;{{ $user->name }}&lt;/h2&gt;
+        {!! $slot !!}
+    &lt;/a&gt;&lt;
+&lt;/div&gt;</code></pre>
+
+                <h3>Automatic Context</h3>
+                <p>These variables are always available in templates:</p>
+                <pre><code>$app       // Application instance
+$request   // Current Request object  
+$session   // Session object
+$errors    // Validation errors
+$view      // Current View instance</code></pre>
+
+                <h3>View Methods</h3>
+                <pre><code>// Share a context variable
+@share('user', $user)
+
+// Check for data in other child template
+@isset($user)
+
+@endisset
+
+// Include template partials
+@include('partials.header')
+</code></pre>
+
+                <h3>Advanced Patterns</h3>
+                <h4>View Composers & Custom directives</h4>
+                <pre><code>// Share or Compose to View
+class AppServiceProvider
+{
+    public function boot()
+    {
+        // Share context globally to view
+        View::share([
+            'categories' => Category::all(),
+            'stats' => SiteStats::get()
+        ]);
+
+        // Set Composers to specific views
+        View::composer('partials.nav', function ($view) {
+            $view->share('friends', User::friends(auth()->id()));
+        });
+
+        // Add a custom directive
+        view()->directive('datetime', function ($expression) {
+            return "&lt;?php echo carbon($expression)->diffForHumans(); ?&gt;";
+        });
+    }
+}</code></pre>
+
+                <h4>Error Handling</h4>
+                <pre><code>// Access all validation errors
+@errors('email')
+    &lt;li&gt;{{ $message }}&lt;/li&gt;
+@enderrors
+
+// Access a specific validation error
+@error('email')
+    &lt;div class="error"&gt;{{ $message }}&lt;/div&gt;
+@enderror
+
+// Alternative, Access a specific validation error
+@if ($errors->has('email'))
+    &lt;div class="error"&gt;{{ $errors->first('email') }}&lt;/div&gt;
+@endif
+
+// Access validation errors
+@if ($errors->hasAny())
+    &lt;div class="alert alert-danger"&gt;{{ $errors }}&lt;/div&gt;
+@endif</code></pre>
+
+                <h3>Full Example</h3>
+                <pre><code>// Controller
+public function show($id)
+{
+    return view('products.show', [
+        'product' => Product::find($id),
+        'related' => Product::related($id)
+    ]);
+}
+
+// Template (products/show.blade.php)
+@extends('layouts.store')
+
+@section('content')
+    @include('partials.product-header')
+
+    &lt;div class="product-details"&gt;
+        &lt;h1&gt;{{ $product->name }}&lt;/h1&gt;
+        &lt;x-price :price="$product->price" /&gt;
+    &lt;/div&gt;
+@endsection
+
+
+@if (!empty($related))
+    &lt;h2&gt;Related Products&lt;/h2&gt;
+    @include('partials.product-grid', ['products' => $related])
+@endif
+
+// Layout (layouts/store.blade.php)
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+    &lt;title&gt;{{ $title ?? 'Store' }}&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    @include('partials.nav')
+    &lt;main&gt;
+        @yield('content')
+    &lt;/main&gt;
+    @include('partials.footer')
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+
+                <h2>Available Blade Directives</h2>
+                <p>This Blade-like template engine supports the following directives and syntax:</p>
+
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Directive</th>
+                            <th>Description</th>
+                            <th>Usage Example</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><code>{{ $var }}</code></td>
+                            <td>Echoes escaped content (HTML entities converted).</td>
+                            <td><code>{{ $name }}</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>{!! $var !!}</code></td>
+                            <td>Echoes unescaped content (raw HTML output).</td>
+                            <td><code>{!! $html !!}</code></td>
+                        </tr>
+                        <!-- PHP -->
+                        <tr>
+                            <td><code>@php ... @endphp</code></td>
+                            <td>Executes raw PHP code inside the template.</td>
+                            <td>
+                                <pre>@php
+    $count = 5;
+@endphp</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>@json($var)</td>
+                            <td>Echo JSON-encoded content.</td>
+                            <td><code>const users = @json($users)</code></td>
+                        </tr>
+
+                        <!-- Layouts -->
+                        <tr>
+                            <td><code>@extends('layout')</code></td>
+                            <td>Specifies a parent view to extend.</td>
+                            <td><code>@extends('layouts.main')</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>@section('name')</code> / <code>@endsection</code></td>
+                            <td>Defines a section for layout injection.</td>
+                            <td>
+                                <pre>@section('title')
+My Page
+@endsection</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><code>@section('name', 'value')</code></td>
+                            <td>Defines a section inline.</td>
+                            <td><code>@section('title', 'My Page')</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>@yield('section')</code></td>
+                            <td>Outputs a section’s content.</td>
+                            <td><code>@yield('content')</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>@yield('section', 'default')</code></td>
+                            <td>Outputs section content with a default value.</td>
+                            <td><code>@yield('title', 'Default')</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>@show</code></td>
+                            <td>Ends section and outputs it immediately.</td>
+                            <td>
+                                <pre>@section('sidebar')
+Sidebar content
+@show</pre>
+                            </td>
+                        </tr>
+
+                        <!-- Includes -->
+                        <tr>
+                            <td><code>@include('view')</code></td>
+                            <td>Includes another view file.</td>
+                            <td><code>@include('partials.header')</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>@includeIf('view')</code></td>
+                            <td>Includes view if it exists.</td>
+                            <td><code>@includeIf('optional.view')</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>@includeWhen(condition, 'view', [data])</code></td>
+                            <td>Includes view only when condition is true.</td>
+                            <td><code>@includeWhen($user, 'profile', ['user' => $user])</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>@includeUnless(condition, 'view')</code></td>
+                            <td>Includes view unless condition is true.</td>
+                            <td><code>@includeUnless($user, 'guest')</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>@hasSection('view')</code></td>
+                            <td>Checks if a section exists.</td>
+                            <td>
+                                <pre>@hasSection('sidebar')
+    Sidebar content is available.
+@else
+    No sidebar content.
+@endif</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><code>@sectionMissing('view')</code></td>
+                            <td>Checks if a section is missing.</td>
+                            <td>
+                                <pre>@sectionMissing('sidebar')
+    No sidebar content.
+@endif</pre>
+                            </td>
+                        </tr>
+
+                        <!-- Components -->
+                        <tr>
+                            <td><code>&lt;x-name /&gt;</code></td>
+                            <td>Self-closing component tag.</td>
+                            <td><code>&lt;x-alert type="success" /&gt;</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>&lt;x-name&gt;...&lt;/x-name&gt;</code></td>
+                            <td>Component with content slot.</td>
+                            <td>
+                                <pre>&lt;x-alert type="error"&gt;
+Error message
+&lt;/x-alert&gt;</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><code>:attribute</code></td>
+                            <td>Passes a PHP variable or expression to a component attribute.</td>
+                            <td><code>&lt;x-alert :message="$error" /&gt;</code></td>
+                        </tr>
+
+                        <!-- Control Structures -->
+                        <tr>
+                            <td><code>@if(condition)</code> / <code>@endif</code></td>
+                            <td>Conditional block.</td>
+                            <td>
+                                <pre>@if($user)
+Hello, {{ $user->name }}
+@endif</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><code>@elseif(condition)</code></td>
+                            <td>Else-if condition in an <code>@if</code> block.</td>
+                            <td><code>@elseif($admin)</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>@else</code></td>
+                            <td>Else branch for conditionals.</td>
+                            <td><code>@else</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>@unless(condition)</code> / <code>@endunless</code></td>
+                            <td>Executes block unless condition is true.</td>
+                            <td>
+                                <pre>@unless($loggedIn)
+Please log in.
+@endunless</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><code>@isset($var)</code> / <code>@endisset</code></td>
+                            <td>Executes block if variable is set.</td>
+                            <td>
+                                <pre>@isset($records)
+Records found!
+@endisset</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><code>@empty($var)</code> / <code>@endempty</code></td>
+                            <td>Executes block if variable is empty.</td>
+                            <td>
+                                <pre>@empty($records)
+No records found.
+@endempty</pre>
+                            </td>
+                        </tr>
+
+                        <!-- Loops -->
+                        <tr>
+                            <td><code>@for(...)</code> / <code>@endfor</code></td>
+                            <td>Classic for loop.</td>
+                            <td>
+                                <pre>@for($i = 0; $i < 10; $i++)
+{{ $i }}
+@endfor</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><code>@foreach(...)</code> / <code>@endforeach</code></td>
+                            <td>Loops through each item.</td>
+                            <td>
+                                <pre>@foreach($users as $user)
+{{ $user->name }}
+@endforeach</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><code>@while(condition)</code> / <code>@endwhile</code></td>
+                            <td>While loop.</td>
+                            <td>
+                                <pre>@while($count < 10)
+Count: {{ $count++ }}
+@endwhile</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><code>@continue</code> / <code>@break</code></td>
+                            <td>Loop control statements.</td>
+                            <td>
+                                <pre>@foreach($items as $item)
+    @if($item->skip) @continue @endif
+    {{ $item }}
+@endforeach</pre>
+                            </td>
+                        </tr>
+
+                        <!-- Switch -->
+                        <tr>
+                            <td><code>@switch($var)</code> / <code>@endswitch</code></td>
+                            <td>Switch statement.</td>
+                            <td>
+                                <pre>@switch($role)
+@case('admin')
+Admin panel
+@break
+@default
+User panel
+@endswitch</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><code>@case(value)</code></td>
+                            <td>Case within a switch.</td>
+                            <td><code>@case('admin')</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>@default</code></td>
+                            <td>Default case in a switch.</td>
+                            <td><code>@default</code></td>
+                        </tr>
+
+                        <!-- Raw Blocks -->
+                        <tr>
+                            <td><code>@verbatim ... @endverbatim</code></td>
+                            <td>Outputs uncompiled content (useful for showing Blade syntax).</td>
+                            <td>
+                                <pre>@verbatim
+{{ This will not be compiled }}
+@endverbatim</pre>
+                            </td>
+                        </tr>
+
+                        <!-- CSRF / Auth -->
+                        <tr>
+                            <td><code>@csrf</code></td>
+                            <td>Outputs a hidden CSRF token input.</td>
+                            <td><code>@csrf</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>@method('PUT')</code></td>
+                            <td>Specifies HTTP method for form spoofing.</td>
+                            <td><code>@method('PATCH')</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>@auth ... @endauth</code></td>
+                            <td>Shows content only if user is authenticated.</td>
+                            <td>
+                                <pre>@auth
+Welcome back!
+@endauth</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><code>@guest ... @endguest</code></td>
+                            <td>Shows content only if user is a guest.</td>
+                            <td>
+                                <pre>@guest
+Please log in.
+@endguest</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><code>@can($ability) / @endcan</code></td>
+                            <td>Checks if a user has a specific ability.</td>
+                            <td>
+                                <pre>@can('edit-articles')
+You can edit articles.
+@endcan</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><code>@cannot($ability) / @endcannot</code></td>
+                            <td>Checks if a user does not have a specific ability.</td>
+                            <td>
+                                <pre>@cannot('edit-articles')
+You cannot edit articles.
+@endcannot</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><code>@vite($args)</code></td>
+                            <td>Includes Vite assets.</td>
+                            <td>
+                                <pre>@vite('app.jsx')</pre>
+                            </td>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><code>@errors('field')</code></td>
+                            <td>Displays validation errors for a specific field.</td>
+                            <td>
+                                <pre>@errors('email')
+    {{ $message }}
+@enderrors</pre>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h3>Best Practices</h3>
+                <div class="note">
+                    <ul>
+                        <li>Keep templates focused on presentation only</li>
+                        <li>Use components for reusable UI elements</li>
+                        <li>Pass only necessary data to views</li>
+                        <li>Store complex logic in view composers</li>
+                        <li>Use layouts for consistent page structures</li>
+                    </ul>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-links">
+            <a href="https://github.com/tinymvc/tinymvc">GitHub</a>
+            <a href="https://github.com/tinymvc/tinymvc/issues">Issues</a>
+            <a href="https://github.com/tinymvc/tinymvc/discussions">Discussions</a>
+            <a href="https://github.com/tinymvc/tinymvc/blob/main/LICENSE">License</a>
+        </div>
+        <div class="copyright">
+            &copy; 2023 TinyMVC Framework by <a href="https://github.com/shahinmoyshan">Shahin Moyshan</a>.
+        </div>
+    </footer>
+</body>
+
+</html>

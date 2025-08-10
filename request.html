@@ -25,7 +25,8 @@
 
     <div class="main-container">
         <nav class="sidebar">
-            <a href="/" style="display: block;margin-bottom: 5px;">Introduction</a>
+            <a href="/">Introduction</a>
+
             <h2>Getting Started</h2>
             <ul>
                 <li><a href="/installation">Installation</a></li>
@@ -36,30 +37,54 @@
             <h2>The Basics</h2>
             <ul>
                 <li><a href="/routing">Routing</a></li>
-                <li><a href="/middleware">Middleware</a></li>
                 <li><a href="/controllers">Controllers</a></li>
                 <li><a href="/request" class="active">Request</a></li>
                 <li><a href="/response">Response</a></li>
+                <li><a href="/blade">Blade</a></li>
             </ul>
 
-            <h2>More Features</h2>
+            <h2>Database</h2>
             <ul>
+                <li><a href="/database">DB</a></li>
+                <li><a href="/query-builder">Query Builder</a></li>
+                <li><a href="/migrations">Migrations</a></li>
+                <li><a href="/models">Models</a></li>
+            </ul>
+
+            <h2>Security</h2>
+            <ul>
+                <li><a href="/middleware">Middleware</a></li>
+                <li><a href="/csrf-protection">CSRF Protection</a></li>
                 <li><a href="/authentication">Authentication</a></li>
                 <li><a href="/authorization">Authorization</a></li>
-                <li><a href="/database">Database</a></li>
+            </ul>
+
+            <h2>Features</h2>
+            <ul>
+                <li><a href="/container">Container</a></li>
+                <li><a href="/encryption">Encryption</a></li>
                 <li><a href="/queues">Queues</a></li>
                 <li><a href="/events">Events</a></li>
-                <li><a href="/encryption">Encryption</a></li>
-                <li><a href="/service-container">Service Container</a></li>
-                <li><a href="/service-provider">Service Provider</a></li>
-                <li><a href="/views">Views</a></li>
-                <li><a href="/asset-bundling">Asset Bundling</a></li>
-                <li><a href="/csrf-protection">CSRF Protection</a></li>
+                <li><a href="/asset-bundling">Asset Bundling (Vite)</a></li>
                 <li><a href="/localization">Localization</a></li>
+                <li><a href="/session">Session</a></li>
                 <li><a href="/spark-cli">Spark CLI</a></li>
-                <li><a href="/helpers-and-utils">Helpers & Utils</a></li>
-                <li><a href="/contribution">❤️ Support or Contribution</a></li>
+                <li><a href="/laravel-supports">Laravel Supports</a></li>
             </ul>
+
+            <h2>Utilities</h2>
+            <ul>
+                <li><a href="/">Http (cURL)</a></li>
+                <li><a href="/">Uploader</a></li>
+                <li><a href="/">Paginator</a></li>
+                <li><a href="/">Mail</a></li>
+                <li><a href="/">Cache</a></li>
+                <li><a href="/">Image</a></li>
+                <li><a href="/">File Manager</a></li>
+                <li><a href="/">Carbon Time</a></li>
+            </ul>
+
+            <a href="/contribution">❤️ Contribution</a>
         </nav>
         <div class="content">
 
@@ -101,16 +126,37 @@ $name = $request->post('name');
 // Get all input
 $all = $request->all();
 
-// Get filtered input
-$filtered = $request->all(['name', 'email']);</code></pre>
+// Get filtered attributes
+$filtered = $request->all(['name', 'email']);
+
+// Get filtered attributes in input sanitizer
+$input = $request->input(['name', 'email']);
+
+dd($input->text('name'));
+dd($input->email('email'));
+
+// Get raw input value using helper function
+dd(input('email'));</code></pre>
 
                 <h4>Checking For Input</h4>
-                <pre><code>if ($request->hasQuery('page')) {
+                <pre><code>if ($request->has('page')) {
+    // Has page attribute
+}
+
+if ($request->hasAny(['email', 'username'])) {
+    // Has email or username
+}
+
+if ($request->hasAll(['email', 'username', 'password'])) {
+    // Has email, username and password
+}
+
+if ($request->hasQuery('page')) {
     // Has query parameter
 }
 
-if ($request->hasPost('email')) {
-    // Has POST parameter
+if ($request->hasPost('name')) {
+    // Has name parameter
 }</code></pre>
 
                 <h3>File Uploads</h3>
@@ -162,20 +208,20 @@ if ($request->expectsJson()) {
 
                 <h3>Input Validation & Sanitization</h3>
                 <p>Request validation:</p>
-                <pre><code>$attributes = $request->validate([
+                <pre><code>$input = $request->validate([
     'name' => ['required'], 
-    'email' => [required, 'email'
-]]);</code></pre>
+    'email' => [required, 'email']
+]);</code></pre>
                 <p>Using the validator helper:</p>
                 <pre><code>try {
-    $sanitizer = validator([
+    $input = validator([
         'name' => 'required|string',
         'email' => 'required|email'
     ]);
     
     // Data is validated and sanitized
-    $email = $sanitizer->email('email');
-    $name = $sanitizer->text('name');
+    $email = $input->email('email');
+    $name = $input->text('name');
 } catch (Exception $e) {
     // Handle validation error
     // $e->getMessage(); // the validation error message
@@ -183,12 +229,10 @@ if ($request->expectsJson()) {
 
                 <p>Using the input helper:</p>
                 <pre><code>// Get sanitized input
-$inputSanitizer = input(['name', 'email']);
-$name = $inputSanitizer->text('name');
-
-// Get raw input
-$rawInput = input(['name', 'email'], false);
-$name = $rawInput['name'];</code></pre>
+$input = input(['name', 'email']);
+$email = $input->email('email');
+$name = $input['name'];
+</code></pre>
 
                 <h3>Route Parameters</h3>
                 <pre><code>// For route '/user/{id}'

@@ -46,7 +46,7 @@
             <h2>Database</h2>
             <ul>
                 <li><a href="/database">DB</a></li>
-                <li><a href="/query-builder">Query Builder</a></li>
+                <li><a href="/query-builder" class="active">Query Builder</a></li>
                 <li><a href="/migrations">Migrations</a></li>
                 <li><a href="/models">Models</a></li>
             </ul>
@@ -84,88 +84,94 @@
                 <li><a href="/">Carbon Time</a></li>
             </ul>
 
-            <a href="/contribution" class="active">❤️ Contribution</a>
+            <a href="/contribution">❤️ Contribution</a>
         </nav>
-
         <div class="content">
-            <section id="support-contribution">
-                <h2>Support & Contribution</h2>
 
-                <div class="contribution-guide">
-                    <h3>How You Can Help</h3>
-                    <p>TinyMVC is a labor of love, and I'd be thrilled to have others contribute to its growth. Here's
-                        how you can help:</p>
+            <section id="database">
+                <h2>Query Builder</h2>
+                <p>The query builder provides a fluent interface for database operations.</p>
 
-                    <h4>⭐ Star the Repository</h4>
-                    <p>Show your support by starring the GitHub repository:</p>
-                    <p><a href="https://github.com/tinymvc" target="_blank" class="github-button">⭐ Star TinyMVC on
-                            GitHub</a></p>
+                <h4>Basic Usage</h4>
+                <pre><code>// Get all records
+$users = query('users')->all();
 
-                    <h4>Contribution Guidelines</h4>
-                    <ol>
-                        <li><strong>Fork</strong> the repository</li>
-                        <li>Create a <strong>feature branch</strong>
-                            (<code>git checkout -b feature/amazing-feature</code>)</li>
-                        <li>Commit your changes (<code>git commit -m 'Add some amazing feature'</code>)</li>
-                        <li>Push to the branch (<code>git push origin feature/amazing-feature</code>)</li>
-                        <li>Open a <strong>Pull Request</strong></li>
-                    </ol>
+// Get single record
+$user = query('users')->where('id', 1)->first();
 
-                    <h4>Areas Needing Contribution</h4>
-                    <ul>
-                        <li>Additional database drivers</li>
-                        <li>Model (ORM) and Query Builder improvements</li>
-                        <li>Routing enhancements</li>
-                        <li>Documentation improvements</li>
-                        <li>Performance optimizations</li>
-                        <li>Security enhancements</li>
-                    </ul>
+// Count records
+$count = query('users')->where('active', 1)->count();</code></pre>
 
-                    <div class="note">
-                        <strong>Before contributing:</strong> Please open an issue first to discuss what you'd like to
-                        change or add.
-                    </div>
+                <h4>Inserting Data</h4>
+                <pre><code>// Insert single record
+query('users')->insert([
+    'name' => 'John Doe',
+    'email' => 'john@example.com'
+]);
+
+// Insert multiple records
+query('users')->insert([
+    ['name' => 'John', 'email' => 'john@example.com'],
+    ['name' => 'Jane', 'email' => 'jane@example.com']
+]);</code></pre>
+
+                <h4>Updating Data</h4>
+                <pre><code>// Update single record
+query('users')
+    ->where('id', 1)
+    ->update(['name' => 'Updated Name']);
+
+// Update multiple records
+query('users')
+    ->where('status', 'pending')
+    ->update(['status' => 'active']);</code></pre>
+
+                <h4>Deleting Data</h4>
+                <pre><code>// Delete single record
+query('users')->where('id', 1)->delete();
+
+// Delete multiple records
+query('users')->where('last_login', '<', '2023-01-01')->delete();</code></pre>
+
+                <h4>Complex Queries</h4>
+                <pre><code>// Join tables
+query('posts')
+    ->as('p')
+    ->select(['p.*', 'u.name as author'])
+    ->join('users as u', 'u.id = p.user_id')
+    ->where('p.published', 1)
+    ->all();
+
+// Conditional where clauses
+query('products')
+    ->where('price', '>', 100)
+    ->orWhere('featured', 1)
+    ->all();</code></pre>
+
+                <div class="note">
+                    <strong>Performance Tip:</strong> Use <code>select()</code> to specify only the columns you need
+                    rather
+                    than selecting all columns with <code>*</code>.
                 </div>
 
-                <div class="support-contact">
-                    <h3>Connect With Me</h3>
-                    <p>Have questions or want to discuss TinyMVC? Reach out through any of these channels:</p>
-
-                    <table class="contact-table">
-                        <tr>
-                            <th>GitHub:</th>
-                            <td><a href="https://github.com/shahinmoyshan" target="_blank">github.com/shahinmoyshan</a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th>Twitter/X:</th>
-                            <td><a href="https://x.com/moyshan2" target="_blank">@moyshan2</a></td>
-                        </tr>
-                        <tr>
-                            <th>Telegram:</th>
-                            <td><a href="https://t.me/moyshan2" target="_blank">@moyshan2</a></td>
-                        </tr>
-                        <tr>
-                            <th>Portfolio:</th>
-                            <td><a href="https://moyshan.netlify.app" target="_blank">moyshan.netlify.app</a></td>
-                        </tr>
-                        <tr>
-                            <th>Email:</th>
-                            <td><a href="mailto:shahin.moyshan2@gmail.com">shahin.moyshan2@gmail.com</a></td>
-                        </tr>
-                        <tr>
-                            <th>WhatsApp:</th>
-                            <td><a href="https://wa.me/8801969467747" target="_blank">+880 1969467747</a></td>
-                        </tr>
-                    </table>
-                </div>
-
-                <div class="final-note">
-                    <p>TinyMVC is built for developers who appreciate simplicity without sacrificing capability. Whether
-                        you're building a quick prototype or a production API, I hope this framework serves you well.
-                        Together, we can make it even better!</p>
-                </div>
+                <h3>Full Example</h3>
+                <pre><code>// Blog post query example
+$posts = query('posts')
+    ->as('p')
+    ->select([
+        'p.id',
+        'p.title',
+        'p.content',
+        'u.name as author',
+        'c.name as category'
+    ])
+    ->join('users as u', 'u.id = p.user_id')
+    ->join('categories as c', 'c.id = p.category_id')
+    ->where('p.published', 1)
+    ->where('p.created_at', '>', '2023-01-01')
+    ->all();</code></pre>
             </section>
+
         </div>
     </div>
 

@@ -25,7 +25,8 @@
 
     <div class="main-container">
         <nav class="sidebar">
-            <a href="/" style="display: block;margin-bottom: 5px;">Introduction</a>
+            <a href="/">Introduction</a>
+
             <h2>Getting Started</h2>
             <ul>
                 <li><a href="/installation">Installation</a></li>
@@ -36,30 +37,54 @@
             <h2>The Basics</h2>
             <ul>
                 <li><a href="/routing">Routing</a></li>
-                <li><a href="/middleware">Middleware</a></li>
                 <li><a href="/controllers">Controllers</a></li>
                 <li><a href="/request">Request</a></li>
                 <li><a href="/response" class="active">Response</a></li>
+                <li><a href="/blade">Blade</a></li>
             </ul>
 
-            <h2>More Features</h2>
+            <h2>Database</h2>
             <ul>
+                <li><a href="/database">DB</a></li>
+                <li><a href="/query-builder">Query Builder</a></li>
+                <li><a href="/migrations">Migrations</a></li>
+                <li><a href="/models">Models</a></li>
+            </ul>
+
+            <h2>Security</h2>
+            <ul>
+                <li><a href="/middleware">Middleware</a></li>
+                <li><a href="/csrf-protection">CSRF Protection</a></li>
                 <li><a href="/authentication">Authentication</a></li>
                 <li><a href="/authorization">Authorization</a></li>
-                <li><a href="/database">Database</a></li>
+            </ul>
+
+            <h2>Features</h2>
+            <ul>
+                <li><a href="/container">Container</a></li>
+                <li><a href="/encryption">Encryption</a></li>
                 <li><a href="/queues">Queues</a></li>
                 <li><a href="/events">Events</a></li>
-                <li><a href="/encryption">Encryption</a></li>
-                <li><a href="/service-container">Service Container</a></li>
-                <li><a href="/service-provider">Service Provider</a></li>
-                <li><a href="/views">Views</a></li>
-                <li><a href="/asset-bundling">Asset Bundling</a></li>
-                <li><a href="/csrf-protection">CSRF Protection</a></li>
+                <li><a href="/asset-bundling">Asset Bundling (Vite)</a></li>
                 <li><a href="/localization">Localization</a></li>
+                <li><a href="/session">Session</a></li>
                 <li><a href="/spark-cli">Spark CLI</a></li>
-                <li><a href="/helpers-and-utils">Helpers & Utils</a></li>
-                <li><a href="/contribution">❤️ Support or Contribution</a></li>
+                <li><a href="/laravel-supports">Laravel Supports</a></li>
             </ul>
+
+            <h2>Utilities</h2>
+            <ul>
+                <li><a href="/">Http (cURL)</a></li>
+                <li><a href="/">Uploader</a></li>
+                <li><a href="/">Paginator</a></li>
+                <li><a href="/">Mail</a></li>
+                <li><a href="/">Cache</a></li>
+                <li><a href="/">Image</a></li>
+                <li><a href="/">File Manager</a></li>
+                <li><a href="/">Carbon Time</a></li>
+            </ul>
+
+            <a href="/contribution">❤️ Contribution</a>
         </nav>
         <div class="content">
 
@@ -95,7 +120,7 @@ $response->json(['status' => 'success', 'data' => $result]);
 $response->json(['error' => 'Not found'], 404);
 
 // Using helper
-return response()->json(['message' => 'Created'], 201);</code></pre>
+return json(['message' => 'Created'], 201);</code></pre>
 
                 <h3>Redirects</h3>
                 <pre><code>// Basic redirect
@@ -108,9 +133,12 @@ $response->back();
 redirect('/dashboard');
 
 // Redirect with flash data
-return response()
-    ->with('message', 'Please login first')
-    ->redirect('/login');</code></pre>
+return redirect('/login')
+    ->with('message', 'Please login first');
+
+// Redirect to previous page with flash data
+return back()
+    ->with('message', 'Please login first');</code></pre>
 
                 <h3>Headers & Status Codes</h3>
                 <pre><code>// Set status code
@@ -130,9 +158,8 @@ $response->with('message', 'Operation successful');
 $response->with('alert', 'Profile updated');
 
 // Typically used with redirects
-return response()
-    ->with('status', 'Welcome back!')
-    ->redirect('/dashboard');</code></pre>
+return redirect('/dashboard')
+    ->with('status', 'Welcome back!');</code></pre>
 
                 <h3>Sending Responses</h3>
                 <pre><code>// Send the response to client
@@ -144,11 +171,14 @@ return $response;</code></pre>
                 <h3>Response Helpers</h3>
                 <pre><code>// response() helper examples
 return response('Hello World', 200);
+return response(['name' => 'John Doe', 'email' => 'john.doe@mail.com'], 200);
 return response()->json($data);
 return response()->redirect('/');
+return response()->with('message', 'Operation successful');
 
 // redirect() helper shortcut
-return redirect('/home');</code></pre>
+return redirect('/home');
+return back();</code></pre>
 
                 <div class="note">
                     <strong>Best Practice:</strong> In controllers, simply return the response object rather than

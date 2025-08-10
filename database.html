@@ -25,7 +25,8 @@
 
     <div class="main-container">
         <nav class="sidebar">
-            <a href="/" style="display: block;margin-bottom: 5px;">Introduction</a>
+            <a href="/">Introduction</a>
+
             <h2>Getting Started</h2>
             <ul>
                 <li><a href="/installation">Installation</a></li>
@@ -36,37 +37,61 @@
             <h2>The Basics</h2>
             <ul>
                 <li><a href="/routing">Routing</a></li>
-                <li><a href="/middleware">Middleware</a></li>
                 <li><a href="/controllers">Controllers</a></li>
                 <li><a href="/request">Request</a></li>
                 <li><a href="/response">Response</a></li>
+                <li><a href="/blade">Blade</a></li>
             </ul>
 
-            <h2>More Features</h2>
+            <h2>Database</h2>
             <ul>
+                <li><a href="/database" class="active">DB</a></li>
+                <li><a href="/query-builder">Query Builder</a></li>
+                <li><a href="/migrations">Migrations</a></li>
+                <li><a href="/models">Models</a></li>
+            </ul>
+
+            <h2>Security</h2>
+            <ul>
+                <li><a href="/middleware">Middleware</a></li>
+                <li><a href="/csrf-protection">CSRF Protection</a></li>
                 <li><a href="/authentication">Authentication</a></li>
                 <li><a href="/authorization">Authorization</a></li>
-                <li><a href="/database" class="active">Database</a></li>
+            </ul>
+
+            <h2>Features</h2>
+            <ul>
+                <li><a href="/container">Container</a></li>
+                <li><a href="/encryption">Encryption</a></li>
                 <li><a href="/queues">Queues</a></li>
                 <li><a href="/events">Events</a></li>
-                <li><a href="/encryption">Encryption</a></li>
-                <li><a href="/service-container">Service Container</a></li>
-                <li><a href="/service-provider">Service Provider</a></li>
-                <li><a href="/views">Views</a></li>
-                <li><a href="/asset-bundling">Asset Bundling</a></li>
-                <li><a href="/csrf-protection">CSRF Protection</a></li>
+                <li><a href="/asset-bundling">Asset Bundling (Vite)</a></li>
                 <li><a href="/localization">Localization</a></li>
+                <li><a href="/session">Session</a></li>
                 <li><a href="/spark-cli">Spark CLI</a></li>
-                <li><a href="/helpers-and-utils">Helpers & Utils</a></li>
-                <li><a href="/contribution">❤️ Support or Contribution</a></li>
+                <li><a href="/laravel-supports">Laravel Supports</a></li>
             </ul>
+
+            <h2>Utilities</h2>
+            <ul>
+                <li><a href="/">Http (cURL)</a></li>
+                <li><a href="/">Uploader</a></li>
+                <li><a href="/">Paginator</a></li>
+                <li><a href="/">Mail</a></li>
+                <li><a href="/">Cache</a></li>
+                <li><a href="/">Image</a></li>
+                <li><a href="/">File Manager</a></li>
+                <li><a href="/">Carbon Time</a></li>
+            </ul>
+
+            <a href="/contribution">❤️ Contribution</a>
         </nav>
         <div class="content">
 
             <section id="database">
                 <h2>Database</h2>
 
-                <p>TinyMVC provides a fluent query builder and database abstraction layer supporting multiple database
+                <p>TinyMVC provides a fluent database abstraction layer supporting SQLite, MySQL, PostgreSQL database
                     drivers.</p>
 
                 <h3>Configuration</h3>
@@ -87,66 +112,6 @@
     'user' => 'root',
     'password' => 'password'
 ]</code></pre>
-
-                <h3>Query Builder</h3>
-                <p>The query builder provides a fluent interface for database operations.</p>
-
-                <h4>Basic Usage</h4>
-                <pre><code>// Get all records
-$users = query('users')->result();
-
-// Get single record
-$user = query('users')->where('id', 1)->first();
-
-// Count records
-$count = query('users')->where('active', 1)->count();</code></pre>
-
-                <h4>Inserting Data</h4>
-                <pre><code>// Insert single record
-query('users')->insert([
-    'name' => 'John Doe',
-    'email' => 'john@example.com'
-]);
-
-// Insert multiple records
-query('users')->insert([
-    ['name' => 'John', 'email' => 'john@example.com'],
-    ['name' => 'Jane', 'email' => 'jane@example.com']
-]);</code></pre>
-
-                <h4>Updating Data</h4>
-                <pre><code>// Update single record
-query('users')
-    ->where('id', 1)
-    ->update(['name' => 'Updated Name']);
-
-// Update multiple records
-query('users')
-    ->where('status', 'pending')
-    ->update(['status' => 'active']);</code></pre>
-
-                <h4>Deleting Data</h4>
-                <pre><code>// Delete single record
-query('users')->where('id', 1)->delete();
-
-// Delete multiple records
-query('users')->where('last_login', '<', '2023-01-01')->delete();</code></pre>
-
-                <h4>Complex Queries</h4>
-                <pre><code>// Join tables
-query('posts')
-    ->as('p')
-    ->select(['p.*', 'u.name as author'])
-    ->join('users as u', 'u.id = p.user_id')
-    ->where('p.published', 1)
-    ->result();
-
-// Conditional where clauses
-query('products')
-    ->where('price', '>', 100)
-    ->orWhere('featured', 1)
-    ->result();</code></pre>
-
                 <h3>Database Helpers</h3>
                 <pre><code>// Get database instance
 $db = database();
@@ -154,8 +119,8 @@ $db = database();
 // Alternative helper
 $db = db();
 
-// Create query builder instance
-$query = query('table_name');</code></pre>
+// Create external database connection
+$external_db = connect_db($config);</code></pre>
 
                 <h3>Transactions</h3>
                 <pre><code>try {
@@ -173,546 +138,6 @@ $query = query('table_name');</code></pre>
     database()->rollback();
     throw $e;
 }</code></pre>
-
-                <div class="note">
-                    <strong>Performance Tip:</strong> Use <code>select()</code> to specify only the columns you need
-                    rather
-                    than selecting all columns with <code>*</code>.
-                </div>
-
-                <h3>Full Example</h3>
-                <pre><code>// Blog post query example
-$posts = query('posts')
-    ->as('p')
-    ->select([
-        'p.id',
-        'p.title',
-        'p.content',
-        'u.name as author',
-        'c.name as category'
-    ])
-    ->join('users as u', 'u.id = p.user_id')
-    ->join('categories as c', 'c.id = p.category_id')
-    ->where('p.published', 1)
-    ->where('p.created_at', '>', '2023-01-01')
-    ->result();
-
-// User registration example
-try {
-    database()->beginTransaction();
-    
-    $userId = query('users')->insert([
-        'name' => request('name'),
-        'email' => request('email'),
-        'password' => password_hash(request('password'), PASSWORD_DEFAULT)
-    ]);
-    
-    query('profiles')->insert([
-        'user_id' => $userId,
-        'bio' => request('bio')
-    ]);
-    
-    database()->commit();
-} catch (Exception $e) {
-    database()->rollback();
-    return response()->with('error', 'Registration failed')->back();
-}</code></pre>
-
-                <h2>Database Models</h2>
-
-                <p>TinyMVC provides an active record implementation through the Model class, allowing you to interact
-                    with
-                    your database tables using object-oriented syntax.</p>
-
-                <h3>Creating Models</h3>
-                <p>Models are stored in the <code>app/Models</code> folder and extend the base
-                    <code>Spark\Database\Model</code> class:
-                </p>
-                <pre><code>&lt;?php
-
-namespace App\Models;
-
-use Spark\Database\Model;
-
-class User extends Model
-{
-    /**
-     * The database table name
-     */
-    public static string $table = 'users';
-
-    /**
-     * Fields that are not mass assignable
-     */
-    protected array $guarded = ['id', 'created_at'];
-}</code></pre>
-
-                <h3>Basic CRUD Operations</h3>
-                <h4>Creating Records</h4>
-                <pre><code>// Create and save in one step
-$user = User::create([
-    'name' => 'John Doe',
-    'email' => 'john@example.com'
-]);
-
-// Or create then save
-$user = new User();
-$user->name = 'John Doe';
-$user->email = 'john@example.com';
-$user->save();</code></pre>
-
-                <h4>Reading Records</h4>
-                <pre><code>// Find by ID
-$user = User::find(1);
-
-// Get all records
-$users = User::result();
-
-// Get first record
-$user = User::first();
-
-// Get last record
-$user = User::last();</code></pre>
-
-                <h4>Updating Records</h4>
-                <pre><code>// Find then update
-$user = User::find(1);
-$user->name = 'Updated Name';
-$user->save();
-
-// Mass update
-User::where('status', 'pending')
-    ->update(['status' => 'active']);</code></pre>
-
-                <h4>Deleting Records</h4>
-                <pre><code>// Find then delete
-$user = User::find(1);
-$user->remove();
-
-// Direct delete
-User::where('last_login', '<', '2020-01-01')->delete();</code></pre>
-
-                <h3>Query Builder Integration</h3>
-                <p>Models inherit all QueryBuilder methods:</p>
-                <pre><code>// Complex queries
-$users = User::where('status', 'active')
-    ->where('created_at', '>', '2023-01-01')
-    ->orderAsc('name')
-    ->result();
-
-// Joins
-$posts = Post::select(['p.*', 'u.name as author'])
-    ->as('p')
-    ->join('users as u', 'u.id = p.user_id')
-    ->where('p.published', 1)
-    ->result();</code></pre>
-
-                <h3>Pagination</h3>
-                <p>The paginate method makes it easy to paginate query results:</p>
-                <pre><code>// Basic pagination (10 items per page)
-$users = User::paginate();
-
-// Custom pagination (25 items per page)
-$users = User::paginate(25);
-
-// Displaying paginated results
-foreach ($users->getData() as $user) {
-    echo $user->name;
-}
-
-// Rendering pagination links
-echo $users->getLinks();</code></pre>
-
-                <h4>Pagination Methods</h4>
-                <pre><code>// Check if data exists
-if ($users->hasData()) {
-    // Process data
-}
-
-// Get paginated data
-$data = $users->getData();
-
-// Custom pagination links
-if ($users->hasLinks()) {
-    echo $users->getLinks(
-        links: 3, // Number of links to show
-        classes: [
-            'container' => 'pagination',
-            'item' => 'page-item',
-            'link' => 'page-link'
-        ],
-        entity: [
-            'previous' => '&laquo;',
-            'next' => '&raquo;'
-        ]
-    );
-}</code></pre>
-
-                <h3>Mass Assignment</h3>
-                <p>Control which fields can be mass assigned:</p>
-                <pre><code>class User extends Model
-{
-    // Only these fields can be mass assigned
-    protected array $fillable = ['name', 'email'];
-    
-    // Or specify guarded fields (opposite of fillable)
-    protected array $guarded = ['id', 'is_admin'];
-}</code></pre>
-
-                <h3>Model Methods</h3>
-                <pre><code>// Convert model to array
-$array = $user->toArray();
-
-// Create model from array
-$user = User::load(['name' => 'John', 'email' => 'john@example.com']);
-
-// Get query builder instance
-$query = User::query();</code></pre>
-
-                <h3>Full Example</h3>
-                <pre><code>// Blog controller example
-public function index()
-{
-    $posts = Post::with('author')
-        ->where('published', 1)
-        ->orderDesc('created_at')
-        ->paginate(15);
-
-    return view('posts.index', ['posts' => $posts]);
-}
-
-// User registration example
-public function store(Hash $hash)
-{
-    $inserted = User::insert([
-        'name' => request('name'),
-        'email' => request('email'),
-        'password' => $hash->hashPassword(request('password'))
-    ]);
-
-    return response()
-        ->with('message', 'Registration successful!')
-        ->redirect('/dashboard');
-}</code></pre>
-
-                <h2>ORM Relationships</h2>
-
-                <p>TinyMVC provides powerful ORM capabilities through the <code>HasOrm</code> trait, allowing you to
-                    define and work with model relationships.</p>
-
-                <h3>Defining Relationships</h3>
-                <p>Relationships are defined in the <code>orm()</code> method of your model:</p>
-                <pre><code>&lt;?php
-
-namespace App\Models;
-
-use Spark\Database\Model;
-use Spark\Database\Traits\HasOrm;
-
-class User extends Model
-{
-    use HasOrm;
-
-    protected function orm(): array
-    {
-        return [
-            // One-to-many relationship
-            'posts' => [
-                'has' => 'many',
-                'model' => Post::class,
-                'foreignKey' => 'user_id'
-            ],
-            
-            // One-to-one relationship
-            'profile' => [
-                'has' => 'one',
-                'model' => Profile::class,
-                'foreignKey' => 'user_id',
-                'localKey' => 'id'
-            ],
-            
-            // Many-to-many relationship
-            'roles' => [
-                'has' => 'many-x',
-                'model' => Role::class,
-                'table' => 'user_roles', // Pivot table
-                'foreignKey' => 'user_id',
-                'localKey' => 'role_id',
-                'callback' => function($query) {
-                    // Additional query constraints
-                    return $query->where('active', 1);
-                }
-            ]
-        ];
-    }
-}</code></pre>
-
-                <h3>Relationship Types</h3>
-
-                <h4>One-to-One</h4>
-                <pre><code>'profile' => [
-    'has' => 'one',
-    'model' => Profile::class,
-    'foreignKey' => 'user_id'
-]</code></pre>
-
-                <h4>One-to-Many</h4>
-                <pre><code>'posts' => [
-    'has' => 'many',
-    'model' => Post::class,
-    'foreignKey' => 'author_id'
-]</code></pre>
-
-                <h4>Many-to-Many</h4>
-                <pre><code>'roles' => [
-    'has' => 'many-x',
-    'model' => Role::class,
-    'table' => 'user_roles', // Pivot table
-    'foreignKey' => 'user_id',
-    'localKey' => 'role_id'
-]</code></pre>
-
-                <h3>Loading Relationships</h3>
-
-                <h4>Eager Loading (with)</h4>
-                <pre><code>// Load single relationship
-$users = User::with('posts')->result();
-
-// Load multiple relationships
-$users = User::with(['posts', 'profile'])->result();
-
-// Load all relationships
-$users = User::with('*')->result();</code></pre>
-
-                <h4>Lazy Loading</h4>
-                <pre><code>$user = User::find(1);
-
-// Access relationship (loaded when first accessed)
-$posts = $user->posts;
-$profile = $user->profile;</code></pre>
-
-                <h3>Advanced Usage</h3>
-
-                <h4>Query Callbacks</h4>
-                <pre><code>'recentPosts' => [
-    'has' => 'many',
-    'model' => Post::class,
-    'foreignKey' => 'user_id',
-    'callback' => function($query) {
-        return $query->where('created_at', '>', '2023-01-01')
-                   ->orderDesc('created_at');
-    }
-]</code></pre>
-
-                <h4>Disabling Lazy Loading</h4>
-                <pre><code>'profile' => [
-    'has' => 'one',
-    'model' => Profile::class,
-    'foreignKey' => 'user_id',
-    'lazy' => false // Must be loaded explicitly with with()
-]</code></pre>
-
-                <h4>Manual Relationship Loading</h4>
-                <pre><code>$users = User::all();
-User::runOrm('posts', $users); // Load posts for all users</code></pre>
-
-                <h3>Full Example</h3>
-                <pre><code>// Blog controller with eager loading
-public function show($userId)
-{
-    $user = User::with(['posts', 'profile'])
-        ->where('id', $userId)
-        ->first();
-    
-    return view('users/show', compact('user'));
-}
-
-// Accessing relationships in views
-&lt;h1&gt;&lt;?= $user->name ?>&gt;&lt;/h1&gt;
-&lt;h2&gt;Profile&lt;/h2&gt;
-&lt;p&gt;&lt;?= $user->profile->bio ?>&gt;&lt;/p&gt;
-
-&lt;h2&gt;Posts&lt;/h2&gt;
-&lt;?php foreach ($user->posts as $post): ?&gt;
-    &lt;article&gt;
-        &lt;h3&gt;&lt;?= $post->title ?>&gt;&lt;/h3&gt;
-        &lt;p&gt;&lt;?= $post->excerpt ?>&gt;&lt;/p&gt;
-    &lt;/article&gt;
-&lt;?php endforeach ?&gt;</code></pre>
-
-                <div class="note">
-                    <strong>Performance Tip:</strong> Always use eager loading (<code>with()</code>) when you know
-                    you'll need related data to avoid the N+1 query problem.
-                </div>
-
-                <h3>Error Handling</h3>
-                <pre><code>try {
-    $users = User::with('undefined_relation')->result();
-} catch (UndefinedOrmException $e) {
-    // Handle undefined relationship
-}
-
-try {
-    $user->posts; // Attempt lazy loading when disabled
-} catch (OrmDisabledLazyLoadingException $e) {
-    // Handle disabled lazy loading
-}</code></pre>
-                <h2>Database Migrations & Schema Builder</h2>
-
-                <p>TinyMVC provides a powerful database migration system and fluent schema builder for managing your
-                    database structure.</p>
-
-                <h3>Creating Migrations</h3>
-                <p>Generate a new migration file using the Spark CLI:</p>
-                <pre><code>php spark make:migration users</code></pre>
-
-                <p>This creates a new file in <code>database/migrations/</code> with timestamp prefix:</p>
-                <pre><code>&lt;?php
-
-use Spark\Database\Schema\Blueprint;
-use Spark\Database\Schema\Schema;
-
-return new class {
-    public function up(): void
-    {
-        Schema::create('users', function (Blueprint $table) {
-            $table->id();
-            $table->string('name');
-            $table->string('email')->unique()->required();
-            $table->string('password')->required();
-            $table->timestamps();
-        });
-    }
-
-    public function down(): void
-    {
-        Schema::dropIfExists('users');
-    }
-};</code></pre>
-
-                <h3>Running Migrations</h3>
-                <pre><code># Run all pending migrations
-php spark migrate:run
-
-# Rollback the last migration
-php spark migrate:rollback
-
-# Rollback multiple migrations
-php spark migrate:rollback 2
-
-# Reset and re-run all migrations
-php spark migrate:fresh</code></pre>
-
-                <h3>Schema Builder</h3>
-                <h4>Column Types</h4>
-                <pre><code>$table->id(); // Auto-incrementing ID
-$table->string('name', 100); // String with optional length
-$table->text('description'); // Long text
-$table->integer('votes'); // Integer
-$table->boolean('active'); // Boolean
-$table->decimal('amount', 8, 2); // Decimal with precision
-$table->date('created_at'); // Date only
-$table->dateTime('updated_at'); // Date and time
-$table->timestamp('published_at'); // Timestamp
-$table->enum('status', ['active', 'pending']); // Enumeration</code></pre>
-
-                <h4>Column Modifiers</h4>
-                <pre><code>$table->string('email')->unique(); // Unique constraint
-$table->string('name')->nullable(); // Allows NULL values
-$table->integer('count')->default(0); // Default value
-$table->string('ip')->required(); // NOT NULL constraint
-$table->integer('views')->unsigned(); // Unsigned integer</code></pre>
-
-                <h4>Indexes</h4>
-                <pre><code>// Single column index
-$table->string('email')->unique();
-
-// Composite index
-$table->index(['account_id', 'created_at']);
-
-// Primary key
-$table->primary(['id', 'parent_id']);</code></pre>
-
-                <h4>Foreign Keys</h4>
-                <pre><code>// Simple foreign key
-$table->foreignId('user_id')->constrained();
-
-// Custom foreign key
-$table->foreign('author_id')->references('id')->on('authors');
-
-// With actions
-$table->foreign('user_id')
-    ->references('id')
-    ->on('users')
-    ->onDelete('cascade');</code></pre>
-
-                <h3>Modifying Tables</h3>
-                <pre><code>Schema::table('users', function (Blueprint $table) {
-    $table->dropColumn('old_column');
-    $table->dropIndex(['email', 'status']);
-    $table->dropForeign('user_id', 'users');
-});</code></pre>
-
-                <h3>Migration Structure</h3>
-                <div class="note">
-                    <p>Each migration class contains two methods:</p>
-                    <ul>
-                        <li><code>up()</code> - Runs when migrating forward</li>
-                        <li><code>down()</code> - Runs when rolling back</li>
-                    </ul>
-                </div>
-
-                <h3>Best Practices</h3>
-                <div class="note">
-                    <ul>
-                        <li>Keep migrations focused on one schema change</li>
-                        <li>Always implement the <code>down()</code> method</li>
-                        <li>Use descriptive migration names</li>
-                        <li>Test migrations in development before production</li>
-                        <li>Consider data migrations for large changes</li>
-                    </ul>
-                </div>
-
-                <h3>Full Example</h3>
-                <pre><code>&lt;?php
-
-use Spark\Database\Schema\Blueprint;
-use Spark\Database\Schema\Schema;
-
-return new class {
-    public function up(): void
-    {
-        Schema::create('posts', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('user_id')
-                ->constrained('users')
-                ->cascadeOnDelete();
-            $table->string('title');
-            $table->string('slug')->unique();
-            $table->text('content');
-            $table->boolean('published')->default(false);
-            $table->timestamp('published_at')->nullable();
-            $table->timestamps();
-            
-            $table->index(['title', 'published_at']);
-        });
-
-        Schema::create('comments', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('post_id')->constrained('posts');
-            $table->foreignId('user_id')->constrained('users');
-            $table->text('body');
-            $table->timestamps();
-        });
-    }
-
-    public function down(): void
-    {
-        Schema::dropIfExists('comments');
-        Schema::dropIfExists('posts');
-    }
-};</code></pre>
-
             </section>
 
         </div>
