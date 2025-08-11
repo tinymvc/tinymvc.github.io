@@ -87,20 +87,26 @@
             <a href="/contribution">❤️ Contribution</a>
         </nav>
         <div class="content">
-
             <section id="database">
-                <h2>Database</h2>
+                <h2>Database Abstraction Layer</h2>
+                <p>The DB class provides a robust database abstraction layer with support for multiple database drivers,
+                    connection management, and query building.</p>
 
-                <p>TinyMVC provides a fluent database abstraction layer supporting SQLite, MySQL, PostgreSQL database
-                    drivers.</p>
+                <div class="note">
+                    <strong>Note:</strong> The DB class implements PDO (PHP Data Objects) under the hood, providing a
+                    secure and consistent interface for database operations.
+                </div>
 
                 <h3>Configuration</h3>
-                <p>Configure your database connection in <code>env.php</code>:</p>
+                <p>Database configuration is typically set in your application's configuration file:</p>
 
                 <h4>SQLite Configuration</h4>
                 <pre><code>'database' => [
     'driver' => 'sqlite',
-    'file' => __DIR__ . '/database/sqlite.db'
+    'file' => __DIR__ . '/database/sqlite.db',
+    'options' => [
+        PDO::ATTR_PERSISTENT => true
+    ]
 ]</code></pre>
 
                 <h4>MySQL Configuration</h4>
@@ -108,38 +114,185 @@
     'driver' => 'mysql',
     'host' => 'localhost',
     'port' => 3306,
-    'name' => 'test_db',
-    'user' => 'root',
-    'password' => 'password'
+    'name' => 'my_database',
+    'user' => 'db_user',
+    'password' => 'secure_password',
+    'charset' => 'utf8mb4',
+    'collation' => 'utf8mb4_unicode_ci',
+    'options' => [
+        PDO::ATTR_PERSISTENT => true,
+        PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES 'utf8mb4'"
+    ]
 ]</code></pre>
-                <h3>Database Helpers</h3>
-                <pre><code>// Get database instance
+
+                <h4>PostgreSQL Configuration</h4>
+                <pre><code>'database' => [
+    'driver' => 'pgsql',
+    'host' => 'localhost',
+    'port' => 5432,
+    'name' => 'my_database',
+    'user' => 'db_user',
+    'password' => 'secure_password',
+    'options' => [
+        PDO::ATTR_PERSISTENT => true
+    ]
+]</code></pre>
+
+                <h3>Initialization</h3>
+                <p>Get a database instance using helper functions:</p>
+                <pre><code>// Get default database connection
 $db = database();
 
 // Alternative helper
 $db = db();
 
-// Create external database connection
-$external_db = connect_db($config);</code></pre>
+// Create custom connection
+$externalDb = connect_db([
+    'driver' => 'mysql',
+    'host' => 'external.db.host',
+    // ... other config
+]);</code></pre>
+
+                <h3>Core Functionality</h3>
+
+                <h4>Direct PDO Access</h4>
+                <pre><code>// Get PDO instance
+$pdo = database()->getPdo();
+
+// Execute raw SQL
+$stmt = database()->query('SELECT * FROM users');
+
+// Prepare statement
+$stmt = database()->prepare('SELECT * FROM users WHERE id = ?');
+$stmt->execute([1]);</code></pre>
+
+                <h4>Connection Management</h4>
+                <pre><code>// Check driver type
+if (database()->isMySQL()) {
+    // MySQL specific logic
+}
+
+// Reset connection with new config
+database()->resetConfig([
+    'driver' => 'sqlite',
+    'file' => 'new_database.db'
+]);
+
+// Force reconnect
+database()->resetPdo();</code></pre>
 
                 <h3>Transactions</h3>
                 <pre><code>try {
+    // Start transaction
     database()->beginTransaction();
     
+    // Perform operations
     query('accounts')
         ->where('id', 1)
-        ->update(['balance' => 1000]);
+        ->decrement('balance', 100);
         
-    query('transactions')
-        ->insert(['account_id' => 1, 'amount' => 1000]);
+    query('accounts')
+        ->where('id', 2)
+        ->increment('balance', 100);
         
+    // Commit if successful
     database()->commit();
 } catch (Exception $e) {
+    // Rollback on error
     database()->rollback();
     throw $e;
 }</code></pre>
-            </section>
 
+                <h3>Query Building</h3>
+                <p>The DB class provides static access to QueryBuilder methods:</p>
+
+                <h4>Basic Queries</h4>
+                <pre><code>// Select all from table
+DB::table('users')->get();
+
+// Select specific columns
+DB::table('users')->select('id', 'name')->get();
+
+// Conditional where
+DB::table('users')
+    ->where('active', 1)
+    ->where('age', '>', 18)
+    ->get();</code></pre>
+
+                <h4>Aggregates</h4>
+                <pre><code>// Count records
+$count = DB::table('users')->count();
+
+// Get max value
+$maxAge = DB::table('users')->max('age');
+
+// Get average
+$avgScore = DB::table('results')->avg('score');</code></pre>
+
+                <h3>Advanced Features</h3>
+
+                <h4>Macros</h4>
+                <pre><code>// Register custom macro
+DB::macro('getActiveUsers', function() {
+    return $this->table('users')
+        ->where('active', 1)
+        ->get();
+});
+
+// Use macro
+$activeUsers = DB::getActiveUsers();</code></pre>
+
+                <h4>Custom DSN</h4>
+                <pre><code>// Use custom DSN string
+$db = new DB([
+    'dsn' => 'mysql:unix_socket=/tmp/mysql.sock;dbname=testdb',
+    'user' => 'root',
+    'password' => ''
+]);</code></pre>
+
+                <h3>Driver-Specific Features</h3>
+
+                <h4>SQLite</h4>
+                <pre><code>// Enable foreign keys (auto-enabled by DB class)
+database()->exec('PRAGMA foreign_keys = ON');
+
+// Use in-memory database
+$db = new DB([
+    'driver' => 'sqlite',
+    'file' => ':memory:'
+]);</code></pre>
+
+                <h4>MySQL</h4>
+                <pre><code>// Set collation
+$db = new DB([
+    'driver' => 'mysql',
+    // ... other config
+    'collation' => 'utf8mb4_unicode_ci'
+]);</code></pre>
+
+                <h3>Error Handling</h3>
+                <pre><code>try {
+    $users = DB::table('users')->where('invalid_column', 'value')->get();
+} catch (\PDOException $e) {
+    // Handle database errors
+    error_log("Database error: " . $e->getMessage());
+    return false;
+}</code></pre>
+
+                <div class="note warning">
+                    <strong>Security Note:</strong> Always use prepared statements or the query builder to prevent SQL
+                    injection. Never concatenate user input directly into SQL queries.
+                </div>
+
+                <h3>Performance Tips</h3>
+                <ul>
+                    <li>Use persistent connections for frequently accessed databases</li>
+                    <li>Enable query caching where appropriate</li>
+                    <li>Use transactions for bulk operations</li>
+                    <li>Select only the columns you need</li>
+                    <li>Add proper indexes to your tables</li>
+                </ul>
+            </section>
         </div>
     </div>
 

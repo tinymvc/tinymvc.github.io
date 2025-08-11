@@ -114,11 +114,11 @@ header {
     background: #9ca3af;
 }
 
-.content ul {
+.content ul, .content ol {
     padding-left: 1.25rem;
 }
 
-.content ul:not(:last-child) {
+.content ul:not(:last-child), .content ol:not(:last-child) {
     margin-bottom: 1.5rem;
 }
 

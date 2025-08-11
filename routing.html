@@ -87,85 +87,268 @@
             <a href="/contribution">❤️ Contribution</a>
         </nav>
         <div class="content">
-
             <section id="routing">
                 <h2>Routing</h2>
+                <p class="intro">
+                    The routing system in TinyMVC is responsible for matching incoming HTTP requests to their
+                    corresponding
+                    handlers (closures or controller methods) and processing the response. It provides a fluent,
+                    expressive
+                    interface for defining routes with support for middleware, parameter binding, and route groups.
+                </p>
 
                 <h3>Basic Routing</h3>
-                <p>Define routes in <code>routes/web.php</code> using URI and closure:</p>
+                <p>Routes are typically defined in <code>routes/web.php</code> using URI patterns and closures or
+                    controller methods:</p>
+
+                <h4>Closure Example</h4>
                 <pre><code>Route::get('foo', function (Request $request) {
     if ($request->has('name')) {
         return sprintf('Hello %s', $request->input('name'));
     }
     return 'Hello World';
-});
+});</code></pre>
 
-Route::post('foo', [SomeController::class, 'store']);</code></pre>
+                <h4>Controller Method Example</h4>
+                <pre><code>Route::post('foo', [SomeController::class, 'store']);</code></pre>
+
                 <div class="note">
-                    <strong>Note:</strong> All the dependencies and route parameters are automatically resolved by the
-                    container.
+                    <strong>Dependency Injection:</strong> The router automatically resolves both controller
+                    dependencies
+                    and route parameters through the dependency injection container.
                 </div>
 
-                <h3>Available Router Methods</h3>
-                <p>Register routes for any HTTP verb:</p>
-                <pre><code>Route::get($uri, $callback);
+                <h4>Show All registered routes</h4>
+                <p>To display all registered routes in your application, you can use the following command:</p>
+                <pre><code>php spark route:list</code></pre>
+
+                <h3>HTTP Method Routing</h3>
+                <p>The router provides methods for all standard HTTP verbs:</p>
+
+                <div class="method-grid">
+                    <div class="method-item">
+                        <h4>Basic Verbs</h4>
+                        <pre><code>Route::get($uri, $callback);
 Route::post($uri, $callback);
 Route::put($uri, $callback);
 Route::patch($uri, $callback);
 Route::delete($uri, $callback);
+Route::options($uri, $callback);</code></pre>
+                    </div>
+
+                    <div class="method-item">
+                        <h4>Special Cases</h4>
+                        <pre><code>// Match any HTTP method
 Route::any($uri, $callback);
-Route::options($uri, $callback);
+
+// Match specific methods
 Route::match(['get', 'post'], $uri, $callback);
-Route::redirect($from, $to);
+
+// Redirect routes
+Route::redirect($from, $to, $status = 302);
+
+// Resourceful routes
 Route::resource($name, $controller);
-Route::view($uri, $callback);
+
+// View rendering
+Route::view($uri, $template);
+
+// Group routes
 Route::group($attributes, $closure);</code></pre>
+                    </div>
+                </div>
 
                 <h3>Route Parameters</h3>
+                <p>Routes can capture segments of the URI as parameters:</p>
+
                 <h4>Required Parameters</h4>
                 <pre><code>Route::get('user/{id}', function ($id) {
     return "User {$id}";
 });</code></pre>
 
-                <p>Multiple parameters example:</p>
-                <pre><code>Route::get('posts/{postId}/comments/{commentId}', function ($postId, $commentId) {
-    // Logic here
-});</code></pre>
+                <h4>Multiple Parameters</h4>
+                <pre><code>Route::get('posts/{postId}/comments/{commentId}', 
+    function ($postId, $commentId) {
+        // Logic here
+    });</code></pre>
+
+                <div class="note">
+                    <strong>Parameter Matching:</strong> Parameters automatically match alphanumeric characters,
+                    hyphens, and underscores. The <code>{id}</code> parameter specifically matches numeric values.
+                </div>
 
                 <h3>Named Routes</h3>
+                <p>Routes can be assigned names for easy URL generation:</p>
                 <pre><code>Route::get('/profile', $callback)->name('profile');</code></pre>
 
-                <h3>Generating URLs To Named Routes</h3>
+                <h3>URL Generation</h3>
+                <p>Generate URLs for named routes with parameters:</p>
                 <pre><code>// Basic route URL
-$url = route_url('profile'); // returns string (Recommended)
+$url = route_url('profile'); // returns string
 $url = route('profile'); // returns Url object
 
 // Parameterized route URL
-$url = route_url('post.comment', ['postId' => 1, 'commentId' => 2]);</code></pre>
+$url = route_url('post.comment', [
+    'postId' => 1, 
+    'commentId' => 2
+]);</code></pre>
 
                 <h3>Route Groups</h3>
-                <p>Group routes with shared attributes:</p>
-                <pre><code>Route::group(['middleware' => ['role:admin'], 'path' => '/admin'], function() {
+                <p>Group routes to share common attributes:</p>
+                <pre><code>Route::group([
+    'middleware' => ['auth', 'role:admin'],
+    'path' => '/admin',
+    'name' => 'admin.'
+], function() {
     Route::get('/dashboard', [AdminController::class, 'dashboard']);
     // More routes...
 });</code></pre>
 
-                <h3>Available Grouping Route Attributes</h3>
-                <ul>
-                    <li><code>middleware</code> - Array of middlewares</li>
-                    <li><code>path</code> - Group path prefix</li>
-                    <li><code>method</code> - Array of HTTP methods</li>
-                    <li><code>name</code> - Route name prefix</li>
-                    <li><code>callback</code> - Controller class</li>
-                    <li><code>template</code> - View template</li>
-                </ul>
+                <h4>Available Group Attributes</h4>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Attribute</th>
+                            <th>Description</th>
+                            <th>Example</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><code>middleware</code></td>
+                            <td>Array of middlewares to apply to all routes</td>
+                            <td><code>['auth', 'throttle']</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>path</code></td>
+                            <td>Prefix for all route paths</td>
+                            <td><code>'/api/v1'</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>method</code></td>
+                            <td>HTTP methods to apply to all routes</td>
+                            <td><code>['get', 'post']</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>name</code></td>
+                            <td>Prefix for all route names</td>
+                            <td><code>'api.'</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>callback</code></td>
+                            <td>Controller to use for all routes</td>
+                            <td><code>ApiController::class</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>template</code></td>
+                            <td>View template prefix</td>
+                            <td><code>'admin/'</code></td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h3>Resourceful Routing</h3>
+                <p>Generate multiple routes for a resource controller:</p>
+                <pre><code>Route::resource('photos', PhotoController::class, 
+    name: 'photos',
+    middleware: ['auth'],
+    only: ['index', 'show'],
+    except: ['destroy']
+);</code></pre>
+
+                <h4>Resource Route Mapping</h4>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Verb</th>
+                            <th>Path</th>
+                            <th>Action</th>
+                            <th>Route Name</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>GET</td>
+                            <td>/photos</td>
+                            <td>index</td>
+                            <td>photos.index</td>
+                        </tr>
+                        <tr>
+                            <td>GET</td>
+                            <td>/photos/create</td>
+                            <td>create</td>
+                            <td>photos.create</td>
+                        </tr>
+                        <tr>
+                            <td>POST</td>
+                            <td>/photos</td>
+                            <td>store</td>
+                            <td>photos.store</td>
+                        </tr>
+                        <tr>
+                            <td>GET</td>
+                            <td>/photos/{id}</td>
+                            <td>show</td>
+                            <td>photos.show</td>
+                        </tr>
+                        <tr>
+                            <td>GET</td>
+                            <td>/photos/{id}/edit</td>
+                            <td>edit</td>
+                            <td>photos.edit</td>
+                        </tr>
+                        <tr>
+                            <td>PUT/PATCH</td>
+                            <td>/photos/{id}</td>
+                            <td>update</td>
+                            <td>photos.update</td>
+                        </tr>
+                        <tr>
+                            <td>DELETE</td>
+                            <td>/photos/{id}</td>
+                            <td>destroy</td>
+                            <td>photos.destroy</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h3>View Routes</h3>
+                <p>Routes can directly render views or Fireline templates:</p>
+                <pre><code>// Regular view
+Route::view('/welcome', 'welcome');
+
+// Fireline template
+Route::fireline('/dashboard', 'dashboard');</code></pre>
+
+                <h3>Middleware</h3>
+                <p>Assign middleware to routes:</p>
+                <pre><code>Route::get('/admin', [AdminController::class, 'index'])
+    ->middleware(['auth', 'admin']);</code></pre>
 
                 <div class="note">
-                    <strong>Tip:</strong> Route groups help organize related routes and apply shared settings
-                    efficiently.
+                    <strong>Middleware Groups:</strong> Middleware defined in route groups will be merged with
+                    route-specific middleware, with duplicates removed.
                 </div>
-            </section>
 
+                <h3>Route Matching Process</h3>
+                <p>When a request comes in, the router:</p>
+                <ol>
+                    <li>Iterates through all registered routes in the order they were defined</li>
+                    <li>Checks for a match on both HTTP method and URI pattern</li>
+                    <li>Extracts route parameters from the URI</li>
+                    <li>Applies any route-specific middleware</li>
+                    <li>Executes the route callback or renders the specified view</li>
+                    <li>Returns a Response object</li>
+                </ol>
+
+                <h3>Error Handling</h3>
+                <p>The router throws specific exceptions for routing errors:</p>
+                <ul>
+                    <li><code>RouteNotFoundException</code> - When no matching route is found</li>
+                    <li><code>InvalidNamedRouteException</code> - When generating a URL for a non-existent named route
+                    </li>
+                </ul>
+            </section>
         </div>
     </div>
 

@@ -90,73 +90,306 @@
 
             <section id="database">
                 <h2>Query Builder</h2>
-                <p>The query builder provides a fluent interface for database operations.</p>
+                <p>The QueryBuilder class provides a fluent interface for building and executing database queries with
+                    support for MySQL, PostgreSQL, and SQLite.</p>
+                <h3>Basic Usage</h3>
+                <pre><code>// Initialize with database connection
+$db = new DB($config);
+$query = new QueryBuilder($db);
 
-                <h4>Basic Usage</h4>
-                <pre><code>// Get all records
-$users = query('users')->all();
+// Get all records from 'users' table
+$users = $query->table('users')->all();
 
-// Get single record
-$user = query('users')->where('id', 1)->first();
+// Get single record with where condition
+$user = $query->table('users')->where('id', 1)->first();
 
-// Count records
-$count = query('users')->where('active', 1)->count();</code></pre>
+// Count records with condition
+$count = $query->table('users')->where('active', 1)->count();
+
+// User query helper function
+query('users')->where('id', 1)->first();</code></pre>
+
+                <h3>Core Methods</h3>
+
+                <h4>Table Operations</h4>
+                <div class="method">
+                    <h5>table(string $table): self</h5>
+                    <p>Sets the table name for the query.</p>
+                    <pre><code>$query->table('users');</code></pre>
+                </div>
+
+                <div class="method">
+                    <h5>prefix(string $prefix): self</h5>
+                    <p>Sets a table prefix for the query.</p>
+                    <pre><code>$query->prefix('app_')->table('users'); // Queries 'app_users'</code></pre>
+                </div>
+
+                <div class="method">
+                    <h5>truncate(): bool</h5>
+                    <p>Truncates the current table (removes all records).</p>
+                    <pre><code>$query->table('logs')->truncate();</code></pre>
+                </div>
+
+                <h4>Select Operations</h4>
+                <div class="method">
+                    <h5>select(array|string $fields = '*'): self</h5>
+                    <p>Specifies columns to select.</p>
+                    <pre><code>$query->select(['id', 'name']);
+$query->select('id, name, email');</code></pre>
+                </div>
+
+                <div class="method">
+                    <h5>from(string $table, ?string $alias = null): self</h5>
+                    <p>Sets the table to select from with optional alias.</p>
+                    <pre><code>$query->from('users', 'u');</code></pre>
+                </div>
+
+                <div class="method">
+                    <h5>as(string $alias): self</h5>
+                    <p>Sets an alias for the current table.</p>
+                    <pre><code>$query->table('users')->as('u');</code></pre>
+                </div>
+
+                <h4>Aggregate Functions</h4>
+                <div class="method">
+                    <h5>count(): int</h5>
+                    <p>Counts matching records.</p>
+                    <pre><code>$activeUsers = $query->table('users')->where('active', 1)->count();</code></pre>
+                </div>
+
+                <div class="method">
+                    <h5>max(string $field, ?string $name = null): self</h5>
+                    <p>Gets the maximum value of a column.</p>
+                    <pre><code>$maxAge = $query->table('users')->max('age')->first();</code></pre>
+                </div>
+
+                <div class="method">
+                    <h5>min(string $field, ?string $name = null): self</h5>
+                    <p>Gets the minimum value of a column.</p>
+                </div>
+
+                <div class="method">
+                    <h5>sum(string $field, ?string $name = null): self</h5>
+                    <p>Calculates the sum of a column.</p>
+                </div>
+
+                <div class="method">
+                    <h5>avg(string $field, ?string $name = null): self</h5>
+                    <p>Calculates the average of a column.</p>
+                </div>
+
+                <h4>Result Retrieval</h4>
+                <div class="method">
+                    <h5>all(): array</h5>
+                    <p>Gets all matching records.</p>
+                    <pre><code>$users = $query->table('users')->all();</code></pre>
+                </div>
+
+                <div class="method">
+                    <h5>get(): Collection</h5>
+                    <p>Gets results as a Collection object.</p>
+                    <pre><code>$users = $query->table('users')->get();</code></pre>
+                </div>
+
+                <div class="method">
+                    <h5>first(): mixed</h5>
+                    <p>Gets the first matching record.</p>
+                    <pre><code>$user = $query->table('users')->where('id', 1)->first();</code></pre>
+                </div>
+
+                <div class="method">
+                    <h5>firstOrFail(mixed $where = null): mixed</h5>
+                    <p>Gets first record or throws NotFoundException.</p>
+                    <pre><code>$user = $query->table('users')->where('id', 999)->firstOrFail();</code></pre>
+                </div>
+
+                <div class="method">
+                    <h5>last(): mixed</h5>
+                    <p>Gets the last record (ordered by ID descending).</p>
+                </div>
+
+                <div class="method">
+                    <h5>latest(): array</h5>
+                    <p>Gets records ordered by ID descending.</p>
+                </div>
+
+                <h4>Pagination</h4>
+                <div class="method">
+                    <h5>paginate(int $limit = 10, string $keyword = 'page'): Paginator</h5>
+                    <p>Paginates query results.</p>
+                    <pre><code>$paginator = $query->table('posts')
+    ->orderDesc('created_at')
+    ->paginate(15);
+
+foreach ($paginator as $post) {
+    // Display post
+}
+echo $paginator->links();</code></pre>
+                    <a href="/paginator">👉 Check the paginator documentation</a>
+                </div>
+
+                <h3>CRUD Operations</h3>
 
                 <h4>Inserting Data</h4>
                 <pre><code>// Insert single record
-query('users')->insert([
+$query->table('users')->insert([
     'name' => 'John Doe',
     'email' => 'john@example.com'
 ]);
 
 // Insert multiple records
-query('users')->insert([
+$query->table('users')->insert([
     ['name' => 'John', 'email' => 'john@example.com'],
     ['name' => 'Jane', 'email' => 'jane@example.com']
-]);</code></pre>
+]);
+
+// Insert with conflict handling (PostgreSQL/SQLite)
+$query->table('users')->insert(
+    ['id' => 1, 'name' => 'John Updated'],
+    ['conflict' => ['id'], 'update' => ['name']]
+);</code></pre>
 
                 <h4>Updating Data</h4>
                 <pre><code>// Update single record
-query('users')
+$query->table('users')
     ->where('id', 1)
     ->update(['name' => 'Updated Name']);
 
 // Update multiple records
-query('users')
+$query->table('users')
     ->where('status', 'pending')
-    ->update(['status' => 'active']);</code></pre>
+    ->update(['status' => 'active']);
+
+// Bulk update
+$query->table('users')->bulkUpdate([
+    ['id' => 1, 'name' => 'John'],
+    ['id' => 2, 'name' => 'Jane']
+]);</code></pre>
 
                 <h4>Deleting Data</h4>
                 <pre><code>// Delete single record
-query('users')->where('id', 1)->delete();
+$query->table('users')->where('id', 1)->delete();
 
 // Delete multiple records
-query('users')->where('last_login', '<', '2023-01-01')->delete();</code></pre>
+$query->table('users')
+    ->where('last_login', '<', '2023-01-01')
+    ->delete();</code></pre>
 
-                <h4>Complex Queries</h4>
-                <pre><code>// Join tables
-query('posts')
-    ->as('p')
-    ->select(['p.*', 'u.name as author'])
-    ->join('users as u', 'u.id = p.user_id')
-    ->where('p.published', 1)
-    ->all();
+                <h3>Query Conditions</h3>
 
-// Conditional where clauses
-query('products')
-    ->where('price', '>', 100)
-    ->orWhere('featured', 1)
+                <h4>Basic Where Clauses</h4>
+                <pre><code>// Simple equality
+$query->where('status', 'active');
+
+// With operator
+$query->where('age', '>', 18);
+
+// Multiple conditions
+$query->where([
+    'status' => 'active',
+    'age' => 18
+]);
+
+// Raw Conditions
+$query->whereRaw('created_at > :date', ['date' => '2023-01-01']);
+
+// OR condition
+$query->orWhere('status', 'inactive');</code></pre>
+
+                <h4>Advanced Where Clauses</h4>
+                <pre><code>// NULL checks
+$query->whereNull('deleted_at');
+$query->whereNotNull('email');
+
+// IN clauses
+$query->whereIn('id', [1, 2, 3]);
+$query->whereNotIn('role', ['admin', 'superadmin']);
+
+// BETWEEN
+$query->between('age', 18, 30);
+
+// LIKE
+$query->like('name', 'John%');
+$query->notLike('email', '%@spam.com');
+
+// Find in Set
+$query->findInSet('tags', 'tech');
+
+// JSON conditions
+$query->findInJson('meta', 'settings.notifications', 'enabled');
+
+// Grouped conditions
+$query->grouped(function($q) {
+    $q->where('status', 'active')
+      ->orWhere('vip', 1);
+});</code></pre>
+
+                <h3>Joins</h3>
+                <pre><code>// Basic join
+$query->table('posts')
+    ->join('users', 'users.id', '=', 'posts.user_id');
+
+// Left join
+$query->table('users')
+    ->leftJoin('profiles', 'profiles.user_id', '=', 'users.id');
+
+// Join with alias
+$query->table('posts', 'p')
+    ->join('users as u', 'u.id', '=', 'p.user_id');</code></pre>
+
+                <h3>Sorting and Grouping</h3>
+                <pre><code>// Order by
+$query->orderBy('created_at', 'DESC');
+$query->orderDesc('price');
+
+// Group by
+$query->groupBy(['category', 'status']);
+
+// Having
+$query->having('COUNT(orders) > 5');</code></pre>
+
+                <h3>Limiting Results</h3>
+                <pre><code>// Limit
+$query->take(10); // Get 10 records
+
+// Limit with offset
+$query->limit(20, 10); // Skip 20, get next 10</code></pre>
+
+                <h3>Data Mappers</h3>
+                <pre><code>// Add data transformation
+$query->table('users')
+    ->addMapper(function($users) {
+        return array_map(function($user) {
+            $user->full_name = "{$user->first_name} {$user->last_name}";
+            return $user;
+        }, $users);
+    })
     ->all();</code></pre>
 
-                <div class="note">
-                    <strong>Performance Tip:</strong> Use <code>select()</code> to specify only the columns you need
-                    rather
-                    than selecting all columns with <code>*</code>.
-                </div>
+                <h3>Database-Specific Features</h3>
+                <pre><code>// PostgreSQL RETURNING clause
+$result = $query->table('users')
+    ->insert(
+        ['name' => 'John'],
+        ['returning' => 'id']
+    );
 
-                <h3>Full Example</h3>
-                <pre><code>// Blog post query example
-$posts = query('posts')
+// MySQL IGNORE
+$query->table('users')
+    ->insert(
+        ['email' => 'existing@example.com'],
+        ['ignore' => true]
+    );
+
+// SQLite COLLATE
+$query->collate('nocase')
+    ->table('users')
+    ->where('email', 'TEST@example.com'); // Case insensitive</code></pre>
+
+                <h3>Full Examples</h3>
+
+                <h4>Complex Query Example</h4>
+                <pre><code>$posts = $query->table('posts')
     ->as('p')
     ->select([
         'p.id',
@@ -165,11 +398,37 @@ $posts = query('posts')
         'u.name as author',
         'c.name as category'
     ])
-    ->join('users as u', 'u.id = p.user_id')
-    ->join('categories as c', 'c.id = p.category_id')
+    ->join('users as u', 'u.id', '=', 'p.user_id')
+    ->join('categories as c', 'c.id', '=', 'p.category_id')
     ->where('p.published', 1)
     ->where('p.created_at', '>', '2023-01-01')
-    ->all();</code></pre>
+    ->orderBy('p.created_at', 'DESC')
+    ->paginate(15);</code></pre>
+
+                <h4>Advanced Insert Example</h4>
+                <pre><code>// PostgreSQL upsert with returning
+$result = $query->table('products')
+    ->insert(
+        [
+            ['id' => 1, 'name' => 'Laptop', 'stock' => 10],
+            ['id' => 2, 'name' => 'Phone', 'stock' => 20]
+        ],
+        [
+            'conflict' => ['id'],
+            'update' => ['name', 'stock'],
+            'returning' => ['id', 'name']
+        ]
+    );</code></pre>
+
+                <div class="note">
+                    <strong>Performance Tip:</strong> Always use <code>select()</code> to specify only needed columns
+                    rather than selecting all with <code>*</code>.
+                </div>
+
+                <div class="note warning">
+                    <strong>Security Note:</strong> All queries are parameterized to prevent SQL injection. Never
+                    concatenate user input directly into queries.
+                </div>
             </section>
 
         </div>

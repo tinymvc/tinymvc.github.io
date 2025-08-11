@@ -87,35 +87,29 @@
             <a href="/contribution">❤️ Contribution</a>
         </nav>
         <div class="content">
-
             <section id="request">
                 <h2>HTTP Request</h2>
-
-                <p>The Request class provides an object-oriented way to interact with the current HTTP request,
-                    including
-                    input data, headers, and file uploads.</p>
+                <p>The Request class provides an object-oriented interface for interacting with HTTP requests, including
+                    input data, headers, files, and server information.</p>
 
                 <h3>Accessing The Request</h3>
-                <p>Get the current request instance:</p>
+                <p>Get the current request instance through dependency injection or helper functions:</p>
+
                 <pre><code>use Spark\Http\Request;
 
-// In controller method
-public function store(Request $request)
-{
+// Dependency injection in controller
+public function store(Request $request) {
     // Use request object
-}</code></pre>
+    $inputs = $request->input(['name', 'email']);
+}
 
-                <p>Using the helper function:</p>
-                <pre><code>// Get entire request
-$request = request();
-
-// Get specific input value
-$name = request('name', 'default');
-
-// Get multiple inputs
-$inputs = request(['name', 'email']);</code></pre>
+// Using helper functions
+$request = request(); // Get full request object
+$name = request('name', 'default'); // Get specific input
+$inputs = request(['name', 'email']); // Get multiple inputs</code></pre>
 
                 <h3>Request Data</h3>
+
                 <h4>Retrieving Input</h4>
                 <pre><code>// Get query parameter
 $id = $request->query('id');
@@ -127,47 +121,47 @@ $name = $request->post('name');
 $all = $request->all();
 
 // Get filtered attributes
-$filtered = $request->all(['name', 'email']);
-
-// Get filtered attributes in input sanitizer
-$input = $request->input(['name', 'email']);
-
-dd($input->text('name'));
-dd($input->email('email'));
-
-// Get raw input value using helper function
-dd(input('email'));</code></pre>
+$filtered = $request->all(['name', 'email']);</code></pre>
 
                 <h4>Checking For Input</h4>
                 <pre><code>if ($request->has('page')) {
-    // Has page attribute
+    // Input exists
 }
 
 if ($request->hasAny(['email', 'username'])) {
-    // Has email or username
+    // At least one exists
 }
 
-if ($request->hasAll(['email', 'username', 'password'])) {
-    // Has email, username and password
-}
-
-if ($request->hasQuery('page')) {
-    // Has query parameter
-}
-
-if ($request->hasPost('name')) {
-    // Has name parameter
+if ($request->hasAll(['email', 'password'])) {
+    // All exist
 }</code></pre>
 
-                <h3>File Uploads</h3>
-                <pre><code>// Get uploaded file
-$file = $request->file('avatar');
+                <div class="note">
+                    <strong>Security Note:</strong> Always validate and sanitize user input to prevent security
+                    vulnerabilities.
+                </div>
 
-// Check if file exists
-if ($request->hasFile('avatar')) {
-    // Process file
+                <h4>Basic Validation</h4>
+                <pre><code>// Validate with automatic error handling
+$input = $request->validate([
+    'name' => ['required', 'string', 'max:255'],
+    'email' => 'required|email',
+    'password' => 'required|min:8'
+]);</code></pre>
+
+                <h4>Manual Validation</h4>
+                <pre><code>try {
+    $input = validator([
+        'name' => 'required|string',
+        'email' => 'required|email'
+    ]);
+    
+    // Access sanitized data
+    $email = $input->email('email');
+    $name = $input->text('name');
+} catch (Exception $e) {
+    // Handle validation error
 }</code></pre>
-
                 <h3>Request Information</h3>
                 <pre><code>// Get request method
 $method = $request->getMethod();
@@ -175,11 +169,14 @@ $method = $request->getMethod();
 // Get request path
 $path = $request->getPath();
 
-// Get full URL
-$url = $request->getUrl();
-
 // Get client IP
-$ip = $request->ip();</code></pre>
+$ip = $request->ip();
+
+// Check if AJAX request
+if ($request->isAjax()) { ... }
+
+// Check if expects JSON
+if ($request->expectsJson()) { ... }</code></pre>
 
                 <h3>Request Headers</h3>
                 <pre><code>// Get header
@@ -190,58 +187,12 @@ if ($request->accept('application/json')) {
     // Client accepts JSON
 }</code></pre>
 
-                <h3>Request Type</h3>
-                <pre><code>// Check request method
-if ($request->isMethod('post')) {
-    // POST request
-}
-
-// Check AJAX request
-if ($request->isAjax()) {
-    // AJAX request
-}
-
-// Check JSON expected
-if ($request->expectsJson()) {
-    // Return JSON response
-}</code></pre>
-
-                <h3>Input Validation & Sanitization</h3>
-                <p>Request validation:</p>
-                <pre><code>$input = $request->validate([
-    'name' => ['required'], 
-    'email' => [required, 'email']
-]);</code></pre>
-                <p>Using the validator helper:</p>
-                <pre><code>try {
-    $input = validator([
-        'name' => 'required|string',
-        'email' => 'required|email'
-    ]);
-    
-    // Data is validated and sanitized
-    $email = $input->email('email');
-    $name = $input->text('name');
-} catch (Exception $e) {
-    // Handle validation error
-    // $e->getMessage(); // the validation error message
-}</code></pre>
-
-                <p>Using the input helper:</p>
-                <pre><code>// Get sanitized input
-$input = input(['name', 'email']);
-$email = $input->email('email');
-$name = $input['name'];
-</code></pre>
-
                 <h3>Route Parameters</h3>
                 <pre><code>// For route '/user/{id}'
 $id = $request->getRouteParam('id');
 
 // Check if parameter exists
-if ($request->hasRouteParam('id')) {
-    // Parameter exists
-}</code></pre>
+if ($request->hasRouteParam('id')) { ... }</code></pre>
 
                 <h3>Modifying Requests</h3>
                 <pre><code>// Set query parameter
@@ -254,13 +205,454 @@ $request->setPostParam('status', 'active');
 $request->mergePostParams(['role' => 'admin']);</code></pre>
 
                 <div class="note">
-                    <strong>Note:</strong> Request modifications only affect the current request instance and won't
-                    change
+                    <strong>Note:</strong> Request modifications only affect the current instance and won't change
                     actual superglobals.
                 </div>
-            </section>
 
+                <h3>Error Handling</h3>
+                <p>Access validation errors and old input:</p>
+                <pre><code>// Check for errors
+if ($request->errors('email')) {
+    // Field has errors
+}
+
+// Get all errors (Error Object)
+$errors = $request->errors();
+if ($errors->any()) {
+    foreach($errors->all() as $error) {
+        echo $error; // Display each error
+    }
+}
+
+if ($errors->has('email')) {
+   echo $errors->first('email'); // Display the first error for the email field
+}
+
+// Get old input
+$oldValue = $request->old('email');</code></pre>
+
+                <h3>Magic Properties</h3>
+                <p>Access request data through dynamic properties:</p>
+                <pre><code>// Equivalent to $request->query('id') or $request->post('id')
+$id = $request->id;
+
+// Check existence
+isset($request->name);
+
+// Set values (only affects current instance)
+$request->page = 2;</code></pre>
+
+                <h3>Array Access</h3>
+                <p>The Request class implements ArrayAccess for convenient access:</p>
+                <pre><code>// Get value
+$name = $request['name'];
+
+// Set value
+$request['page'] = 2;
+
+// Check existence
+isset($request['email']);
+
+// Unset value
+unset($request['temp']);</code></pre>
+                <div id="input-validator">
+                    <h2>Input Validator</h2>
+                    <p>The InputValidator class provides comprehensive validation rules for ensuring data integrity and
+                        correctness.</p>
+
+                    <div class="note warning">
+                        <strong>Important:</strong> Validation should be performed before sanitization to catch invalid
+                        data
+                        early.
+                    </div>
+
+                    <h3>Basic Usage</h3>
+                    <pre><code>// Create validator instance
+$validator = new InputValidator();
+
+// Define validation rules
+$rules = [
+    'name' => 'required|string|min:3|max:255',
+    'email' => 'required|email|unique:users,email',
+    'password' => 'required|min:8|confirmed'
+];
+
+// Validate input
+if ($validator->validate($rules, $request->all())) {
+    // Data is valid
+    $cleanData = $validator->validated();
+} else {
+    // Handle errors
+    $errors = $validator->getErrors();
+}</code></pre>
+
+                    <h3>Validation Rules</h3>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Rule</th>
+                                <th>Description</th>
+                                <th>Example</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><code>required</code></td>
+                                <td>Field must be present and not empty</td>
+                                <td><code>'name' => 'required'</code></td>
+                            </tr>
+                            <tr>
+                                <td><code>email</code></td>
+                                <td>Valid email format</td>
+                                <td><code>'email' => 'email'</code></td>
+                            </tr>
+                            <tr>
+                                <td><code>url</code></td>
+                                <td>Valid URL format</td>
+                                <td><code>'website' => 'url'</code></td>
+                            </tr>
+                            <tr>
+                                <td><code>numeric</code></td>
+                                <td>Numeric value</td>
+                                <td><code>'age' => 'numeric'</code></td>
+                            </tr>
+                            <tr>
+                                <td><code>integer</code></td>
+                                <td>Integer value</td>
+                                <td><code>'count' => 'integer'</code></td>
+                            </tr>
+                            <tr>
+                                <td><code>float</code></td>
+                                <td>Floating-point number</td>
+                                <td><code>'price' => 'float'</code></td>
+                            </tr>
+                            <tr>
+                                <td><code>string</code></td>
+                                <td>String value</td>
+                                <td><code>'name' => 'string'</code></td>
+                            </tr>
+                            <tr>
+                                <td><code>boolean</code></td>
+                                <td>Boolean value</td>
+                                <td><code>'active' => 'boolean'</code></td>
+                            </tr>
+                            <tr>
+                                <td><code>array</code></td>
+                                <td>Array value</td>
+                                <td><code>'tags' => 'array'</code></td>
+                            </tr>
+                            <tr>
+                                <td><code>min</code></td>
+                                <td>Minimum length/value</td>
+                                <td><code>'password' => 'min:8'</code></td>
+                            </tr>
+                            <tr>
+                                <td><code>max</code></td>
+                                <td>Maximum length/value</td>
+                                <td><code>'title' => 'max:100'</code></td>
+                            </tr>
+                            <tr>
+                                <td><code>between</code></td>
+                                <td>Value between range</td>
+                                <td><code>'age' => 'between:18,65'</code></td>
+                            </tr>
+                            <tr>
+                                <td><code>in</code></td>
+                                <td>Value in given list</td>
+                                <td><code>'status' => 'in:active,pending,blocked'</code></td>
+                            </tr>
+                            <tr>
+                                <td><code>not_in</code></td>
+                                <td>Value not in given list</td>
+                                <td><code>'role' => 'not_in:admin,superadmin'</code></td>
+                            </tr>
+                            <tr>
+                                <td><code>regex</code></td>
+                                <td>Matches regex pattern</td>
+                                <td><code>'zip' => 'regex:/^\d{5}(-\d{4})?$/'</code></td>
+                            </tr>
+                            <tr>
+                                <td><code>unique</code></td>
+                                <td>Unique value in database</td>
+                                <td><code>'email' => 'unique:users,email'</code></td>
+                            </tr>
+                            <tr>
+                                <td><code>exists</code></td>
+                                <td>Value exists in database</td>
+                                <td><code>'user_id' => 'exists:users,id'</code></td>
+                            </tr>
+                            <tr>
+                                <td><code>confirmed</code></td>
+                                <td>Field matches confirmation field</td>
+                                <td><code>'password' => 'confirmed'</code></td>
+                            </tr>
+                            <tr>
+                                <td><code>date</code></td>
+                                <td>Valid date</td>
+                                <td><code>'birthday' => 'date'</code></td>
+                            </tr>
+                            <tr>
+                                <td><code>date_format</code></td>
+                                <td>Date matches format</td>
+                                <td><code>'created_at' => 'date_format:Y-m-d'</code></td>
+                            </tr>
+                            <tr>
+                                <td><code>before</code></td>
+                                <td>Date is before given date</td>
+                                <td><code>'start_date' => 'before:end_date'</code></td>
+                            </tr>
+                            <tr>
+                                <td><code>after</code></td>
+                                <td>Date is after given date</td>
+                                <td><code>'end_date' => 'after:start_date'</code></td>
+                            </tr>
+                            <tr>
+                                <td><code>alpha</code></td>
+                                <td>Alphabetic characters only</td>
+                                <td><code>'first_name' => 'alpha'</code></td>
+                            </tr>
+                            <tr>
+                                <td><code>alpha_num</code></td>
+                                <td>Alphanumeric characters</td>
+                                <td><code>'username' => 'alpha_num'</code></td>
+                            </tr>
+                            <tr>
+                                <td><code>alpha_dash</code></td>
+                                <td>Alphanumeric with dashes/underscores</td>
+                                <td><code>'slug' => 'alpha_dash'</code></td>
+                            </tr>
+                            <tr>
+                                <td><code>file</code></td>
+                                <td>Valid file upload</td>
+                                <td><code>'avatar' => 'file'</code></td>
+                            </tr>
+                            <tr>
+                                <td><code>image</code></td>
+                                <td>Valid image file</td>
+                                <td><code>'photo' => 'image'</code></td>
+                            </tr>
+                            <tr>
+                                <td><code>mimes</code></td>
+                                <td>File has allowed MIME type</td>
+                                <td><code>'document' => 'mimes:pdf,docx'</code></td>
+                            </tr>
+                            <tr>
+                                <td><code>password</code></td>
+                                <td>Meets password requirements</td>
+                                <td><code>'password' => 'password:8,uppercase,numbers'</code></td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <h3>Error Handling</h3>
+                    <pre><code>// Get all errors
+$errors = $validator->getErrors();
+
+// Get first error
+$firstError = $validator->getFirstError();
+
+// Custom error messages
+InputValidator::setErrorMessages([
+    'required' => 'The %s field is mandatory',
+    'email' => [
+        'default' => 'Invalid email format',
+        'contact_email' => 'Please provide a valid contact email'
+    ]
+]);
+
+// Set a Single Error Message
+InputValidator::setErrorMessage('unique', [
+    'email' => 'This email is already registered',
+    'username' => 'This username is already taken',
+    'default' => 'The %s field is already exists'
+]);</code></pre>
+
+                    <h3>Advanced Features</h3>
+
+                    <h4>Conditional Validation</h4>
+                    <pre><code>// Only validate if other field exists
+$rules = [
+    'payment_method' => 'required|in:credit_card,paypal',
+    'credit_card_number' => 'required_if:payment_method,credit_card'
+];</code></pre>
+
+                    <div class="note">
+                        <strong>Note:</strong> The validator automatically handles different input types (strings,
+                        numbers,
+                        arrays, files) appropriately for each rule.
+                    </div>
+
+                    <h3>File Uploads</h3>
+                    <pre><code>// Get uploaded file
+$file = $request->file('avatar');
+
+// Check if file exists
+if ($request->hasFile('avatar')) {
+    // Process file
+    $name = $file['name'];
+    $size = $file['size'];
+    $tmp = $file['tmp_name'];
+}</code></pre>
+
+                    <h2>Input Sanitizer</h2>
+                    <p>The InputSanitizer class provides robust data cleaning and sanitization methods to ensure safe
+                        handling of user input.</p>
+
+                    <div class="note">
+                        <strong>Security Note:</strong> Always sanitize user input before processing or storing it to
+                        prevent security vulnerabilities.
+                    </div>
+
+                    <h3>Basic Usage</h3>
+                    <pre><code>// Create from request input
+$input = $request->input(['name', 'email']);
+
+// Or create directly
+$sanitizer = new InputSanitizer([
+    'name' => 'John <script>Doe</script>',
+    'email' => 'john@example.com'
+]);
+
+// Get sanitized values
+$name = $sanitizer->text('name'); // "John Doe"
+$email = $sanitizer->email('email'); // "john@example.com"</code></pre>
+
+                    <h3>Sanitization Methods</h3>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Method</th>
+                                <th>Description</th>
+                                <th>Example</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><code>text()</code></td>
+                                <td>Basic string sanitization with optional HTML stripping</td>
+                                <td><code>$sanitizer->text('bio', true)</code></td>
+                            </tr>
+                            <tr>
+                                <td><code>email()</code></td>
+                                <td>Validates and sanitizes email addresses</td>
+                                <td><code>$sanitizer->email('email')</code></td>
+                            </tr>
+                            <tr>
+                                <td><code>html()</code></td>
+                                <td>Escapes HTML special characters</td>
+                                <td><code>$sanitizer->html('comment')</code></td>
+                            </tr>
+                            <tr>
+                                <td><code>number()</code></td>
+                                <td>Sanitizes integer values</td>
+                                <td><code>$sanitizer->number('age')</code></td>
+                            </tr>
+                            <tr>
+                                <td><code>float()</code></td>
+                                <td>Sanitizes floating-point numbers</td>
+                                <td><code>$sanitizer->float('price')</code></td>
+                            </tr>
+                            <tr>
+                                <td><code>boolean()</code></td>
+                                <td>Validates boolean values</td>
+                                <td><code>$sanitizer->boolean('active')</code></td>
+                            </tr>
+                            <tr>
+                                <td><code>url()</code></td>
+                                <td>Sanitizes URLs</td>
+                                <td><code>$sanitizer->url('website')</code></td>
+                            </tr>
+                            <tr>
+                                <td><code>ip()</code></td>
+                                <td>Validates IP addresses</td>
+                                <td><code>$sanitizer->ip('ip_address')</code></td>
+                            </tr>
+                            <tr>
+                                <td><code>alpha()</code></td>
+                                <td>Only alphabetic characters</td>
+                                <td><code>$sanitizer->alpha('first_name')</code></td>
+                            </tr>
+                            <tr>
+                                <td><code>alphaNum()</code></td>
+                                <td>Alphanumeric characters only</td>
+                                <td><code>$sanitizer->alphaNum('username')</code></td>
+                            </tr>
+                            <tr>
+                                <td><code>alphaDash()</code></td>
+                                <td>Alphanumeric with dashes/underscores</td>
+                                <td><code>$sanitizer->alphaDash('slug')</code></td>
+                            </tr>
+                            <tr>
+                                <td><code>digits()</code></td>
+                                <td>Digits only</td>
+                                <td><code>$sanitizer->digits('pin')</code></td>
+                            </tr>
+                            <tr>
+                                <td><code>phone()</code></td>
+                                <td>Sanitizes phone numbers</td>
+                                <td><code>$sanitizer->phone('phone')</code></td>
+                            </tr>
+                            <tr>
+                                <td><code>date()</code></td>
+                                <td>Validates and formats dates</td>
+                                <td><code>$sanitizer->date('birthday', 'Y-m-d')</code></td>
+                            </tr>
+                            <tr>
+                                <td><code>json()</code></td>
+                                <td>Validates and optionally decodes JSON</td>
+                                <td><code>$sanitizer->json('preferences', true)</code></td>
+                            </tr>
+                            <tr>
+                                <td><code>array()</code></td>
+                                <td>Sanitizes arrays with optional callback</td>
+                                <td><code>$sanitizer->array('tags', 'trim')</code></td>
+                            </tr>
+                            <tr>
+                                <td><code>file()</code></td>
+                                <td>Sanitizes file upload data</td>
+                                <td><code>$sanitizer->file('avatar')</code></td>
+                            </tr>
+                            <tr>
+                                <td><code>password()</code></td>
+                                <td>Sanitizes passwords with optional hashing</td>
+                                <td><code>$sanitizer->password('password', true)</code></td>
+                            </tr>
+                            <tr>
+                                <td><code>safe()</code></td>
+                                <td>Removes dangerous content with allowed tags</td>
+                                <td><code>$sanitizer->safe('content', ['p','b'])</code></td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <h3>Advanced Features</h3>
+
+                    <h4>Bulk Sanitization</h4>
+                    <pre><code>// Sanitize multiple fields at once
+$cleanData = $sanitizer->to([
+    'name' => 'text',
+    'email' => 'email',
+    'age' => 'number'
+]);</code></pre>
+
+                    <h4>Filtering Data</h4>
+                    <pre><code>// Get only specific fields
+$filtered = $sanitizer->only(['name', 'email']);
+
+// Exclude specific fields 
+$filtered = $sanitizer->except(['password']);</code></pre>
+
+                    <h4>Collection Conversion</h4>
+                    <pre><code>// Convert to Collection for chaining
+$sanitizer->collect('tags')->map(fn($tag) => strtoupper($tag));</code></pre>
+
+                    <div class="note tip">
+                        <strong>Tip:</strong> Use the <code>__toString()</code> method to get the first sanitized text
+                        value: <code>(string)$sanitizer</code>
+                    </div>
+            </section>
         </div>
+    </div>
     </div>
 
     <footer>
