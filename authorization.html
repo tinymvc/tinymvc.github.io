@@ -54,7 +54,7 @@
             <h2>Security</h2>
             <ul>
                 <li><a href="/middleware">Middleware</a></li>
-                <li><a href="/csrf-protection">CSRF Protection</a></li>
+                <li><a href="/cors-and-csrf-protection">CORS & CSRF Protection</a></li>
                 <li><a href="/authentication">Authentication</a></li>
                 <li><a href="/authorization" class="active">Authorization</a></li>
             </ul>
@@ -97,7 +97,7 @@
                 <h3>Defining Abilities</h3>
                 <p>Abilities are defined using closures that determine if a user can perform an action:</p>
                 <pre><code>// In your service provider or bootstrap file
-gate()->define('edit-post', function (?User $user, Post $post) {
+gate()->define('post.edit', function (?User $user, Post $post) {
     // Guests can't edit posts
     if (!$user) {
         return false;
@@ -115,17 +115,17 @@ gate()->define('edit-post', function (?User $user, Post $post) {
                 <h3>Checking Abilities</h3>
                 <p>Use the helper functions to check permissions:</p>
                 <pre><code>// Check if user can edit a post
-if (can('edit-post', $post)) {
+if (can('post.edit', $post)) {
     // Show edit button
 }
 
 // Alternative check
-if (cannot('edit-post', $post)) {
+if (cannot('post.edit', $post)) {
     abort(403);
 }
 
 // Force authorization check (throws exception if denied)
-authorize('edit-post', $post);</code></pre>
+authorize('post.edit', $post);</code></pre>
 
                 <h3>Before Callbacks</h3>
                 <p>Register callbacks that run before all ability checks:</p>
@@ -142,7 +142,7 @@ gate()->before(function (?User $user, string $ability) {
                 <p>Authorize actions in controllers:</p>
                 <pre><code>public function update(Post $post)
 {
-    authorize('edit-post', $post);
+    authorize('post.edit', $post);
     
     // Update the post...
 }</code></pre>
@@ -154,25 +154,29 @@ gate()->before(function (?User $user, string $ability) {
                 </div>
 
                 <h3>Full Example</h3>
-                <pre><code>// Define abilities
-gate()->define('manage-users', function (User $user) {
-    return $user->is_admin;
-});
+                <pre><code>class AppServiceProvider {
+    public function boot() {
+        // define user abilities
+        gate()->define('users.manage', function (User $user) {
+            return $user->is_admin;
+        });
 
-gate()->define('edit-settings', function (User $user, Account $account) {
-    return $user->id === $account->owner_id;
-});
+        gate()->define('settings.edit', function (User $user, Account $account) {
+            return $user->id === $account->owner_id;
+        });
+    }
+}
 
 // In controller
 public function edit(Account $account)
 {
-    authorize('edit-settings', $account);
+    authorize('settings.edit', $account);
     
     return view('account.edit', compact('account'));
 }
 
 // In view
-&lt;?php if(can('manage-users')): ?&gt;
+&lt;?php if(can('users.manage')): ?&gt;
     &lt;a href="/admin/users"&gt;Manage Users&lt;/a&gt;
 &lt;?php endif ?&gt;</code></pre>
             </section>

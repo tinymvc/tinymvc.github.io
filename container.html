@@ -54,7 +54,7 @@
             <h2>Security</h2>
             <ul>
                 <li><a href="/middleware">Middleware</a></li>
-                <li><a href="/csrf-protection">CSRF Protection</a></li>
+                <li><a href="/cors-and-csrf-protection">CORS & CSRF Protection</a></li>
                 <li><a href="/authentication">Authentication</a></li>
                 <li><a href="/authorization">Authorization</a></li>
             </ul>
@@ -135,6 +135,7 @@ singleton(Database::class, function() {
 
 // Get instance
 $db = get(Database::class);
+
 // or, use app helper function
 $db = app(Database::class);
 </code></pre>
@@ -225,6 +226,146 @@ dd(container()->debug());
 # Check if binding exists
 if (has(LoggerInterface::class)) {
     // ...
+}</code></pre>
+            </section>
+
+            <section id="service-providers">
+                <h2>Service Providers</h2>
+
+                <p>Service providers are the central place of application bootstrapping. They allow you to register
+                    bindings, event listeners, middleware, and more in a structured way.</p>
+
+                <h3>Creating Providers</h3>
+                <p>Generate a new provider using the Spark CLI:</p>
+                <pre><code>php spark make:provider AuthServiceProvider</code></pre>
+
+                <p>This creates a new provider in <code>app/Providers/AuthServiceProvider.php</code>:</p>
+                <pre><code>&lt;?php
+        
+namespace App\Providers;
+
+use Spark\Container;
+
+class AuthServiceProvider
+{
+    public function register(Container $container)
+    {
+        // Register bindings here
+    }
+
+    public function boot(Container $container)
+    {
+        // Perform bootstrapping here
+    }
+}</code></pre>
+
+                <h3>Registering Providers</h3>
+                <p>Add providers to <code>bootstrap/providers.php</code>:</p>
+                <pre><code>return [
+    \App\Providers\AppServiceProvider::class,
+    \App\Providers\AuthServiceProvider::class,
+    \App\Providers\EventServiceProvider::class,
+];</code></pre>
+
+                <h3>Provider Methods</h3>
+                <h4>register()</h4>
+                <p>Used to bind services into the container:</p>
+                <pre><code>public function register(Container $container)
+{
+    $container->singleton(Auth::class, function(Container $container) {
+        return new Auth(
+            $container->get(Session::class),
+            User::class,
+            [
+                'cache_enabled' => false,
+                'guest_route' => 'admin.auth.login',
+                'logged_in_route' => 'admin.dashboard',
+            ]
+        );
+    });
+}</code></pre>
+
+                <h4>boot()</h4>
+                <p>Called after all providers are registered:</p>
+                <pre><code>public function boot(Container $container)
+{
+    // Register event listeners
+    event([
+        'user.created' => [SendWelcomeEmail::class],
+    ]);
+    
+    // Define authorization abilities
+    gate([
+        'edit.profile' => function(User $user) {
+            return $user->isAdmin() || $user->isOwner();
+        }
+    ]);
+}</code></pre>
+
+                <h3>Common Use Cases</h3>
+                <h4>Database Bindings</h4>
+                <pre><code>public function register(Container $container)
+{
+    $container->singleton(Connection::class, function() {
+        return new DatabaseConnection(config('database'));
+    });
+}</code></pre>
+
+                <h4>Third-Party Integrations</h4>
+                <pre><code>public function register(Container $container)
+{
+    $container->singleton(Mailer::class, function() {
+        return new SMTPMailer(config('mail'));
+    });
+}</code></pre>
+
+                <h4>Custom Services</h4>
+                <pre><code>public function register(Container $container)
+{
+    $container->singleton('geoip', function() {
+        return new GeoIPService(config('geoip'));
+    });
+}</code></pre>
+
+                <h3>Best Practices</h3>
+                <div class="note">
+                    <ul>
+                        <li>Keep providers focused on a specific domain</li>
+                        <li>Use <code>register()</code> only for bindings</li>
+                        <li>Perform initialization in <code>boot()</code></li>
+                        <li>Group related bindings in dedicated providers</li>
+                        <li>Load providers in order of dependency</li>
+                    </ul>
+                </div>
+
+
+                <h3>Full Example</h3>
+                <pre><code>&lt;?php
+
+namespace App\Providers;
+
+use Spark\Container;
+use App\Services\Analytics;
+use App\Listeners\TrackUserLogin;
+
+class AnalyticsServiceProvider
+{
+    public function register(Container $container)
+    {
+        $container->singleton(Analytics::class, function() {
+            return new Analytics(config('analytics.key'));
+        });
+    }
+
+    public function boot(Container $container)
+    {
+        event()->addListener('user.login', function($user) use ($container) {
+            $container->get(Analytics::class)->track('login', $user->id);
+        });
+        
+        // Or using listener class
+        event()->addListener('user.login', TrackUserLogin::class);
+    }
 }</code></pre>
             </section>
 

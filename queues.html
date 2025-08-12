@@ -54,7 +54,7 @@
             <h2>Security</h2>
             <ul>
                 <li><a href="/middleware">Middleware</a></li>
-                <li><a href="/csrf-protection">CSRF Protection</a></li>
+                <li><a href="/cors-and-csrf-protection">CORS & CSRF Protection</a></li>
                 <li><a href="/authentication">Authentication</a></li>
                 <li><a href="/authorization">Authorization</a></li>
             </ul>
@@ -171,7 +171,10 @@ php spark queue:clear</code></pre>
 crontab -e
 
 # Add this line to run every 5 minutes
-*/5 * * * * cd /var/www/your-project &amp;&amp; php spark queue:run >> /var/log/your-project-queue.log 2>&amp;1</code></pre>
+*/5 * * * * cd /var/www/your-project &amp;&amp; php spark queue:run >> /var/log/your-project-queue.log 2>&amp;1
+
+# This will discard all output
+*/5 * * * * cd /var/www/your-project &amp;&amp; php spark queue:run > /dev/null 2>&amp;1</code></pre>
 
                 <h5>Windows Server Setup</h5>
                 <p>Create a scheduled task that runs every 5 minutes with this command:</p>

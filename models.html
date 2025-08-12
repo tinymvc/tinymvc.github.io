@@ -54,7 +54,7 @@
             <h2>Security</h2>
             <ul>
                 <li><a href="/middleware">Middleware</a></li>
-                <li><a href="/csrf-protection">CSRF Protection</a></li>
+                <li><a href="/cors-and-csrf-protection">CORS & CSRF Protection</a></li>
                 <li><a href="/authentication">Authentication</a></li>
                 <li><a href="/authorization">Authorization</a></li>
             </ul>
@@ -96,6 +96,9 @@
                     your database tables using object-oriented syntax.</p>
 
                 <h3>Creating Models</h3>
+                <p>To create a new model, use the Spark CLI:</p>
+                <pre><code>php spark make:model User</code></pre>
+
                 <p>Models are stored in the <code>app/Models</code> folder and extend the base
                     <code>Spark\Database\Model</code> class:
                 </p>
@@ -126,15 +129,35 @@ $user = User::create([
     'email' => 'john@example.com'
 ]);
 
-// Or create then save
+// Create a new model then save
 $user = new User();
 $user->name = 'John Doe';
 $user->email = 'john@example.com';
-$user->save();</code></pre>
+$user->save();
+
+// Load a model from an array
+$user = User::load([
+    'name' => 'John Doe',
+    'email' => 'john@example.com'
+]);
+$user->save();
+
+// Load a model from an input object
+$user = User::load(input(['name', 'email']));
+$user->save();
+
+// Insert multiple records
+User::insert([
+    ['name' => 'Jane Doe', 'email' => 'jane@example.com'],
+    ['name' => 'Alice Smith', 'email' => 'alice@example.com']
+]);</code></pre>
 
                 <h4>Reading Records</h4>
                 <pre><code>// Find by ID
 $user = User::find(1);
+
+// This will throw a 404 error if not found
+$user = User::findOrFail(1);
 
 // Get all records
 $users = User::all();
@@ -143,13 +166,22 @@ $users = User::all();
 $user = User::first();
 
 // Get last record
-$user = User::last();</code></pre>
+$user = User::last();
+
+// Get Models using query builder
+$users = User::where('status', 'active')
+    ->orderDesc('created_at')
+    ->get();
+</code></pre>
 
                 <h4>Updating Records</h4>
                 <pre><code>// Find then update
 $user = User::find(1);
 $user->name = 'Updated Name';
 $user->save();
+
+// Update directly
+User::update(['name' => 'Updated Name'], ['id' => 1]);
 
 // Mass update
 User::where('status', 'pending')
@@ -164,6 +196,9 @@ $user->remove();
 User::destroy(1);
 
 // Direct delete
+User::delete(['id' => 1]);
+
+// Direct delete with where clause
 User::where('last_login', '<', '2020-01-01')->delete();</code></pre>
 
                 <h3>Query Builder Integration</h3>
@@ -190,12 +225,15 @@ $users = User::paginate();
 $users = User::paginate(25);
 
 // Displaying paginated results
-foreach ($users->getData() as $user) {
+foreach ($users as $user) {
     echo $user->name;
 }
 
 // Rendering pagination links
-echo $users->links();</code></pre>
+echo $users->links();
+
+// Get the pagination as array
+$data = $users->toArray();</code></pre>
 
                 <h4>Pagination Methods</h4>
                 <pre><code>// Check if data exists
@@ -204,7 +242,7 @@ if ($users->hasData()) {
 }
 
 // Get paginated data
-$data = $users->getData();
+$data = $users->items();
 
 // Custom pagination links
 if ($users->hasLinks()) {
@@ -256,17 +294,14 @@ public function index()
 }
 
 // User registration example
-public function store(Hash $hash)
+public function store(Request $request)
 {
-    $inserted = User::insert([
-        'name' => request('name'),
-        'email' => request('email'),
-        'password' => $hash->hashPassword(request('password'))
-    ]);
+    $user = User::create(
+        $request->input(['name', 'email', 'password'])
+    );
 
-    return response()
-        ->with('message', 'Registration successful!')
-        ->redirect('/dashboard');
+    return redirect('/dashboard')
+        ->with('message', 'Registration successful!');
 }</code></pre>
 
                 <h2>ORM Relationships</h2>

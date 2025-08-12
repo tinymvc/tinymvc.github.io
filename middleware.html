@@ -54,7 +54,7 @@
             <h2>Security</h2>
             <ul>
                 <li><a href="/middleware" class="active">Middleware</a></li>
-                <li><a href="/csrf-protection">CSRF Protection</a></li>
+                <li><a href="/cors-and-csrf-protection">CORS & CSRF Protection</a></li>
                 <li><a href="/authentication">Authentication</a></li>
                 <li><a href="/authorization">Authorization</a></li>
             </ul>
@@ -94,27 +94,27 @@
                 <p>Middleware provides a mechanism for filtering HTTP requests entering your application. Middleware can
                     perform various tasks like authentication, CSRF protection, CORS headers, and more.</p>
 
-                <h3>Defining Middleware</h3>
-                <p>All middleware should be stored in the <code>app/Http/Middlewares</code> directory.</p>
+                <p>Run the Spark Command to create a new middleware:</p>
+                <pre><code>php spark make:middleware AuthMiddleware</code></pre>
+
+                <p>It will create a new middleware class in the <code>app/Http/Middlewares</code> directory:</p>
                 <pre><code>&lt;?php
-        
+
 namespace App\Http\Middlewares;
 
+use Spark\Contracts\Http\MiddlewareInterface;
 use Spark\Http\Request;
 
-class AuthMiddleware
+class AuthMiddleware implements MiddlewareInterface
 {
-    /**
-    * Run the request filter.
-    *
-    * @param  \Spark\Http\Request  $request
-    * @return mixed
-    */
-    public function handle(Request $request)
+    public function handle(Request $request, \Closure $next): mixed
     {
         if (is_guest()) {
-            return redirect('/login');
+            return redirect('/login')
+                ->with('error', 'You must be logged in to access this page.');
         }
+
+        return $next($request);
     }
 }</code></pre>
 
@@ -151,14 +151,38 @@ return [
     // More routes...
 });</code></pre>
 
-                <p>
+                <h3>Create a Middleware that accept arguments</h3>
+                <pre><code>&lt;?php
+
+namespace App\Http\Middlewares;
+
+use Spark\Contracts\Http\MiddlewareWithParametersInterface;
+use Spark\Http\Request;
+
+class RoleMiddleware implements MiddlewareWithParametersInterface
+{
+    public function handle(Request $request, \Closure $next, ...$parameters): mixed
+    {
+        if (is_guest() || !in_array(user('role'), $parameters)) {
+            return abort(403, 'You do not have permission to access this page.');
+        }
+
+        return $next($request);
+    }
+}</code></pre>
+
+                <p>Apply middleware to specific routes using the middleware key:</p>
+                <pre><code>Route::get('admin/profile', [AdminController::class, 'profile'])
+    ->middleware('auth');</code></pre>
+
+                <p>Multiple middleware can be applied using an array:</p>
+                <pre><code>Route::get('dashboard', [DashboardController::class, 'index'])
+    ->middleware('role:super,admin');</code></pre>
+
+                <div class="note">
                     <strong>Tip:</strong> Middleware executes in the order they are listed in the array. Put more
                     general
                     middleware first and specific ones later.
-                </p>
-                <div class="note">
-                    <strong>Note:</strong> Use <code>php spark make:middleware TrustProxies</code> to generate
-                    a new TrustProxiesMiddleware Class.
                 </div>
             </section>
 

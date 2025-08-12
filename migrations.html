@@ -54,7 +54,7 @@
             <h2>Security</h2>
             <ul>
                 <li><a href="/middleware">Middleware</a></li>
-                <li><a href="/csrf-protection">CSRF Protection</a></li>
+                <li><a href="/cors-and-csrf-protection">CORS & CSRF Protection</a></li>
                 <li><a href="/authentication">Authentication</a></li>
                 <li><a href="/authorization">Authorization</a></li>
             </ul>
@@ -91,7 +91,16 @@
             <section id="database">
                 <h2>Creating Migrations</h2>
                 <p>Generate a new migration file using the Spark CLI:</p>
-                <pre><code>php spark make:migration users</code></pre>
+                <pre><code>php spark make:migration users
+
+// Create a pivot migration table
+php spark make:migration --pivot
+
+// Create a migration with a seeder
+php spark make:migration users -s
+
+// Create a seeder for the users table
+php spark make:seeder users</code></pre>
 
                 <p>This creates a new file in <code>database/migrations/</code> with timestamp prefix:</p>
                 <pre><code>&lt;?php
@@ -121,6 +130,9 @@ return new class {
                 <pre><code># Run all pending migrations
 php spark migrate:run
 
+// migrate all pending migrations and seeders
+php spark migrate:run -s
+
 # Rollback the last migration
 php spark migrate:rollback
 
@@ -128,7 +140,10 @@ php spark migrate:rollback
 php spark migrate:rollback 2
 
 # Reset and re-run all migrations
-php spark migrate:fresh</code></pre>
+php spark migrate:fresh
+
+# Reset and re-run all migrations and seeders
+php spark migrate:fresh -s</code></pre>
 
                 <h3>Schema Builder</h3>
                 <h4>Column Types</h4>
@@ -175,6 +190,7 @@ $table->foreign('user_id')
 
                 <h3>Modifying Tables</h3>
                 <pre><code>Schema::table('users', function (Blueprint $table) {
+    $table->string('new_column')->nullable();
     $table->dropColumn('old_column');
     $table->dropIndex(['email', 'status']);
     $table->dropForeign('user_id', 'users');

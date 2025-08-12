@@ -54,7 +54,7 @@
             <h2>Security</h2>
             <ul>
                 <li><a href="/middleware">Middleware</a></li>
-                <li><a href="/csrf-protection">CSRF Protection</a></li>
+                <li><a href="/cors-and-csrf-protection">CORS & CSRF Protection</a></li>
                 <li><a href="/authentication">Authentication</a></li>
                 <li><a href="/authorization">Authorization</a></li>
             </ul>
@@ -102,8 +102,10 @@
 
                 <div class="note">
                     <strong>Important:</strong> Generate a new application key if not set:
-                    <pre><code>php spark key:generate</code></pre>
                 </div>
+
+                <p>Run the following command to generate a new key:</p>
+                <pre><code>php spark key:generate</code></pre>
 
                 <h3>Basic Hashing</h3>
                 <pre><code>// Create a hash
@@ -135,15 +137,9 @@ try {
 }</code></pre>
 
                 <h3>Dependency Injection</h3>
-                <pre><code>// Inject Hash class
-public function __construct(Hash $hash)
+                <pre><code>public function storeData($data, Hash $hash)
 {
-    $this->hash = $hash;
-}
-
-public function storeData($data)
-{
-    $encrypted = $this->hash->encrypt($data);
+    $encrypted = $hash->encrypt($data);
     // ...
 }</code></pre>
 
@@ -187,17 +183,20 @@ $container->singleton(Hash::class, function() {
         'api_token' => hashing()->encrypt(random_bytes(32))
     ]);
     
-    return response()->json($user);
+    return [
+        'status' => 'success',
+        'message' => 'User registered successfully.',
+        'user' => $user
+    ];
 }</code></pre>
 
                 <h4>Data Encryption Workflow</h4>
                 <pre><code>// Store encrypted data
-$creditCard = [
+PaymentMethod::create([
     'number' => hashing()->encrypt($request->number),
     'expiry' => hashing()->encrypt($request->expiry),
     'cvv' => hashing()->encrypt($request->cvv)
-];
-PaymentMethod::create($creditCard);
+]);
 
 // Retrieve and decrypt
 $method = PaymentMethod::find(1);

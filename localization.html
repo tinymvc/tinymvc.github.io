@@ -54,7 +54,7 @@
             <h2>Security</h2>
             <ul>
                 <li><a href="/middleware">Middleware</a></li>
-                <li><a href="/csrf-protection">CSRF Protection</a></li>
+                <li><a href="/cors-and-csrf-protection">CORS & CSRF Protection</a></li>
                 <li><a href="/authentication">Authentication</a></li>
                 <li><a href="/authorization">Authorization</a></li>
             </ul>
@@ -119,7 +119,7 @@ echo __('hello'); // Outputs: Hello!
 echo __('welcome', 'John'); // Outputs: Welcome, John!
 
 // With HTML escaping
-echo __e('welcome', '&lt;John&gt;'); // Outputs: Welcome, &amp;lt;John&amp;gt;!</code></pre>
+echo _e('welcome', '&lt;John&gt;'); // Outputs: Welcome, &amp;lt;John&amp;gt;!</code></pre>
 
                 <h3>Pluralization</h3>
 
@@ -155,9 +155,9 @@ echo __('user_action', 2, ['Jane', 2]);
 
                 <p>You can add additional translation files in a service provider:</p>
 
-                <pre><code>public function register()
+                <pre><code>public function boot()
 {
-    $translator = $this->app->get(Translator::class);
+    $translator = app(Translator::class);
     $translator->addLanguageFile(lang_dir('admin/notice/fr.php'));
 }</code></pre>
 
@@ -208,7 +208,7 @@ echo __('user_action', 2, ['Jane', 2]);
                 <ul>
                     <li>Use consistent keys across all language files</li>
                     <li>Keep translations organized by module/feature when possible</li>
-                    <li>Use <code>__e()</code> for any user-facing text that will be rendered in HTML</li>
+                    <li>Use <code>_e()</code> for any user-facing text that will be rendered in HTML</li>
                     <li>For complex pluralization rules, consider implementing a custom solution</li>
                     <li>Load only necessary language files for better performance</li>
                 </ul>

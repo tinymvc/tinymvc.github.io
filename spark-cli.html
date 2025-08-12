@@ -54,7 +54,7 @@
             <h2>Security</h2>
             <ul>
                 <li><a href="/middleware">Middleware</a></li>
-                <li><a href="/csrf-protection">CSRF Protection</a></li>
+                <li><a href="/cors-and-csrf-protection">CORS & CSRF Protection</a></li>
                 <li><a href="/authentication">Authentication</a></li>
                 <li><a href="/authorization">Authorization</a></li>
             </ul>
@@ -146,6 +146,11 @@
                             <td><code>php spark make:model User</code></td>
                         </tr>
                         <tr>
+                            <td><code>make:seeder</code></td>
+                            <td>Create a new database seeder class</td>
+                            <td><code>php spark make:seeder users</code></td>
+                        </tr>
+                        <tr>
                             <td><code>make:provider</code></td>
                             <td>Create a new service provider class</td>
                             <td><code>php spark make:provider CustomServiceProvider</code></td>
@@ -210,6 +215,7 @@ command('greet', function (Prompt $prompt) {
                     <li><code>command('name', callable)</code> - Defines the command name and handler</li>
                     <li>The handler will be injected with any dependencies automatically.</li>
                     <li><code>->description()</code> - Sets the command description shown in help</li>
+                    <li><code>->help()</code> - Sets the command help text shown in help</li>
                 </ol>
 
                 <h4>Prompt Methods</h4>

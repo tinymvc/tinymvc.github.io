@@ -54,7 +54,7 @@
             <h2>Security</h2>
             <ul>
                 <li><a href="/middleware">Middleware</a></li>
-                <li><a href="/csrf-protection">CSRF Protection</a></li>
+                <li><a href="/cors-and-csrf-protection">CORS & CSRF Protection</a></li>
                 <li><a href="/authentication">Authentication</a></li>
                 <li><a href="/authorization">Authorization</a></li>
             </ul>
@@ -164,16 +164,16 @@ Alpine.start();</code></pre>
 
                 <h3>Including Assets in Views</h3>
 
-                <p>To include the bundled assets in your views, use the <code>vite()</code> helper:</p>
+                <p>To include the bundled assets in your views, use the <code>@vite</code> directive:</p>
 
                 <pre><code>&lt;!DOCTYPE html&gt;
 &lt;html&gt;
 &lt;head&gt;
     &lt;title&gt;My App&lt;/title&gt;
-    &lt;?= vite(); // including vite's script/modules ?&gt;
+    @vite
 &lt;/head&gt;
 &lt;body&gt;
-    &lt;?= $content ?&gt;
+    @yield('content')
 &lt;/body&gt;
 &lt;/html&gt;</code></pre>
 
@@ -196,18 +196,13 @@ Alpine.start();</code></pre>
 
                 <p>Then reference them in your views:</p>
 
-                <pre><code>&lt;img src="&lt;?= vite()-&gt;asset('/images/logo.png') ?&gt;"&gt;</code></pre>
+                <pre><code>&lt;img src="{{ vite()-&gt;asset('/images/logo.png') }}"&gt;</code></pre>
 
                 <h3>React Support</h3>
 
                 <p>When using React, add the React refresh tag before including Vite:</p>
 
-                <pre><code>&lt;?= vite()-&gt;reactRefreshTag() ?&gt;
-&lt;?= vite() ?&gt;</code></pre>
-
-                <div class="note">
-                    <strong>Note:</strong> Remember to install React dependencies when using this feature.
-                </div>
+                <pre><code>@vite('app.jsx')</code></pre>
 
                 <h3>Production Build</h3>
 

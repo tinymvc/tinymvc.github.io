@@ -54,7 +54,7 @@
             <h2>Security</h2>
             <ul>
                 <li><a href="/middleware">Middleware</a></li>
-                <li><a href="/csrf-protection">CSRF Protection</a></li>
+                <li><a href="/cors-and-csrf-protection">CORS & CSRF Protection</a></li>
                 <li><a href="/authentication" class="active">Authentication</a></li>
                 <li><a href="/authorization">Authorization</a></li>
             </ul>
@@ -88,17 +88,13 @@
         </nav>
 
         <div class="content">
-
-
             <section id="authentication">
-                <h2>Authentication</h2>
-
-                <p>TinyMVC provides a complete authentication system with session management, remember me functionality,
-                    and
-                    route protection.</p>
+                <h2>Authentication Service</h2>
+                <p>The Spark Authentication Service provides a robust, driver-based authentication system with session
+                    management, remember me functionality, route protection, and user caching.</p>
 
                 <h3>Configuration</h3>
-                <p>Register the Auth service in your <code>AppServiceProvider</code>:</p>
+                <p>Register and configure the Auth service in your <code>AppServiceProvider</code>:</p>
                 <pre><code>use Spark\Http\Auth;
 use App\Models\User;
 
@@ -107,129 +103,295 @@ $container->singleton(Auth::class, function(Container $container) {
         $container->get(Session::class),
         User::class,
         [
-            'cache_enabled' => false,
-            'guest_route' => 'admin.auth.login',
-            'logged_in_route' => 'admin.dashboard',
-            'cookie_name' => 'remember_me',
-            'cookie_expire' => '30 days'
+            'session_key' => 'user_id',
+            'cache_enabled' => true,
+            'cache_name' => 'auth_cache',
+            'cache_expire' => '30 minutes',
+            'guest_route' => 'login',
+            'logged_in_route' => 'dashboard',
+            'cookie_enabled' => true,
+            'cookie_name' => 'logged_user_token',
+            'cookie_expire' => '30 days',
+            'driver' => null
         ]
     );
 });</code></pre>
 
-                <h3>Basic Authentication</h3>
-                <h4>Logging In</h4>
-                <pre><code>// In your login controller
-public function login(Auth $auth)
-{
-    $user = User::where('email', request('email'))->first();
-    
-    if ($user && password_verify(request('password'), $user->password)) {
-        $auth->login($user, request('remember'));
-        return redirect($auth->getLoggedInRoute());
-    }
-    
-    return response()->with('error', 'Invalid credentials')->back();
+                <h4>Configuration Options</h4>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Option</th>
+                            <th>Type</th>
+                            <th>Default</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>session_key</td>
+                            <td>string</td>
+                            <td>'admin_user_id'</td>
+                            <td>Session key for storing authenticated user ID</td>
+                        </tr>
+                        <tr>
+                            <td>cache_enabled</td>
+                            <td>bool</td>
+                            <td>false</td>
+                            <td>Enable caching of user objects</td>
+                        </tr>
+                        <tr>
+                            <td>cache_name</td>
+                            <td>string</td>
+                            <td>'logged_user'</td>
+                            <td>Cache storage identifier</td>
+                        </tr>
+                        <tr>
+                            <td>cache_expire</td>
+                            <td>string</td>
+                            <td>'10 minutes'</td>
+                            <td>Cache expiration time (strtotime compatible)</td>
+                        </tr>
+                        <tr>
+                            <td>guest_route</td>
+                            <td>string</td>
+                            <td>'admin.auth.login'</td>
+                            <td>Route name for guest redirects</td>
+                        </tr>
+                        <tr>
+                            <td>logged_in_route</td>
+                            <td>string</td>
+                            <td>'admin.dashboard'</td>
+                            <td>Route name for authenticated redirects</td>
+                        </tr>
+                        <tr>
+                            <td>cookie_enabled</td>
+                            <td>bool</td>
+                            <td>false</td>
+                            <td>Enable remember me functionality</td>
+                        </tr>
+                        <tr>
+                            <td>cookie_name</td>
+                            <td>string|null</td>
+                            <td>null</td>
+                            <td>Remember me cookie name (null disables remember me)</td>
+                        </tr>
+                        <tr>
+                            <td>cookie_expire</td>
+                            <td>string</td>
+                            <td>'6 months'</td>
+                            <td>Remember me cookie expiration</td>
+                        </tr>
+                        <tr>
+                            <td>driver</td>
+                            <td>AuthDriverContract|null</td>
+                            <td>null</td>
+                            <td>Custom authentication driver</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h3>Core Methods</h3>
+
+                <div class="method">
+                    <h4>getUser(): false|Model</h4>
+                    <p>Retrieves the currently authenticated user.</p>
+                    <ul>
+                        <li>Returns user model if authenticated</li>
+                        <li>Returns false if no user is authenticated</li>
+                        <li>Handles session, cookie, and cache automatically</li>
+                    </ul>
+                    <pre><code>$user = $auth->getUser();
+if ($user !== false) {
+    echo "Welcome, {$user->name}";
 }</code></pre>
-
-                <h4>Logging Out</h4>
-                <pre><code>public function logout(Auth $auth)
-{
-    $auth->logout();
-    return redirect($auth->getGuestRoute());
-}</code></pre>
-
-                <h3>Authentication Helpers</h3>
-                <pre><code>// Check if user is guest
-if (is_guest()) {
-    return redirect('login');
-}
-
-// Get current user
-$user = user();
-
-// Access user properties
-$name = user('name');
-$email = user('email');
-
-// Set temporary user data
-user()->temp_data = 'value';</code></pre>
-
-                <h3>Protecting Routes</h3>
-                <p>Use middleware to protect routes:</p>
-                <pre><code>Route::group(['middleware' => 'auth'], function() {
-    Route::get('dashboard', [DashboardController::class, 'index']);
-});</code></pre>
-
-                <h3>Remember Me Functionality</h3>
-                <p>Enable "remember me" by setting cookie configuration:</p>
-                <pre><code>new Auth(
-    $session,
-    User::class,
-    [
-        'cookie_name' => 'remember_token',
-        'cookie_expire' => '30 days'
-    ]
-);</code></pre>
-
-                <h3>Advanced Features</h3>
-                <h4>Refreshing User Data</h4>
-                <pre><code>// Refresh user data from database
-$auth->refresh();</code></pre>
-
-                <h4>Clearing Cache</h4>
-                <pre><code>// Clear cached user data
-$auth->clearCache();</code></pre>
-
-                <h3>Redirect Paths</h3>
-                <pre><code>// Get redirect paths
-$loginRoute = $auth->getGuestRoute();
-$dashboardRoute = $auth->getLoggedInRoute();</code></pre>
-
-                <h3>User Access</h3>
-                <pre><code>// Access user properties directly
-$name = $auth->name;
-$email = $auth->email;
-
-// Call user methods
-$auth->updateProfile($data);</code></pre>
-
-                <p>
-                    <strong>Security Tip:</strong> Always hash passwords before storing them in the database. TinyMVC
-                    recommends using PHP's <code>Hash</code> Encryption Class.
-                </p>
-                <div class="note">
-                    <strong>Tip:</strong> Always use <code>auth()</code> helper to access the Auth service.
                 </div>
 
-                <h3>Full Authentication Example</h3>
-                <pre><code>// Login Controller
-public function authenticate(Auth $auth, Hash $hash)
+                <div class="method">
+                    <h4>user(?string $key = null, mixed $default = null): mixed</h4>
+                    <p>Retrieves user or specific user attribute.</p>
+                    <pre><code>// Get entire user model
+$user = $auth->user();
+
+// Get specific attribute
+$email = $auth->user('email');
+
+// With default value
+$phone = $auth->user('phone', 'No phone set');</code></pre>
+                </div>
+
+                <div class="method">
+                    <h4>login(Model $user, bool $remember = false): void</h4>
+                    <p>Authenticates a user.</p>
+                    <ul>
+                        <li>Sets session data</li>
+                        <li>Optionally sets remember me cookie</li>
+                        <li>Caches user if enabled</li>
+                    </ul>
+                    <pre><code>// Basic login
+$auth->login($user);
+
+// With remember me
+$auth->login($user, true);</code></pre>
+                </div>
+
+                <div class="method">
+                    <h4>logout(): void</h4>
+                    <p>Terminates the user session.</p>
+                    <ul>
+                        <li>Clears session data</li>
+                        <li>Removes remember me cookie if set</li>
+                        <li>Clears user cache if enabled</li>
+                    </ul>
+                    <pre><code>$auth->logout();</code></pre>
+                </div>
+
+                <div class="method">
+                    <h4>isGuest(): bool</h4>
+                    <p>Checks if current user is not authenticated.</p>
+                    <pre><code>if ($auth->isGuest()) {
+    return redirect('login');
+}</code></pre>
+                </div>
+
+                <div class="method">
+                    <h4>refresh(): void</h4>
+                    <p>Refreshes user data from storage.</p>
+                    <ul>
+                        <li>Clears cache</li>
+                        <li>Reloads user from database</li>
+                    </ul>
+                    <pre><code>// After updating user profile
+$auth->refresh();</code></pre>
+                </div>
+
+                <h3>Authentication Drivers</h3>
+                <p>Implement custom authentication logic by creating a driver:</p>
+                <pre><code>use Spark\Contracts\Http\AuthDriverContract;
+
+class CustomAuthDriver implements AuthDriverContract
 {
-    $credentials = request()->validate([
-        'email' => ['required', 'email'],
-        'password' => ['required']
+    public function getUser(): false|Model
+    {
+        // Custom logic to retrieve user
+    }
+
+    public function login(Model $user, bool $remember = false): void
+    {
+        // Custom login handling
+    }
+
+    public function logout(): void
+    {
+        // Custom logout handling
+    }
+}
+
+// Configure the driver
+$auth->configure(['driver' => new CustomAuthDriver()]);</code></pre>
+
+                <h3>Remember Me Functionality</h3>
+                <p>Secure remember me implementation using encrypted cookies:</p>
+                <pre><code>// Configuration
+'cookie_enabled' => true,
+'cookie_name' => 'auth_token',
+'cookie_expire' => '30 days',
+
+// During login
+$auth->login($user, true); // Second parameter enables remember me
+
+// Automatic authentication flow:
+// 1. Checks session for user ID
+// 2. If no session, checks 'auth_token' cookie
+// 3. Validates cookie, logs in user if valid
+// 4. Sets new session</code></pre>
+
+                <h3>User Caching</h3>
+                <p>Improve performance by caching authenticated users:</p>
+                <pre><code>// Enable caching
+'cache_enabled' => true,
+'cache_name' => 'auth_users',
+'cache_expire' => '1 hour',
+
+// Caching behavior:
+// - User cached on first access after login
+// - Cache cleared on logout or refresh
+// - Automatically used by getUser()</code></pre>
+
+                <h3>Route Protection</h3>
+                <p>Example auth middleware implementation:</p>
+                <pre><code>class AuthMiddleware
+{
+    public function handle($request, $next)
+    {
+        if (auth()->isGuest()) {
+            return redirect(auth()->getGuestRoute());
+        }
+
+        return $next($request);
+    }
+}
+
+// Register middleware
+Route::group(['middleware' => 'auth'], function() {
+    // Protected routes
+});</code></pre>
+
+                <h3>Full Authentication Flow Example</h3>
+                <pre><code>// Login Controller
+public function authenticate(Request $request, Auth $auth, Hash $hash)
+{
+    $credentials = $request->validate([
+        'email' => 'required|email',
+        'password' => 'required'
     ]);
 
     $user = User::where('email', $credentials['email'])->first();
 
     if ($user && $hash->validatePassword($credentials['password'], $user->password)) {
-        $auth->login($user, request('remember_me'));
-        return redirect()->intended($auth->getLoggedInRoute());
+        $auth->login($user, $request->has('remember'));
+        
+        return redirect($auth->getLoggedInRoute());
     }
 
-    return response()->with('error', 'Invalid credentials')->back();
+    return back()->with('error', 'Invalid credentials');
 }
 
-// Protected Dashboard Controller
+// Dashboard Controller
 public function dashboard(Auth $auth)
 {
     return view('dashboard', [
-        'user' => $auth->getUser()
+        'user' => $auth->user()
     ]);
+}
+
+// Logout Controller
+public function logout(Auth $auth)
+{
+    $auth->logout();
+    return redirect('/');
 }</code></pre>
+
+                <div class="note warning">
+                    <strong>Security Best Practices:</strong>
+                    <ul>
+                        <li>Always hash passwords using the Hash service</li>
+                        <li>Regenerate session ID after login</li>
+                        <li>Use HTTPS for all authentication requests</li>
+                        <li>Implement CSRF protection for login forms</li>
+                        <li>Set secure and HttpOnly flags for cookies</li>
+                    </ul>
+                </div>
+
+                <div class="note">
+                    <strong>Helper Functions:</strong>
+                    <ul>
+                        <li><code>auth()</code> - Returns Auth service instance</li>
+                        <li><code>user()</code> - Returns current user or attribute</li>
+                        <li><code>is_guest()</code> - Checks if user is not authenticated</li>
+                    </ul>
+                </div>
             </section>
-
-
         </div>
     </div>
 

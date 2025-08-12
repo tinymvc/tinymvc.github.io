@@ -133,7 +133,7 @@ class CsrfProtectionMiddleware extends CsrfProtection
                 <p>To apply CSRF protection to all routes, register it globally in <code>bootstrap/app.php</code>:</p>
 
                 <pre><code>->withMiddleware(function (Middleware $middleware) {
-    $middleware->merge(require __DIR__ . '/middlewares.php');
+    $middleware->registerMany(require __DIR__ . '/middlewares.php');
     $middleware->queue(['csrf']);
 })</code></pre>
 
@@ -165,12 +165,17 @@ Route::group(['middleware' => ['csrf']], function() {
                         <tr>
                             <td><code>csrf_token()</code></td>
                             <td>Returns the current CSRF token</td>
-                            <td><code>&lt;?= csrf_token() ?&gt;</code></td>
+                            <td><code>{{ csrf_token() }}</code></td>
                         </tr>
                         <tr>
                             <td><code>csrf()</code></td>
                             <td>Generates a hidden input field with the CSRF token</td>
-                            <td><code>&lt;?= csrf() ?&gt;</code></td>
+                            <td><code>{!! csrf() !!}</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>@csrf</code></td>
+                            <td>The Blade directive for CSRF token</td>
+                            <td><code>@csrf</code></td>
                         </tr>
                     </tbody>
                 </table>
@@ -178,7 +183,7 @@ Route::group(['middleware' => ['csrf']], function() {
                 <h4>Form Example</h4>
 
                 <pre><code>&lt;form method="POST" action="/submit"&gt;
-    &lt;?= csrf() ?&gt;
+    @csrf
     &lt;!-- Other form fields --&gt;
     &lt;button type="submit"&gt;Submit&lt;/button&gt;
 &lt;/form&gt;</code></pre>
@@ -192,6 +197,7 @@ Route::group(['middleware' => ['csrf']], function() {
                     <li>Axios automatically reads this cookie and includes it in requests as <code>X-XSRF-TOKEN</code>
                         header</li>
                     <li>No additional configuration is needed for Axios requests</li>
+                    <li>For Fetch API, include the CSRF token in the body: { _token: '{{ csrf_token() }}' }</li>
                 </ul>
 
                 <div class="note">
@@ -237,24 +243,24 @@ class CorsControlMiddleware extends CorsAccessControl
                         <tr>
                             <th>Option</th>
                             <th>Description</th>
-                            <th>Default</th>
+                            <th>Value</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
                             <td><code>origin</code></td>
                             <td>Allowed origins (use '*' for all or specify domains)</td>
-                            <td><code>*</code></td>
+                            <td><code>['example.com', 'example2.com']</code></td>
                         </tr>
                         <tr>
                             <td><code>methods</code></td>
                             <td>Allowed HTTP methods</td>
-                            <td><code>['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS']</code></td>
+                            <td><code>['GET', 'POST', 'PUT', 'DELETE']</code></td>
                         </tr>
                         <tr>
                             <td><code>headers</code></td>
                             <td>Allowed headers</td>
-                            <td><code>['Content-Type', 'Authorization', 'X-Requested-With']</code></td>
+                            <td><code>['Content-Type', 'Authorization']</code></td>
                         </tr>
                         <tr>
                             <td><code>credentials</code></td>
@@ -276,7 +282,7 @@ class CorsControlMiddleware extends CorsAccessControl
                 <h4>Global Registration</h4>
 
                 <pre><code>->withMiddleware(function (Middleware $middleware) {
-    $middleware->merge(require __DIR__ . '/middlewares.php');
+    $middleware->registerMany(require __DIR__ . '/middlewares.php');
     $middleware->queue(['cors']);
 })</code></pre>
 
