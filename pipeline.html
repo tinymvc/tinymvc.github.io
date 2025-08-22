@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TinyMVC Documentation</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <header>
+        <a href="https://tinymvc.github.io" class="logo">
+            <span>TinyMVC</span> <sup class="version">v1.x</sup>
+        </a>
+        <a href="https://github.com/tinymvc/tinymvc" class="github-link">
+            <svg height="20" viewBox="0 0 16 16" width="20" style="margin-right: 5px;">
+                <path fill="currentColor" fill-rule="evenodd"
+                    d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z">
+                </path>
+            </svg>
+            GitHub
+        </a>
+    </header>
+
+    <div class="main-container">
+        <nav class="sidebar">
+            <a href="/">Introduction</a>
+
+            <h2>Getting Started</h2>
+            <ul>
+                <li><a href="/installation">Installation</a></li>
+                <li><a href="/configuration">Configuration</a></li>
+                <li><a href="/quick-start">Quick Start</a></li>
+            </ul>
+
+            <h2>The Basics</h2>
+            <ul>
+                <li><a href="/routing">Routing</a></li>
+                <li><a href="/controllers">Controllers</a></li>
+                <li><a href="/request">Request</a></li>
+                <li><a href="/response">Response</a></li>
+                <li><a href="/blade">Blade</a></li>
+            </ul>
+
+            <h2>Database</h2>
+            <ul>
+                <li><a href="/database">DB</a></li>
+                <li><a href="/query-builder">Query Builder</a></li>
+                <li><a href="/migrations">Migrations</a></li>
+                <li><a href="/models">Models</a></li>
+            </ul>
+
+            <h2>Security</h2>
+            <ul>
+                <li><a href="/middleware">Middleware</a></li>
+                <li><a href="/cors-and-csrf-protection">CORS & CSRF Protection</a></li>
+                <li><a href="/authentication">Authentication</a></li>
+                <li><a href="/authorization">Authorization</a></li>
+            </ul>
+
+            <h2>Features</h2>
+            <ul>
+                <li><a href="/container">Container</a></li>
+                <li><a href="/encryption">Encryption</a></li>
+                <li><a href="/queues">Queues</a></li>
+                <li><a href="/events">Events</a></li>
+                <li><a href="/asset-bundling">Asset Bundling (Vite)</a></li>
+                <li><a href="/localization">Localization</a></li>
+                <li><a href="/session">Session</a></li>
+                <li><a href="/pipeline" class="active">Pipeline</a></li>
+                <li><a href="/spark-cli">Spark CLI</a></li>
+            </ul>
+
+            <h2>Utilities</h2>
+            <ul>
+                <li><a href="/helpers-and-utilities#http-utility">Http (cURL)</a></li>
+                <li><a href="/helpers-and-utilities#uploader-utility">Uploader</a></li>
+                <li><a href="/helpers-and-utilities#paginator-utility">Paginator</a></li>
+                <li><a href="/helpers-and-utilities#mail-utility">Mail</a></li>
+                <li><a href="/helpers-and-utilities#cache-utility">Cache</a></li>
+                <li><a href="/helpers-and-utilities#image-utility">Image</a></li>
+                <li><a href="/helpers-and-utilities#filemanager-utility">File Manager</a></li>
+                <li><a href="/helpers-and-utilities#time-utility">Carbon Time</a></li>
+            </ul>
+
+            <a href="/contribution">❤️ Contribution</a>
+        </nav>
+        <div class="content">
+            <section id="pipeline-processing">
+                <h2>Pipeline Processing</h2>
+
+                <p>TinyMVC provides a powerful pipeline processing system through the <code>Pipeline</code> class,
+                    allowing you to create sequences of operations (pipes) that process data sequentially with support
+                    for middleware, error handling, and context management.</p>
+
+                <h3>Basic Usage</h3>
+                <pre><code>// Create a pipeline with initial data
+$result = Pipeline::make($userData)
+    ->through(
+        ValidateUser::class,
+        [SanitizeData::class, 'process'],
+        function($payload, $next) {
+            // Custom processing
+            $payload['processed'] = true;
+            return $next($payload);
+        }
+    )
+    ->then(function($processedData) {
+        // Final processing
+        return saveUser($processedData);
+    });</code></pre>
+
+                <h3>Pipeline Creation</h3>
+                <pre><code>// Create pipeline with initial payload
+$pipeline = Pipeline::make($initialData);
+
+// Alternative: create and set payload separately
+$pipeline = new Pipeline();
+$pipeline->send($data);</code></pre>
+
+                <h3>Adding Pipes</h3>
+                <pre><code>// Add pipes (multiple formats supported)
+$pipeline->through(
+    'ClassName',                  // Class with handle() or __invoke()
+    [ClassName::class, 'method'], // Class method
+    function($payload, $next) {   // Closure
+        // Process payload
+        return $next($payload);
+    }
+);
+
+// Alias method
+$pipeline->pipe(SanitizeStep::class);
+
+// Conditional pipes
+$pipeline->when($condition, LogOperation::class);
+$pipeline->unless($condition, SkipStep::class);</code></pre>
+
+                <h3>Execution Methods</h3>
+                <pre><code>// Execute with final callback
+$result = $pipeline->then(function($processedData) {
+    return finalProcessing($processedData);
+});
+
+// Alias method
+$result = $pipeline->execute($finalCallback);
+
+// Collect all intermediate results
+$results = $pipeline->collect();
+
+// Execute asynchronously (returns Generator)
+foreach ($pipeline->async() as $index => $result) {
+    // Process each result as it becomes available
+}</code></pre>
+
+                <h3>Error Handling</h3>
+                <pre><code>// Set custom error handler
+$pipeline->onError(function($exception, $payload, $context) {
+    logError($exception->getMessage());
+    return fallbackProcessing($payload);
+}, $stopOnError = true);
+
+// Example with error handling
+$result = Pipeline::make($data)
+    ->through(RiskyOperation::class, AnotherStep::class)
+    ->onError(function($e) {
+        return ['error' => $e->getMessage()];
+    })
+    ->then();</code></pre>
+
+                <h3>Middleware and Context</h3>
+                <pre><code>// Add middleware that wraps entire pipeline
+$pipeline->middleware(function($payload, $next) {
+    // Pre-processing
+    $start = microtime(true);
+    
+    $result = $next($payload);
+    
+    // Post-processing
+    $duration = microtime(true) - $start;
+    logDuration($duration);
+    
+    return $result;
+});
+
+// Add context data available to all pipes
+$pipeline->withContext([
+    'requestId' => uniqid(),
+    'userId' => Auth::id()
+]);</code></pre>
+
+                <h3>Debugging and Logging</h3>
+                <pre><code>// Enable debug mode
+$pipeline->debug(true);
+
+// Execute pipeline
+$result = $pipeline->then();
+
+// Get debug logs
+$logs = $pipeline->getLogs();
+foreach ($logs as $log) {
+    echo "{$log['timestamp']} [{$log['level']}] {$log['message']}";
+}</code></pre>
+
+                <h3>Pipe Interface</h3>
+                <p>Create custom pipes by implementing the PipeInterface:</p>
+                <pre><code>use Spark\Contracts\PipeInterface;
+
+class ValidationPipe implements PipeInterface
+{
+    public function handle($payload, Closure $next)
+    {
+        // Validate payload
+        if (!isValid($payload)) {
+            throw new ValidationException('Invalid data');
+        }
+        
+        // Pass to next pipe
+        return $next($payload);
+    }
+}
+
+// Usage
+$pipeline->through(new ValidationPipe());</code></pre>
+
+                <h3>Advanced Usage</h3>
+                <h4>Pipeline Reuse</h4>
+                <pre><code>// Create a base pipeline with common configuration
+$basePipeline = Pipeline::make()
+    ->through(LogStep::class, AuditStep::class)
+    ->middleware(TimingMiddleware::class)
+    ->debug(config('debug'));
+
+// Clone for specific use cases
+$userPipeline = $basePipeline->clone()
+    ->send($userData)
+    ->through(ValidateUser::class, ProcessUser::class);
+
+$orderPipeline = $basePipeline->clone()
+    ->send($orderData)
+    ->through(ValidateOrder::class, ProcessOrder::class);
+
+// Reset pipeline for reuse
+$pipeline->reset()->send($newData)->through($newPipes);</code></pre>
+
+                <h4>Complex Conditional Logic</h4>
+                <pre><code>Pipeline::make($data)
+    ->through(BaseValidation::class)
+    ->when($isPremiumUser, PremiumFeatures::class)
+    ->when($hasDiscount, [DiscountApplication::class, 'apply'])
+    ->unless($isGuest, UserPersonalization::class)
+    ->then(function($processed) {
+        return finalize($processed);
+    });</code></pre>
+
+                <h3>Full Examples</h3>
+                <h4>User Registration Pipeline</h4>
+                <pre><code>public function registerUser(Request $request)
+{
+    try {
+        $user = Pipeline::make($request->all())
+            ->through(
+                [UserValidator::class, 'validate'],
+                [UserSanitizer::class, 'sanitize'],
+                function($data, $next) {
+                    // Custom transformation
+                    $data['registration_ip'] = $request->ip();
+                    return $next($data);
+                },
+                [UserCreator::class, 'create'],
+                [WelcomeEmail::class, 'send']
+            )
+            ->withContext(['request' => $request])
+            ->onError(function($e) use ($request) {
+                Log::error("Registration failed: {$e->getMessage()}");
+                return null;
+            })
+            ->then();
+            
+        return $user ? response()->json($user) : abort(500);
+        
+    } catch (Exception $e) {
+        return response()->json(['error' => $e->getMessage()], 500);
+    }
+}</code></pre>
+
+                <h4>Data Processing Workflow</h4>
+                <pre><code>public function processImportFile($filePath)
+{
+    $results = Pipeline::make($filePath)
+        ->debug(true)
+        ->through(
+            [FileValidator::class, 'validate'],
+            [FileReader::class, 'read'],
+            [DataTransformer::class, 'transform'],
+            [DatabaseInserter::class, 'insert']
+        )
+        ->middleware(function($payload, $next) {
+            // Track memory usage
+            $startMemory = memory_get_usage();
+            $result = $next($payload);
+            $endMemory = memory_get_usage();
+            
+            $this->logMemoryUsage($endMemory - $startMemory);
+            return $result;
+        })
+        ->collect(); // Get results from each step
+        
+    return [
+        'success' => true,
+        'processed' => count($results),
+        'logs' => Pipeline::getLogs()
+    ];
+}</code></pre>
+
+                <h3>Best Practices</h3>
+                <div class="note">
+                    <ul>
+                        <li>Keep pipes focused on single responsibilities</li>
+                        <li>Use the PipeInterface for complex pipe logic</li>
+                        <li>Always implement error handling for production pipelines</li>
+                        <li>Use context for passing metadata without polluting payload</li>
+                        <li>Enable debug mode during development but disable in production</li>
+                        <li>Consider cloning base pipelines for similar workflows</li>
+                    </ul>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-links">
+            <a href="https://github.com/tinymvc/tinymvc">GitHub</a>
+            <a href="https://github.com/tinymvc/tinymvc/issues">Issues</a>
+            <a href="https://github.com/tinymvc/tinymvc/discussions">Discussions</a>
+            <a href="https://github.com/tinymvc/tinymvc/blob/main/LICENSE">License</a>
+        </div>
+        <div class="copyright">
+            &copy; 2023 TinyMVC Framework by <a href="https://github.com/shahinmoyshan">Shahin Moyshan</a>.
+        </div>
+    </footer>
+</body>
+
+</html>

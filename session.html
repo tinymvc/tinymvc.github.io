@@ -62,12 +62,12 @@
             <h2>Features</h2>
             <ul>
                 <li><a href="/container">Container</a></li>
-                <li><a href="/encryption" class="active">Encryption</a></li>
+                <li><a href="/encryption">Encryption</a></li>
                 <li><a href="/queues">Queues</a></li>
                 <li><a href="/events">Events</a></li>
                 <li><a href="/asset-bundling">Asset Bundling (Vite)</a></li>
                 <li><a href="/localization">Localization</a></li>
-                <li><a href="/session">Session</a></li>
+                <li><a href="/session" class="active">Session</a></li>
                 <li><a href="/pipeline">Pipeline</a></li>
                 <li><a href="/spark-cli">Spark CLI</a></li>
 
@@ -88,130 +88,152 @@
             <a href="/contribution">❤️ Contribution</a>
         </nav>
         <div class="content">
-            <section id="hashing-encryption">
-                <h2>Hashing and Encryption</h2>
 
-                <p>TinyMVC provides robust security utilities for hashing, password management, and encryption through
-                    the
-                    <code>Hash</code> class.
-                </p>
+            <section id="session-management">
+                <h2>Session Management</h2>
 
-                <h3>Configuration</h3>
-                <p>Set your application key in <code>env.php</code>:</p>
-                <pre><code>// Security settings
-'app_key' => 'e32e4a35fce965947481cdad2db2a4e4', // 32+ character key</code></pre>
+                <p>TinyMVC provides comprehensive session management through the <code>Session</code> class, offering
+                    methods to store, retrieve, check, and delete session variables, as well as regenerate and destroy
+                    sessions.</p>
 
-                <div class="note">
-                    <strong>Important:</strong> Generate a new application key if not set:
-                </div>
+                <h3>Basic Usage</h3>
+                <pre><code>// Get session instance
+$session = session();
 
-                <p>Run the following command to generate a new key:</p>
-                <pre><code>php spark key:generate</code></pre>
+// Store data in session
+$session->set('user_id', 123);
+$session->set('username', 'john_doe');
 
-                <h3>Basic Hashing</h3>
-                <pre><code>// Create a hash
-$hash = hashing()->make('plain-text');
+// Retrieve data from session
+$userId = $session->get('user_id');
+$username = $session->get('username', 'guest'); // with default value
 
-// Validate a hash
-if (hashing()->validate('plain-text', $storedHash)) {
-    // Hashes match
-}</code></pre>
+// Check if session key exists
+if ($session->has('user_id')) {
+    // User is logged in
+}
 
-                <h3>Password Management</h3>
-                <pre><code>// Hash a password (uses Argon2id)
-$hashedPassword = hashing()->hashPassword('user-password');
+// Remove session data
+$session->delete('username');</code></pre>
 
-// Verify password
-if (hashing()->validatePassword('input-password', $storedHash)) {
-    // Password correct
-}</code></pre>
+                <h3>Flash Messages</h3>
+                <p>Flash messages are temporary session data that persist only until the next request.</p>
+                <pre><code>// Set flash message
+$session->flash('success', 'Your changes have been saved!');
+$session->flash('error', 'Please fix the errors below.');
 
-                <h3>Encryption/Decryption</h3>
-                <pre><code>// Encrypt sensitive data
-$encrypted = hashing()->encrypt('sensitive-data');
+// Retrieve flash messages (automatically cleared after retrieval)
+$successMessage = $session->getFlash('success');
+$errorMessage = $session->getFlash('error', 'No errors found.');
 
-// Decrypt data
-try {
-    $decrypted = hashing()->decrypt($encrypted);
-} catch (DecryptionFailedException $e) {
-    // Handle decryption failure
+// Check if flash message exists
+if ($session->hasFlash('success')) {
+    // Display success message
+}
+
+// Clear all flash messages
+$session->clearFlash();</code></pre>
+
+                <h3>Session Security</h3>
+                <pre><code>// Regenerate session ID (prevents session fixation attacks)
+$session->regenerate(true); // true = delete old session
+
+// Get current session ID
+$sessionId = $session->id();
+
+// Destroy session (log out user)
+$session->destroy();</code></pre>
+
+                <h3>Advanced Session Operations</h3>
+                <pre><code>// Get all session data
+$allSessionData = $session->all();
+
+// Close session early (writes data to storage)
+$session->close();
+
+// Check if session is active
+if (session()->isStarted()) {
+    // Session is active
 }</code></pre>
 
                 <h3>Dependency Injection</h3>
-                <pre><code>public function storeData($data, Hash $hash)
+                <pre><code>public function updateProfile(Request $request, Session $session)
 {
-    $encrypted = $hash->encrypt($data);
-    // ...
+    $userData = $request->validate([...]);
+    
+    // Store success message in flash session
+    $session->flash('success', 'Profile updated successfully!');
+    
+    return redirect('/profile');
 }</code></pre>
 
                 <h3>Security Best Practices</h3>
                 <div class="note">
                     <ul>
-                        <li>Always use the provided methods rather than raw PHP functions</li>
-                        <li>Never store encryption keys in version control</li>
-                        <li>Rotate your application key periodically</li>
-                        <li>Use different keys for different environments</li>
-                        <li>Always catch encryption/decryption exceptions</li>
+                        <li>Always regenerate session ID after login to prevent session fixation</li>
+                        <li>Store minimal sensitive data in sessions</li>
+                        <li>Set appropriate session cookie parameters (secure, httponly, samesite)</li>
+                        <li>Implement proper session expiration policies</li>
+                        <li>Destroy sessions completely on logout</li>
                     </ul>
                 </div>
 
-                <h3>Advanced Usage</h3>
-                <h4>Custom Hashing Algorithms</h4>
-                <pre><code>// Use SHA-512 instead of default SHA-256
-$hash = hashing()->make('data', 'sha512');</code></pre>
-
-                <h4>Password Hash Options</h4>
-                <pre><code>// Custom Argon2 parameters (in service provider)
-$container->singleton(Hash::class, function() {
-    $hash = new Hash(config('app_key'));
-    $hash->setPasswordOptions([
-        'memory_cost' => 131072,  // 128MB
-        'time_cost' => 6,         // 6 iterations
-        'threads' => 3            // 3 threads
-    ]);
-    $hash->setPasswordAlgorithm(PASSWORD_ARGON2ID);
-    return $hash;
-});</code></pre>
-
                 <h3>Full Examples</h3>
-                <h4>User Registration</h4>
-                <pre><code>public function register(Request $request)
+                <h4>User Authentication Workflow</h4>
+                <pre><code>public function login(Request $request, Session $session)
 {
-    $user = User::create([
-        'name' => $request->name,
-        'email' => $request->email,
-        'password' => hashing()->hashPassword($request->password),
-        'api_token' => hashing()->encrypt(random_bytes(32))
+    $credentials = $request->only('email', 'password');
+    
+    if (Auth::attempt($credentials)) {
+        // Regenerate session to prevent fixation
+        $session->regenerate(true);
+        
+        // Store user data in session
+        $session->set('user_id', Auth::id());
+        $session->set('user_role', Auth::user('role'));
+        
+        // Set welcome message
+        $session->flash('success', 'Welcome back!');
+        
+        return redirect('/dashboard');
+    }
+    
+    $session->flash('error', 'Invalid credentials');
+    return back()->withInput();
+}
+
+public function logout(Session $session)
+{
+    // Destroy session completely
+    $session->destroy();
+    
+    return redirect('/login');
+}</code></pre>
+
+                <h4>Form Submission with Flash Messages</h4>
+                <pre><code>public function storeContactForm(Request $request, Session $session)
+{
+    $validated = $request->validate([
+        'name' => 'required',
+        'email' => 'required|email',
+        'message' => 'required'
     ]);
     
-    return [
-        'status' => 'success',
-        'message' => 'User registered successfully.',
-        'user' => $user
-    ];
-}</code></pre>
+    // Save to database
+    Contact::create($validated);
+    
+    // Set success message
+    $session->flash('success', 'Your message has been sent!');
+    
+    return redirect('/contact');
+}
 
-                <h4>Data Encryption Workflow</h4>
-                <pre><code>// Store encrypted data
-PaymentMethod::create([
-    'number' => hashing()->encrypt($request->number),
-    'expiry' => hashing()->encrypt($request->expiry),
-    'cvv' => hashing()->encrypt($request->cvv)
-]);
-
-// Retrieve and decrypt
-$method = PaymentMethod::find(1);
-try {
-    $cardNumber = hashing()->decrypt($method->number);
-} catch (DecryptionFailedException $e) {
-    abort(500);
-}</code></pre>
-
-                <h3>Troubleshooting</h3>
-                <pre><code># Common issues:
-# - "Encryption key not provided" → Set app_key in env.php
-# - "Invalid encrypted data format" → Corrupted encrypted data
-# - "Decryption failed" → Wrong key or corrupted data</code></pre>
+// In your view template:
+@if (session()->hasFlash('success'))
+    &lt;div class="alert alert-success"&gt;
+        {{ session()->getFlash('success') }}
+    &lt;/div&gt;
+@endif</code></pre>
             </section>
 
         </div>
