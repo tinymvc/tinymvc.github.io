@@ -378,7 +378,7 @@
                     interfaces.
                 </div>
 
-                <div id="http-utility" style="padding-top: 25px;">
+                <div id="cache-utility" style="padding-top: 25px;">
                     <h2>Cache Utility</h2>
 
                     <p>The Cache utility provides a simple yet powerful caching mechanism for storing and retrieving
@@ -1099,6 +1099,394 @@ if (request()->hasFile('avatar')) {
                         multiple separate uploads.
                     </div>
                 </div>
+
+                <div id="filemanager-utility" style="padding-top: 25px;">
+                    <h2>File Manager Utility</h2>
+
+                    <p>The File Manager utility provides comprehensive file and directory operations with support for
+                        file manipulation, directory management, and various file system operations.</p>
+
+                    <h4>Basic Usage</h4>
+
+                    <pre><code>// Using helper functions
+$fm = filemanager(); // or fm()
+
+// Check if file exists
+if (fm()->exists('/path/to/file.txt')) {
+    $content = fm()->get('/path/to/file.txt');
+}
+
+// Create directory recursively
+fm()->ensureDirectoryExists('/path/to/new/directory', 0755);
+
+// Get all files in directory
+$files = fm()->files('/path/to/directory');</code></pre>
+
+                    <h4>Core Methods</h4>
+
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Method</th>
+                                <th>Description</th>
+                                <th>Example</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><code>exists()</code></td>
+                                <td>Check if file/directory exists</td>
+                                <td><code>fm()->exists('/path/file.txt')</code></td>
+                            </tr>
+                            <tr>
+                                <td><code>get()</code></td>
+                                <td>Get file contents</td>
+                                <td><code>fm()->get('/path/file.txt')</code></td>
+                            </tr>
+                            <tr>
+                                <td><code>put()</code></td>
+                                <td>Write content to file</td>
+                                <td><code>fm()->put('/path/file.txt', 'content')</code></td>
+                            </tr>
+                            <tr>
+                                <td><code>delete()</code></td>
+                                <td>Delete file(s)</td>
+                                <td><code>fm()->delete('/path/file.txt')</code></td>
+                            </tr>
+                            <tr>
+                                <td><code>makeDirectory()</code></td>
+                                <td>Create directory</td>
+                                <td><code>fm()->makeDirectory('/path/dir')</code></td>
+                            </tr>
+                            <tr>
+                                <td><code>files()</code></td>
+                                <td>Get files in directory</td>
+                                <td><code>fm()->files('/path/dir')</code></td>
+                            </tr>
+                            <tr>
+                                <td><code>allFiles()</code></td>
+                                <td>Get all files recursively</td>
+                                <td><code>fm()->allFiles('/path/dir')</code></td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <h4>File Operations</h4>
+
+                    <pre><code>// Read and write files
+$content = fm()->get('/path/file.txt');
+fm()->put('/path/new.txt', $content);
+
+// Append to file
+fm()->append('/path/log.txt', "New log entry\n");
+
+// Prepend to file
+fm()->prepend('/path/log.txt', "First entry\n");
+
+// Move and copy files
+fm()->move('/old/path.txt', '/new/path.txt');
+fm()->copy('/source.txt', '/backup.txt');
+
+// Get file information
+$size = fm()->size('/path/file.txt');
+$mime = fm()->mimeType('/path/image.jpg');
+$modified = fm()->lastModified('/path/file.txt');</code></pre>
+
+                    <h4>Directory Operations</h4>
+
+                    <pre><code>// Create directories
+fm()->makeDirectory('/path/to/dir', 0755, true);
+
+// Ensure directory exists and is writable
+fm()->ensureDirectoryWritable('/path/to/uploads');
+
+// List directory contents
+$files = fm()->files('/path/dir');
+$directories = fm()->directories('/path/dir');
+
+// Recursive directory operations
+$allFiles = fm()->allFiles('/path/dir');
+fm()->copyDirectory('/source', '/destination');
+fm()->deleteDirectory('/path/to/delete');
+
+// Clean directory (remove contents but keep directory)
+fm()->cleanDirectory('/path/to/clean');</code></pre>
+
+                    <h4>Advanced Features</h4>
+
+                    <pre><code>// File hashing and comparison
+$hash = fm()->hash('/path/file.txt', 'sha256');
+$same = fm()->same('/file1.txt', '/file2.txt');
+
+// Atomic file writes (prevents partial writes)
+fm()->putAtomic('/path/file.txt', 'important data');
+
+// Generate unique filenames
+$uniqueName = fm()->uniqueFilename('/uploads', 'image.jpg');
+
+// Get human-readable file size
+$size = fm()->humanFileSize(1024 * 1024); // Returns "1.00 MB"
+
+// Symbolic links (cross-platform)
+fm()->link('/target/file', '/link/path');
+
+// File permissions
+$perms = fm()->permissions('/path/file.txt');
+fm()->chmod('/path/file.txt', 0644);</code></pre>
+
+                    <h4>Helper Functions</h4>
+
+                    <pre><code>// Using the filemanager() and fm() helpers
+if (filemanager()->exists($filePath)) {
+    $content = fm()->get($filePath);
+}
+
+// Common usage pattern
+public function storeFile($uploadedFile)
+{
+    $uploadDir = '/uploads/' . date('Y-m');
+    fm()->ensureDirectoryWritable($uploadDir);
+    
+    $filename = fm()->uniqueFilename($uploadDir, $uploadedFile['name']);
+    $filePath = $uploadDir . '/' . $filename;
+    
+    if (fm()->put($filePath, file_get_contents($uploadedFile['tmp_name']))) {
+        return $filePath;
+    }
+    
+    return false;
+}</code></pre>
+
+                    <h4>Security Features</h4>
+                    <ul>
+                        <li>Secure file permission management</li>
+                        <li>Directory traversal prevention</li>
+                        <li>Atomic file operations</li>
+                        <li>File integrity checking through hashing</li>
+                        <li>Safe directory creation with proper permissions</li>
+                    </ul>
+
+                    <div class="note">
+                        <strong>Security Note:</strong> Always validate file paths and restrict directory permissions
+                        appropriately. Use <code>ensureDirectoryWritable()</code> to safely manage upload directories.
+                    </div>
+
+                    <div class="tip">
+                        <strong>Performance Tip:</strong> Use <code>allFiles()</code> cautiously on large directories as
+                        it recursively scans all subdirectories.
+                    </div>
+                </div>
+
+                <div id="time-utility" style="padding-top: 25px;">
+                    <h2>Carbon Time Utility</h2>
+
+                    <p>The Carbon Time utility provides a comprehensive DateTime manipulation library with intuitive API
+                        for date and time operations, formatting, and calculations.</p>
+
+                    <h4>Basic Usage</h4>
+
+                    <pre><code>// Using helper functions
+$now = now(); // Current datetime
+$specific = carbon('2023-12-25 15:30:00');
+
+// Create from various formats
+$fromTimestamp = carbon(1671980400);
+$fromFormat = Carbon::createFromFormat('d/m/Y', '25/12/2023');
+
+// Basic formatting
+echo $now->toDateTimeString(); // 2023-12-25 10:30:45
+echo $now->toDateString();     // 2023-12-25
+echo $now->toTimeString();     // 10:30:45</code></pre>
+
+                    <h4>Core Methods</h4>
+
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Method</th>
+                                <th>Description</th>
+                                <th>Example</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><code>now()</code></td>
+                                <td>Current datetime</td>
+                                <td><code>$now = now()</code></td>
+                            </tr>
+                            <tr>
+                                <td><code>carbon()</code></td>
+                                <td>Create from string/timestamp</td>
+                                <td><code>carbon('2023-12-25')</code></td>
+                            </tr>
+                            <tr>
+                                <td><code>today()</code></td>
+                                <td>Today at midnight</td>
+                                <td><code>Carbon::today()</code></td>
+                            </tr>
+                            <tr>
+                                <td><code>yesterday()</code></td>
+                                <td>Yesterday at midnight</td>
+                                <td><code>Carbon::yesterday()</code></td>
+                            </tr>
+                            <tr>
+                                <td><code>tomorrow()</code></td>
+                                <td>Tomorrow at midnight</td>
+                                <td><code>Carbon::tomorrow()</code></td>
+                            </tr>
+                            <tr>
+                                <td><code>format()</code></td>
+                                <td>Custom formatting</td>
+                                <td><code>$now->format('Y-m-d H:i:s')</code></td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <h4>Date Manipulation</h4>
+
+                    <pre><code>// Adding time
+$future = now()->addDays(7)->addHours(3);
+$nextMonth = now()->addMonths(1);
+$nextYear = now()->addYears(1);
+
+// Subtracting time
+$past = now()->subDays(5)->subMinutes(30);
+$lastMonth = now()->subMonths(1);
+
+// Start/end of periods
+$startOfDay = now()->startOfDay();
+$endOfDay = now()->endOfDay();
+$startOfWeek = now()->startOfWeek();
+$endOfWeek = now()->endOfWeek();
+$startOfMonth = now()->startOfMonth();
+$endOfMonth = now()->endOfMonth();
+$startOfYear = now()->startOfYear();
+$endOfYear = now()->endOfYear();</code></pre>
+
+                    <h4>Date Comparison</h4>
+
+                    <pre><code>// Date comparisons
+$date1 = carbon('2023-12-25');
+$date2 = carbon('2023-12-31');
+
+$date1->isAfter($date2);    // false
+$date1->isBefore($date2);   // true
+$date1->equals($date2);     // false
+$date1->isSameDay($date2);  // false
+
+// Relative checks
+$date->isToday();      // true if today
+$date->isTomorrow();   // true if tomorrow
+$date->isYesterday();  // true if yesterday
+$date->isFuture();     // true if in future
+$date->isPast();       // true if in past
+$date->isWeekend();    // true if weekend
+$date->isWeekday();    // true if weekday</code></pre>
+
+                    <h4>Difference Calculations</h4>
+
+                    <pre><code>// Time differences
+$diffSeconds = $date1->diffInSeconds($date2);
+$diffMinutes = $date1->diffInMinutes($date2);
+$diffHours = $date1->diffInHours($date2);
+$diffDays = $date1->diffInDays($date2);
+
+// Human-readable differences
+echo $date1->diffForHumans($date2); // "6 days ago" or "in 6 days"
+
+// Age calculation
+$birthday = carbon('1990-05-15');
+$age = $birthday->age(); // 33 (current age)</code></pre>
+
+                    <h4>Timezone Handling</h4>
+
+                    <pre><code>// Setting default timezone
+Carbon::setDefaultTimezone('Europe/London');
+
+// Working with timezones
+$utcTime = now()->setTimezone('UTC');
+$newYorkTime = now()->setTimezone('America/New_York');
+
+// Get timezone information
+$timezone = now()->getTimezone();
+echo $timezone->getName(); // Europe/London</code></pre>
+
+                    <h4>Helper Functions</h4>
+
+                    <pre><code>// Using the now() and carbon() helpers
+$current = now();
+$specific = carbon('2023-12-25 15:30:00');
+
+// Common usage patterns
+public function isEventActive($eventDate)
+{
+    $event = carbon($eventDate);
+    return $event->isFuture() && $event->isWeekday();
+}
+
+public function formatEventDate($eventDate)
+{
+    return carbon($eventDate)->toFormattedDateString(); // Dec 25, 2023
+}
+
+public function getDaysUntilEvent($eventDate)
+{
+    return now()->diffInDays(carbon($eventDate));
+}</code></pre>
+
+                    <h4>Advanced Features</h4>
+
+                    <pre><code>// Working with arrays
+$dateArray = now()->toArray();
+/*
+[
+    'year' => 2023,
+    'month' => 12,
+    'day' => 25,
+    'hour' => 10,
+    'minute' => 30,
+    'second' => 45,
+    ...
+]
+*/
+
+// Finding min/max dates
+$dates = [
+    carbon('2023-12-25'),
+    carbon('2023-12-31'),
+    carbon('2024-01-01')
+];
+
+$earliest = Carbon::minDate(...$dates);
+$latest = Carbon::maxDate(...$dates);
+
+// Cloning and modification
+$original = now();
+$modified = $original->clone()->addDay();
+// $original remains unchanged</code></pre>
+
+                    <h4>Configuration</h4>
+
+                    <pre><code>// Set application-wide default timezone
+Carbon::setDefaultTimezone('Asia/Dhaka');
+
+// The timezone can be a string or DateTimeZone object
+Carbon::setDefaultTimezone(new DateTimeZone('UTC'));
+
+// All new instances will use this timezone
+$utcTime = now(); // Uses UTC timezone</code></pre>
+
+                    <div class="note">
+                        <strong>Note:</strong> The Carbon utility is immutable - all modification methods return new
+                        instances rather than modifying the original object.
+                    </div>
+
+                    <div class="tip">
+                        <strong>Performance Tip:</strong> For frequently used date formats, consider caching formatted
+                        strings rather than calling format() repeatedly.
+                    </div>
+                </div>
+
                 <h2>Support Classes</h2>
 
                 <p>The framework includes powerful support classes inspired by <a
