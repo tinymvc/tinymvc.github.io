@@ -5,13 +5,25 @@
     <link rel="icon" type="image/svg+xml" href="./flame.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="theme-color" content="#fcfbf8" />
+    <script>
+      // Apply the documentation preference before the first paint.
+      if (/^#\/docs(?:\/|$)/.test(location.hash)) {
+        let theme;
+        try { theme = localStorage.getItem("spark-docs-theme"); } catch {}
+        if (theme !== "light" && theme !== "dark") {
+          theme = matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+        }
+        document.documentElement.dataset.docsTheme = theme;
+        if (theme === "dark") document.querySelector('meta[name="theme-color"]').content = "#171b18";
+      }
+    </script>
     <meta
       name="description"
       content="Build fast APIs and modern web apps with Spark by TinyMVC. Choose Blade, Alpine and FireLine, or Inertia with React, Vue and Svelte. Start your admin dashboard with Orbit."
     />
     <title>Spark — A lighter foundation for modern PHP applications.</title>
-    <script type="module" crossorigin src="./assets/index-BM1Z9hTR.js"></script>
-    <link rel="stylesheet" crossorigin href="./assets/index-C2wRqm7x.css">
+    <script type="module" crossorigin src="./assets/index-Djeqxw-e.js"></script>
+    <link rel="stylesheet" crossorigin href="./assets/index-DFJrwEP7.css">
   </head>
   <body>
     <div id="root"></div>
