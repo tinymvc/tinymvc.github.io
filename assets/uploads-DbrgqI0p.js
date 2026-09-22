@@ -1,4 +1,6 @@
-const e=`## Accept and validate a file
+const e=`For new applications that select between local, public, and cloud storage, start with [File storage & disks](./storage.md). Disk-backed uploads reuse this uploader's validation and image processing. Existing \`uploader()\` calls keep their configured upload root.
+
+## Accept and validate a file
 
 Use \`multipart/form-data\` for browser uploads and validate the file before storing it:
 
@@ -36,6 +38,7 @@ The validation and uploader size limits are in **KB**. The uploader default is 2
 | \`resizes\` | Multiple image sizes |
 | \`compress\` | Image compression quality |
 | \`driver\` | Custom upload driver |
+| \`relativeTo\` | Base stripped from driver destinations; available on \`Uploader\` / \`Uploader::make()\` |
 
 The default root is \`config('app.upload_dir')\`. \`setUploadDir()\` ensures a writable directory. The return from \`upload()\` is a path string or array of paths, depending on the files and transformations; store the returned paths rather than reconstructing generated filenames.
 
@@ -57,7 +60,7 @@ Private documents should remain outside publicly linked storage and be served th
 
 ## Delete and extend
 
-\`delete($pathOrPaths)\` removes uploaded files; only pass stored paths owned by the record being updated or deleted. \`copy()\` duplicates uploader configuration. \`removeUploadDir()\` normalizes paths relative to the upload root.
+\`delete($pathOrPaths)\` removes uploaded files; only pass stored paths owned by the record being updated or deleted. \`copy()\` duplicates uploader configuration. \`removeUploadDir()\` strips the configured upload root. With an explicit \`uploadDir\`, returned keys and local deletion are relative to that root.
 
 A custom driver implements \`Spark\\Contracts\\Utils\\UploaderUtilDriverInterface\`. Verify upload/delete behavior and returned-path conventions when integrating remote storage. Catch \`UploaderUtilException\` at a controlled boundary and report a useful, non-sensitive error.
 
@@ -77,4 +80,6 @@ A string argument names the request file field. Multiple uploads use PHP's paral
 A multi-file upload can store earlier files before a later file fails. Database rollback does not remove filesystem writes. Track stored paths and implement cleanup if the complete operation must succeed together. When replacing a file, persist the new reference successfully before removing the old file unless your recovery design says otherwise.
 
 An empty extension list does not establish a file-type allowlist. Supply explicit extensions and MIME validation for public uploads. Store the returned relative paths using the same uploader root when later deleting them.
+
+The uploader requires a genuine PHP HTTP upload and checks its actual temporary-file size. For an existing local file or CLI-generated report, use \`disk()->putFile()\` / \`putFileAs()\` instead of constructing an upload array.
 `;export{e as default};
