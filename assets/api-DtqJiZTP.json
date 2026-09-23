@@ -16358,7 +16358,7 @@
     "file": "Storage/S3Storage.php",
     "name": "Spark\\Storage\\S3Storage",
     "kind": "class",
-    "sha256": "00b1f1fd33a5a21e6cc9f32e979f3f1f04f59687d77f786fdd68587605ae29e8",
+    "sha256": "c2767d2da398ebda25a78bac5a89f75dc2de0b4c66744be37690e7a00b7da43e",
     "methods": [
       {
         "name": "__construct",

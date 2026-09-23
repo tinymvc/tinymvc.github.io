@@ -34,7 +34,7 @@ Add an entry to the array in \`bootstrap/middlewares.php\`:
 'admin' => \\App\\Http\\Middlewares\\EnsureAdmin::class,
 \`\`\`
 
-Preserve the existing aliases. The skeleton includes \`csrf\`, \`cors\`, and \`throttle\`; authentication aliases are added by the application or an installed starter.
+Preserve the existing aliases. The skeleton includes \`auth\`, \`csrf\`, \`cors\`, and \`throttle\`. See [Authentication](./authentication.md#protect-routes) for the current core AuthMiddleware limitations and a standalone guard-aware replacement for the \`auth\` alias.
 
 ## Route and global middleware
 
