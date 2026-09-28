@@ -5764,455 +5764,455 @@
     "file": "Database/Query/BuildsConditionalClauses.php",
     "name": "Spark\\Database\\Query\\BuildsConditionalClauses",
     "kind": "trait",
-    "sha256": "1e876764184a23e5192298fe2d46f0db99de140891d2c6db6cd6109359ecd56f",
+    "sha256": "6e3c76a7096ddc02088e745d864b258303eec44d54de5b870dd32a0d58dffea8",
     "methods": [
       {
         "name": "where",
         "signature": "public function where(null|string|array|Arrayable|Closure $column = null, mixed $operator = null, $value = null, null|string $boolean = null, bool $not = false): QueryBuilder",
         "description": "Add a where clause to the query.",
         "doc": "Add a where clause to the query.\n\n@param null|string|array|Arrayable|Closure $column\n  The column name to query, or an array of column names.\n@param string|null $operator\n  The operator to use. If null, the operator will be determined\n  based on the value given.\n@param mixed $value\n  The value to query. If null, the value will be determined\n  based on the operator given.\n@param null|string $boolean\n  The type of where clause to add. May be 'AND' or 'OR'.\n@param bool $not\n  If true, the where clause will be negated.\n\n@return self",
-        "line": 40
+        "line": 41
       },
       {
         "name": "bind",
         "signature": "public function bind(string|array $args, bool $named = true): QueryBuilder",
         "description": "Adds a WHERE binding to the query.\nThis method allows you to add additional bindings to the WHERE clause.",
         "doc": "Adds a WHERE binding to the query.\nThis method allows you to add additional bindings to the WHERE clause.\n\n@param string|array $args\n@return QueryBuilder",
-        "line": 198
+        "line": 199
       },
       {
         "name": "whereRaw",
         "signature": "public function whereRaw(string $sql, string|array $bindings = [], string $boolean = 'AND'): QueryBuilder",
         "description": "Adds a raw WHERE clause to the query.",
         "doc": "Adds a raw WHERE clause to the query.\n\n@param string $sql\n  The raw SQL condition to add.\n@param string|array $bindings\n  The bindings for the raw SQL condition.\n@param string $boolean\n  The type of where clause to add. May be 'AND' or 'OR'.\n@return self",
-        "line": 220
+        "line": 221
       },
       {
         "name": "orWhereRaw",
         "signature": "public function orWhereRaw(string $sql, string|array $bindings = []): QueryBuilder",
         "description": "Adds an OR raw WHERE clause to the query.",
         "doc": "Adds an OR raw WHERE clause to the query.\n\n@param string $sql\n  The raw SQL condition to add.\n@param string|array $bindings\n  The bindings for the raw SQL condition.\n@return self",
-        "line": 244
+        "line": 245
       },
       {
         "name": "orWhere",
         "signature": "public function orWhere(null|string|array|Arrayable|Closure $column = null, mixed $operator = null, $value = null): QueryBuilder",
         "description": "Add an OR where clause to the query.",
         "doc": "Add an OR where clause to the query.\n\n@param null|string|array|Arrayable|Closure $column\n  The column name to query, or an array of column names.\n@param mixed $operator\n  The operator to use. If null, the operator will be determined\n  based on the value given.\n@param mixed $value\n  The value to query. If null, the value will be determined\n  based on the operator given.\n@return self\n  Returns the current instance for method chaining.",
-        "line": 263
+        "line": 264
       },
       {
         "name": "notWhere",
         "signature": "public function notWhere(null|string|array|Arrayable|Closure $column = null, mixed $operator = null, $value = null): QueryBuilder",
         "description": "Add an AND NOT where clause to the query.",
         "doc": "Add an AND NOT where clause to the query.\n\n@param null|string|array|Arrayable|Closure $column\n  The column name to query, or an array of column names.\n@param mixed $operator\n  The operator to use. If null, the operator will be determined\n  based on the value given.\n@param mixed $value\n  The value to query. If null, the value will be determined\n  based on the operator given.\n@return self\n  Returns the current instance for method chaining.",
-        "line": 286
+        "line": 287
       },
       {
         "name": "orNotWhere",
         "signature": "public function orNotWhere(null|string|array|Arrayable|Closure $column = null, mixed $operator = null, $value = null): QueryBuilder",
         "description": "Add an OR NOT where clause to the query.",
         "doc": "Add an OR NOT where clause to the query.\n\n@param null|string|array|Arrayable|Closure $column\n  The column name to query, or an array of column names.\n@param mixed $operator\n  The operator to use. If null, the operator will be determined\n  based on the value given.\n@param mixed $value\n  The value to query. If null, the value will be determined\n  based on the operator given.\n@return self\n  Returns the current instance for method chaining.",
-        "line": 309
+        "line": 310
       },
       {
         "name": "whereNull",
         "signature": "public function whereNull(string $field, bool $not = false, string $boolean = 'AND'): QueryBuilder",
         "description": "Adds a WHERE condition that the given column is null.",
         "doc": "Adds a WHERE condition that the given column is null.\n\n@param string $field\n  The column name to query.\n@param bool $not\n  Whether to use IS NOT NULL instead of IS NULL.\n@return self\n  Returns the current instance for method chaining.",
-        "line": 328
+        "line": 329
       },
       {
         "name": "whereNotNull",
         "signature": "public function whereNotNull(string $field): QueryBuilder",
         "description": "Adds a WHERE condition that the given column is not null.",
         "doc": "Adds a WHERE condition that the given column is not null.\n\n@param string $field\n  The column name to query.\n@return self\n  Returns the current instance for method chaining.",
-        "line": 343
+        "line": 344
       },
       {
         "name": "orWhereNull",
         "signature": "public function orWhereNull(string $field): QueryBuilder",
         "description": "Adds an OR WHERE condition that the given column is null.",
         "doc": "Adds an OR WHERE condition that the given column is null.\n\n@param string $field\n@return self",
-        "line": 354
+        "line": 355
       },
       {
         "name": "orWhereNotNull",
         "signature": "public function orWhereNotNull(string $field): QueryBuilder",
         "description": "Adds an OR WHERE condition that the given column is not null.",
         "doc": "Adds an OR WHERE condition that the given column is not null.\n\n@param string $field\n@return self",
-        "line": 365
+        "line": 366
       },
       {
         "name": "whereIn",
-        "signature": "public function whereIn(string $column, array|string|QueryBuilder|Closure $values): QueryBuilder",
+        "signature": "public function whereIn(string $column, array|string|Relation|QueryBuilder|Closure $values): QueryBuilder",
         "description": "Add a WHERE condition that the given column is in the given values or subquery.",
-        "doc": "Add a WHERE condition that the given column is in the given values or subquery.\n\n@param string $column\n  The column name to query.\n@param array|string|QueryBuilder|Closure $values\n  An array of values, or a trusted SQL string, builder, or closure for a subquery.\n@return self\n  Returns the current instance for method chaining.",
-        "line": 380
+        "doc": "Add a WHERE condition that the given column is in the given values or subquery.\n\n@param string $column\n  The column name to query.\n@param array|string|Relation|QueryBuilder|Closure $values\n  An array of values, or a trusted SQL string, builder, or closure for a subquery.\n@return self\n  Returns the current instance for method chaining.",
+        "line": 381
       },
       {
         "name": "whereNotIn",
-        "signature": "public function whereNotIn(string $column, array|string|QueryBuilder|Closure $values): QueryBuilder",
+        "signature": "public function whereNotIn(string $column, array|string|Relation|QueryBuilder|Closure $values): QueryBuilder",
         "description": "Add a WHERE condition that the given column is not in the given values or subquery.",
-        "doc": "Add a WHERE condition that the given column is not in the given values or subquery.\n\n@param string $column\n  The column name to query.\n@param array|string|QueryBuilder|Closure $values\n  An array of values, or a trusted SQL string, builder, or closure for a subquery.\n@return self\n  Returns the current instance for method chaining.",
-        "line": 397
+        "doc": "Add a WHERE condition that the given column is not in the given values or subquery.\n\n@param string $column\n  The column name to query.\n@param array|string|Relation|QueryBuilder|Closure $values\n  An array of values, or a trusted SQL string, builder, or closure for a subquery.\n@return self\n  Returns the current instance for method chaining.",
+        "line": 398
       },
       {
         "name": "orWhereIn",
-        "signature": "public function orWhereIn(string $column, array|string|QueryBuilder|Closure $values): QueryBuilder",
+        "signature": "public function orWhereIn(string $column, array|string|Relation|QueryBuilder|Closure $values): QueryBuilder",
         "description": "Add an OR WHERE condition that the given column is in the given values or subquery.",
-        "doc": "Add an OR WHERE condition that the given column is in the given values or subquery.\n\n@param string $column\n  The column name to query.\n@param array|string|QueryBuilder|Closure $values\n  An array of values, or a trusted SQL string, builder, or closure for a subquery.\n@return self\n  Returns the current instance for method chaining.",
-        "line": 414
+        "doc": "Add an OR WHERE condition that the given column is in the given values or subquery.\n\n@param string $column\n  The column name to query.\n@param array|string|Relation|QueryBuilder|Closure $values\n  An array of values, or a trusted SQL string, builder, or closure for a subquery.\n@return self\n  Returns the current instance for method chaining.",
+        "line": 415
       },
       {
         "name": "orWhereNotIn",
-        "signature": "public function orWhereNotIn(string $column, array|string|QueryBuilder|Closure $values): QueryBuilder",
+        "signature": "public function orWhereNotIn(string $column, array|string|Relation|QueryBuilder|Closure $values): QueryBuilder",
         "description": "Add an OR WHERE condition that the given column is not in the given values or subquery.",
-        "doc": "Add an OR WHERE condition that the given column is not in the given values or subquery.\n\n@param string $column\n  The column name to query.\n@param array|string|QueryBuilder|Closure $values\n  An array of values, or a trusted SQL string, builder, or closure for a subquery.\n@return self\n  Returns the current instance for method chaining.",
-        "line": 431
+        "doc": "Add an OR WHERE condition that the given column is not in the given values or subquery.\n\n@param string $column\n  The column name to query.\n@param array|string|Relation|QueryBuilder|Closure $values\n  An array of values, or a trusted SQL string, builder, or closure for a subquery.\n@return self\n  Returns the current instance for method chaining.",
+        "line": 432
       },
       {
         "name": "whereInSub",
-        "signature": "public function whereInSub(string $column, string|QueryBuilder|Closure $subquery, string $boolean = 'AND', bool $not = false, string $mode = 'IN'): QueryBuilder",
+        "signature": "public function whereInSub(string $column, string|Relation|QueryBuilder|Closure $subquery, string $boolean = 'AND', bool $not = false, string $mode = 'IN'): QueryBuilder",
         "description": "Add a WHERE condition that the given column is in the result of a subquery.",
-        "doc": "Add a WHERE condition that the given column is in the result of a subquery.\n\n@param string $column\n  The column name to query.\n@param string|QueryBuilder|Closure $subquery\n  The subquery to use for the IN clause. Can be a raw SQL string, a QueryBuilder instance, or a Closure that receives a QueryBuilder instance.\n@param string $boolean\n  The type of where clause to add. May be 'AND' or 'OR'.\n@param bool $not\n  Whether to use NOT IN instead of IN.\n@return self\n  Returns the current instance for method chaining.",
-        "line": 452
+        "doc": "Add a WHERE condition that the given column is in the result of a subquery.\n\n@param string $column\n  The column name to query.\n@param string|Relation|QueryBuilder|Closure $subquery\n  The subquery to use for the IN clause. Can be a raw SQL string, a QueryBuilder instance, or a Closure that receives a QueryBuilder instance.\n@param string $boolean\n  The type of where clause to add. May be 'AND' or 'OR'.\n@param bool $not\n  Whether to use NOT IN instead of IN.\n@return self\n  Returns the current instance for method chaining.",
+        "line": 453
       },
       {
         "name": "whereNotInSub",
-        "signature": "public function whereNotInSub(string $column, string|QueryBuilder|Closure $subquery, string $boolean = 'AND'): QueryBuilder",
+        "signature": "public function whereNotInSub(string $column, string|Relation|QueryBuilder|Closure $subquery, string $boolean = 'AND'): QueryBuilder",
         "description": "Add a WHERE condition that the given column is not in the result of a subquery.",
-        "doc": "Add a WHERE condition that the given column is not in the result of a subquery.\n\n@param string $column\n  The column name to query.\n@param string|QueryBuilder|Closure $subquery\n  The subquery to use for the NOT IN clause. Can be a raw SQL string, a QueryBuilder instance, or a Closure that receives a QueryBuilder instance.\n@param string $boolean\n  The type of where clause to add. May be 'AND' or 'OR'.\n@return self\n  Returns the current instance for method chaining.",
-        "line": 496
+        "doc": "Add a WHERE condition that the given column is not in the result of a subquery.\n\n@param string $column\n  The column name to query.\n@param string|Relation|QueryBuilder|Closure $subquery\n  The subquery to use for the NOT IN clause. Can be a raw SQL string, a QueryBuilder instance, or a Closure that receives a QueryBuilder instance.\n@param string $boolean\n  The type of where clause to add. May be 'AND' or 'OR'.\n@return self\n  Returns the current instance for method chaining.",
+        "line": 501
       },
       {
         "name": "orWhereInSub",
-        "signature": "public function orWhereInSub(string $column, string|QueryBuilder|Closure $subquery): QueryBuilder",
+        "signature": "public function orWhereInSub(string $column, string|Relation|QueryBuilder|Closure $subquery): QueryBuilder",
         "description": "Add an OR WHERE condition that the given column is in the result of a subquery.",
-        "doc": "Add an OR WHERE condition that the given column is in the result of a subquery.\n\n@param string $column\n  The column name to query.\n@param string|QueryBuilder|Closure $subquery\n  The subquery to use for the IN clause. Can be a raw SQL string, a QueryBuilder instance, or a Closure that receives a QueryBuilder instance.\n@return self\n  Returns the current instance for method chaining.",
-        "line": 511
+        "doc": "Add an OR WHERE condition that the given column is in the result of a subquery.\n\n@param string $column\n  The column name to query.\n@param string|Relation|QueryBuilder|Closure $subquery\n  The subquery to use for the IN clause. Can be a raw SQL string, a QueryBuilder instance, or a Closure that receives a QueryBuilder instance.\n@return self\n  Returns the current instance for method chaining.",
+        "line": 516
       },
       {
         "name": "orWhereNotInSub",
-        "signature": "public function orWhereNotInSub(string $column, string|QueryBuilder|Closure $subquery): QueryBuilder",
+        "signature": "public function orWhereNotInSub(string $column, string|Relation|QueryBuilder|Closure $subquery): QueryBuilder",
         "description": "Add an OR WHERE condition that the given column is not in the result of a subquery.",
-        "doc": "Add an OR WHERE condition that the given column is not in the result of a subquery.\n\n@param string $column\n  The column name to query.\n@param string|QueryBuilder|Closure $subquery\n  The subquery to use for the NOT IN clause. Can be a raw SQL string, a QueryBuilder instance, or a Closure that receives a QueryBuilder instance.\n@return self\n  Returns the current instance for method chaining.",
-        "line": 526
+        "doc": "Add an OR WHERE condition that the given column is not in the result of a subquery.\n\n@param string $column\n  The column name to query.\n@param string|Relation|QueryBuilder|Closure $subquery\n  The subquery to use for the NOT IN clause. Can be a raw SQL string, a QueryBuilder instance, or a Closure that receives a QueryBuilder instance.\n@return self\n  Returns the current instance for method chaining.",
+        "line": 531
       },
       {
         "name": "whereExists",
-        "signature": "public function whereExists(string|QueryBuilder|Closure $subquery, string $boolean = 'AND', bool $not = false): QueryBuilder",
+        "signature": "public function whereExists(string|Relation|QueryBuilder|Closure $subquery, string $boolean = 'AND', bool $not = false): QueryBuilder",
         "description": "Add a WHERE EXISTS condition to the query.",
-        "doc": "Add a WHERE EXISTS condition to the query.\n\n@param string|QueryBuilder|Closure $subquery\n  The subquery to use for the EXISTS clause. Can be a raw SQL string, a QueryBuilder instance, or a Closure that receives a QueryBuilder instance.\n@param string $boolean\n  The type of where clause to add. May be 'AND' or 'OR'.\n@param bool $not\n  Whether to use NOT EXISTS instead of EXISTS.\n@return self\n  Returns the current instance for method chaining.",
-        "line": 543
+        "doc": "Add a WHERE EXISTS condition to the query.\n\n@param string|Relation|QueryBuilder|Closure $subquery\n  The subquery to use for the EXISTS clause. Can be a raw SQL string, a QueryBuilder instance, or a Closure that receives a QueryBuilder instance.\n@param string $boolean\n  The type of where clause to add. May be 'AND' or 'OR'.\n@param bool $not\n  Whether to use NOT EXISTS instead of EXISTS.\n@return self\n  Returns the current instance for method chaining.",
+        "line": 548
       },
       {
         "name": "whereNotExists",
-        "signature": "public function whereNotExists(string|QueryBuilder|Closure $subquery, string $boolean = 'AND'): QueryBuilder",
+        "signature": "public function whereNotExists(string|Relation|QueryBuilder|Closure $subquery, string $boolean = 'AND'): QueryBuilder",
         "description": "Add a WHERE NOT EXISTS condition to the query.",
-        "doc": "Add a WHERE NOT EXISTS condition to the query.\n\n@param string|QueryBuilder|Closure $subquery\n  The subquery to use for the NOT EXISTS clause. Can be a raw SQL string, a QueryBuilder instance, or a Closure that receives a QueryBuilder instance.\n@param string $boolean\n  The type of where clause to add. May be 'AND' or 'OR'.\n@return self\n  Returns the current instance for method chaining.",
-        "line": 558
+        "doc": "Add a WHERE NOT EXISTS condition to the query.\n\n@param string|Relation|QueryBuilder|Closure $subquery\n  The subquery to use for the NOT EXISTS clause. Can be a raw SQL string, a QueryBuilder instance, or a Closure that receives a QueryBuilder instance.\n@param string $boolean\n  The type of where clause to add. May be 'AND' or 'OR'.\n@return self\n  Returns the current instance for method chaining.",
+        "line": 563
       },
       {
         "name": "orWhereExists",
-        "signature": "public function orWhereExists(string|QueryBuilder|Closure $subquery): QueryBuilder",
+        "signature": "public function orWhereExists(string|Relation|QueryBuilder|Closure $subquery): QueryBuilder",
         "description": "Add an OR WHERE EXISTS condition to the query.",
-        "doc": "Add an OR WHERE EXISTS condition to the query.\n\n@param string|QueryBuilder|Closure $subquery\n  The subquery to use for the EXISTS clause. Can be a raw SQL string, a QueryBuilder instance, or a Closure that receives a QueryBuilder instance.\n@return self\n  Returns the current instance for method chaining.",
-        "line": 571
+        "doc": "Add an OR WHERE EXISTS condition to the query.\n\n@param string|Relation|QueryBuilder|Closure $subquery\n  The subquery to use for the EXISTS clause. Can be a raw SQL string, a QueryBuilder instance, or a Closure that receives a QueryBuilder instance.\n@return self\n  Returns the current instance for method chaining.",
+        "line": 576
       },
       {
         "name": "orWhereNotExists",
-        "signature": "public function orWhereNotExists(string|QueryBuilder|Closure $subquery): QueryBuilder",
+        "signature": "public function orWhereNotExists(string|Relation|QueryBuilder|Closure $subquery): QueryBuilder",
         "description": "Add an OR WHERE NOT EXISTS condition to the query.",
-        "doc": "Add an OR WHERE NOT EXISTS condition to the query.\n\n@param string|QueryBuilder|Closure $subquery\n  The subquery to use for the NOT EXISTS clause. Can be a raw SQL string, a QueryBuilder instance, or a Closure that receives a QueryBuilder instance.\n@return self\n  Returns the current instance for method chaining.",
-        "line": 584
+        "doc": "Add an OR WHERE NOT EXISTS condition to the query.\n\n@param string|Relation|QueryBuilder|Closure $subquery\n  The subquery to use for the NOT EXISTS clause. Can be a raw SQL string, a QueryBuilder instance, or a Closure that receives a QueryBuilder instance.\n@return self\n  Returns the current instance for method chaining.",
+        "line": 589
       },
       {
         "name": "whereColumn",
         "signature": "public function whereColumn(string $firstColumn, string $operator, ?string $secondColumn = null, string $boolean = 'AND'): QueryBuilder",
         "description": "Add a WHERE condition that compares two columns.",
         "doc": "Add a WHERE condition that compares two columns.\n\n@param string $firstColumn\n  The first column name to compare.\n@param string $operator\n  The operator to use for comparison. If null, the operator will be '='.\n@param string|null $secondColumn\n  The second column name to compare. If null, the operator will be '=' and the second column will be the same as the first column.\n@param string $boolean\n  The type of where clause to add. May be 'AND' or 'OR'.\n@return self\n  Returns the current instance for method chaining.",
-        "line": 603
+        "line": 608
       },
       {
         "name": "orWhereColumn",
         "signature": "public function orWhereColumn(string $firstColumn, string $operator, ?string $secondColumn = null): QueryBuilder",
         "description": "Add an OR WHERE condition that compares two columns.",
         "doc": "Add an OR WHERE condition that compares two columns.\n\n@param string $firstColumn\n  The first column name to compare.\n@param string $operator\n  The operator to use for comparison. If null, the operator will be '='.\n@param string|null $secondColumn\n  The second column name to compare. If null, the operator will be '=' and the second column will be the same as the first column.\n@return self\n  Returns the current instance for method chaining.",
-        "line": 635
+        "line": 640
       },
       {
         "name": "findInSet",
         "signature": "public function findInSet(string $field, mixed $key, string $type = '', string $boolean = 'AND'): QueryBuilder",
         "description": "Add a WHERE condition using FIND_IN_SET function.",
         "doc": "Add a WHERE condition using FIND_IN_SET function.\n\n@param string $field\n  The field name to search within.\n@param mixed $key\n  The key to find in the set.\n@param string $type\n  Optional type to prepend to the FIND_IN_SET clause (e.g., 'NOT').\n@return self\n  Returns the current instance for method chaining.",
-        "line": 652
+        "line": 657
       },
       {
         "name": "notFindInSet",
         "signature": "public function notFindInSet(string $field, mixed $key): QueryBuilder",
         "description": "Add a WHERE condition using FIND_IN_SET function, negated.",
         "doc": "Add a WHERE condition using FIND_IN_SET function, negated.\n\n@param string $field\n  The field name to search within.\n@param mixed $key\n  The key to find in the set.\n\n@return self\n  Returns the current instance for method chaining.",
-        "line": 684
+        "line": 689
       },
       {
         "name": "orFindInSet",
         "signature": "public function orFindInSet(string $field, mixed $key): QueryBuilder",
         "description": "Add an OR WHERE condition using the FIND_IN_SET function.",
         "doc": "Add an OR WHERE condition using the FIND_IN_SET function.\n\n@param string $field\n  The field name to search within.\n@param mixed $key\n  The key to find in the set.\n@return self\n  Returns the current instance for method chaining.",
-        "line": 699
+        "line": 704
       },
       {
         "name": "orNotFindInSet",
         "signature": "public function orNotFindInSet(string $field, mixed $key): QueryBuilder",
         "description": "Add an OR WHERE condition using the FIND_IN_SET function, negated.",
         "doc": "Add an OR WHERE condition using the FIND_IN_SET function, negated.\n\n@param string $field\n  The field name to search within.\n@param mixed $key\n  The key to find in the set.\n@return self\n  Returns the current instance for method chaining.",
-        "line": 714
+        "line": 719
       },
       {
         "name": "findInJson",
         "signature": "public function findInJson(string $field, string $key, mixed $value, string $type = '', string $boolean = 'AND'): QueryBuilder",
         "description": "Add a WHERE condition using JSON_EXTRACT function.",
         "doc": "Add a WHERE condition using JSON_EXTRACT function.\n\n@param string $field\n  The field name to search within.\n@param string $key\n  The key to find in the JSON object.\n@param mixed $value\n  The value to match against the extracted JSON value.\n@param string $type\n  Optional type to prepend to the LIKE clause (e.g., 'NOT').\n@param string $boolean\n  The logical operator to combine with previous conditions, e.g., 'AND' or 'OR'.\n@return self\n  Returns the current instance for method chaining.",
-        "line": 735
+        "line": 740
       },
       {
         "name": "notFindInJson",
         "signature": "public function notFindInJson(string $field, string $key, mixed $value): QueryBuilder",
         "description": "Add a WHERE condition using JSON_EXTRACT function, negated.",
         "doc": "Add a WHERE condition using JSON_EXTRACT function, negated.\n\n@param string $field\n  The field name to search within.\n@param string $key\n  The key to find in the JSON object.\n@param mixed $value\n  The value to match against the extracted JSON value.\n@return self\n  Returns the current instance for method chaining.",
-        "line": 777
+        "line": 782
       },
       {
         "name": "orFindInJson",
         "signature": "public function orFindInJson(string $field, string $key, mixed $value): QueryBuilder",
         "description": "Add an OR WHERE condition using JSON_EXTRACT function.",
         "doc": "Add an OR WHERE condition using JSON_EXTRACT function.\n\n@param string $field\n  The field name to search within.\n@param string $key\n  The key to find in the JSON object.\n@param mixed $value\n  The value to match against the extracted JSON value.\n@return self\n  Returns the current instance for method chaining.",
-        "line": 794
+        "line": 799
       },
       {
         "name": "orNotFindInJson",
         "signature": "public function orNotFindInJson(string $field, string $key, mixed $value): QueryBuilder",
         "description": "Add an OR WHERE condition using JSON_EXTRACT function, negated.",
         "doc": "Add an OR WHERE condition using JSON_EXTRACT function, negated.\n\n@param string $field\n  The field name to search within.\n@param string $key\n  The key to find in the JSON object.\n@param mixed $value\n  The value to match against the extracted JSON value.\n@return self\n  Returns the current instance for method chaining.",
-        "line": 811
+        "line": 816
       },
       {
         "name": "whereJsonContains",
         "signature": "public function whereJsonContains(string $field, string $key, mixed $value, string $type = '', string $boolean = 'AND'): QueryBuilder",
         "description": "Add a WHERE condition that checks if a JSON field contains a specific value.",
         "doc": "Add a WHERE condition that checks if a JSON field contains a specific value.\n\n@param string $field\n  The field name to query.\n@param string $key\n  The key within the JSON object to check.\n@param mixed $value\n  The value to check for within the JSON array.\n@param string $type\n  The type of comparison, e.g., 'NOT'.\n@param string $boolean\n  The logical operator to combine with previous conditions, e.g., 'AND' or 'OR'.\n@return self\n  Returns the current instance for method chaining.",
-        "line": 832
+        "line": 837
       },
       {
         "name": "whereJsonNotContains",
         "signature": "public function whereJsonNotContains(string $field, string $key, mixed $value): QueryBuilder",
         "description": "Add a WHERE condition that checks if a JSON field does not contain a specific value.",
         "doc": "Add a WHERE condition that checks if a JSON field does not contain a specific value.\n\n@param string $field\n  The field name to query.\n@param string $key\n  The key within the JSON object to check.\n@param mixed $value\n  The value to check for within the JSON array.\n@return self\n  Returns the current instance for method chaining.",
-        "line": 849
+        "line": 854
       },
       {
         "name": "orWhereJsonContains",
         "signature": "public function orWhereJsonContains(string $field, string $key, mixed $value): QueryBuilder",
         "description": "Add an OR WHERE condition that checks if a JSON field contains a specific value.",
         "doc": "Add an OR WHERE condition that checks if a JSON field contains a specific value.\n\n@param string $field\n  The field name to query.\n@param string $key\n  The key within the JSON object to check.\n@param mixed $value\n  The value to check for within the JSON array.\n@return self\n  Returns the current instance for method chaining.",
-        "line": 866
+        "line": 871
       },
       {
         "name": "orWhereJsonNotContains",
         "signature": "public function orWhereJsonNotContains(string $field, string $key, mixed $value): QueryBuilder",
         "description": "Add an OR WHERE condition that checks if a JSON field does not contain a specific value.",
         "doc": "Add an OR WHERE condition that checks if a JSON field does not contain a specific value.\n\n@param string $field\n  The field name to query.\n@param string $key\n  The key within the JSON object to check.\n@param mixed $value\n  The value to check for within the JSON array.\n@return self\n  Returns the current instance for method chaining.",
-        "line": 883
+        "line": 888
       },
       {
         "name": "between",
         "signature": "public function between(string $field, mixed $value1, mixed $value2, string $type = '', string $boolean = 'AND'): QueryBuilder",
         "description": "Add a WHERE condition that checks if the field is between two values.",
         "doc": "Add a WHERE condition that checks if the field is between two values.\n\n@param string $field\n  The field name to query.\n@param mixed $value1\n  The first value of the range.\n@param mixed $value2\n  The second value of the range.\n@param string $type\n  The type of comparison, e.g., 'NOT'.\n@param string $boolean\n  The logical operator to combine with previous conditions, e.g., 'AND' or 'OR'.\n@return self\n  Returns the current instance for method chaining.",
-        "line": 904
+        "line": 909
       },
       {
         "name": "whereBetween",
         "signature": "public function whereBetween(string $field, array $values, string $boolean = 'AND', bool $not = false): QueryBuilder",
         "description": "Laravel-style alias for adding a BETWEEN condition.",
         "doc": "Laravel-style alias for adding a BETWEEN condition.\n\n@param string $field\n@param array $values\n@param string $boolean\n@param bool $not\n@return self",
-        "line": 929
+        "line": 934
       },
       {
         "name": "notBetween",
         "signature": "public function notBetween(string $field, mixed $value1, mixed $value2): QueryBuilder",
         "description": "Add a WHERE condition that checks if the field is not between two values.",
         "doc": "Add a WHERE condition that checks if the field is not between two values.\n\n@param string $field\n  The field name to query.\n@param mixed $value1\n  The first value of the range.\n@param mixed $value2\n  The second value of the range.\n@return self\n  Returns the current instance for method chaining.",
-        "line": 946
+        "line": 951
       },
       {
         "name": "whereNotBetween",
         "signature": "public function whereNotBetween(string $field, array $values): QueryBuilder",
         "description": "Laravel-style alias for adding a NOT BETWEEN condition.",
         "doc": "Laravel-style alias for adding a NOT BETWEEN condition.\n\n@param string $field\n@param array $values\n@return self",
-        "line": 958
+        "line": 963
       },
       {
         "name": "orBetween",
         "signature": "public function orBetween(string $field, mixed $value1, mixed $value2): QueryBuilder",
         "description": "Add an OR WHERE condition that checks if the field is between two values.",
         "doc": "Add an OR WHERE condition that checks if the field is between two values.\n\n@param string $field\n  The field name to query.\n@param mixed $value1\n  The first value of the range.\n@param mixed $value2\n  The second value of the range.\n@return self\n  Returns the current instance for method chaining.",
-        "line": 975
+        "line": 980
       },
       {
         "name": "orWhereBetween",
         "signature": "public function orWhereBetween(string $field, array $values): QueryBuilder",
         "description": "Laravel-style alias for adding an OR BETWEEN condition.",
         "doc": "Laravel-style alias for adding an OR BETWEEN condition.\n\n@param string $field\n@param array $values\n@return self",
-        "line": 987
+        "line": 992
       },
       {
         "name": "orNotBetween",
         "signature": "public function orNotBetween(string $field, mixed $value1, mixed $value2): QueryBuilder",
         "description": "Add an OR WHERE condition that checks if the field is not between two values.",
         "doc": "Add an OR WHERE condition that checks if the field is not between two values.\n\n@param string $field\n  The field name to query.\n@param mixed $value1\n  The first value of the range.\n@param mixed $value2\n  The second value of the range.\n@return self\n  Returns the current instance for method chaining.",
-        "line": 1004
+        "line": 1009
       },
       {
         "name": "orWhereNotBetween",
         "signature": "public function orWhereNotBetween(string $field, array $values): QueryBuilder",
         "description": "Laravel-style alias for adding an OR NOT BETWEEN condition.",
         "doc": "Laravel-style alias for adding an OR NOT BETWEEN condition.\n\n@param string $field\n@param array $values\n@return self",
-        "line": 1016
+        "line": 1021
       },
       {
         "name": "like",
         "signature": "public function like(string $field, mixed $data, string $type = '', string $boolean = 'AND'): QueryBuilder",
         "description": "Add a WHERE condition using the LIKE operator.",
         "doc": "Add a WHERE condition using the LIKE operator.\n\n@param string $field\n  The field name to query.\n@param mixed $data\n  The data to match against using the LIKE operator.\n@param string $type\n  Optional type to prepend to the LIKE clause (e.g., 'NOT').\n@param string $boolean\n  The type of where clause to add. May be 'AND' or 'OR'.\n@return self\n  Returns the current instance for method chaining.",
-        "line": 1035
+        "line": 1040
       },
       {
         "name": "orLike",
         "signature": "public function orLike(string $field, mixed $data): QueryBuilder",
         "description": "Add an OR WHERE condition that checks if the field matches the given data\nusing the LIKE operator.",
         "doc": "Add an OR WHERE condition that checks if the field matches the given data\nusing the LIKE operator.\n\n@param string $field\n  The field name to query.\n@param mixed $data\n  The data to match against using the LIKE operator.\n@return self\n  Returns the current instance for method chaining.",
-        "line": 1058
+        "line": 1063
       },
       {
         "name": "notLike",
         "signature": "public function notLike(string $field, mixed $data): QueryBuilder",
         "description": "Add an AND WHERE condition that checks if the field does not match\nthe given data using the LIKE operator.",
         "doc": "Add an AND WHERE condition that checks if the field does not match\nthe given data using the LIKE operator.\n\n@param string $field\n  The field name to query.\n@param mixed $data\n  The data to match against using the NOT LIKE operator.\n@return self\n  Returns the current instance for method chaining.",
-        "line": 1074
+        "line": 1079
       },
       {
         "name": "orNotLike",
         "signature": "public function orNotLike(string $field, mixed $data): QueryBuilder",
         "description": "Add an OR WHERE condition that checks if the field does not match\nthe given data using the NOT LIKE operator.",
         "doc": "Add an OR WHERE condition that checks if the field does not match\nthe given data using the NOT LIKE operator.\n\n@param string $field\n  The field name to query.\n@param mixed $data\n  The data to match against using the NOT LIKE operator.\n@return self\n  Returns the current instance for method chaining.",
-        "line": 1090
+        "line": 1095
       },
       {
         "name": "whereContains",
         "signature": "public function whereContains(string $column, mixed $value, string $type = '', string $boolean = 'AND'): QueryBuilder",
         "description": "Add a WHERE clause that checks if a column contains a value.",
         "doc": "Add a WHERE clause that checks if a column contains a value.\n\n@param string $column\n@param mixed $value\n@param string $type\n@param string $boolean\n@return self",
-        "line": 1104
+        "line": 1109
       },
       {
         "name": "orWhereContains",
         "signature": "public function orWhereContains(string $column, mixed $value): QueryBuilder",
         "description": "Add an OR WHERE clause that checks if a column contains a value.",
         "doc": "Add an OR WHERE clause that checks if a column contains a value.\n\n@param string $column\n@param mixed $value\n@return self",
-        "line": 1116
+        "line": 1121
       },
       {
         "name": "whereNotContains",
         "signature": "public function whereNotContains(string $column, mixed $value): QueryBuilder",
         "description": "Add a WHERE clause that checks if a column does not contain a value.",
         "doc": "Add a WHERE clause that checks if a column does not contain a value.\n\n@param string $column\n@param mixed $value\n@return self",
-        "line": 1128
+        "line": 1133
       },
       {
         "name": "orWhereNotContains",
         "signature": "public function orWhereNotContains(string $column, mixed $value): QueryBuilder",
         "description": "Add an OR WHERE clause that checks if a column does not contain a value.",
         "doc": "Add an OR WHERE clause that checks if a column does not contain a value.\n\n@param string $column\n@param mixed $value\n@return self",
-        "line": 1140
+        "line": 1145
       },
       {
         "name": "whereStartsWith",
         "signature": "public function whereStartsWith(string $column, mixed $value, string $type = '', string $boolean = 'AND'): QueryBuilder",
         "description": "Add a WHERE clause that checks if a column starts with a value.",
         "doc": "Add a WHERE clause that checks if a column starts with a value.\n\n@param string $column\n@param mixed $value\n@param string $type\n@param string $boolean\n@return self",
-        "line": 1154
+        "line": 1159
       },
       {
         "name": "orWhereStartsWith",
         "signature": "public function orWhereStartsWith(string $column, mixed $value): QueryBuilder",
         "description": "Add an OR WHERE clause that checks if a column starts with a value.",
         "doc": "Add an OR WHERE clause that checks if a column starts with a value.\n\n@param string $column\n@param mixed $value\n@return self",
-        "line": 1166
+        "line": 1171
       },
       {
         "name": "whereEndsWith",
         "signature": "public function whereEndsWith(string $column, mixed $value, string $type = '', string $boolean = 'AND'): QueryBuilder",
         "description": "Add a WHERE clause that checks if a column ends with a value.",
         "doc": "Add a WHERE clause that checks if a column ends with a value.\n\n@param string $column\n@param mixed $value\n@param string $type\n@param string $boolean\n@return self",
-        "line": 1180
+        "line": 1185
       },
       {
         "name": "orWhereEndsWith",
         "signature": "public function orWhereEndsWith(string $column, mixed $value): QueryBuilder",
         "description": "Add an OR WHERE clause that checks if a column ends with a value.",
         "doc": "Add an OR WHERE clause that checks if a column ends with a value.\n\n@param string $column\n@param mixed $value\n@return self",
-        "line": 1192
+        "line": 1197
       },
       {
         "name": "whereDate",
         "signature": "public function whereDate(string $column, string $operator, $value = null, string $boolean = 'AND'): QueryBuilder",
         "description": "Add a WHERE clause for date comparison.",
         "doc": "Add a WHERE clause for date comparison.\n\n@param string $column\n@param string $operator\n@param mixed $value\n@param string $boolean\n@return self",
-        "line": 1206
+        "line": 1211
       },
       {
         "name": "orWhereDate",
         "signature": "public function orWhereDate(string $column, string $operator, mixed $value = null): QueryBuilder",
         "description": "Add an OR WHERE clause for date comparison.",
         "doc": "Add an OR WHERE clause for date comparison.\n\n@param string $column\n@param string $operator\n@param mixed $value\n@return self",
-        "line": 1232
+        "line": 1237
       },
       {
         "name": "whereYear",
         "signature": "public function whereYear(string $column, string $operator, $value = null, string $boolean = 'AND'): QueryBuilder",
         "description": "Add a WHERE clause for year comparison.",
         "doc": "Add a WHERE clause for year comparison.\n\n@param string $column\n@param string $operator\n@param mixed $value\n@param string $boolean\n@return self",
-        "line": 1246
+        "line": 1251
       },
       {
         "name": "orWhereYear",
         "signature": "public function orWhereYear(string $column, string $operator, mixed $value = null): QueryBuilder",
         "description": "Add an OR WHERE clause for year comparison.",
         "doc": "Add an OR WHERE clause for year comparison.\n\n@param string $column\n@param string $operator\n@param mixed $value\n@return self",
-        "line": 1272
+        "line": 1277
       },
       {
         "name": "whereMonth",
         "signature": "public function whereMonth(string $column, string $operator, mixed $value = null, string $boolean = 'AND'): QueryBuilder",
         "description": "Add a WHERE clause for month comparison.",
         "doc": "Add a WHERE clause for month comparison.\n\n@param string $column\n@param string $operator\n@param mixed $value\n@param string $boolean\n@return self",
-        "line": 1286
+        "line": 1291
       },
       {
         "name": "orWhereMonth",
         "signature": "public function orWhereMonth(string $column, string $operator, mixed $value = null): QueryBuilder",
         "description": "Add an OR WHERE clause for month comparison.",
         "doc": "Add an OR WHERE clause for month comparison.\n\n@param string $column\n@param string $operator\n@param mixed $value\n@return self",
-        "line": 1312
+        "line": 1317
       },
       {
         "name": "grouped",
         "signature": "public function grouped(Closure $callback, string $boolean = 'AND'): QueryBuilder",
         "description": "Add a grouped WHERE condition.\n\nThis method will execute the given callback with the current instance\nas the first parameter. The callback should call any of the where,\norWhere, whereNull, or orWhereNull methods to add the desired\nconditions.\n\nThe callback should not return anything, but the conditions will be\nadded to the query.",
         "doc": "Add a grouped WHERE condition.\n\nThis method will execute the given callback with the current instance\nas the first parameter. The callback should call any of the where,\norWhere, whereNull, or orWhereNull methods to add the desired\nconditions.\n\nThe callback should not return anything, but the conditions will be\nadded to the query.\n\n@param Closure $callback\n  The callback to call to add the conditions.\n\n@param string $boolean\n The boolean operator to use for the grouped conditions. Defaults to 'AND'.\n\n@return self\n  Returns the current instance for method chaining.",
-        "line": 1337
+        "line": 1342
       }
     ]
   },
@@ -6719,7 +6719,7 @@
     "file": "Database/QueryBuilder.php",
     "name": "Spark\\Database\\QueryBuilder",
     "kind": "class",
-    "sha256": "0913f8f7cb8ebc1ef49f4484bfe2e59a0d1cd10479095b2fe5b2404f10311d55",
+    "sha256": "68b22128371218462412198561c9fd66bbe305d90b145be2a3a3dd5a1eeedc8b",
     "methods": [
       {
         "name": "__construct",
@@ -6780,121 +6780,121 @@
       {
         "name": "withAlias",
         "signature": "public function withAlias(string $column): string",
-        "description": "Gets the table name with the column name used for the query.",
-        "doc": "Gets the table name with the column name used for the query.\n\n@param string $column The column name.\n@return string The table name with the column name.",
-        "line": 268
+        "description": "Qualify a bare column with the read alias or effective table, including its prefix.\nQualified names and SQL expressions are preserved; this does not escape raw SQL.",
+        "doc": "Qualify a bare column with the read alias or effective table, including its prefix.\nQualified names and SQL expressions are preserved; this does not escape raw SQL.\n\n@param string $column A column name or trusted SQL expression.\n@return string The qualified column or unchanged expression.",
+        "line": 269
       },
       {
         "name": "getDB",
         "signature": "public function getDB(): DB",
         "description": "Returns the database instance associated with this query.",
         "doc": "Returns the database instance associated with this query.\n\n@return DB The database instance associated with this query.",
-        "line": 282
+        "line": 293
       },
       {
         "name": "setDB",
         "signature": "public function setDB(DB $database): self",
         "description": "Sets the database instance for this query.\n\n This method allows you to change the database instance associated with this query.\n It is useful when you need to switch databases or when the query needs to be executed\n against a different database connection.",
         "doc": "Sets the database instance for this query.\n\n This method allows you to change the database instance associated with this query.\n It is useful when you need to switch databases or when the query needs to be executed\n against a different database connection.\n\n @param DB $database The database instance to set.\n @return self",
-        "line": 297
+        "line": 308
       },
       {
         "name": "getWrapper",
         "signature": "public function getWrapper(): WrapperContract",
         "description": "Returns the query wrapper.",
         "doc": "Returns the query wrapper.\n\n@return WrapperContract The query wrapper.",
-        "line": 309
+        "line": 320
       },
       {
         "name": "prefix",
         "signature": "public function prefix(string $prefix): self",
         "description": "Sets the table prefix to be used for the query.",
         "doc": "Sets the table prefix to be used for the query.\n\n@param string $prefix The table prefix to set.\n@return self",
-        "line": 320
+        "line": 331
       },
       {
         "name": "addMapper",
         "signature": "public function addMapper(callable $callback): self",
         "description": "Adds a data mapper callback to process query results.",
         "doc": "Adds a data mapper callback to process query results.\n\n@param callable $callback The callback function to process data.\n@return self Returns the query object.",
-        "line": 332
+        "line": 343
       },
       {
         "name": "param",
         "signature": "public function param(string|array $parameter): self",
         "description": "Adds a parameter for a query.",
         "doc": "Adds a parameter for a query.\n\n@param string|array $parameter Additional parameter names.\n@return self Returns the query object.",
-        "line": 344
+        "line": 355
       },
       {
         "name": "getBindings",
         "signature": "public function getBindings(): array",
         "description": "Returns the query bindings.",
         "doc": "Returns the query bindings.\n\n@return array The query bindings.",
-        "line": 356
+        "line": 367
       },
       {
         "name": "getParameters",
         "signature": "public function getParameters(): array",
         "description": "Returns the query parameters.",
         "doc": "Returns the query parameters.\n\n@return array The query parameters.",
-        "line": 366
+        "line": 377
       },
       {
         "name": "clone",
         "signature": "public function clone(): self",
         "description": "Clone the query builder.",
         "doc": "Clone the query builder.\n\n@return self",
-        "line": 376
+        "line": 387
       },
       {
         "name": "copy",
         "signature": "public function copy(): self",
         "description": "Clone the query builder.",
         "doc": "Clone the query builder.\n\n@return self",
-        "line": 386
+        "line": 397
       },
       {
         "name": "withTrashed",
         "signature": "public function withTrashed(bool $withTrashed = true): self",
         "description": "Include active and soft deleted records, or select active records when false.",
         "doc": "Include active and soft deleted records, or select active records when false.\n\n@param bool $withTrashed Whether to include soft deleted records.\n@return self",
-        "line": 397
+        "line": 408
       },
       {
         "name": "onlyTrashed",
         "signature": "public function onlyTrashed(): self",
         "description": "Include only soft deleted records in the query results.",
         "doc": "Include only soft deleted records in the query results.\n\n@return self",
-        "line": 413
+        "line": 424
       },
       {
         "name": "withoutTrashed",
         "signature": "public function withoutTrashed(): self",
         "description": "Select only active records, including for an explicit force delete.",
         "doc": "Select only active records, including for an explicit force delete.\n\n@return self",
-        "line": 425
+        "line": 436
       },
       {
         "name": "__call",
         "signature": "public function __call(string $method, array $args)",
         "description": "Magic method to handle dynamic method calls.",
         "doc": "Magic method to handle dynamic method calls.\n\n@param string $method The name of the method being called.\n@param array $args The arguments passed to the method.\n@return mixed",
-        "line": 439
+        "line": 450
       },
       {
         "name": "useThroughModel",
         "signature": "public function useThroughModel(Model $model): self",
         "description": "@internal Bind the intermediate model of a has-many-through read.",
         "doc": "@internal Bind the intermediate model of a has-many-through read.",
-        "line": 494
+        "line": 505
       },
       {
         "name": "withTrashedParents",
         "signature": "public function withTrashedParents(bool $withTrashed = true): self",
         "description": "Include archived intermediate models, independently of the final related model.",
         "doc": "Include archived intermediate models, independently of the final related model.",
-        "line": 501
+        "line": 512
       }
     ]
   },
@@ -7002,84 +7002,84 @@
     "file": "Database/Relation/HasMany.php",
     "name": "Spark\\Database\\Relation\\HasMany",
     "kind": "class",
-    "sha256": "2b5ae957e6e73b73a8681cb1409c2a24ff8122512991edd7ac4bef4a6a159f04",
+    "sha256": "ccd4a55f8988b918ed31796c671daf8525aa121c9f58141d7857803b7f812070",
     "methods": [
       {
         "name": "__construct",
         "signature": "public function __construct( protected string $related, protected null|string $foreignKey = null, protected null|string $localKey = null, protected bool $lazy = true, protected null|Closure $callback = null, null|Model $model = null )",
         "description": "Create a new HasMany relationship instance.",
         "doc": "Create a new HasMany relationship instance.\n\n@param string $related The related model class name.\n@param string|null $foreignKey The foreign key in the related model that references the current model.\n@param string|null $localKey The primary key in the current model that the foreign key references.\n@param bool $lazy Whether to load the relationship lazily.\n@param Closure|null $callback An optional callback to modify the query for the relationship.\n@param Model|null $model The model instance that this relationship belongs to.",
-        "line": 33
+        "line": 34
       },
       {
         "name": "getConfig",
         "signature": "public function getConfig(): array",
         "description": "Get the configuration for the HasMany relationship.",
         "doc": "Get the configuration for the HasMany relationship.\n\n@return array{\n    related: string,\n    foreignKey: string|null,\n    localKey: string|null,\n    lazy: bool,\n    callback: Closure|null\n}",
-        "line": 80
+        "line": 81
       },
       {
         "name": "create",
-        "signature": "public function create(array $attributes = []): Model",
+        "signature": "public function create(Arrayable|array $attributes = []): Model",
         "description": "Create a new instance of the related model.",
-        "doc": "Create a new instance of the related model.\n\n@param array $attributes The attributes for the new model.\n@return Model The newly created model instance.",
-        "line": 97
+        "doc": "Create a new instance of the related model.\n\n@param Arrayable|array $attributes The attributes for the new model.\n@return Model The newly created model instance.",
+        "line": 98
       },
       {
         "name": "createMany",
         "signature": "public function createMany(array $records): array",
         "description": "Create multiple instances of the related model.",
         "doc": "Create multiple instances of the related model.\n\n@param array $records Array of attribute arrays for each model.\n@return array Array of newly created model instances.",
-        "line": 128
+        "line": 133
       },
       {
         "name": "createOrUpdate",
-        "signature": "public function createOrUpdate(array $attributes = [], array $values = []): Model",
+        "signature": "public function createOrUpdate(Arrayable|array $attributes = [], array $values = []): Model",
         "description": "Create a new instance of the related model or update if it exists.",
-        "doc": "Create a new instance of the related model or update if it exists.\n\n@param array $attributes The attributes for the model.\n@param array $values Additional values to set on the model.\n@return Model The created or updated model instance.",
-        "line": 160
+        "doc": "Create a new instance of the related model or update if it exists.\n\n@param Arrayable|array $attributes The attributes for the model.\n@param array $values Additional values to set on the model.\n@return Model The created or updated model instance.",
+        "line": 165
       },
       {
         "name": "firstOrCreate",
-        "signature": "public function firstOrCreate(array $attributes = [], array $values = []): Model",
+        "signature": "public function firstOrCreate(Arrayable|array $attributes = [], array $values = []): Model",
         "description": "Get or create a new instance of the related model.",
-        "doc": "Get or create a new instance of the related model.\n\n@param array $attributes The attributes to search for.\n@return Model The found or newly created model instance.",
-        "line": 188
+        "doc": "Get or create a new instance of the related model.\n\n@param Arrayable|array $attributes The attributes to search for.\n@return Model The found or newly created model instance.",
+        "line": 197
       },
       {
         "name": "deleteAll",
         "signature": "public function deleteAll(null|int|string|array $conditions = null): int",
         "description": "Delete related model(s) based on specific conditions.",
         "doc": "Delete related model(s) based on specific conditions.\n\n@param null|int|string|array $conditions Conditions to filter which related models to delete.\n@return int The number of deleted models.\n\n@throws \\RuntimeException If the parent model instance is not set or the local key is missing.",
-        "line": 218
+        "line": 231
       },
       {
         "name": "deleteWhere",
         "signature": "public function deleteWhere(int|string|array $conditions): int",
         "description": "Delete related model(s) based on specific conditions.",
         "doc": "Delete related model(s) based on specific conditions.\n\n@param int|string|array|null $conditions Conditions to filter which related models to delete.\n@return int The number of deleted models.",
-        "line": 253
+        "line": 266
       },
       {
         "name": "deleteById",
         "signature": "public function deleteById(int $id): int",
         "description": "Delete a related model by its ID.",
         "doc": "Delete a related model by its ID.\n\n@param int $id The ID of the related model to delete.\n@return int The number of deleted models.",
-        "line": 264
+        "line": 277
       },
       {
         "name": "save",
         "signature": "public function save(Model $model): Model",
         "description": "Save an existing related model through this relationship.",
         "doc": "Save an existing related model through this relationship.\n\n@param Model $model\n@return Model",
-        "line": 275
+        "line": 288
       },
       {
         "name": "saveMany",
         "signature": "public function saveMany(array $models): array",
         "description": "Save many existing related models through this relationship.",
         "doc": "Save many existing related models through this relationship.\n\n@param array $models\n@return array",
-        "line": 301
+        "line": 314
       }
     ]
   },
@@ -9461,7 +9461,7 @@
     "file": "Foundation/Console/PrimaryCommandsHandler.php",
     "name": "Spark\\Foundation\\Console\\PrimaryCommandsHandler",
     "kind": "class",
-    "sha256": "17a1402988ac319328cada521628b3d66127755e1b99b25df7724093a28b63a7",
+    "sha256": "35ff36b8123f0cbe4b18b559c30a1dfad949ce15781d54cf478c5ff6c537550a",
     "methods": [
       {
         "name": "startDevelopmentServer",
@@ -9567,7 +9567,7 @@
     "file": "Foundation/Console/StubCreation.php",
     "name": "Spark\\Foundation\\Console\\StubCreation",
     "kind": "class",
-    "sha256": "39ca3daf7c1c88b0c230ce7d6af4a51d28ef91dcda7d71dfe5560f1ecfd38dea",
+    "sha256": "fa3773ce2fbab942b213d863050b37148d0353ce74084fb441c2fac6bdf9bca4",
     "methods": [
       {
         "name": "create",
@@ -9821,7 +9821,7 @@
     "file": "Foundation/helpers.php",
     "name": "Foundation/helpers.php",
     "kind": "functions",
-    "sha256": "153cc97de408425048db85e52560cc405a8816b649090ef1864c6eeb43abcde4",
+    "sha256": "f17d7787afb29c89d50abf318914bc2d365f11fe96c94384de0554d1cb5f8294",
     "methods": [
       {
         "name": "app",
@@ -10475,74 +10475,67 @@
         "line": 2204
       },
       {
-        "name": "filemanager",
-        "signature": "function filemanager(): FileManager",
-        "description": "Retrieves the FileManager instance.\n\nThis function returns the FileManager instance, which provides methods\nfor managing files and directories.",
-        "doc": "Retrieves the FileManager instance.\n\nThis function returns the FileManager instance, which provides methods\nfor managing files and directories.\n\n@return FileManager The FileManager instance.",
-        "line": 2219
-      },
-      {
         "name": "fm",
-        "signature": "function fm(): FileManager",
-        "description": "Retrieves the FileManager instance.\n\nThis function returns the FileManager instance, which provides methods\nfor managing files and directories. It is an alias for the filemanager() function.",
-        "doc": "Retrieves the FileManager instance.\n\nThis function returns the FileManager instance, which provides methods\nfor managing files and directories. It is an alias for the filemanager() function.\n\n@return FileManager The FileManager instance.",
-        "line": 2234
+        "signature": "function fm(): File",
+        "description": "Retrieves the File instance.\n\nThis function returns the File instance, which provides methods\nfor managing files and directories.",
+        "doc": "Retrieves the File instance.\n\nThis function returns the File instance, which provides methods\nfor managing files and directories.\n\n@return File The File instance.",
+        "line": 2219
       },
       {
         "name": "arr_from_set",
         "signature": "function arr_from_set(null|string|array|Arrayable $value, ?callable $callback = null, ?string $delimiter = ','): array",
         "description": "Convert a comma-separated string into an array of trimmed values.",
         "doc": "Convert a comma-separated string into an array of trimmed values.\n\n@param null|string|array|Arrayable $value\n@param callable|null $callback\n@param string|null $delimiter\n@return array",
-        "line": 2249
+        "line": 2234
       },
       {
         "name": "tracer",
         "signature": "function tracer(): Tracer",
         "description": "Retrieves the Tracer instance.\n\nThis function returns the Tracer instance, which provides methods\nfor tracing and logging application events.",
         "doc": "Retrieves the Tracer instance.\n\nThis function returns the Tracer instance, which provides methods\nfor tracing and logging application events.\n\n@return Tracer The Tracer instance.",
-        "line": 2295
+        "line": 2280
       },
       {
         "name": "is_cli",
         "signature": "function is_cli(): bool",
         "description": "Determine if the current execution environment is CLI.\n\nThis function checks if the PHP script is being executed from the command line interface (CLI)\nby comparing the PHP SAPI name to 'cli'.",
         "doc": "Determine if the current execution environment is CLI.\n\nThis function checks if the PHP script is being executed from the command line interface (CLI)\nby comparing the PHP SAPI name to 'cli'.\n\n@return bool True if the script is running in CLI mode, false otherwise.",
-        "line": 2314
+        "line": 2299
       },
       {
         "name": "is_web",
         "signature": "function is_web(): bool",
         "description": "Determine if the current execution environment is web (not CLI).\n\nThis function checks if the PHP script is being executed in a web server\nenvironment by negating the result of the is_cli() function.",
         "doc": "Determine if the current execution environment is web (not CLI).\n\nThis function checks if the PHP script is being executed in a web server\nenvironment by negating the result of the is_cli() function.\n\n@return bool True if the script is running in a web environment, false otherwise.",
-        "line": 2329
+        "line": 2314
       },
       {
         "name": "is_debug_mode",
         "signature": "function is_debug_mode(): bool",
         "description": "Determine if the application is running in debug mode.\n\nThis function checks the application's configuration to see if\ndebug mode is enabled, which is typically used for development\nand troubleshooting purposes.",
         "doc": "Determine if the application is running in debug mode.\n\nThis function checks the application's configuration to see if\ndebug mode is enabled, which is typically used for development\nand troubleshooting purposes.\n\n@return bool True if the application is in debug mode, false otherwise.",
-        "line": 2345
+        "line": 2330
       },
       {
         "name": "tracer_log",
         "signature": "function tracer_log(string $message): void",
         "description": "Log a message using the Tracer instance.\n\nThis function logs a message using the Tracer instance, which provides\nmethods for tracing and logging application events.",
         "doc": "Log a message using the Tracer instance.\n\nThis function logs a message using the Tracer instance, which provides\nmethods for tracing and logging application events.\n\n@param string $message The message to be logged.\n@return void",
-        "line": 2361
+        "line": 2346
       },
       {
         "name": "pipeline",
         "signature": "function pipeline($payload = null): Pipeline",
         "description": "Create a new Pipeline instance.\n\nThis function initializes a new Pipeline instance with the given payload.\nThe Pipeline instance provides a convenient interface for processing\nthe payload through a series of stages.",
         "doc": "Create a new Pipeline instance.\n\nThis function initializes a new Pipeline instance with the given payload.\nThe Pipeline instance provides a convenient interface for processing\nthe payload through a series of stages.\n\n@param mixed $payload The initial payload to be processed by the pipeline.\n\n@return Pipeline The Pipeline instance initialized with the given payload.",
-        "line": 2379
+        "line": 2364
       },
       {
         "name": "concurrency",
         "signature": "function concurrency(null|array $tasks = null): mixed",
         "description": "Create a new Concurrency instance or run tasks concurrently.\n\nThis function either creates a new Concurrency instance or runs\nthe provided tasks concurrently using the Concurrency class.",
         "doc": "Create a new Concurrency instance or run tasks concurrently.\n\nThis function either creates a new Concurrency instance or runs\nthe provided tasks concurrently using the Concurrency class.\n\n@param null|array $tasks An optional array of tasks to run concurrently.\n@return Concurrency|array The Concurrency instance or the results of the concurrent tasks.",
-        "line": 2395
+        "line": 2380
       }
     ]
   },
@@ -14880,7 +14873,7 @@
     "file": "Http/Validator.php",
     "name": "Spark\\Http\\Validator",
     "kind": "class",
-    "sha256": "c9d6e65719bbff045c931e7565987205ea0b857ead45cd2d1a2869b66549742e",
+    "sha256": "fbbdafa380ff9f395b3ec1014f69899c586a57c1b4deade5d8ed02bae92f64d0",
     "methods": [
       {
         "name": "__construct",
@@ -16660,7 +16653,7 @@
     "file": "Storage/Storage.php",
     "name": "Spark\\Storage\\Storage",
     "kind": "class",
-    "sha256": "bc37b0c988e4862da594f03ec28bbc18c3e6872ab40ddaafdcd42fb1c9e26a41",
+    "sha256": "6eac49b6e419d190fa83f0102a7ac38322eaf2f42d8b85a502c52295e8226449",
     "methods": [
       {
         "name": "__construct",
@@ -16865,56 +16858,56 @@
     "file": "Storage/Uploader.php",
     "name": "Spark\\Storage\\Uploader",
     "kind": "class",
-    "sha256": "1e993e0d4510ac42fb77c4eb012769724e889c0c15552b220dceb21094700369",
+    "sha256": "467d4d4d6df2877314535be89b9479e7d20bb7662ad31d92ce8e0d387eb15fde",
     "methods": [
       {
         "name": "__construct",
         "signature": "public function __construct( null|string $uploadTo = null, null|string $uploadDir = null, null|array $extensions = [], null|bool $multiple = null, null|int $maxSize = 2048, null|float|array $resize = null, null|array $resizes = null, null|int $compress = null, null|UploaderUtilDriverInterface $driver = null, null|string $relativeTo = null )",
         "description": "Sets up the uploader configuration.",
         "doc": "Sets up the uploader configuration.\n\n@param null|string $uploadTo Upload directory path.\n@param null|string $uploadDir Upload directory path.\n@param array $extensions Supported file extensions.\n@param null|bool $multiple Whether to support multiple file uploads.\n@param null|int $maxSize Maximum file size (in KB).\n@param null|array $resize Resize options for images.\n@param null|array $resizes Bulk resize options for images.\n@param null|int $compress Compression level for images.\n@param ?string $relativeTo Base directory stripped from driver destinations and returned paths.",
-        "line": 71
+        "line": 72
       },
       {
         "name": "make",
         "signature": "public static function make( null|string $uploadTo = null, null|string $uploadDir = null, null|array $extensions = [], null|bool $multiple = null, null|int $maxSize = 2048, null|float|array $resize = null, null|array $resizes = null, null|int $compress = null, null|UploaderUtilDriverInterface $driver = null, null|string $relativeTo = null ): self",
         "description": "Factory method to create a new instance of the Uploader class.",
         "doc": "Factory method to create a new instance of the Uploader class.\n\n@param null|string $uploadTo Upload directory path.\n@param null|string $uploadDir Upload directory path.\n@param array $extensions Supported file extensions.\n@param null|bool $multiple Whether to support multiple file uploads.\n@param null|int $maxSize Maximum file size (in KB).\n@param null|array $resize Resize options for images.\n@param null|array $resizes Bulk resize options for images.\n@param null|int $compress Compression level for images.\n@param ?string $relativeTo Base directory stripped from driver destinations and returned paths.\n@param null|UploaderUtilDriverInterface $driver File upload driver.\n@return self Returns a new instance of the Uploader class.",
-        "line": 131
+        "line": 132
       },
       {
         "name": "setUploadDir",
         "signature": "public function setUploadDir(string $uploadDir): self",
         "description": "Sets the upload directory.",
         "doc": "Sets the upload directory.\n\n@param string $uploadDir Upload directory path.\n@return $this\n@throws UploaderUtilException If the upload directory cannot be created or is not writable.",
-        "line": 164
+        "line": 165
       },
       {
         "name": "upload",
         "signature": "public function upload(string|array|Arrayable $files): string|array",
         "description": "Uploads a file or multiple files.",
         "doc": "Uploads a file or multiple files.\n\n@param string|array|Arrayable $files The file(s) to upload.\n@return string|array Returns the file path(s) of the uploaded file(s).",
-        "line": 181
+        "line": 182
       },
       {
         "name": "delete",
         "signature": "public function delete(string|array $file): bool",
         "description": "Deletes a file or multiple files.",
         "doc": "Deletes a file or multiple files.\n\n@param string|array $file The file(s) to delete.\n@return bool Returns true if the file(s) were successfully deleted, false otherwise.",
-        "line": 249
+        "line": 250
       },
       {
         "name": "removeUploadDir",
         "signature": "public function removeUploadDir(string|array $files): string|array",
         "description": "Removes the upload directory path from a file path or an array of file paths.",
         "doc": "Removes the upload directory path from a file path or an array of file paths.\n\n@param string|array $files The file path(s) to process.\n@return string|array Returns the file path(s) without the upload directory.",
-        "line": 274
+        "line": 275
       },
       {
         "name": "copy",
         "signature": "public function copy(): self",
         "description": "Create a copy of the uploader instance.",
         "doc": "Create a copy of the uploader instance.\n\n@return self A new instance that is a copy of the current instance.",
-        "line": 295
+        "line": 296
       }
     ]
   },
@@ -23242,7 +23235,7 @@
     "file": "Tinker.php",
     "name": "Spark\\Tinker",
     "kind": "class",
-    "sha256": "dc71ce23ab9b439f94e869c523cf901dbf0d1e5c0e149d376da7bff57b1e69e8",
+    "sha256": "f4547d24336fd12f6affe80ba0f0debf8e1ea4fa49dca39a88eff1488c81080c",
     "methods": [
       {
         "name": "__construct",
@@ -23831,10 +23824,10 @@
     ]
   },
   {
-    "file": "Utils/FileManager.php",
-    "name": "Spark\\Utils\\FileManager",
+    "file": "Utils/File.php",
+    "name": "Spark\\Utils\\File",
     "kind": "class",
-    "sha256": "98ed7ad866e8c5cdfd8ceabf7f037bf9b36c54a91e61aa1e40746e2f40386078",
+    "sha256": "7b791fa5157cd27bd6a7eec032110db0272ee610849a8c4e8e77f38477335891",
     "methods": [
       {
         "name": "exists",
@@ -25397,63 +25390,63 @@
     "file": "View/BladeCompiler.php",
     "name": "Spark\\View\\BladeCompiler",
     "kind": "class",
-    "sha256": "014b21b72243425984754bed3b8da86d35112d4146e0a9b9db3efe50c0c5f8a7",
+    "sha256": "4abb18394afbdd6571386b7d7863b381f92cbbc6d45e0298e32562e476ab330e",
     "methods": [
       {
         "name": "__construct",
         "signature": "public function __construct(string $cachePath)",
         "description": "",
         "doc": "",
-        "line": 43
+        "line": 44
       },
       {
         "name": "compile",
         "signature": "public function compile(string $templatePath, string $compiledPath): void",
         "description": "Compile a template file",
         "doc": "Compile a template file\n\n@param string $templatePath\n@param string $compiledPath\n@return void\n@throws \\RuntimeException",
-        "line": 59
+        "line": 60
       },
       {
         "name": "compileString",
         "signature": "public function compileString(string $template): string",
         "description": "Compile template string",
         "doc": "Compile template string\n\n@param string $template\n@return string",
-        "line": 82
+        "line": 83
       },
       {
         "name": "compileSingleLineDirective",
         "signature": "public function compileSingleLineDirective(string $template, string $directive, string $phpCode): string",
         "description": "Compile single-line directives like @break, @continue, etc.",
         "doc": "Compile single-line directives like @break, @continue, etc.\n\n@param string $template\n@param string $directive\n@param string $phpCode\n@return string",
-        "line": 1234
+        "line": 1235
       },
       {
         "name": "directive",
         "signature": "public function directive(string $name, callable $callback): void",
         "description": "Register a custom directive",
         "doc": "Register a custom directive\n\n@param string $name\n@param callable $callback\n@return void",
-        "line": 1294
+        "line": 1295
       },
       {
         "name": "getCompiledPath",
         "signature": "public function getCompiledPath(string $template): string",
         "description": "Get compiled template path",
         "doc": "Get compiled template path\n\n@param string $template\n@return string",
-        "line": 1305
+        "line": 1306
       },
       {
         "name": "isExpired",
         "signature": "public function isExpired(string $templatePath, string $compiledPath): bool",
         "description": "Check if template needs recompilation",
         "doc": "Check if template needs recompilation\n\n@param string $templatePath\n@param string $compiledPath\n@return bool",
-        "line": 1317
+        "line": 1318
       },
       {
         "name": "clearCache",
         "signature": "public function clearCache(): void",
         "description": "Clear compiled templates cache",
         "doc": "Clear compiled templates cache\n\n@return void",
-        "line": 1338
+        "line": 1339
       }
     ]
   },
