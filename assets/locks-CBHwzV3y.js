@@ -48,4 +48,8 @@ For durable retried work, combine a lock with [queue jobs](./queues.md) and an i
 \`withLock()\` throws \`Spark\\Cache\\Exceptions\\LockException\` if acquisition times out. Its callback receives the Lock instance and may return any result; callback exceptions propagate after the \`finally\` release. Use a bounded response such as “already being processed” or a queued retry when contention is expected.
 
 A positive lifetime expires even if the callback is still running. \`extendLock()\` succeeds only for the current owner. Do not start work under one Lock instance and expect an unrelated instance to release it: retain the owner object until the operation completes.
+
+## Database row locks
+
+The Lock service above coordinates application work through a lease. Database builders separately expose \`lockForUpdate()\` and \`sharedLock()\` for SELECT rows inside a transaction. Use the same connection for the locked read and subsequent writes; SQLite has no SELECT row-lock equivalent. See [Query row locks](./query-builder.md#primary-keys-aliases-and-row-locks) for driver behavior and model key scoping.
 `;export{e as default};

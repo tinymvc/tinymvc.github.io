@@ -60,10 +60,11 @@ npm run docs:lint-examples
 npm test
 npm run docs:smoke
 npm run docs:smoke-database
+npm run docs:smoke-storage
 npm run build
 \`\`\`
 
-The source and smoke commands expect sibling \`tinycore/\` and \`skeleton/\` checkouts. You can pass another TinyCore \`src\` directory to \`docs:check-source\` / \`docs:sync-api\`, and the PHP smoke scripts accept source and skeleton paths. The build and navigation checks work with the committed content/reference snapshots alone.
+The source and smoke commands expect sibling \`tinycore/\` and \`skeleton/\` checkouts. You can pass another TinyCore \`src\` directory to \`docs:check-source\` / \`docs:sync-api\`, and the framework/database PHP smoke scripts accept source and skeleton paths. The storage smoke script accepts a source path, uses synthetic credentials and a temporary loopback HTTP server, and requires PHP cURL, SimpleXML, and permission to bind a local port. It does not contact a real bucket. The build and navigation checks work with the committed content/reference snapshots alone.
 
 \`docs:check-source\` reports changed source files and affected guides. After reviewing those changes and updating examples, run \`npm run docs:sync-api\` to refresh **current** \`api.json\` and \`sources.json\`, then repeat the relevant checks. Never use a snapshot refresh as a substitute for reviewing changed behavior.
 
