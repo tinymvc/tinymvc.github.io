@@ -10782,7 +10782,7 @@
     "file": "Http/Auth.php",
     "name": "Spark\\Http\\Auth",
     "kind": "class",
-    "sha256": "2769fc66b86e99970ce61f780b8bc7c16b05acd1925379857f99a96a2006fd06",
+    "sha256": "20c72ea9e14c62b4db64b7244b5825b5b948acb50c21f14270eb4b1cdf3ced89",
     "methods": [
       {
         "name": "__construct",
@@ -10898,122 +10898,122 @@
       },
       {
         "name": "createToken",
-        "signature": "public function createToken(array $payload = []): string",
+        "signature": "public function createToken(?Model $user = null, array $payload = []): string",
         "description": "Generates a JWT token for the currently logged in user with an optional payload.\n\nThis method creates a JWT token that includes the user's ID and an expiration time.\nAdditional payload data can be included by passing an associative array.",
-        "doc": "Generates a JWT token for the currently logged in user with an optional payload.\n\nThis method creates a JWT token that includes the user's ID and an expiration time.\nAdditional payload data can be included by passing an associative array.\n\n@param array $payload Optional associative array of additional payload data to include in the token.\n@return string The generated JWT token as a string.",
-        "line": 404
+        "doc": "Generates a JWT token for the currently logged in user with an optional payload.\n\nThis method creates a JWT token that includes the user's ID and an expiration time.\nAdditional payload data can be included by passing an associative array.\n\n@param Model|null $user The user model for whom the JWT token is to be generated. If null, the currently logged in user will be used.\n@param array $payload Optional associative array of additional payload data to include in the token.\n@return string The generated JWT token as a string.",
+        "line": 405
       },
       {
         "name": "tokens",
         "signature": "public function tokens(): \\Spark\\Support\\Collection",
         "description": "Retrieves all JWT tokens associated with the currently logged in user.\n\nThis method fetches all JWT tokens from the configured token table for the authenticated user.\nIt returns a collection of tokens, including their hash, expiration time, and creation time.",
         "doc": "Retrieves all JWT tokens associated with the currently logged in user.\n\nThis method fetches all JWT tokens from the configured token table for the authenticated user.\nIt returns a collection of tokens, including their hash, expiration time, and creation time.\n\n@return \\Spark\\Support\\Collection A collection of JWT tokens for the authenticated user.\n@throws \\RuntimeException If no authenticated user is found or if the JWT token table is not configured.",
-        "line": 447
+        "line": 448
       },
       {
         "name": "revokeToken",
         "signature": "public function revokeToken(?string $tokenHash = null): bool",
         "description": "Revokes a specific JWT token for the currently logged in user.\n\nThis method deletes the specified JWT token from the configured token table for the authenticated user.\nIt returns true if the token was successfully revoked, or false if the token was not found.",
         "doc": "Revokes a specific JWT token for the currently logged in user.\n\nThis method deletes the specified JWT token from the configured token table for the authenticated user.\nIt returns true if the token was successfully revoked, or false if the token was not found.\n\n@param ?string $tokenHash The hash of the JWT token to revoke.\n@return bool True if the token was successfully revoked, false otherwise.\n@throws \\RuntimeException If no authenticated user is found or if the JWT token table is not configured.",
-        "line": 475
+        "line": 476
       },
       {
         "name": "token",
         "signature": "public function token(): ?string",
         "description": "Retrieves the unique identifier (jti) of the currently authenticated JWT token.\n\nThis method extracts the 'jti' claim from the JWT payload, which serves as a unique identifier\nfor the token. If no valid JWT token is present, it returns null.",
         "doc": "Retrieves the unique identifier (jti) of the currently authenticated JWT token.\n\nThis method extracts the 'jti' claim from the JWT payload, which serves as a unique identifier\nfor the token. If no valid JWT token is present, it returns null.\n\n@return ?string The unique identifier of the JWT token, or null if not available.",
-        "line": 506
+        "line": 507
       },
       {
         "name": "logout",
         "signature": "public function logout(): void",
         "description": "Logs out the current user by deleting the session and user properties.",
         "doc": "Logs out the current user by deleting the session and user properties.\n\n@return void",
-        "line": 517
+        "line": 518
       },
       {
         "name": "clearCache",
         "signature": "public function clearCache(null|int $id = null): void",
         "description": "Clears the cache for the currently logged in user.\n\nThis method erases the cached user instance if caching is enabled,\nusing the configured cache name and session key to identify the user.",
         "doc": "Clears the cache for the currently logged in user.\n\nThis method erases the cached user instance if caching is enabled,\nusing the configured cache name and session key to identify the user.\n\n@param int|null $id Optional user ID to clear cache for. If not provided, it will clear cache for the currently logged in user.\n\n@return void",
-        "line": 574
+        "line": 575
       },
       {
         "name": "refresh",
         "signature": "public function refresh(): void",
         "description": "Refreshes the user instance if the user is not a guest.\n\nIf the user is not a guest, this method will refresh the user instance by\ndeleting the user property and calling the user method again.",
         "doc": "Refreshes the user instance if the user is not a guest.\n\nIf the user is not a guest, this method will refresh the user instance by\ndeleting the user property and calling the user method again.\n\n@return void",
-        "line": 596
+        "line": 597
       },
       {
         "name": "__get",
         "signature": "public function __get(string $name)",
         "description": "Magic getter for the admin user properties.",
         "doc": "Magic getter for the admin user properties.\n\n@param string $name\n@return mixed",
-        "line": 615
+        "line": 616
       },
       {
         "name": "__set",
         "signature": "public function __set(string $name, $value)",
         "description": "Magic setter for the admin user properties.",
         "doc": "Magic setter for the admin user properties.\n\n@param string $name\n@param mixed $value\n@return void",
-        "line": 627
+        "line": 628
       },
       {
         "name": "__isset",
         "signature": "public function __isset(string $name)",
         "description": "Magic isset for the admin user properties.",
         "doc": "Magic isset for the admin user properties.\n\n@param string $name\n@return bool",
-        "line": 638
+        "line": 639
       },
       {
         "name": "__unset",
         "signature": "public function __unset(string $name)",
         "description": "Magic unset for the admin user properties.",
         "doc": "Magic unset for the admin user properties.\n\n@param string $name\n@return void",
-        "line": 649
+        "line": 650
       },
       {
         "name": "offsetExists",
         "signature": "public function offsetExists($key): bool",
         "description": "Check if the given field exists in the user model.\n\nThis method is used to determine if a specific property or field\nexists in the user model, allowing for dynamic access to user attributes.",
         "doc": "Check if the given field exists in the user model.\n\nThis method is used to determine if a specific property or field\nexists in the user model, allowing for dynamic access to user attributes.\n\n@param string $key The name of the field to check.\n@return bool True if the field exists, false otherwise.",
-        "line": 663
+        "line": 664
       },
       {
         "name": "offsetUnset",
         "signature": "public function offsetUnset($key): void",
         "description": "Method to unset a key-value pair in the user model.",
         "doc": "Method to unset a key-value pair in the user model.\n\n@param string $key The key to unset.\n@return void",
-        "line": 679
+        "line": 680
       },
       {
         "name": "offsetGet",
         "signature": "public function offsetGet($key): mixed",
         "description": "Method to get a value by key from the user model.\n\nThis method allows for accessing user properties dynamically using array-like syntax.",
         "doc": "Method to get a value by key from the user model.\n\nThis method allows for accessing user properties dynamically using array-like syntax.\n\n@param string $key The key to retrieve the value for.\n@return mixed The value associated with the key, or null if the key does not exist.",
-        "line": 697
+        "line": 698
       },
       {
         "name": "offsetSet",
         "signature": "public function offsetSet($key, $value): void",
         "description": "Method to set a value by key in the user model.\n This method allows for dynamically setting user properties using array-like syntax.",
         "doc": "Method to set a value by key in the user model.\n This method allows for dynamically setting user properties using array-like syntax.\n\n@param string $key The key to set the value for.\n@param mixed $value The value to set for the key.\n@return void",
-        "line": 715
+        "line": 716
       },
       {
         "name": "checkId",
         "signature": "public function checkId(): void",
         "description": "Checks and sets the authentication ID from the session.\n\nThis method checks if the session contains the configured session key\nfor the user ID. If it does, it attempts to authenticate via cookie\nif cookie authentication is enabled. Finally, it sets the internal ID\nproperty to the user ID from the session or 0 if not found.",
         "doc": "Checks and sets the authentication ID from the session.\n\nThis method checks if the session contains the configured session key\nfor the user ID. If it does, it attempts to authenticate via cookie\nif cookie authentication is enabled. Finally, it sets the internal ID\nproperty to the user ID from the session or 0 if not found.\n\n@return void",
-        "line": 926
+        "line": 927
       },
       {
         "name": "check",
         "signature": "public function check(): bool",
         "description": "Checks if the user is authenticated.\n\nThis method checks if the user has a valid ID and if the user model is not null,\nindicating that the user is authenticated.",
         "doc": "Checks if the user is authenticated.\n\nThis method checks if the user has a valid ID and if the user model is not null,\nindicating that the user is authenticated.\n\n@return bool True if the user is authenticated, false otherwise.",
-        "line": 969
+        "line": 970
       }
     ]
   },
