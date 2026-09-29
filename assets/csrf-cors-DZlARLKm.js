@@ -58,11 +58,17 @@ return [
 
 ## Preflight behavior
 
-A browser preflight uses \`OPTIONS\`, \`Origin\`, and \`Access-Control-Request-Method\`, optionally with \`Access-Control-Request-Headers\`. The router matches a preflight to the route for its requested method, so an ordinary API route with \`cors\` middleware does not need a duplicate OPTIONS route. An explicitly registered OPTIONS route is also supported. Keep \`cors\` before middleware that would reject an unauthenticated preflight.
+A browser preflight uses \`OPTIONS\`, \`Origin\`, and \`Access-Control-Request-Method\`, optionally with \`Access-Control-Request-Headers\`. The router matches a preflight to the route for its requested method, including GET routes for requested HEAD methods, so an ordinary API route with \`cors\` middleware does not need a duplicate OPTIONS route. An explicitly registered OPTIONS route is also supported. OPTIONS requests missing either required header remain ordinary requests. Keep \`cors\` before middleware that would reject an unauthenticated preflight.
 
-For an allowed origin, an accepted preflight returns **204** without invoking the controller; unsupported methods or headers return **403**. A disallowed origin continues without CORS access headers, so the browser cannot read the response. CORS is a browser response-access policy, not a server-side permission check.
+An accepted preflight returns **204** without invoking the controller. Disallowed origins, unsupported methods or headers, and malformed method/header tokens return **403** once the request reaches CORS middleware, even under wildcard policies. A normal request from a disallowed origin continues without CORS access headers, so the browser cannot read the response. CORS is a browser response-access policy, not a server-side permission check.
 
-Credential headers are emitted only when enabled; the middleware does not emit \`Access-Control-Allow-Credentials: false\`. Origin-specific responses include \`Vary: Origin\`.
+Credential headers are emitted only when enabled; the middleware does not emit \`Access-Control-Allow-Credentials: false\`. Wildcard origin policies reflect the concrete origin when credentials are enabled. Origin patterns work as a string or an array. CORS responses merge \`Vary: Origin\` with existing values, and preflight responses also vary by \`Access-Control-Request-Method\` and \`Access-Control-Request-Headers\`.
+
+## Error responses
+
+Once CORS middleware runs for a matching path, its headers also apply to responses rendered after an exception, including validation **422** responses, and early \`send()\` / \`abort()\` responses and redirects. The status and response body are preserved, so an allowed frontend can read validation errors normally. This behavior runs in production as well as tests; no application CORS override is needed for these responses.
+
+Put \`cors\` before authentication and other middleware that may return or throw early. Excluded paths, routes without CORS middleware, and failures before CORS executes do not acquire CORS headers. CORS response preparation is reset for each \`Application::handle()\` call, preventing one request's origin or policy from leaking into later requests.
 
 ## Troubleshooting
 
