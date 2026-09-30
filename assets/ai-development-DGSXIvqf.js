@@ -81,6 +81,14 @@ This gives the assistant observable requirements without prescribing every imple
 
 For example, \`onlyTrashed()->forceDelete()\` permanently deletes the selected archived rows. A trash scope alone does not restrict the operation to the current user. The assistant should preserve the application's ownership conditions and verify the resulting database state.
 
+## Coding style and native features
+
+The development skill requires readable Laravel-style PHP formatting while using Spark's real APIs: four spaces, one statement per line, expanded long arrays and chains, and blank lines between logical steps. It discourages compressed method bodies, nested ternaries, redundant wrappers, and unnecessary service layers. Newly written code should follow these conventions without reformatting unrelated files.
+
+Use Spark's validation, resources, relationships, scopes, support helpers, and services before adding custom equivalents. Verify each method against the installed package. Laravel formatting is a style choice, not a promise of Eloquent or Illuminate compatibility.
+
+The skill also requires checking model return values before chaining. Use global \`tap()\` when retaining a model after actions, and \`pipe()\` when returning a transformed value. Explicitly handle failed writes when success matters; \`tap()\` ignores callback return values. See [Models](./models.md#model-action-return-values-tap-and-pipe) and [Helpers](./helpers.md#tap-and-pipe).
+
 ## Verify the result
 
 Ask for checks appropriate to the change. The skeleton provides a PHP test runner:
