@@ -61,7 +61,7 @@ Check a public page, a JSON endpoint, login/logout, a protected write with CSRF,
 
 ## Persist release state
 
-Keep uploaded files, SQLite databases, queue/cache locations as appropriate, and **\`database/migrations.json\`** outside a replaceable release directory or restore them consistently for the new release. The migration history is a file, not a table in the application database. Losing it can cause an already-applied migration to be attempted again.
+Keep uploaded files, SQLite databases, and file queue/session/cache locations outside replaceable release directories or mount persistent storage. Migration history now lives in the application database’s \`migrations\` table and must be backed up with that database. Baseline the SQL ledger before running 4.0 migrations against an existing schema; core has no legacy import support. See [migration upgrades](./migrations.md#upgrade-an-existing-database).
 
 Clear stale configuration before running migrations or restarting workers so deployment commands use the intended database. Verify CLI PHP and the web PHP runtime have the same required extensions; a successful CLI command does not establish that PHP-FPM loaded the same configuration.
 
