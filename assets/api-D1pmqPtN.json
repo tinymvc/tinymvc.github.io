@@ -2001,7 +2001,7 @@
     "file": "Console/Commands.php",
     "name": "Spark\\Console\\Commands",
     "kind": "class",
-    "sha256": "b7272ea2a0976cdbd47a2d34403a9b8c65fcc60303ec2998cd39d1ad511270a8",
+    "sha256": "d652f991b7972b74876ad30a1ef437487ade91b183eaa07af2baedc4f32a5a37",
     "methods": [
       {
         "name": "__construct",
@@ -2100,7 +2100,7 @@
     "file": "Console/Console.php",
     "name": "Spark\\Console\\Console",
     "kind": "class",
-    "sha256": "e26ed4cd014b947097559a4d55b05f59a32fb1a6857625e0ee5986826f7fd4d9",
+    "sha256": "f5fde528441d443c681e3f6992a9e538eed779f2d412fc5eb109e38c3d5cb0d1",
     "methods": [
       {
         "name": "__construct",
@@ -2208,7 +2208,7 @@
     "file": "Console/Contracts/PromptContract.php",
     "name": "Spark\\Console\\Contracts\\PromptContract",
     "kind": "interface",
-    "sha256": "ea06fb997c1b092a8b9f280392b39f768808485f2b5df2e4c969c1df9b83fd33",
+    "sha256": "385af69197425c9a932b72c309659a7e9d7c2cf5f71a8393cf3e049f6a9b8479",
     "methods": [
       {
         "name": "ask",
@@ -2225,116 +2225,123 @@
         "line": 35
       },
       {
+        "name": "status",
+        "signature": "public static function status(string $message, string $status = 'DONE', ?float $duration = null): void",
+        "description": "Print a progress status with an optional duration in seconds.",
+        "doc": "Print a progress status with an optional duration in seconds.",
+        "line": 38
+      },
+      {
         "name": "line",
         "signature": "public static function line(string $message = ''): void",
         "description": "Print a plain line.",
         "doc": "Print a plain line.\n\n@param string $message",
-        "line": 42
+        "line": 46
       },
       {
         "name": "info",
         "signature": "public static function info(string $message): void",
         "description": "Print an info message.",
         "doc": "Print an info message.\n\n@param string $message",
-        "line": 49
+        "line": 53
       },
       {
         "name": "success",
         "signature": "public static function success(string $message): void",
         "description": "Print a success message.",
         "doc": "Print a success message.\n\n@param string $message",
-        "line": 56
+        "line": 60
       },
       {
         "name": "warning",
         "signature": "public static function warning(string $message): void",
         "description": "Print a warning message.",
         "doc": "Print a warning message.\n\n@param string $message",
-        "line": 63
+        "line": 67
       },
       {
         "name": "error",
         "signature": "public static function error(string $message): void",
         "description": "Print an error message.",
         "doc": "Print an error message.\n\n@param string $message",
-        "line": 70
+        "line": 74
       },
       {
         "name": "comment",
         "signature": "public static function comment(string $message): void",
         "description": "Print a muted comment message.",
         "doc": "Print a muted comment message.\n\n@param string $message",
-        "line": 77
+        "line": 81
       },
       {
         "name": "alert",
         "signature": "public static function alert(string $message): void",
         "description": "Print an alert message.",
         "doc": "Print an alert message.\n\n@param string $message",
-        "line": 84
+        "line": 88
       },
       {
         "name": "title",
         "signature": "public static function title(string $title): void",
         "description": "Print a formatted title.",
         "doc": "Print a formatted title.\n\n@param string $title",
-        "line": 91
+        "line": 95
       },
       {
         "name": "section",
         "signature": "public static function section(string $title): void",
         "description": "Print a section heading.",
         "doc": "Print a section heading.\n\n@param string $title",
-        "line": 98
+        "line": 102
       },
       {
         "name": "table",
         "signature": "public static function table(array $headers, array $rows): void",
         "description": "Print a table in console output.",
         "doc": "Print a table in console output.\n\n@param array $headers\n@param array $rows",
-        "line": 106
+        "line": 110
       },
       {
         "name": "definitionList",
         "signature": "public static function definitionList(array $items): void",
         "description": "Print a definition list.",
         "doc": "Print a definition list.\n\n@param array $items",
-        "line": 113
+        "line": 117
       },
       {
         "name": "choice",
         "signature": "public static function choice(string $question, array $options, mixed $default = null): mixed",
         "description": "Ask an option choice from an option list.",
         "doc": "Ask an option choice from an option list.\n\n@param string $question\n@param array $options\n@param mixed $default",
-        "line": 122
+        "line": 126
       },
       {
         "name": "confirm",
         "signature": "public static function confirm(string $question, bool $default = false): bool",
         "description": "Ask the user a yes/no question and return their response as a boolean.",
         "doc": "Ask the user a yes/no question and return their response as a boolean.\n\n@param string $question\n  The question to display to the user.\n@param bool $default\n  The default answer if the user provides no input. Defaults to false (no).\n\n@return bool\n  True if the user answered yes, false if they answered no.",
-        "line": 135
+        "line": 139
       },
       {
         "name": "warn",
         "signature": "public static function warn(string $message): void",
         "description": "Show output using <warn> style as backward-compatible alias.",
         "doc": "Show output using <warn> style as backward-compatible alias.\n\n@param string $message",
-        "line": 142
+        "line": 146
       },
       {
         "name": "parseArguments",
         "signature": "public static function parseArguments(array $args): array",
         "description": "Parse CLI arguments.",
         "doc": "Parse CLI arguments.\n\n@param array $args\n@return array",
-        "line": 150
+        "line": 154
       },
       {
         "name": "newline",
         "signature": "public static function newline(int $count = 1): void",
         "description": "Print a specified number of newlines to the console.",
         "doc": "Print a specified number of newlines to the console.\n\n@param int $count\n  The number of newlines to print. Defaults to 1.",
-        "line": 158
+        "line": 162
       }
     ]
   },
@@ -2483,133 +2490,140 @@
     "file": "Console/Prompt.php",
     "name": "Spark\\Console\\Prompt",
     "kind": "class",
-    "sha256": "8fbf29f9bf5ee163526c7a8546890c39ba992f8395133b099666eea2db115fc1",
+    "sha256": "d64eb11eed2676246bf771229057d53e4464c5ca392243a476ad08441896835c",
     "methods": [
       {
         "name": "ask",
         "signature": "public static function ask(string $question, string $default = ''): string",
         "description": "Prompts the user with a question and returns their input.",
         "doc": "Prompts the user with a question and returns their input.\n\n@param string $question\n  The question to display to the user.\n@param string $default\n  The default answer if the user provides no input.\n\n@return string\n  The user's input or the default value.",
-        "line": 55
+        "line": 56
       },
       {
         "name": "message",
         "signature": "public static function message(string $message, string $type = 'normal'): void",
         "description": "Prints a message with a colored style.",
         "doc": "Prints a message with a colored style.\n\n@param string $message\n  The message to print.\n@param string $type\n  The type of message. Supported types are \"success\", \"danger\", \"warning\", \"info\".\n  If not provided, the message will be printed as normal text.",
-        "line": 84
+        "line": 85
+      },
+      {
+        "name": "status",
+        "signature": "public static function status(string $message, string $status = 'DONE', ?float $duration = null): void",
+        "description": "Print a complete progress line, optionally including elapsed seconds.",
+        "doc": "Print a complete progress line, optionally including elapsed seconds.",
+        "line": 109
       },
       {
         "name": "line",
         "signature": "public static function line(string $message = ''): void",
         "description": "Prints a plain line.",
         "doc": "Prints a plain line.\n\n@param string $message",
-        "line": 99
+        "line": 132
       },
       {
         "name": "info",
         "signature": "public static function info(string $message): void",
         "description": "Prints an informational message.",
         "doc": "Prints an informational message.\n\n@param string $message",
-        "line": 109
+        "line": 142
       },
       {
         "name": "success",
         "signature": "public static function success(string $message): void",
         "description": "Prints a success message.",
         "doc": "Prints a success message.\n\n@param string $message",
-        "line": 119
+        "line": 152
       },
       {
         "name": "warning",
         "signature": "public static function warning(string $message): void",
         "description": "Prints a warning message.",
         "doc": "Prints a warning message.\n\n@param string $message",
-        "line": 129
+        "line": 162
       },
       {
         "name": "warn",
         "signature": "public static function warn(string $message): void",
         "description": "Prints a warning message.",
         "doc": "Prints a warning message.\n\n@param string $message\n@deprecated Use warning() instead.",
-        "line": 140
+        "line": 173
       },
       {
         "name": "error",
         "signature": "public static function error(string $message): void",
         "description": "Prints an error message.",
         "doc": "Prints an error message.\n\n@param string $message",
-        "line": 150
+        "line": 183
       },
       {
         "name": "comment",
         "signature": "public static function comment(string $message): void",
         "description": "Prints a muted comment line.",
         "doc": "Prints a muted comment line.\n\n@param string $message",
-        "line": 160
+        "line": 193
       },
       {
         "name": "alert",
         "signature": "public static function alert(string $message): void",
         "description": "Prints an alert-style message with spacing.",
         "doc": "Prints an alert-style message with spacing.\n\n@param string $message",
-        "line": 170
+        "line": 203
       },
       {
         "name": "title",
         "signature": "public static function title(string $title): void",
         "description": "Prints a title-like heading.",
         "doc": "Prints a title-like heading.\n\n@param string $title",
-        "line": 182
+        "line": 215
       },
       {
         "name": "section",
         "signature": "public static function section(string $title): void",
         "description": "Prints a section-like heading.",
         "doc": "Prints a section-like heading.\n\n@param string $title",
-        "line": 196
+        "line": 229
       },
       {
         "name": "confirm",
         "signature": "public static function confirm(string $question, bool $default = false): bool",
         "description": "Confirm a question with a yes/no answer.",
         "doc": "Confirm a question with a yes/no answer.\n\n@param string $question\n  The question to confirm.\n@param bool $default\n  The default answer (if user just hits enter).\n  If true (default), the default answer is \"Yes\".\n  If false, the default answer is \"No\".\n\n@return bool\n  The answer to the question (true for yes, false for no).",
-        "line": 215
+        "line": 248
       },
       {
         "name": "newline",
         "signature": "public static function newline(int $count = 1): void",
         "description": "Print a newline character a specified number of times.",
         "doc": "Print a newline character a specified number of times.\n\n@param int $count\n  The number of times to print a newline character.\n  If not provided, it defaults to 1.",
-        "line": 241
+        "line": 274
       },
       {
         "name": "table",
         "signature": "public static function table(array $headers, array $rows): void",
         "description": "Prints a table with headers and rows.",
         "doc": "Prints a table with headers and rows.\n\n@param array $headers\n  Header list.\n@param array $rows\n  A list of row arrays.",
-        "line": 255
+        "line": 288
       },
       {
         "name": "definitionList",
         "signature": "public static function definitionList(array $items): void",
         "description": "Prints list items in a compact two-column format.",
         "doc": "Prints list items in a compact two-column format.\n\n@param array $items\n  Label/value associative pairs.",
-        "line": 332
+        "line": 381
       },
       {
         "name": "choice",
         "signature": "public static function choice(string $question, array $options, mixed $default = null): mixed",
         "description": "Asks the user to choose from a list of options.",
         "doc": "Asks the user to choose from a list of options.\n\n@param string $question\n@param array $options\n@param mixed $default\n@return mixed",
-        "line": 358
+        "line": 407
       },
       {
         "name": "parseArguments",
         "signature": "public static function parseArguments(array $args): array",
         "description": "Parses command line arguments into an associative array.\n\nThis method takes an array of command line arguments and converts them\ninto a structured associative array, where long options (e.g., --option)\nand short options (e.g., -o) are separated from positional arguments.",
         "doc": "Parses command line arguments into an associative array.\n\nThis method takes an array of command line arguments and converts them\ninto a structured associative array, where long options (e.g., --option)\nand short options (e.g., -o) are separated from positional arguments.\n\n@param array $args\n  The command line arguments to parse.\n\n@return array\n  An associative array containing parsed command line arguments.",
-        "line": 393
+        "line": 442
       }
     ]
   },
@@ -5350,7 +5364,7 @@
     "file": "Database/Migration.php",
     "name": "Spark\\Database\\Migration",
     "kind": "class",
-    "sha256": "6c429b9e7a850b1239e38ad4dbbdc3e6f5a08297832ea31200c1a7811ad7582d",
+    "sha256": "3f061fe6f5e92b900b462473a95e292565eed261e3bec57e7e809cdb7bd2ed5c",
     "methods": [
       {
         "name": "__construct",
@@ -5364,21 +5378,21 @@
         "signature": "public function up(array $args = []): void",
         "description": "Applies new migrations.\n\nScans the folder for migration files (all PHP files) and executes the\nup() method on those that haven't been applied yet.",
         "doc": "Applies new migrations.\n\nScans the folder for migration files (all PHP files) and executes the\nup() method on those that haven't been applied yet.\n\n@param array $args\n An array containing the arguments for the migration.\n@return void",
-        "line": 73
+        "line": 71
       },
       {
         "name": "down",
         "signature": "public function down(array $args = []): void",
         "description": "Rolls back the last applied migrations.\n\nRetrieves the list of applied migrations, most recently applied first,\nand calls down() on the specified number of them.",
         "doc": "Rolls back the last applied migrations.\n\nRetrieves the list of applied migrations, most recently applied first,\nand calls down() on the specified number of them.\n\n@param array $args\n  An array containing the number of steps to rollback.\n  If 'step' is not provided, it defaults to 1.\n@return void",
-        "line": 147
+        "line": 159
       },
       {
         "name": "refresh",
         "signature": "public function refresh(array $args = []): void",
         "description": "Rolls back all applied migrations and then applies all migrations again.\n\nThis is useful for quickly setting up a database in a development environment.",
         "doc": "Rolls back all applied migrations and then applies all migrations again.\n\nThis is useful for quickly setting up a database in a development environment.\n\n@param array $args\n An array containing the number of steps to rollback.\n@return void",
-        "line": 213
+        "line": 236
       }
     ]
   },
@@ -9630,105 +9644,105 @@
     "file": "Foundation/Console/PrimaryCommandsHandler.php",
     "name": "Spark\\Foundation\\Console\\PrimaryCommandsHandler",
     "kind": "class",
-    "sha256": "19431a1b1c19c9dfbb73f9065088d3f0240b5c8937e58ea5398a00b58963e9d8",
+    "sha256": "bbea1a118c2a57f3fc362c5c55cdab659a3c0624027c8af27e71a1ca2c3be5fe",
     "methods": [
       {
         "name": "startDevelopmentServer",
         "signature": "public function startDevelopmentServer(array $args)",
         "description": "Starts a PHP built-in development server.\n\nThis method runs a PHP built-in server on localhost using the specified port\nfrom the arguments or defaults to port 8080. It provides a console message\nindicating the server's address and start time. The server runs in the\nforeground, allowing proper termination with Ctrl+C.",
         "doc": "Starts a PHP built-in development server.\n\nThis method runs a PHP built-in server on localhost using the specified port\nfrom the arguments or defaults to port 8080. It provides a console message\nindicating the server's address and start time. The server runs in the\nforeground, allowing proper termination with Ctrl+C.\n\n@param array $args\n  An associative array of arguments, where the server port can be specified\n  using the '_args' key.",
-        "line": 37
+        "line": 40
       },
       {
         "name": "routeList",
         "signature": "public function routeList(Router $router)",
         "description": "Displays a list of registered routes in the console.\n\nThis method retrieves the registered routes from the router and displays\nthem in the console with their associated HTTP methods and (optional)\nroute names. The output is formatted to be easy to read, with the route\npath and HTTP method(s) aligned in columns.",
         "doc": "Displays a list of registered routes in the console.\n\nThis method retrieves the registered routes from the router and displays\nthem in the console with their associated HTTP methods and (optional)\nroute names. The output is formatted to be easy to read, with the route\npath and HTTP method(s) aligned in columns.\n\n@param Router $router\n  An instance of the Router class containing the registered routes.",
-        "line": 73
+        "line": 124
       },
       {
         "name": "handleHelp",
         "signature": "public function handleHelp(Commands $commands, array $args)",
         "description": "Handles the \"help\" command by listing all registered commands or showing\nhelp for a specific command if a command name is provided.",
         "doc": "Handles the \"help\" command by listing all registered commands or showing\nhelp for a specific command if a command name is provided.\n\n@param Commands $commands\n  An instance of the Commands class containing the registered commands.\n@param array $args\n  An associative array of arguments, where the command name can be\n  specified using the '_args' key.\n\n@return void",
-        "line": 101
+        "line": 158
       },
       {
         "name": "runQueueJobs",
         "signature": "public function runQueueJobs(Queue $queue, array $args)",
         "description": "Handles the \"queue:run\" command by running all the pending queue jobs.",
         "doc": "Handles the \"queue:run\" command by running all the pending queue jobs.\n\n@param Queue $queue\n  An instance of the Queue class for running queue jobs.\n @param array $args\n  An associative array of arguments, where the maximum number of jobs to run\n\n@return void",
-        "line": 126
+        "line": 184
       },
       {
         "name": "listQueueJobs",
         "signature": "public function listQueueJobs(Queue $queue, array $args)",
         "description": "Lists all scheduled queue jobs.",
         "doc": "Lists all scheduled queue jobs.\n\n@param Queue $queue\n  An instance of the Queue class for managing queue jobs.\n\n@return void",
-        "line": 146
+        "line": 204
       },
       {
         "name": "listFailedQueueJobs",
         "signature": "public function listFailedQueueJobs(Queue $queue, array $args)",
         "description": "Lists all failed queue jobs.",
         "doc": "Lists all failed queue jobs.\n\n@param Queue $queue\n  An instance of the Queue class for managing queue jobs.\n\n@return void",
-        "line": 181
+        "line": 243
       },
       {
         "name": "clearQueueJobs",
         "signature": "public function clearQueueJobs(Queue $queue)",
         "description": "Clears all the pending jobs in the queue.",
         "doc": "Clears all the pending jobs in the queue.\n\n@param Queue $queue\n  An instance of the Queue class for clearing queue jobs.\n\n@return void",
-        "line": 213
+        "line": 280
       },
       {
         "name": "clearFailedQueueJobs",
         "signature": "public function clearFailedQueueJobs(Queue $queue)",
         "description": "Lists all failed queue jobs.",
         "doc": "Lists all failed queue jobs.\n\n@param Queue $queue\n  An instance of the Queue class for managing queue jobs.\n\n@return void",
-        "line": 227
+        "line": 294
       },
       {
         "name": "retryFailedQueueJobs",
         "signature": "public function retryFailedQueueJobs(Queue $queue)",
         "description": "Retries all failed queue jobs.",
         "doc": "Retries all failed queue jobs.\n\n@param Queue $queue\n  An instance of the Queue class for managing queue jobs.\n\n@return void",
-        "line": 241
+        "line": 308
       },
       {
         "name": "clearViewCaches",
         "signature": "public function clearViewCaches()",
         "description": "Clears the view caches.\n\nThis method clears the cached views in the application, ensuring that\nthe latest view files are used when rendering views.",
         "doc": "Clears the view caches.\n\nThis method clears the cached views in the application, ensuring that\nthe latest view files are used when rendering views.\n\n@return void",
-        "line": 255
+        "line": 322
       },
       {
         "name": "clearConfigCache",
         "signature": "public function clearConfigCache()",
         "description": "Clears the configuration cache.\n\nThis method removes the cached configuration file, allowing the application\nto load the latest configuration settings from the config directory.",
         "doc": "Clears the configuration cache.\n\nThis method removes the cached configuration file, allowing the application\nto load the latest configuration settings from the config directory.\n\n@return void",
-        "line": 270
+        "line": 337
       },
       {
         "name": "clearCache",
         "signature": "public function clearCache(): void",
         "description": "Clear the default cache and compiled views/configuration without releasing active locks.",
         "doc": "Clear the default cache and compiled views/configuration without releasing active locks.",
-        "line": 285
+        "line": 352
       },
       {
         "name": "generateAppKey",
         "signature": "public function generateAppKey()",
         "description": "Generate an application key only when the environment has no existing key.",
         "doc": "Generate an application key only when the environment has no existing key.",
-        "line": 295
+        "line": 362
       },
       {
         "name": "createSymbolicLinkForUploads",
         "signature": "public function createSymbolicLinkForUploads()",
         "description": "Creates a symbolic link for the uploads directory.\n\nThis method creates a symbolic link from the storage uploads directory\nto the public uploads directory. It first checks if the symbolic link\nor directory already exists. If it does, an informational message is displayed.\nIf not, it attempts to create the symbolic link and provides feedback\non whether the operation was successful or not.",
         "doc": "Creates a symbolic link for the uploads directory.\n\nThis method creates a symbolic link from the storage uploads directory\nto the public uploads directory. It first checks if the symbolic link\nor directory already exists. If it does, an informational message is displayed.\nIf not, it attempts to create the symbolic link and provides feedback\non whether the operation was successful or not.\n\n@return void",
-        "line": 350
+        "line": 425
       }
     ]
   },
@@ -9736,7 +9750,7 @@
     "file": "Foundation/Console/StubCreation.php",
     "name": "Spark\\Foundation\\Console\\StubCreation",
     "kind": "class",
-    "sha256": "fa3773ce2fbab942b213d863050b37148d0353ce74084fb441c2fac6bdf9bca4",
+    "sha256": "1c627a959eb36e486628c966abf242f2594b2e625dc0388f5ddc7a6c115c6aab",
     "methods": [
       {
         "name": "create",
@@ -9939,7 +9953,7 @@
     "file": "Foundation/Providers/ConsoleServiceProvider.php",
     "name": "Spark\\Foundation\\Providers\\ConsoleServiceProvider",
     "kind": "class",
-    "sha256": "324f7cecdb255e2bb7dd08e3a1621a7d6c37303ec038201bcc6f0e24fc0e1a28",
+    "sha256": "3a1ae0c2660ec5564192f7543103d20238567d7e56723c50e93afe8062c64423",
     "methods": [
       {
         "name": "register",
@@ -16520,98 +16534,98 @@
     "file": "Queue/Queue.php",
     "name": "Spark\\Queue\\Queue",
     "kind": "class",
-    "sha256": "9ed8dfb97916c875c6ea6f93e65f07ba080b1d9c126c0be12b830081c65e9223",
+    "sha256": "ba7684a824b67cbd0639c739d8d9960ff9a4f2ba896200d624cdcf49947f9bca",
     "methods": [
       {
         "name": "__construct",
         "signature": "public function __construct()",
         "description": "",
         "doc": "",
-        "line": 30
+        "line": 31
       },
       {
         "name": "getConnection",
         "signature": "public function getConnection(): PDO|\\Redis",
         "description": "",
         "doc": "",
-        "line": 42
+        "line": 43
       },
       {
         "name": "push",
         "signature": "public function push(JobContract $job, string $queue = 'default'): void",
         "description": "Push a job onto the queue.",
         "doc": "Push a job onto the queue.\n\n@param JobContract $job The job to push onto the queue.\n@param string $queue The name of the queue to push the job onto.",
-        "line": 53
+        "line": 54
       },
       {
         "name": "pushOnce",
         "signature": "public function pushOnce(JobContract $job, string $queue = 'default'): void",
         "description": "Push a job onto the queue only if it doesn't already exist.",
         "doc": "Push a job onto the queue only if it doesn't already exist.\n\n@param JobContract $job The job to push onto the queue.\n@param string $queue The name of the queue to push the job onto.",
-        "line": 64
+        "line": 65
       },
       {
         "name": "clearAllJobs",
         "signature": "public function clearAllJobs(): void",
         "description": "Clear all jobs from the queue, including pending, processing, and failed jobs.",
         "doc": "Clear all jobs from the queue, including pending, processing, and failed jobs.",
-        "line": 72
+        "line": 73
       },
       {
         "name": "clearRepeatedJobs",
         "signature": "public function clearRepeatedJobs(): void",
         "description": "Clear all jobs from the queue, including pending and processing jobs, but not failed jobs.",
         "doc": "Clear all jobs from the queue, including pending and processing jobs, but not failed jobs.",
-        "line": 80
+        "line": 81
       },
       {
         "name": "clearFailedJobs",
         "signature": "public function clearFailedJobs(): void",
         "description": "Clear all failed jobs from the queue.",
         "doc": "Clear all failed jobs from the queue.",
-        "line": 88
+        "line": 89
       },
       {
         "name": "removeJobById",
         "signature": "public function removeJobById(int $id): bool",
         "description": "Remove a job from the queue by its ID.",
         "doc": "Remove a job from the queue by its ID.\n\n@param int $id The ID of the job to remove.\n@return bool True if the job was removed, false otherwise.",
-        "line": 99
+        "line": 100
       },
       {
         "name": "removeQueue",
         "signature": "public function removeQueue(string $name): bool",
         "description": "Remove a queue by its name.",
         "doc": "Remove a queue by its name.\n\n@param string $name The name of the queue to remove.\n@return bool True if the queue was removed, false otherwise.",
-        "line": 110
+        "line": 111
       },
       {
         "name": "work",
         "signature": "public function work( bool $once = false, int $timeout = 3600, int $sleep = 3, int $delay = 5, int $tries = 3, array|string $queue = 'default' ): void",
         "description": "Start the queue worker to process jobs.",
         "doc": "Start the queue worker to process jobs.\n\n@param bool $once Whether to process only one job and exit (default is false).\n@param int $timeout The maximum time in seconds to run the worker (default is 3600).\n@param int $sleep The number of seconds to sleep between job checks (default is 3).\n@param int $delay The number of seconds to delay before retrying a failed job (default is 5).\n@param int $tries The maximum number of attempts for a job before marking it as failed (default is 3).\n@param array|string $queue The name(s) of the queue(s) to process (default is 'default').",
-        "line": 125
+        "line": 126
       },
       {
         "name": "getJobs",
         "signature": "public function getJobs( array|string|null $queue = null, array|string|null $status = null, int $from = 0, int $to = 500, ): array",
         "description": "Get jobs from the queue with optional filtering by queue name and status.",
         "doc": "Get jobs from the queue with optional filtering by queue name and status.\n\n@param array|string|null $queue The name(s) of the queue(s) to filter by (default is null for all queues).\n@param array|string|null $status The status(es) of the jobs to filter by (default is null for all statuses).\n@param int $from The starting index for pagination (default is 0).\n@param int $to The ending index for pagination (default is 500).\n@return array An array of jobs matching the specified criteria.",
-        "line": 229
+        "line": 230
       },
       {
         "name": "getFailedJobs",
         "signature": "public function getFailedJobs(int $from = 0, int $to = 500): array",
         "description": "Get failed jobs from the queue with optional pagination.",
         "doc": "Get failed jobs from the queue with optional pagination.\n\n@param int $from The starting index for pagination (default is 0).\n@param int $to The ending index for pagination (default is 500).\n@return array An array of failed jobs.",
-        "line": 245
+        "line": 246
       },
       {
         "name": "retryFailedJobs",
         "signature": "public function retryFailedJobs(): void",
         "description": "Retry all failed jobs in the queue.",
         "doc": "Retry all failed jobs in the queue.",
-        "line": 253
+        "line": 254
       }
     ]
   },
