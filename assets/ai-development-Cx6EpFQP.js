@@ -6,14 +6,14 @@ Open your application folder in your coding assistant, then give it a concrete t
 
 \`\`\`text
 Use .agents/skills/tinymvc-development/SKILL.md for this TinyMVC project.
-Read the relevant sections of FRAMEWORK.md and inspect the installed
+Read the relevant linked references and inspect the installed
 TinyCore source when an API is unclear.
 
 Add a posts API with validation, ownership checks, and pagination.
 Follow the existing application conventions and add focused tests.
 \`\`\`
 
-In tools that support named skill invocation, select \`tinymvc-development\` or invoke \`$tinymvc-development\` when it is available. In other tools, explicitly reference the skill file and \`FRAMEWORK.md\`. Automatic discovery varies by assistant; the files can also be used as ordinary Markdown context.
+In tools that support named skill invocation, select \`tinymvc-development\` or invoke \`$tinymvc-development\` when it is available. In other tools, explicitly reference the skill file and its \`references/\` directory. Automatic discovery varies by assistant; the files can also be used as ordinary Markdown context.
 
 New to TinyMVC itself? Start with [Introduction](./introduction.md), [Installation](./installation.md), and [Quick start](./quick-start.md).
 
@@ -24,22 +24,28 @@ Keep these files together at their application-relative paths:
 \`\`\`text
 your-application/
 ├── AGENTS.md
-├── FRAMEWORK.md
 └── .agents/
     └── skills/
         └── tinymvc-development/
-            └── SKILL.md
+            ├── SKILL.md
+            └── references/
+                ├── application-patterns.md
+                ├── foundation.md
+                ├── queries.md
+                ├── workflow-testing.md
+                └── ... (topic references linked from SKILL.md)
 \`\`\`
 
 | File | Purpose |
 | --- | --- |
 | \`AGENTS.md\` | Directs project agents to the TinyMVC skill and the installed framework |
 | \`.agents/skills/tinymvc-development/SKILL.md\` | A focused workflow for implementing, debugging, reviewing, and testing features |
-| \`FRAMEWORK.md\` | Detailed APIs, examples, source locations, and framework-specific behavior |
+| \`.agents/skills/tinymvc-development/references/application-patterns.md\` | Portable controller, scope, resource, service, and job examples |
+| \`.agents/skills/tinymvc-development/references/\` | Focused API references for HTTP, database, auth, sessions, queues, storage, views, testing, upgrades and operations |
 
 The skill routes the assistant to the relevant reference sections. A routing change should not require loading every database, queue, and frontend example. Keep your application's own conventions in its project instructions, and keep reusable framework guidance in the skill/reference.
 
-For an existing application without these files, bring them over from the [TinyMVC starter](https://github.com/tinymvc/skeleton) after reviewing them against your installed framework. Merge guidance into an existing \`AGENTS.md\` instead of overwriting project rules. Preserve the directory structure: the skill links to \`FRAMEWORK.md\` using a relative path. These are repository files; they do not require a PHP service provider or runtime package.
+For an existing application without these files, bring them over from the [TinyMVC starter](https://github.com/tinymvc/skeleton) after reviewing them against your installed framework. Merge guidance into an existing \`AGENTS.md\` instead of overwriting project rules. Preserve the directory structure: the skill links to its topic references using relative paths. The former root \`FRAMEWORK.md\` is split into these references; copy the entire skill folder. These are repository files; they do not require a PHP service provider or runtime package.
 
 ## Work against your installed version
 
@@ -85,9 +91,26 @@ For example, \`onlyTrashed()->forceDelete()\` permanently deletes the selected a
 
 The development skill requires readable Laravel-style PHP formatting while using Spark's real APIs: four spaces, one statement per line, expanded long arrays and chains, and blank lines between logical steps. It discourages compressed method bodies, nested ternaries, redundant wrappers, and unnecessary service layers. Newly written code should follow these conventions without reformatting unrelated files.
 
+The application-patterns reference demonstrates: direct typed controller actions, inline validation for small actions or form requests for larger rule sets, focused domain services, reusable model scopes, and explicit response resources. Its examples are self-contained and use a neutral application domain. Service injection and stateless static helpers are both supported where they match the application. Copy the whole skill directory when adopting the guidance.
+
+For efficient work, trace one nearby feature and its tests, then inspect only the relevant installed methods and reference sections. Route binding does not establish ownership. \`validate()\` and no-argument \`validated()\` return Spark's \`Input\` object; call \`all()\` when a plain array is required. Eager-load the relations/counts a resource needs and use \`whenLoaded()\` / \`whenCounted()\` to avoid hidden serialization queries.
+
 Use Spark's validation, resources, relationships, scopes, support helpers, and services before adding custom equivalents. Verify each method against the installed package. Laravel formatting is a style choice, not a promise of Eloquent or Illuminate compatibility.
 
 The skill also requires checking model return values before chaining. Use global \`tap()\` when retaining a model after actions, and \`pipe()\` when returning a transformed value. Explicitly handle failed writes when success matters; \`tap()\` ignores callback return values. See [Models](./models.md#model-action-return-values-tap-and-pipe) and [Helpers](./helpers.md#tap-and-pipe).
+
+## Advanced work and exact APIs
+
+The skill includes advanced workflows for conditional writes, tenant/owner scopes, connection boundaries, commit/dispatch failures, idempotent jobs, expiring locks, query costs, and request/worker state isolation. Load those references when the task crosses these boundaries; routine edits can stay focused.
+
+For uncertain signatures, its \`scripts/api-lookup.php\` reads the installed TinyCore source without booting the application. From the application root:
+
+\`\`\`bash
+php .agents/skills/tinymvc-development/scripts/api-lookup.php upsert
+php .agents/skills/tinymvc-development/scripts/api-lookup.php transaction --file=Database/
+\`\`\`
+
+The tool returns bounded signature/source-location results. Follow traits, inheritance and facade forwarding when interpreting them. The skill intentionally does not bundle the documentation’s large \`api.json\` snapshot: an application can install a different version. Keep the browsable [API reference](./api-reference.md) in the documentation and use installed source to settle version-specific behavior. Copy \`scripts/\` along with the skill and its references.
 
 ## Verify the result
 
@@ -105,7 +128,7 @@ The assistant's handoff should identify the behavior changed, tests actually run
 
 ## Keep the guidance current
 
-Update \`FRAMEWORK.md\` when the framework's public behavior changes. Update \`SKILL.md\` when the development workflow or reference paths change. Keep the short entry point focused and link to detailed guidance instead of duplicating the entire manual.
+Update the relevant file under \`references/\` when the framework's public behavior changes. Update \`SKILL.md\` when the development workflow or reference paths change. Keep the short entry point focused and link to detailed guidance instead of duplicating the entire manual.
 
 When adopting a new TinyCore release, review the [upgrade notes](./upgrade-notes.md), compare the installed APIs with the guidance, and re-run the relevant application tests. Existing versioned documentation should continue to describe its own release.
 `;export{e as default};

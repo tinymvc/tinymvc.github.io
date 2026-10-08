@@ -57,6 +57,8 @@ Measure latency, database time, memory, and error rates with your actual workloa
 
 ## Verify a release
 
+Review the [recorded framework test results and coverage limits](./testing.md#verified-framework-test-results), then run your application tests against the intended runtime and database. The framework regression suite does not validate your application configuration, migrations, external providers, or production workload.
+
 Check a public page, a JSON endpoint, login/logout, a protected write with CSRF, asset loading, upload access, and a queued job. Confirm debug output is off and expected logs are being written. Keep a tested rollback plan for both code and schema changes.
 
 ## Persist release state
