@@ -4549,7 +4549,7 @@
     "file": "Database/Concerns/InteractsWithRelation.php",
     "name": "Spark\\Database\\Concerns\\InteractsWithRelation",
     "kind": "trait",
-    "sha256": "dd4de614496ff4011c1d9dca06fd962a52f9a9f76af04c081be2d96764b93569",
+    "sha256": "ed096e3b16160b23729baba49bcbd61893780904bebab39f657da572cad76ae9",
     "methods": [
       {
         "name": "with",
@@ -4581,9 +4581,9 @@
       },
       {
         "name": "find",
-        "signature": "public function find(string|int $value): false|Model",
+        "signature": "public function find(string|int $value): ?Model",
         "description": "Finds a model by its primary key ID.",
-        "doc": "Finds a model by its primary key ID.\n\n@param string|int $value The Unique Identifier of the model to retrieve.\n@return false|Model The found model instance or false if not found.",
+        "doc": "Finds a model by its primary key ID.\n\n@param string|int $value The Unique Identifier of the model to retrieve.\n@return ?Model The found model instance or null if not found.",
         "line": 179
       },
       {
@@ -5400,532 +5400,532 @@
     "file": "Database/Model.php",
     "name": "Spark\\Database\\Model",
     "kind": "class",
-    "sha256": "24307b3cbe0acb009f5cecef6d06b5fe99d893d8fe752e04b4ffff17a1108325",
+    "sha256": "e23a866b96c972cd7618cfc8362e29a99baa50dd36b85e82c7b18ad147f16dbb",
     "methods": [
       {
         "name": "__construct",
         "signature": "public function __construct()",
         "description": "model constructor.\nInitializes the model instance and decodes any previously saved data if an ID is set.",
         "doc": "model constructor.\nInitializes the model instance and decodes any previously saved data if an ID is set.",
-        "line": 219
+        "line": 220
       },
       {
         "name": "query",
         "signature": "public static function query(): QueryBuilder",
         "description": "Creates a new query instance for the model's table.",
         "doc": "Creates a new query instance for the model's table.\n\n@return QueryBuilder Returns a query object for database operations.",
-        "line": 229
+        "line": 230
       },
       {
         "name": "getTable",
         "signature": "public function getTable(): string",
         "description": "Retrieves the table name associated with the model.",
         "doc": "Retrieves the table name associated with the model.\n\n@return string The table name for the model.",
-        "line": 245
+        "line": 246
       },
       {
         "name": "getPrimaryKey",
         "signature": "public function getPrimaryKey(): string",
         "description": "Retrieves the primary key field name for the model.",
         "doc": "Retrieves the primary key field name for the model.\n\n@return string The primary key field name.",
-        "line": 255
+        "line": 256
       },
       {
         "name": "events",
         "signature": "protected function events(): Events",
         "description": "Retrieves the Events instance for the model.",
         "doc": "Retrieves the Events instance for the model.\n\n@return Events The Events instance.",
-        "line": 265
+        "line": 266
       },
       {
         "name": "create",
         "signature": "public static function create(array|Arrayable $data): static",
         "description": "Creates a new model instance from the given data and saves it to the database.",
         "doc": "Creates a new model instance from the given data and saves it to the database.\n\n@param array|Arrayable $data Key-value pairs of model properties.\n@return static The saved model instance.",
-        "line": 276
+        "line": 277
       },
       {
         "name": "createOrUpdate",
         "signature": "public static function createOrUpdate(array|Arrayable $data, array $uniqueBy = [], array|Arrayable $values = []): static",
         "description": "Creates a new model instance from the given data and saves it to the database.",
         "doc": "Creates a new model instance from the given data and saves it to the database.\n\n@param array|Arrayable $data Key-value pairs of model properties.\n@param array $uniqueBy Array of fields to uniquely identify the model.\n@param array|Arrayable $values Additional values to set if creating a new model.\n@return static The saved model instance.",
-        "line": 293
+        "line": 294
       },
       {
         "name": "firstOrCreate",
         "signature": "public static function firstOrCreate(array|Arrayable $attributes, array|Arrayable $values = []): static",
         "description": "Retrieves the first model matching the given data or creates a new one if none exists.",
         "doc": "Retrieves the first model matching the given data or creates a new one if none exists.\n\n@param array|Arrayable $attributes Key-value pairs of model properties.\n@param array|Arrayable $values Additional values to set if creating a new model.\n@return static The found or newly created model instance.",
-        "line": 327
+        "line": 328
       },
       {
         "name": "firstOrNew",
         "signature": "public static function firstOrNew(array|Arrayable $attributes, array|Arrayable $values = []): static",
         "description": "Retrieves the first model matching the given data or returns a new instance if none exists.",
         "doc": "Retrieves the first model matching the given data or returns a new instance if none exists.\n\n@param array|Arrayable $attributes Key-value pairs of model properties.\n@param array|Arrayable $values Additional values to set if creating a new model.\n@return static The found model instance or a new instance with the given data.",
-        "line": 350
+        "line": 351
       },
       {
         "name": "fill",
         "signature": "public function fill(array|Arrayable $data): static",
         "description": "Fills the model with the given data.",
         "doc": "Fills the model with the given data.\n\n@param array|Arrayable $data Key-value pairs of model properties.\n@return static The current model instance.",
-        "line": 375
+        "line": 376
       },
       {
         "name": "save",
         "signature": "public function save(bool $forceCreate = false): bool",
         "description": "Saves the model to the database, either updating or creating a new entry.",
         "doc": "Saves the model to the database, either updating or creating a new entry.\n\n@param bool $forceCreate If true, forces the creation of a new record even if the model has a primary key.\n@return bool True on success, false on failure.",
-        "line": 399
+        "line": 400
       },
       {
         "name": "remove",
         "signature": "public function remove(): bool",
         "description": "Removes the model from the database.",
         "doc": "Removes the model from the database.\n\n@return bool True if removal was successful, false otherwise.",
-        "line": 456
+        "line": 457
       },
       {
         "name": "getFillableData",
         "signature": "public function getFillableData(): array",
         "description": "Retrieves the fillable fields of the model based on the $fillable and $guarded properties.\n\nIf $fillable is defined, only the fields specified in the array are included unless\nexplicitly restricted by the $guarded property. If $fillable is empty, all fields\nare included except the ones that are explicitly guarded by the $guarded property.",
         "doc": "Retrieves the fillable fields of the model based on the $fillable and $guarded properties.\n\nIf $fillable is defined, only the fields specified in the array are included unless\nexplicitly restricted by the $guarded property. If $fillable is empty, all fields\nare included except the ones that are explicitly guarded by the $guarded property.\n\n@return array The fillable fields of the model.",
-        "line": 474
+        "line": 475
       },
       {
         "name": "castDataForStorage",
         "signature": "public function castDataForStorage(array $data): array",
         "description": "Prepares data before saving, such as encoding arrays to JSON and applying mutators.",
         "doc": "Prepares data before saving, such as encoding arrays to JSON and applying mutators.\n\n@param array $data The data to prepare.\n@return array The prepared data for database insertion or update.",
-        "line": 498
+        "line": 499
       },
       {
         "name": "castStoredData",
         "signature": "public function castStoredData(): void",
         "description": "Decodes JSON strings in properties to their original formats and applies casts.",
         "doc": "Decodes JSON strings in properties to their original formats and applies casts.\n\n@return void",
-        "line": 549
+        "line": 550
       },
       {
         "name": "primaryValue",
         "signature": "public function primaryValue($default = null): mixed",
         "description": "Gets the value of the primary key.",
         "doc": "Gets the value of the primary key.\n\n@param mixed $default The value to return if the primary key is empty.\n@return mixed The value of the primary key or the default value.",
-        "line": 573
+        "line": 574
       },
       {
         "name": "hasPrimaryValue",
         "signature": "public function hasPrimaryValue(): bool",
         "description": "Checks if the model has an original primary key value.",
         "doc": "Checks if the model has an original primary key value.\n\n@return bool True if the model has an original primary key, false otherwise.",
-        "line": 583
+        "line": 584
       },
       {
         "name": "exists",
         "signature": "public function exists(): bool",
         "description": "Checks if the model exists in the database.",
         "doc": "Checks if the model exists in the database.\n\n@return bool True if the model exists, false otherwise.",
-        "line": 595
+        "line": 596
       },
       {
         "name": "wasNewlyCreated",
         "signature": "public function wasNewlyCreated(): bool",
         "description": "Checks if the model was newly created (i.e., it has a primary key but no original primary key).",
         "doc": "Checks if the model was newly created (i.e., it has a primary key but no original primary key).\n\n@return bool True if the model was newly created, false otherwise.",
-        "line": 611
+        "line": 612
       },
       {
         "name": "wasUpdated",
         "signature": "public function wasUpdated(): bool",
         "description": "Checks if the model was updated (i.e., it has an original primary key and changes were made).",
         "doc": "Checks if the model was updated (i.e., it has an original primary key and changes were made).\n\n@return bool True if the model was updated, false otherwise.",
-        "line": 621
+        "line": 622
       },
       {
         "name": "wasCreated",
         "signature": "public function wasCreated(): bool",
         "description": "Checks if the model was created (i.e., it has a primary key and was marked as created).",
         "doc": "Checks if the model was created (i.e., it has a primary key and was marked as created).\n\n@return bool True if the model was created, false otherwise.",
-        "line": 631
+        "line": 632
       },
       {
         "name": "wasChanged",
         "signature": "public function wasChanged(): bool",
         "description": "Checks if the model was either newly created or updated.",
         "doc": "Checks if the model was either newly created or updated.\n\n@return bool True if the model was changed, false otherwise.",
-        "line": 641
+        "line": 642
       },
       {
         "name": "wasDeleted",
         "signature": "public function wasDeleted(): bool",
         "description": "Checks if the model was deleted.",
         "doc": "Checks if the model was deleted.\n\n@return bool True if the model was deleted, false otherwise.",
-        "line": 651
+        "line": 652
       },
       {
         "name": "__set",
         "signature": "public function __set(string $name, mixed $value): void",
         "description": "Magic setter method to set the value of a model attribute.",
         "doc": "Magic setter method to set the value of a model attribute.\n\n@param string $name The name of the attribute to set.\n@param mixed $value The value to set.\n@return void",
-        "line": 663
+        "line": 664
       },
       {
         "name": "__get",
         "signature": "public function __get(string $name): mixed",
         "description": "Magic getter method to retrieve the value of a model attribute.",
         "doc": "Magic getter method to retrieve the value of a model attribute.\n\n@param string $name The name of the attribute to retrieve.\n@return mixed|null The value of the attribute if set, or null if not set.",
-        "line": 674
+        "line": 675
       },
       {
         "name": "__isset",
         "signature": "public function __isset(string $name): bool",
         "description": "Checks if the specified model attribute is set.",
         "doc": "Checks if the specified model attribute is set.\n\n@param string $name The name of the attribute to check.\n@return bool True if the attribute is set, false otherwise.",
-        "line": 685
+        "line": 686
       },
       {
         "name": "__unset",
         "signature": "public function __unset(string $name): void",
         "description": "Magic unset method to remove the specified model attribute.",
         "doc": "Magic unset method to remove the specified model attribute.\n\n@param string $name The name of the attribute to remove.\n@return void",
-        "line": 696
+        "line": 697
       },
       {
         "name": "toArray",
         "signature": "public function toArray(): array",
         "description": "Converts the model to an associative array.",
         "doc": "Converts the model to an associative array.\n\n@return array An array of model properties and their values.",
-        "line": 706
+        "line": 707
       },
       {
         "name": "getHidden",
         "signature": "public function getHidden(): array",
         "description": "Get the hidden attributes for the model.",
         "doc": "Get the hidden attributes for the model.\n\n@return array",
-        "line": 761
+        "line": 762
       },
       {
         "name": "getVisible",
         "signature": "public function getVisible(): array",
         "description": "Get the visible attributes for the model.",
         "doc": "Get the visible attributes for the model.\n\n@return array",
-        "line": 774
+        "line": 775
       },
       {
         "name": "makeVisible",
         "signature": "public function makeVisible(string|array $attributes): static",
         "description": "Make the given, typically hidden, attributes visible.",
         "doc": "Make the given, typically hidden, attributes visible.\n\n@param string|array $attributes\n@return $this",
-        "line": 787
+        "line": 788
       },
       {
         "name": "makeHidden",
         "signature": "public function makeHidden(string|array $attributes): static",
         "description": "Make the given, typically visible, attributes hidden.",
         "doc": "Make the given, typically visible, attributes hidden.\n\n@param string|array $attributes\n@return $this",
-        "line": 803
+        "line": 804
       },
       {
         "name": "toJson",
         "signature": "public function toJson($options = 0): string",
         "description": "Converts the model to a JSON string.",
         "doc": "Converts the model to a JSON string.\n\n@param int $options Options for json_encode.\n@return string A JSON representation of the model.",
-        "line": 819
+        "line": 820
       },
       {
         "name": "offsetExists",
         "signature": "public function offsetExists(mixed $offset): bool",
         "description": "Check if the model has a specific attribute.",
         "doc": "Check if the model has a specific attribute.\n\n@param mixed $offset\n@return bool",
-        "line": 830
+        "line": 831
       },
       {
         "name": "offsetGet",
         "signature": "public function offsetGet(mixed $offset): mixed",
         "description": "Get the value of a specific attribute.",
         "doc": "Get the value of a specific attribute.\n\n@param mixed $offset\n@return mixed",
-        "line": 841
+        "line": 842
       },
       {
         "name": "offsetSet",
         "signature": "public function offsetSet(mixed $offset, mixed $value): void",
         "description": "Set the value of a specific attribute.",
         "doc": "Set the value of a specific attribute.\n\n@param mixed $offset\n@param mixed $value\n@return void",
-        "line": 859
+        "line": 860
       },
       {
         "name": "offsetUnset",
         "signature": "public function offsetUnset(mixed $offset): void",
         "description": "Unset a specific attribute.",
         "doc": "Unset a specific attribute.\n\n@param mixed $offset\n@return void",
-        "line": 874
+        "line": 875
       },
       {
         "name": "set",
         "signature": "public function set(string $name, mixed $value): void",
         "description": "Set a value for a specific attribute.",
         "doc": "Set a value for a specific attribute.\n\n@param string $name The name of the attribute to set.\n@param mixed $value The value to set for the attribute.\n@return void",
-        "line": 891
+        "line": 892
       },
       {
         "name": "unset",
         "signature": "public function unset(string $name, ...$names): void",
         "description": "Unset a specific attribute.",
         "doc": "Unset a specific attribute.\n\n@param string $name The name of the attribute to unset.\n@return void",
-        "line": 906
+        "line": 907
       },
       {
         "name": "get",
         "signature": "public function get(string $name, $default = null): mixed",
         "description": "Get the value of a specific attribute.",
         "doc": "Get the value of a specific attribute.\n\n@param string $name The name of the attribute to get.\n@param mixed $default The default value to return if the attribute is not set.\n@return mixed The value of the attribute or the default value if not set.",
-        "line": 925
+        "line": 926
       },
       {
         "name": "isset",
         "signature": "public function isset(array|string $column): bool",
         "description": "Check if the model has a specific attribute.",
         "doc": "Check if the model has a specific attribute.\n\n@param array|string $column The name of the attribute to check.\n@return bool True if the attribute exists, false otherwise.",
-        "line": 955
+        "line": 956
       },
       {
         "name": "getOriginal",
         "signature": "public function getOriginal(string $name, $default = null): mixed",
         "description": "Get the original value of a specific attribute before any changes were made.",
         "doc": "Get the original value of a specific attribute before any changes were made.\n\n@param string $name The name of the attribute to get.\n@param mixed $default The default value to return if the attribute is not set.\n@return mixed The original value of the attribute or the default value if not set.",
-        "line": 973
+        "line": 974
       },
       {
         "name": "getNestedOriginal",
         "signature": "public function getNestedOriginal(string $path, mixed $default = null): mixed",
         "description": "Get the original value of a nested attribute before any changes.",
         "doc": "Get the original value of a nested attribute before any changes.\n\n@param string $path The dot-notation path to the attribute.\n@param mixed $default The default value if no original exists.\n@return mixed The original value or the default.",
-        "line": 985
+        "line": 986
       },
       {
         "name": "getChanges",
         "signature": "public function getChanges(): array",
         "description": "Get the changes made to the model compared to its original state.",
         "doc": "Get the changes made to the model compared to its original state.\n\n@return array An associative array of changed attributes and their new values.",
-        "line": 1009
+        "line": 1010
       },
       {
         "name": "getNestedChanges",
         "signature": "public function getNestedChanges(): array",
         "description": "Get all nested paths that have been changed.",
         "doc": "Get all nested paths that have been changed.\n\n@return array An associative array of changed paths with their original and new values.",
-        "line": 1023
+        "line": 1024
       },
       {
         "name": "hasChanges",
         "signature": "public function hasChanges(): bool",
         "description": "Check if the model has any changes compared to its original state.",
         "doc": "Check if the model has any changes compared to its original state.\n\n@return bool True if there are changes, false otherwise.",
-        "line": 1033
+        "line": 1034
       },
       {
         "name": "clearOriginal",
         "signature": "public function clearOriginal(): void",
         "description": "Clear the original attributes of the model.",
         "doc": "Clear the original attributes of the model.\n\n@return void",
-        "line": 1043
+        "line": 1044
       },
       {
         "name": "hasOriginal",
         "signature": "public function hasOriginal(): bool",
         "description": "Check if the model has original attributes stored.",
         "doc": "Check if the model has original attributes stored.\n\n@return bool",
-        "line": 1053
+        "line": 1054
       },
       {
         "name": "isDirty",
         "signature": "public function isDirty(null|string $field = null): bool",
         "description": "Check if the model or a specific field is dirty (has changes).",
         "doc": "Check if the model or a specific field is dirty (has changes).\n\n@param string|null $field The specific field to check for changes. If null, checks the entire model.\n@return bool True if the model or the specified field has changes, false otherwise.",
-        "line": 1064
+        "line": 1065
       },
       {
         "name": "isClean",
         "signature": "public function isClean(null|string $field = null): bool",
         "description": "Check if the model or a specific field has no unsaved changes.",
         "doc": "Check if the model or a specific field has no unsaved changes.\n\n@param string|null $field\n@return bool",
-        "line": 1086
+        "line": 1087
       },
       {
         "name": "isNestedDirty",
         "signature": "public function isNestedDirty(null|string $path = null): bool",
         "description": "Check if a specific nested path has been changed.",
         "doc": "Check if a specific nested path has been changed.\n\n@param string|null $path The dot-notation path to check, or null to check if any nested path changed.\n@return bool True if the path (or any path) has been changed.",
-        "line": 1097
+        "line": 1098
       },
       {
         "name": "restoreOriginal",
         "signature": "public function restoreOriginal(): void",
         "description": "Restore the model's attributes to their original state.\n\nThis method reverts any changes made to the model since the last save.",
         "doc": "Restore the model's attributes to their original state.\n\nThis method reverts any changes made to the model since the last save.\n\n@return void",
-        "line": 1128
+        "line": 1129
       },
       {
         "name": "trackUpdated",
         "signature": "public function trackUpdated(): void",
         "description": "Mark the model as updated.",
         "doc": "Mark the model as updated.\n\n@return void",
-        "line": 1141
+        "line": 1142
       },
       {
         "name": "trackCreated",
         "signature": "public function trackCreated(): void",
         "description": "Mark the model as created.",
         "doc": "Mark the model as created.\n\n@return void",
-        "line": 1153
+        "line": 1154
       },
       {
         "name": "trackDeleted",
         "signature": "public function trackDeleted(): void",
         "description": "Mark the model as deleted.",
         "doc": "Mark the model as deleted.\n\n@return void",
-        "line": 1165
+        "line": 1166
       },
       {
         "name": "triggerEvent",
         "signature": "public function triggerEvent(string $event): void",
         "description": "Trigger a model event if the events method exists.",
         "doc": "Trigger a model event if the events method exists.\n\n@param string $event The name of the event to trigger.\n@return void",
-        "line": 1177
+        "line": 1178
       },
       {
         "name": "clearTracks",
         "signature": "public function clearTracks(): void",
         "description": "Clear all tracking information for the model.",
         "doc": "Clear all tracking information for the model.\n\n@return void",
-        "line": 1198
+        "line": 1199
       },
       {
         "name": "only",
         "signature": "public function only(string|array $field): static",
         "description": "Get a new instance of the model with only the specified attributes.",
         "doc": "Get a new instance of the model with only the specified attributes.\n\n@param string|array $field The attributes to include.\n@return static",
-        "line": 1209
+        "line": 1210
       },
       {
         "name": "except",
         "signature": "public function except(string|array $field): static",
         "description": "Get a new instance of the model with all attributes except the specified ones.",
         "doc": "Get a new instance of the model with all attributes except the specified ones.\n\n@param string|array $field The attributes to exclude.\n@return static",
-        "line": 1226
+        "line": 1227
       },
       {
         "name": "getIterator",
         "signature": "public function getIterator(): \\Traversable",
         "description": "Get an iterator for the items.\n\nThis method allows the model to be iterated over like an array.",
         "doc": "Get an iterator for the items.\n\nThis method allows the model to be iterated over like an array.\n\n@template TKey of array-key\n\n@template-covariant TValue\n\n@implements \\ArrayAccess<TKey, TValue>\n\n@return \\ArrayIterator<TKey, TValue>",
-        "line": 1250
+        "line": 1251
       },
       {
         "name": "copy",
         "signature": "public function copy(): static",
         "description": "Create a copy of the model instance.",
         "doc": "Create a copy of the model instance.\n\n@return static",
-        "line": 1260
+        "line": 1261
       },
       {
         "name": "hasAccessor",
         "signature": "public function hasAccessor(string $name): bool",
         "description": "Check if an accessor method exists for a given attribute.",
         "doc": "Check if an accessor method exists for a given attribute.\n\n@param string $name The name of the attribute.\n@return bool True if an accessor method exists, false otherwise.",
-        "line": 1271
+        "line": 1272
       },
       {
         "name": "getAttributeValue",
         "signature": "public function getAttributeValue(string $name, $value): mixed",
         "description": "Get the value of an attribute using its accessor method.",
         "doc": "Get the value of an attribute using its accessor method.\n\n@param string $name The name of the attribute.\n@return mixed The value of the attribute.",
-        "line": 1286
+        "line": 1287
       },
       {
         "name": "hasMutator",
         "signature": "public function hasMutator(string $name): bool",
         "description": "Check if a mutator method exists for a given attribute.",
         "doc": "Check if a mutator method exists for a given attribute.\n\n@param string $name The name of the attribute.\n@return bool True if a mutator method exists, false otherwise.",
-        "line": 1303
+        "line": 1304
       },
       {
         "name": "mutateAttribute",
         "signature": "public function mutateAttribute(string $name, mixed $value): mixed",
         "description": "Mutate the value of an attribute using its mutator method.",
         "doc": "Mutate the value of an attribute using its mutator method.\n\n@param string $name The name of the attribute.\n@param mixed $value The value to mutate.\n@return mixed The mutated value of the attribute.",
-        "line": 1319
+        "line": 1320
       },
       {
         "name": "refresh",
         "signature": "public function refresh(): static",
         "description": "Refresh the model instance with the latest data from the database.",
         "doc": "Refresh the model instance with the latest data from the database.\n\n@return static The refreshed model instance.",
-        "line": 1335
+        "line": 1336
       },
       {
         "name": "__call",
         "signature": "public function __call(string $name, array $arguments): mixed",
         "description": "Handles dynamic method calls to the query instance.",
-        "doc": "Handles dynamic method calls to the query instance.\n\n@param string $name The method name.\n@param array $arguments The method arguments.\n@return mixed The result of the query method call.",
-        "line": 1361
+        "doc": "Handles dynamic method calls to the query instance.\n\n@param string $name The method name.\n@param array $arguments The method arguments.\n@return QueryBuilder<static> The result of the query method call.",
+        "line": 1362
       },
       {
         "name": "__callStatic",
         "signature": "public static function __callStatic(string $name, array $arguments): mixed",
         "description": "Handles static method calls to the query instance.",
-        "doc": "Handles static method calls to the query instance.\n\n@param string $name The method name.\n@param array $arguments The method arguments.\n@return mixed The result of the query method call.",
-        "line": 1377
+        "doc": "Handles static method calls to the query instance.\n\n@param string $name The method name.\n@param array $arguments The method arguments.\n@return QueryBuilder<static> The result of the query method call.",
+        "line": 1378
       },
       {
         "name": "getCastedTimestampsForStorage",
         "signature": "public function getCastedTimestampsForStorage(): array",
         "description": "Prepare the timestamp attributes for storage when saving the model.",
         "doc": "Prepare the timestamp attributes for storage when saving the model.\n\n@return array An array containing the casted timestamps for storage.",
-        "line": 1514
+        "line": 1515
       },
       {
         "name": "decodeTimestamps",
         "signature": "public function decodeTimestamps(): void",
         "description": "Decode timestamp attributes from storage format to Carbon instances.\n\nThis method checks for the presence of timestamp attributes (created_at and updated_at)\nand converts their values from string format to Carbon instances for easier manipulation.",
         "doc": "Decode timestamp attributes from storage format to Carbon instances.\n\nThis method checks for the presence of timestamp attributes (created_at and updated_at)\nand converts their values from string format to Carbon instances for easier manipulation.\n\n@return void",
-        "line": 1543
+        "line": 1544
       },
       {
         "name": "setAttributes",
         "signature": "public function setAttributes(array $attributes): void",
         "description": "Set the model's attributes.",
         "doc": "Set the model's attributes.\n\n@param array $attributes The attributes to set on the model.\n@return void",
-        "line": 1560
+        "line": 1561
       },
       {
         "name": "getAttributes",
         "signature": "public function getAttributes(): array",
         "description": "Get the model's attributes.",
         "doc": "Get the model's attributes.\n\n@return array The model's attributes.",
-        "line": 1570
+        "line": 1571
       },
       {
         "name": "hasAttribute",
         "signature": "public function hasAttribute(string $name): bool",
         "description": "Check if the model has a specific attribute.",
         "doc": "Check if the model has a specific attribute.\n\n@param string $name The name of the attribute to check.\n@return bool True if the attribute exists, false otherwise.",
-        "line": 1581
+        "line": 1582
       },
       {
         "name": "getAttribute",
         "signature": "public function getAttribute(string $name, $default = null): mixed",
         "description": "Get the value of a specific attribute.",
         "doc": "Get the value of a specific attribute.\n\n@param string $name The name of the attribute to get.\n@param mixed $default The default value to return if the attribute is not set.\n@return mixed The value of the attribute or the default value if not set.",
-        "line": 1593
+        "line": 1594
       },
       {
         "name": "is",
         "signature": "public function is(Model $model): bool",
         "description": "Check if this model is the same as another model.",
         "doc": "Check if this model is the same as another model.\n\n@param Model $model The model to compare with.\n@return bool True if the models are the same, false otherwise.",
-        "line": 1604
+        "line": 1605
       }
     ]
   },
@@ -6389,385 +6389,385 @@
     "file": "Database/Query/BuildsReadQueries.php",
     "name": "Spark\\Database\\Query\\BuildsReadQueries",
     "kind": "trait",
-    "sha256": "289861f9ad8a50e6cc5f7c441d935e442e7dfc0eea5e500ae9a945570826b61b",
+    "sha256": "9e9fbabd2bfffa724ac2fb4eb01a6113811911498659272f84c2a50678b8a0e5",
     "methods": [
       {
         "name": "select",
         "signature": "public function select(array|string $fields = '*'): QueryBuilder",
         "description": "Specify the fields to include in the SELECT clause.",
         "doc": "Specify the fields to include in the SELECT clause.\n\n@param array|string $fields A string or an array of column names to select.\n@return self The current instance for method chaining.",
-        "line": 29
+        "line": 31
       },
       {
         "name": "selectSub",
         "signature": "public function selectSub(string|QueryBuilder|Closure $subquery, string $alias): QueryBuilder",
         "description": "Adds a subquery to the SELECT clause with an alias.",
         "doc": "Adds a subquery to the SELECT clause with an alias.\n\n@param string|QueryBuilder|Closure $subquery The subquery to include in the SELECT clause.\n@param string $alias The alias for the subquery result.\n@return self The current instance for method chaining.",
-        "line": 63
+        "line": 65
       },
       {
         "name": "column",
         "signature": "public function column(string $column): QueryBuilder",
         "description": "Select a single column from the database.",
         "doc": "Select a single column from the database.\n\n@param string $column The name of the column to select.\n@return self The current instance for method chaining.",
-        "line": 97
+        "line": 99
       },
       {
         "name": "value",
         "signature": "public function value(string $column): mixed",
         "description": "Get a single column's value from the first result.",
         "doc": "Get a single column's value from the first result.\n\n@param string $column The column name to retrieve.\n@return mixed",
-        "line": 109
+        "line": 111
       },
       {
         "name": "pluck",
         "signature": "public function pluck(string $column, ?string $key = null): array",
         "description": "Get a single column's values from all matching rows.",
         "doc": "Get a single column's values from all matching rows.\n\n@param string $column The column name to retrieve.\n@param string|null $key Optional column name to use as keys in the returned array.\n@return array",
-        "line": 127
+        "line": 129
       },
       {
         "name": "selectRaw",
         "signature": "public function selectRaw(string $sql, array $bindings = []): QueryBuilder",
         "description": "Adds a raw SQL expression to the SELECT clause.",
         "doc": "Adds a raw SQL expression to the SELECT clause.\n\n@param string $sql The raw SQL expression to add.\n@param array $bindings Optional bindings for the SQL expression.\n@return self The current instance for method chaining.",
-        "line": 161
+        "line": 163
       },
       {
         "name": "from",
         "signature": "public function from(string $table, string|null $alias = null): QueryBuilder",
         "description": "Sets the table to select from.\n\nThis method allows you to specify the table from which to select data.\nIf the table is already set in the query, it will replace the existing FROM clause\nwith the new table.",
         "doc": "Sets the table to select from.\n\nThis method allows you to specify the table from which to select data.\nIf the table is already set in the query, it will replace the existing FROM clause\nwith the new table.\n\n@param string $table The name of the table to select from.\n@param string|null $alias Optional alias for the table.\n@return self The current instance for method chaining.",
-        "line": 181
+        "line": 183
       },
       {
         "name": "max",
         "signature": "public function max(string $field): float",
         "description": "Calculates the maximum value of a specified field.",
         "doc": "Calculates the maximum value of a specified field.\n\n@param string $field\n@return float",
-        "line": 198
+        "line": 200
       },
       {
         "name": "min",
         "signature": "public function min(string $field): float",
         "description": "Calculates the minimum value of a specified field.",
         "doc": "Calculates the minimum value of a specified field.\n\n@param string $field\n@return float",
-        "line": 212
+        "line": 214
       },
       {
         "name": "sum",
         "signature": "public function sum(string $field): float",
         "description": "Calculates the sum of a specified field.",
         "doc": "Calculates the sum of a specified field.\n\n@param string $field\n@return float",
-        "line": 226
+        "line": 228
       },
       {
         "name": "avg",
         "signature": "public function avg(string $field): float",
         "description": "Calculates the average value of a specified field.",
         "doc": "Calculates the average value of a specified field.\n\n@param string $field\n@return float",
-        "line": 240
+        "line": 242
       },
       {
         "name": "as",
         "signature": "public function as(string $alias): QueryBuilder",
         "description": "Sets an alias for the current table in the FROM clause.\n\nIf the given alias does not contain the 'AS ' keyword, it will be prepended.",
         "doc": "Sets an alias for the current table in the FROM clause.\n\nIf the given alias does not contain the 'AS ' keyword, it will be prepended.\n\n@param string $alias The alias for the table.\n\n@return self The current instance for method chaining.",
-        "line": 257
+        "line": 259
       },
       {
         "name": "join",
         "signature": "public function join(string $table, string|null $field1 = null, string|null $operator = null, string|null $field2 = null, string $type = ''): QueryBuilder",
         "description": "Adds a JOIN clause to the query.",
         "doc": "Adds a JOIN clause to the query.\n\n@param string $table The table to join.\n@param string|null $field1 The first field to join on.\n@param string|null $operator The operator to use for the join.\n@param string|null $field2 The second field to join on.\n@param string      $type The type of the join (e.g., LEFT, RIGHT, INNER).\n\n@return self The current instance for method chaining.",
-        "line": 275
+        "line": 277
       },
       {
         "name": "joinRaw",
         "signature": "public function joinRaw(string $sql, array $bindings = []): QueryBuilder",
         "description": "Adds a raw JOIN clause to the query.",
         "doc": "Adds a raw JOIN clause to the query.\n\n@param string $sql The raw SQL join clause.\n@param array $bindings The bindings for the raw SQL.\n\n@return self The current instance for method chaining.",
-        "line": 304
+        "line": 306
       },
       {
         "name": "on",
         "signature": "public function on(string $field1, null|string $operator = null, null|string $field2 = null, null|string|array $parameters = null, string $orOn = 'ON', ): QueryBuilder",
         "description": "Adds an ON clause to the query.",
         "doc": "Adds an ON clause to the query.\n\n@param string $field1 The field to join on.\n@param null|string $operator The operator to use for the join.\n@param string $field2 The value to join with.\n@param string|array|null $parameters The parameters to bind to the query.\n\n@return self The current instance for method chaining.",
-        "line": 323
+        "line": 325
       },
       {
         "name": "orOn",
         "signature": "public function orOn(string $field1, null|string $operator = null, null|string $field2 = null, null|string|array $parameters = null): QueryBuilder",
         "description": "Adds an OR clause to the current join condition.",
         "doc": "Adds an OR clause to the current join condition.\n\n@param string $field1 The first field to join on.\n@param string|null $operator The operator to use for the join.\n@param string|null $field2 The second field to join on.\n@param string|array|null $parameters The parameters to bind to the query.\n\n@return self The current instance for method chaining.",
-        "line": 353
+        "line": 355
       },
       {
         "name": "andOn",
         "signature": "public function andOn(string $field1, null|string $operator = null, null|string $field2 = null, null|string|array $parameters = null): QueryBuilder",
         "description": "Adds an AND clause to the current join condition.",
         "doc": "Adds an AND clause to the current join condition.\n\n@param string $field1 The first field to join on.\n@param string|null $operator The operator to use for the join.\n@param string|null $field2 The second field to join on.\n@param string|array|null $parameters The parameters to bind to the query.\n\n@return self The current instance for method chaining.",
-        "line": 368
+        "line": 370
       },
       {
         "name": "innerJoin",
         "signature": "public function innerJoin(string $table, string|null $field1 = null, string|null $operator = null, string|null $field2 = null)",
         "description": "Adds an INNER JOIN clause to the query.",
         "doc": "Adds an INNER JOIN clause to the query.\n\n@param string      $table The table to join.\n@param string|null $field1 The first field to join on.\n@param string|null $operator The operator to use for the join.\n@param string|null $field2 The second field to join on.\n\n@return self The current instance for method chaining.",
-        "line": 383
+        "line": 385
       },
       {
         "name": "leftJoin",
         "signature": "public function leftJoin(string $table, string|null $field1 = null, string|null $operator = null, string|null $field2 = null)",
         "description": "Adds a LEFT JOIN clause to the query.",
         "doc": "Adds a LEFT JOIN clause to the query.\n\n@param string      $table The table to join.\n@param string|null $field1 The first field to join on.\n@param string|null $operator The operator to use for the join.\n@param string|null $field2 The second field to join on.\n\n@return self The current instance for method chaining.",
-        "line": 398
+        "line": 400
       },
       {
         "name": "rightJoin",
         "signature": "public function rightJoin(string $table, string|null $field1 = null, string|null $operator = null, string|null $field2 = null)",
         "description": "Adds a RIGHT JOIN clause to the query.",
         "doc": "Adds a RIGHT JOIN clause to the query.\n\n@param string      $table The table to join.\n@param string|null $field1 The first field to join on.\n@param string|null $operator The operator to use for the join.\n@param string|null $field2 The second field to join on.\n\n@return self The current instance for method chaining.",
-        "line": 413
+        "line": 415
       },
       {
         "name": "fullOuterJoin",
         "signature": "public function fullOuterJoin(string $table, string|null $field1 = null, string|null $operator = null, string|null $field2 = null)",
         "description": "Adds a FULL OUTER JOIN clause to the query.",
         "doc": "Adds a FULL OUTER JOIN clause to the query.\n\n@param string      $table The table to join.\n@param string|null $field1 The first field to join on.\n@param string|null $operator The operator to use for the join.\n@param string|null $field2 The second field to join on.\n\n@return self The current instance for method chaining.",
-        "line": 429
+        "line": 431
       },
       {
         "name": "leftOuterJoin",
         "signature": "public function leftOuterJoin(string $table, string|null $field1 = null, string|null $operator = null, string|null $field2 = null)",
         "description": "Adds a LEFT OUTER JOIN clause to the query.",
         "doc": "Adds a LEFT OUTER JOIN clause to the query.\n\n@param string      $table The table to join.\n@param string|null $field1 The first field to join on.\n@param string|null $operator The operator to use for the join.\n@param string|null $field2 The second field to join on.\n\n@return self The current instance for method chaining.",
-        "line": 444
+        "line": 446
       },
       {
         "name": "rightOuterJoin",
         "signature": "public function rightOuterJoin(string $table, string|null $field1 = null, string|null $operator = null, string|null $field2 = null)",
         "description": "Adds a RIGHT OUTER JOIN clause to the query.",
         "doc": "Adds a RIGHT OUTER JOIN clause to the query.\n\n@param string      $table The table to join.\n@param string|null $field1 The first field to join on.\n@param string|null $operator The operator to use for the join.\n@param string|null $field2 The second field to join on.\n\n@return self The current instance for method chaining.",
-        "line": 459
+        "line": 461
       },
       {
         "name": "order",
         "signature": "public function order(null|string $sort = null): QueryBuilder",
         "description": "Sets the ordering clause for the query.",
         "doc": "Sets the ordering clause for the query.\n\n@param null|string $sort Order by clause as a string (e.g., 'field ASC').\n@return self",
-        "line": 470
+        "line": 472
       },
       {
         "name": "orderBy",
         "signature": "public function orderBy(string $field, string $sort = 'ASC'): QueryBuilder",
         "description": "Sets the ordering clause for the query.",
         "doc": "Sets the ordering clause for the query.\n\n@param string $field The field to order by.\n@param string $sort The sorting direction, defaults to 'ASC'.\n@return self",
-        "line": 486
+        "line": 488
       },
       {
         "name": "orderByRaw",
         "signature": "public function orderByRaw(string $sql, array $bindings = []): QueryBuilder",
         "description": "Sets a raw ordering clause for the query.",
         "doc": "Sets a raw ordering clause for the query.\n\n@param string $sql The raw SQL for the ORDER BY clause.\n@param array $bindings Optional bindings for the raw SQL.\n@return self",
-        "line": 499
+        "line": 501
       },
       {
         "name": "orderAsc",
         "signature": "public function orderAsc(null|string $field = null): QueryBuilder",
         "description": "Sets ascending order for a specified field.",
         "doc": "Sets ascending order for a specified field.\n\n@param null|string $field Field to order by in ascending order, defaults to 'id'.\n@return self",
-        "line": 514
+        "line": 516
       },
       {
         "name": "orderDesc",
         "signature": "public function orderDesc(null|string $field = null): QueryBuilder",
         "description": "Sets descending order for a specified field.",
         "doc": "Sets descending order for a specified field.\n\n@param null|string $field Field to order by in descending order, defaults to 'id'.\n@return self",
-        "line": 528
+        "line": 530
       },
       {
         "name": "groupBy",
         "signature": "public function groupBy(string|array $field): QueryBuilder",
         "description": "Sets the GROUP BY clause for the query.",
         "doc": "Sets the GROUP BY clause for the query.\n\n@param string|array $field Group by clause as a string or array.\n@return self",
-        "line": 542
+        "line": 544
       },
       {
         "name": "groupByRaw",
         "signature": "public function groupByRaw(string $sql, array $bindings = []): QueryBuilder",
         "description": "Sets a raw GROUP BY clause for the query.",
         "doc": "Sets a raw GROUP BY clause for the query.\n\n@param string $sql The raw SQL for the GROUP BY clause.\n@param array $bindings Optional bindings for the raw SQL.\n@return self",
-        "line": 557
+        "line": 559
       },
       {
         "name": "having",
         "signature": "public function having(string $having): QueryBuilder",
         "description": "Sets the HAVING clause for the query.",
         "doc": "Sets the HAVING clause for the query.\n\n@param string $having Having clause as a string.\n@return self",
-        "line": 572
+        "line": 574
       },
       {
         "name": "limit",
         "signature": "public function limit(string|int $from, null|int $to = null): QueryBuilder",
         "description": "Sets a limit and optional offset for the query.",
         "doc": "Sets a limit and optional offset for the query.\n\n@param string|int $from Starting point for the query.\n@param int|null $to Ending point for the query, if specified.\n@return self",
-        "line": 585
+        "line": 587
       },
       {
         "name": "offset",
         "signature": "public function offset(int $offset): QueryBuilder",
         "description": "Sets the offset for the query.",
         "doc": "Sets the offset for the query.\n\n@param int $offset The offset for the query.\n@return self",
-        "line": 603
+        "line": 605
       },
       {
         "name": "take",
         "signature": "public function take(int $limit): QueryBuilder",
         "description": "Specifies the number of records to fetch.",
         "doc": "Specifies the number of records to fetch.\n\n@param int $limit Number of records to fetch.\n@return self",
-        "line": 615
+        "line": 617
       },
       {
         "name": "skip",
         "signature": "public function skip(int $count): QueryBuilder",
         "description": "Skip a number of records.",
         "doc": "Skip a number of records.\n\n@param int $count Number of records to skip.\n@return self",
-        "line": 627
+        "line": 629
       },
       {
         "name": "fetch",
         "signature": "public function fetch(...$fetch): QueryBuilder",
         "description": "Specifies the fetch mode(s) for the query results.",
         "doc": "Specifies the fetch mode(s) for the query results.\n\n@param mixed ...$fetch PDO fetch styles (e.g., PDO::FETCH_ASSOC).\n@return self",
-        "line": 639
+        "line": 641
       },
       {
         "name": "fetchAssoc",
         "signature": "public function fetchAssoc(): QueryBuilder",
         "description": "Specifies that results should be fetched as associative arrays.",
         "doc": "Specifies that results should be fetched as associative arrays.\n\n@return self",
-        "line": 650
+        "line": 652
       },
       {
         "name": "fetchColumn",
         "signature": "public function fetchColumn(): QueryBuilder",
         "description": "Specifies that results should be fetched as numeric arrays.",
         "doc": "Specifies that results should be fetched as numeric arrays.\n\n@return self",
-        "line": 660
+        "line": 662
       },
       {
         "name": "fetchClass",
         "signature": "public function fetchClass(string $className, array $ctorArgs = []): QueryBuilder",
         "description": "Specifies that results should be fetched as objects.",
         "doc": "Specifies that results should be fetched as objects.\n\n@return self",
-        "line": 670
+        "line": 672
       },
       {
         "name": "distinct",
         "signature": "public function distinct(null|string $column = null): QueryBuilder",
         "description": "Get distinct values for a column.",
         "doc": "Get distinct values for a column.\n\n@param null|string $column\n@return self",
-        "line": 681
+        "line": 683
       },
       {
         "name": "toSql",
         "signature": "public function toSql(): string",
         "description": "Get the SQL representation of the query.",
         "doc": "Get the SQL representation of the query.\n\n@return string",
-        "line": 698
+        "line": 700
       },
       {
         "name": "union",
         "signature": "public function union(QueryBuilder|Closure $query, bool $all = false): QueryBuilder",
         "description": "Add a UNION clause to the query.",
         "doc": "Add a UNION clause to the query.\n\n@param QueryBuilder|Closure $query\n@param bool $all\n@return self",
-        "line": 730
+        "line": 732
       },
       {
         "name": "first",
         "signature": "public function first(null|string|array $fields = null): mixed",
         "description": "Retrieves the first result from the query.",
-        "doc": "Retrieves the first result from the query.\n\n@param null|string|array $fields Optional fields to select for the first result.\n@return mixed",
-        "line": 764
+        "doc": "Retrieves the first result from the query.\n\n@param null|string|array $fields Optional fields to select for the first result.\n@return TModel|array|object|null The first result object or null if none found.",
+        "line": 766
       },
       {
         "name": "firstOrFail",
         "signature": "public function firstOrFail($where = null, $fields = null): mixed",
         "description": "Retrieves the first result or throws an exception if not found.",
-        "doc": "Retrieves the first result or throws an exception if not found.\n\n@param mixed $where Optional WHERE clause to filter results.\n@param null|string|array $fields Optional fields to select for the first result.\n@return mixed The first result object or throws NotFoundException.\n@throws \\Spark\\Exceptions\\NotFoundException If no results are found.",
-        "line": 794
+        "doc": "Retrieves the first result or throws an exception if not found.\n\n@param mixed $where Optional WHERE clause to filter results.\n@param null|string|array $fields Optional fields to select for the first result.\n@return TModel|array|object The first result object or throws NotFoundException.\n@throws \\Spark\\Exceptions\\NotFoundException If no results are found.",
+        "line": 796
       },
       {
         "name": "last",
         "signature": "public function last(null|string|array $fields = null): mixed",
         "description": "Retrieves the last result by applying descending order and fetching the first.",
-        "doc": "Retrieves the last result by applying descending order and fetching the first.\n\n@return mixed",
-        "line": 813
+        "doc": "Retrieves the last result by applying descending order and fetching the first.\n\n@return TModel|array|object|null",
+        "line": 815
       },
       {
         "name": "latest",
         "signature": "public function latest(string $field = 'created_at', array|string|null $fields = null): QueryBuilder",
         "description": "Sets the query to order results by the latest created_at timestamp.",
         "doc": "Sets the query to order results by the latest created_at timestamp.\n\n@param string $field The field to order by.\n@param null|string|array $fields Optional fields to select.\n@return self",
-        "line": 825
+        "line": 827
       },
       {
         "name": "oldest",
         "signature": "public function oldest(string $field = 'created_at', array|string|null $fields = null): QueryBuilder",
         "description": "Sets the query to order results by the oldest created_at timestamp.",
         "doc": "Sets the query to order results by the oldest created_at timestamp.\n\n@param string $field The field to order by.\n@param null|string|array $fields Optional fields to select.\n@return self",
-        "line": 838
+        "line": 840
       },
       {
         "name": "random",
         "signature": "public function random(): QueryBuilder",
         "description": "Sets the query to return results in random order.",
         "doc": "Sets the query to return results in random order.\n\n@return self",
-        "line": 850
+        "line": 852
       },
       {
         "name": "all",
         "signature": "public function all(array|string|null $fields = null): array",
         "description": "Retrieves all results from the executed query.",
-        "doc": "Retrieves all results from the executed query.\n\n@param null|string|array $fields Optional fields to select.\n@return array Array of query results.",
-        "line": 862
+        "doc": "Retrieves all results from the executed query.\n\n@param null|string|array $fields Optional fields to select.\n@return array<TModel|array|object> Array of query results.",
+        "line": 864
       },
       {
         "name": "get",
         "signature": "public function get(array|string|null $fields = null): Collection",
         "description": "Retrieves all results from the executed query and returns them in a collection.",
-        "doc": "Retrieves all results from the executed query and returns them in a collection.\n\n@param null|string|array $fields Optional fields to select.\n@return Collection Array of query results.",
-        "line": 888
+        "doc": "Retrieves all results from the executed query and returns them in a collection.\n\n@param null|string|array $fields Optional fields to select.\n@return Collection<TModel> Array of query results.",
+        "line": 890
       },
       {
         "name": "paginate",
         "signature": "public function paginate(int $limit = 10, string $keyword = 'page', array|string|null $fields = null): Paginator",
         "description": "Paginates query results.",
-        "doc": "Paginates query results.\n\n@param int $limit Number of items per page.\n@param string $keyword URL query parameter name for pagination.\n@param null|string|array $fields Optional fields to select.\n@return Paginator",
-        "line": 901
+        "doc": "Paginates query results.\n\n@param int $limit Number of items per page.\n@param string $keyword URL query parameter name for pagination.\n@param null|string|array $fields Optional fields to select.\n@return Paginator<TModel>",
+        "line": 903
       },
       {
         "name": "count",
         "signature": "public function count(): int",
         "description": "Counts the number of rows matching the current query.",
         "doc": "Counts the number of rows matching the current query.\n\n@return int The number of matching rows.",
-        "line": 938
+        "line": 940
       },
       {
         "name": "exists",
         "signature": "public function exists(): bool",
         "description": "Checks if any records exist based on the current query conditions.",
         "doc": "Checks if any records exist based on the current query conditions.\n\n@return bool True if at least one record exists, false otherwise.",
-        "line": 972
+        "line": 974
       },
       {
         "name": "doesntExist",
         "signature": "public function doesntExist(): bool",
         "description": "Checks if no records exist based on the current query conditions.",
         "doc": "Checks if no records exist based on the current query conditions.\n\n@return bool True if no records exist, false otherwise.",
-        "line": 989
+        "line": 991
       }
     ]
   },
@@ -6888,182 +6888,182 @@
     "file": "Database/QueryBuilder.php",
     "name": "Spark\\Database\\QueryBuilder",
     "kind": "class",
-    "sha256": "5a6b2a3488baa9cf3d85813c4a7c742cef2ba7f322b7beb82ed8d63de8f17bc4",
+    "sha256": "856525d9bc6cd528fce956afddc2e92f2843a855ebd59601f68cae60a123ea6e",
     "methods": [
       {
         "name": "__construct",
         "signature": "public function __construct(private DB $database)",
         "description": "Constructor for the query class.\n\nInitializes the query object with a database instance,\nwhich is used for executing SQL queries.",
         "doc": "Constructor for the query class.\n\nInitializes the query object with a database instance,\nwhich is used for executing SQL queries.\n\n@param DB $database The database instance to be used for query execution.",
-        "line": 152
+        "line": 107
       },
       {
         "name": "lock",
         "signature": "public function lock(bool|string|null $value = true): self",
         "description": "Set a SELECT lock. False requests a shared lock; null removes the lock.\nCustom clauses are raw SQL and must not contain untrusted input.\nExecute the read and subsequent writes within the same transaction.",
         "doc": "Set a SELECT lock. False requests a shared lock; null removes the lock.\nCustom clauses are raw SQL and must not contain untrusted input.\nExecute the read and subsequent writes within the same transaction.",
-        "line": 163
+        "line": 118
       },
       {
         "name": "lockForUpdate",
         "signature": "public function lockForUpdate(): QueryBuilder",
         "description": "Request an exclusive lock on the selected rows until the transaction ends.\nOn an existing model instance, the query also filters by its primary key.",
         "doc": "Request an exclusive lock on the selected rows until the transaction ends.\nOn an existing model instance, the query also filters by its primary key.",
-        "line": 178
+        "line": 133
       },
       {
         "name": "sharedLock",
         "signature": "public function sharedLock(): QueryBuilder",
         "description": "Request a shared lock on the selected rows until the transaction ends.",
         "doc": "Request a shared lock on the selected rows until the transaction ends.",
-        "line": 184
+        "line": 139
       },
       {
         "name": "table",
         "signature": "public function table(string $table, ?string $alias = null): self",
         "description": "Sets the table name to be used for the query.",
         "doc": "Sets the table name to be used for the query.\n\n@param string $table The table name to set.\n@param string|null $alias Optional alias for the table.\n@return self",
-        "line": 213
+        "line": 168
       },
       {
         "name": "getTable",
         "signature": "public function getTable(): string",
         "description": "Gets the table name used for the query.",
         "doc": "Gets the table name used for the query.\n\n@return string The table name.",
-        "line": 233
+        "line": 188
       },
       {
         "name": "getAlias",
         "signature": "public function getAlias(): null|string",
         "description": "Gets the alias used for the query.",
         "doc": "Gets the alias used for the query.\n\n@return string|null The alias or null if not set.",
-        "line": 243
+        "line": 198
       },
       {
         "name": "hasAlias",
         "signature": "public function hasAlias(): bool",
         "description": "Checks if the query has an alias.",
         "doc": "Checks if the query has an alias.\n\n@return bool True if the query has an alias, false otherwise.",
-        "line": 257
+        "line": 212
       },
       {
         "name": "withAlias",
         "signature": "public function withAlias(string $column): string",
         "description": "Qualify a bare column with the read alias or effective table, including its prefix.\nQualified names and SQL expressions are preserved; this does not escape raw SQL.",
         "doc": "Qualify a bare column with the read alias or effective table, including its prefix.\nQualified names and SQL expressions are preserved; this does not escape raw SQL.\n\n@param string $column A column name or trusted SQL expression.\n@return string The qualified column or unchanged expression.",
-        "line": 269
+        "line": 224
       },
       {
         "name": "getDB",
         "signature": "public function getDB(): DB",
         "description": "Returns the database instance associated with this query.",
         "doc": "Returns the database instance associated with this query.\n\n@return DB The database instance associated with this query.",
-        "line": 293
+        "line": 248
       },
       {
         "name": "setDB",
         "signature": "public function setDB(DB $database): self",
         "description": "Sets the database instance for this query.\n\n This method allows you to change the database instance associated with this query.\n It is useful when you need to switch databases or when the query needs to be executed\n against a different database connection.",
         "doc": "Sets the database instance for this query.\n\n This method allows you to change the database instance associated with this query.\n It is useful when you need to switch databases or when the query needs to be executed\n against a different database connection.\n\n @param DB $database The database instance to set.\n @return self",
-        "line": 308
+        "line": 263
       },
       {
         "name": "getWrapper",
         "signature": "public function getWrapper(): WrapperContract",
         "description": "Returns the query wrapper.",
         "doc": "Returns the query wrapper.\n\n@return WrapperContract The query wrapper.",
-        "line": 320
+        "line": 275
       },
       {
         "name": "prefix",
         "signature": "public function prefix(string $prefix): self",
         "description": "Sets the table prefix to be used for the query.",
         "doc": "Sets the table prefix to be used for the query.\n\n@param string $prefix The table prefix to set.\n@return self",
-        "line": 331
+        "line": 286
       },
       {
         "name": "addMapper",
         "signature": "public function addMapper(callable $callback): self",
         "description": "Adds a data mapper callback to process query results.",
         "doc": "Adds a data mapper callback to process query results.\n\n@param callable $callback The callback function to process data.\n@return self Returns the query object.",
-        "line": 343
+        "line": 298
       },
       {
         "name": "param",
         "signature": "public function param(string|array $parameter): self",
         "description": "Adds a parameter for a query.",
         "doc": "Adds a parameter for a query.\n\n@param string|array $parameter Additional parameter names.\n@return self Returns the query object.",
-        "line": 355
+        "line": 310
       },
       {
         "name": "getBindings",
         "signature": "public function getBindings(): array",
         "description": "Returns the query bindings.",
         "doc": "Returns the query bindings.\n\n@return array The query bindings.",
-        "line": 367
+        "line": 322
       },
       {
         "name": "getParameters",
         "signature": "public function getParameters(): array",
         "description": "Returns the query parameters.",
         "doc": "Returns the query parameters.\n\n@return array The query parameters.",
-        "line": 377
+        "line": 332
       },
       {
         "name": "clone",
         "signature": "public function clone(): self",
         "description": "Clone the query builder.",
         "doc": "Clone the query builder.\n\n@return self",
-        "line": 387
+        "line": 342
       },
       {
         "name": "copy",
         "signature": "public function copy(): self",
         "description": "Clone the query builder.",
         "doc": "Clone the query builder.\n\n@return self",
-        "line": 397
+        "line": 352
       },
       {
         "name": "withTrashed",
         "signature": "public function withTrashed(bool $withTrashed = true): self",
         "description": "Include active and soft deleted records, or select active records when false.",
         "doc": "Include active and soft deleted records, or select active records when false.\n\n@param bool $withTrashed Whether to include soft deleted records.\n@return self",
-        "line": 408
+        "line": 363
       },
       {
         "name": "onlyTrashed",
         "signature": "public function onlyTrashed(): self",
         "description": "Include only soft deleted records in the query results.",
         "doc": "Include only soft deleted records in the query results.\n\n@return self",
-        "line": 424
+        "line": 379
       },
       {
         "name": "withoutTrashed",
         "signature": "public function withoutTrashed(): self",
         "description": "Select only active records, including for an explicit force delete.",
         "doc": "Select only active records, including for an explicit force delete.\n\n@return self",
-        "line": 436
+        "line": 391
       },
       {
         "name": "__call",
         "signature": "public function __call(string $method, array $args)",
         "description": "Magic method to handle dynamic method calls.",
-        "doc": "Magic method to handle dynamic method calls.\n\n@param string $method The name of the method being called.\n@param array $args The arguments passed to the method.\n@return mixed",
-        "line": 450
+        "doc": "Magic method to handle dynamic method calls.\n\n@param string $method The name of the method being called.\n@param array $args The arguments passed to the method.\n@return static<TModel>",
+        "line": 405
       },
       {
         "name": "useThroughModel",
         "signature": "public function useThroughModel(Model $model): self",
         "description": "@internal Bind the intermediate model of a has-many-through read.",
         "doc": "@internal Bind the intermediate model of a has-many-through read.",
-        "line": 505
+        "line": 460
       },
       {
         "name": "withTrashedParents",
         "signature": "public function withTrashedParents(bool $withTrashed = true): self",
         "description": "Include archived intermediate models, independently of the final related model.",
         "doc": "Include archived intermediate models, independently of the final related model.",
-        "line": 512
+        "line": 467
       }
     ]
   },
@@ -9559,7 +9559,7 @@
     "file": "Foundation/Console/MakeStubCommandsHandler.php",
     "name": "Spark\\Foundation\\Console\\MakeStubCommandsHandler",
     "kind": "class",
-    "sha256": "751d82b5631af75fdfea9016eebeffa550cf0ec547ac2295dae7088d6bbe080f",
+    "sha256": "4afcc868f0e074dcf0bfd83dbed14348b8e16cc6716577cd2fd83f3e60835c65",
     "methods": [
       {
         "name": "makeProvider",
@@ -9622,42 +9622,42 @@
         "signature": "public function makeJob(array $args)",
         "description": "Create a job stub.",
         "doc": "Create a job stub.\n\n@param array $args\n  The arguments passed to the command.\n\n@return void",
-        "line": 280
+        "line": 281
       },
       {
         "name": "makeController",
         "signature": "public function makeController(array $args)",
         "description": "Create a controller stub.",
         "doc": "Create a controller stub.\n\n@param array $args\n  The arguments passed to the command.\n\n@return void",
-        "line": 307
+        "line": 308
       },
       {
         "name": "makeMiddleware",
         "signature": "public function makeMiddleware(array $args)",
         "description": "Create a middleware stub.",
         "doc": "Create a middleware stub.\n\n@param array $args\n  The arguments passed to the command.\n\n@return void",
-        "line": 349
+        "line": 350
       },
       {
         "name": "makeView",
         "signature": "public function makeView(array $args)",
         "description": "Create a view stub.",
         "doc": "Create a view stub.\n\n@param array $args\n  The arguments passed to the command.\n\n@return void",
-        "line": 385
+        "line": 386
       },
       {
         "name": "makeViewComponent",
         "signature": "public function makeViewComponent(array $args)",
         "description": "Create a view component stub.",
         "doc": "Create a view component stub.\n@param array $args\n The arguments passed to the command.\n@return void",
-        "line": 405
+        "line": 406
       },
       {
         "name": "removeSuffix",
         "signature": "public function removeSuffix(string $name, string $suffix): string",
         "description": "Remove a suffix from a name.",
         "doc": "Remove a suffix from a name.\n\n@param string $name\n  The name to remove the suffix from.\n@param string $suffix\n  The suffix to remove.\n\n@return string\n  The name without the suffix.",
-        "line": 499
+        "line": 500
       }
     ]
   },
@@ -10979,7 +10979,7 @@
     "file": "Http/Auth.php",
     "name": "Spark\\Http\\Auth",
     "kind": "class",
-    "sha256": "a4696e6bb218df047741225caa37b5395ed1f98f573c7f7233660e6f53cfb4c9",
+    "sha256": "af5e3cdd5fa213bfd973d81a0cd057ca9f10117dcea401eb0c05c61d89ec5715",
     "methods": [
       {
         "name": "__construct",
@@ -14010,168 +14010,168 @@
     "file": "Http/Resources/JsonResource.php",
     "name": "Spark\\Http\\Resources\\JsonResource",
     "kind": "class",
-    "sha256": "2096bfa6b362dafeea00e82fe217830377e1811dd7b0a2152197cea64d59d562",
+    "sha256": "6d1c6a47c24efa4dc15d190993a43cabd10479b669178661a3566dcca6e40fef",
     "methods": [
       {
         "name": "__construct",
-        "signature": "public function __construct(public mixed $resource)",
+        "signature": "public function __construct( public mixed $resource )",
         "description": "The resource being transformed.",
         "doc": "The resource being transformed.",
-        "line": 27
+        "line": 32
       },
       {
         "name": "make",
         "signature": "public static function make(mixed $resource): static",
         "description": "Create a new resource instance.",
-        "doc": "Create a new resource instance.",
-        "line": 32
+        "doc": "Create a new resource instance.\n\n@param TResource $resource\n@return static<TResource>",
+        "line": 44
       },
       {
         "name": "collection",
         "signature": "public static function collection(iterable|Paginator $resource): ResourceCollection",
         "description": "Create a new resource collection instance.",
-        "doc": "Create a new resource collection instance.",
-        "line": 38
+        "doc": "Create a new resource collection instance.\n\n@param iterable<TResource>|Paginator<TResource> $resource\n@return ResourceCollection",
+        "line": 55
       },
       {
         "name": "toArray",
         "signature": "public function toArray(?Request $request = null): array",
         "description": "Override this method to select the fields exposed by your API.",
         "doc": "Override this method to select the fields exposed by your API.",
-        "line": 44
+        "line": 61
       },
       {
         "name": "resolve",
         "signature": "public function resolve(?Request $request = null): array",
         "description": "Resolve nested resources and omit missing fields, without response wrapping.",
         "doc": "Resolve nested resources and omit missing fields, without response wrapping.",
-        "line": 57
+        "line": 74
       },
       {
         "name": "with",
         "signature": "public function with(?Request $request = null): array",
         "description": "Additional top-level response fields; ignored when this resource is nested.",
         "doc": "Additional top-level response fields; ignored when this resource is nested.",
-        "line": 64
+        "line": 81
       },
       {
         "name": "additional",
         "signature": "public function additional(array $data): static",
         "description": "",
         "doc": "",
-        "line": 69
+        "line": 86
       },
       {
         "name": "wrap",
         "signature": "public function wrap(?string $key): static",
         "description": "Set this instance's outer key; null disables wrapping when no metadata exists.",
         "doc": "Set this instance's outer key; null disables wrapping when no metadata exists.",
-        "line": 76
+        "line": 93
       },
       {
         "name": "withoutWrapping",
         "signature": "public function withoutWrapping(): static",
         "description": "",
         "doc": "",
-        "line": 82
+        "line": 99
       },
       {
         "name": "responseData",
         "signature": "public function responseData(?Request $request = null): array",
         "description": "Build the HTTP document; nested resources use resolve() instead.",
         "doc": "Build the HTTP document; nested resources use resolve() instead.",
-        "line": 88
+        "line": 105
       },
       {
         "name": "response",
         "signature": "public function response(int $status = 200, array $headers = []): Response",
         "description": "",
         "doc": "",
-        "line": 99
+        "line": 116
       },
       {
         "name": "toResponse",
         "signature": "public function toResponse(?Request $request = null): Response",
         "description": "",
         "doc": "",
-        "line": 104
+        "line": 121
       },
       {
         "name": "when",
         "signature": "public function when(bool|Closure $condition, mixed $value, mixed $default = MissingValue::Missing): mixed",
         "description": "",
         "doc": "",
-        "line": 109
+        "line": 126
       },
       {
         "name": "unless",
         "signature": "public function unless(bool|Closure $condition, mixed $value, mixed $default = MissingValue::Missing): mixed",
         "description": "",
         "doc": "",
-        "line": 114
+        "line": 131
       },
       {
         "name": "whenNotNull",
         "signature": "public function whenNotNull(mixed $value, mixed $default = MissingValue::Missing): mixed",
         "description": "",
         "doc": "",
-        "line": 119
+        "line": 136
       },
       {
         "name": "whenHas",
         "signature": "public function whenHas(string $attribute, mixed $value = MissingValue::Missing, mixed $default = MissingValue::Missing): mixed",
         "description": "",
         "doc": "",
-        "line": 124
+        "line": 141
       },
       {
         "name": "whenLoaded",
         "signature": "public function whenLoaded(string $relation, mixed $value = MissingValue::Missing, mixed $default = MissingValue::Missing): mixed",
         "description": "Only includes a relation already loaded on a model; never triggers a query.",
         "doc": "Only includes a relation already loaded on a model; never triggers a query.",
-        "line": 140
+        "line": 157
       },
       {
         "name": "whenCounted",
         "signature": "public function whenCounted(string $relation): mixed",
         "description": "Only includes a relation count already loaded on a model; never triggers a query.",
         "doc": "Only includes a relation count already loaded on a model; never triggers a query.",
-        "line": 155
+        "line": 172
       },
       {
         "name": "__get",
         "signature": "public function __get(string $key): mixed",
         "description": "",
         "doc": "",
-        "line": 160
+        "line": 177
       },
       {
         "name": "__isset",
         "signature": "public function __isset(string $key): bool",
         "description": "",
         "doc": "",
-        "line": 173
+        "line": 190
       },
       {
         "name": "jsonSerialize",
         "signature": "public function jsonSerialize(): array",
         "description": "",
         "doc": "",
-        "line": 178
+        "line": 195
       },
       {
         "name": "toJson",
         "signature": "public function toJson($options = 0): string",
         "description": "",
         "doc": "",
-        "line": 183
+        "line": 200
       },
       {
         "name": "normalize",
         "signature": "public static function normalize(mixed $value, ?Request $request = null): mixed",
         "description": "Normalize JSON values recursively, without adding resource response wrappers.",
         "doc": "Normalize JSON values recursively, without adding resource response wrappers.",
-        "line": 204
+        "line": 221
       }
     ]
   },
@@ -23300,7 +23300,7 @@
     "file": "Testing/ApplicationTestCase.php",
     "name": "Spark\\Testing\\ApplicationTestCase",
     "kind": "class",
-    "sha256": "c4816d42570a3ae4363b8350b24ccee25b98d0cf3757ff31fc54cec54d6f3cb1",
+    "sha256": "d7eebacfbe8721f652d23952cf792873a9f6848f53da8864571854e8c09fb18f",
     "methods": [
       {
         "name": "createApplication",

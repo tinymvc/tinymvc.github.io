@@ -131,4 +131,6 @@ The assistant's handoff should identify the behavior changed, tests actually run
 Update the relevant file under \`references/\` when the framework's public behavior changes. Update \`SKILL.md\` when the development workflow or reference paths change. Keep the short entry point focused and link to detailed guidance instead of duplicating the entire manual.
 
 When adopting a new TinyCore release, review the [upgrade notes](./upgrade-notes.md), compare the installed APIs with the guidance, and re-run the relevant application tests. Existing versioned documentation should continue to describe its own release.
+
+The skill also includes focused references for dependency injection and event/pipeline composition (\`container-pipelines.md\`), execution choices and concurrency failure handling (\`concurrency.md\`), and request locale/timezone boundaries (\`localization-dates.md\`). Its query reference documents nullable single-row lookups and the migration from false checks. These references are linked from \`SKILL.md\` so complex work can load the relevant contracts without loading the entire guide.
 `;export{e as default};
