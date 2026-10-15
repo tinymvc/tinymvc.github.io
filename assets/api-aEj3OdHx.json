@@ -828,7 +828,7 @@
     "file": "Cache/Storage/FileStorage.php",
     "name": "Spark\\Cache\\Storage\\FileStorage",
     "kind": "class",
-    "sha256": "67d8ce5ad699b8873b96b675172dfe0afd168fd769bbf9b8d586f4b8a7130225",
+    "sha256": "54ac4ff8637381f4a90f61b1bdf788dedc5f49353199805a080ab19e454b8da8",
     "methods": [
       {
         "name": "__construct",
@@ -894,137 +894,130 @@
         "line": 261
       },
       {
-        "name": "clear",
-        "signature": "public function clear(): void",
-        "description": "",
-        "doc": "",
-        "line": 274
-      },
-      {
         "name": "storeMany",
         "signature": "public function storeMany(array $items, null|string $expire = null): void",
         "description": "",
         "doc": "",
-        "line": 280
+        "line": 276
       },
       {
         "name": "increment",
         "signature": "public function increment(string $key, int $amount = 1): int|false",
         "description": "",
         "doc": "",
-        "line": 295
+        "line": 291
       },
       {
         "name": "add",
         "signature": "public function add(string $key, mixed $value, null|string $expire = null): bool",
         "description": "",
         "doc": "",
-        "line": 324
+        "line": 320
       },
       {
         "name": "stats",
         "signature": "public function stats(): array",
         "description": "",
         "doc": "",
-        "line": 342
+        "line": 338
       },
       {
         "name": "pull",
         "signature": "public function pull(string $key, mixed $default = null): mixed",
         "description": "",
         "doc": "",
-        "line": 368
+        "line": 364
       },
       {
         "name": "storeManyWithExpiry",
         "signature": "public function storeManyWithExpiry(array $items): void",
         "description": "",
         "doc": "",
-        "line": 389
+        "line": 385
       },
       {
         "name": "ttl",
         "signature": "public function ttl(string $key): ?int",
         "description": "",
         "doc": "",
-        "line": 408
+        "line": 404
       },
       {
         "name": "optimizeCache",
         "signature": "public function optimizeCache(): void",
         "description": "",
         "doc": "",
-        "line": 432
+        "line": 428
       },
       {
         "name": "lock",
         "signature": "public function lock(string $key, string $owner, int $timeout = 10, int $waitTimeout = 5): bool",
         "description": "",
         "doc": "",
-        "line": 446
+        "line": 442
       },
       {
         "name": "unlock",
         "signature": "public function unlock(string $key, string $owner): bool",
         "description": "",
         "doc": "",
-        "line": 470
+        "line": 466
       },
       {
         "name": "unlockAll",
         "signature": "public function unlockAll(string $owner): int",
         "description": "",
         "doc": "",
-        "line": 491
+        "line": 487
       },
       {
         "name": "isLocked",
         "signature": "public function isLocked(string $key): bool",
         "description": "",
         "doc": "",
-        "line": 504
+        "line": 500
       },
       {
         "name": "ownsLock",
         "signature": "public function ownsLock(string $key, string $owner): bool",
         "description": "",
         "doc": "",
-        "line": 512
+        "line": 508
       },
       {
         "name": "releaseExpiredLocks",
         "signature": "public function releaseExpiredLocks(): int",
         "description": "",
         "doc": "",
-        "line": 520
+        "line": 516
       },
       {
         "name": "extendLock",
         "signature": "public function extendLock(string $key, string $owner, int $additionalSeconds): bool",
         "description": "",
         "doc": "",
-        "line": 549
+        "line": 545
       },
       {
         "name": "getLockInfo",
         "signature": "public function getLockInfo(string $key): ?array",
         "description": "",
         "doc": "",
-        "line": 574
+        "line": 570
       },
       {
         "name": "forceUnlock",
         "signature": "public function forceUnlock(string $key): bool",
         "description": "",
         "doc": "",
-        "line": 589
+        "line": 585
       },
       {
         "name": "optimizeLocks",
         "signature": "public function optimizeLocks(): void",
         "description": "",
         "doc": "",
-        "line": 600
+        "line": 596
       }
     ]
   },
@@ -1032,7 +1025,7 @@
     "file": "Cache/Storage/RedisStorage.php",
     "name": "Spark\\Cache\\Storage\\RedisStorage",
     "kind": "class",
-    "sha256": "dcf221bd171308c4cb563a9b53db2323c3f4201d70e8200fa9bbc821d0c7bee3",
+    "sha256": "cb617617924d956d8e8b94ea95be88d7e3bf524d213e71f05fd434dea65fbdd6",
     "methods": [
       {
         "name": "__construct",
@@ -1098,137 +1091,130 @@
         "line": 171
       },
       {
-        "name": "clear",
-        "signature": "public function clear(): void",
-        "description": "",
-        "doc": "",
-        "line": 183
-      },
-      {
         "name": "storeMany",
         "signature": "public function storeMany(array $items, null|string $expire = null): void",
         "description": "",
         "doc": "",
-        "line": 188
+        "line": 183
       },
       {
         "name": "increment",
         "signature": "public function increment(string $key, int $amount = 1): int|false",
         "description": "",
         "doc": "",
-        "line": 195
+        "line": 190
       },
       {
         "name": "add",
         "signature": "public function add(string $key, mixed $value, null|string $expire = null): bool",
         "description": "",
         "doc": "",
-        "line": 227
+        "line": 222
       },
       {
         "name": "stats",
         "signature": "public function stats(): array",
         "description": "",
         "doc": "",
-        "line": 239
+        "line": 234
       },
       {
         "name": "pull",
         "signature": "public function pull(string $key, mixed $default = null): mixed",
         "description": "",
         "doc": "",
-        "line": 272
+        "line": 267
       },
       {
         "name": "storeManyWithExpiry",
         "signature": "public function storeManyWithExpiry(array $items): void",
         "description": "",
         "doc": "",
-        "line": 284
+        "line": 279
       },
       {
         "name": "ttl",
         "signature": "public function ttl(string $key): ?int",
         "description": "",
         "doc": "",
-        "line": 295
+        "line": 290
       },
       {
         "name": "optimizeCache",
         "signature": "public function optimizeCache(): void",
         "description": "",
         "doc": "",
-        "line": 310
+        "line": 305
       },
       {
         "name": "lock",
         "signature": "public function lock(string $key, string $owner, int $timeout = 10, int $waitTimeout = 5): bool",
         "description": "",
         "doc": "",
-        "line": 315
+        "line": 310
       },
       {
         "name": "unlock",
         "signature": "public function unlock(string $key, string $owner): bool",
         "description": "",
         "doc": "",
-        "line": 339
+        "line": 334
       },
       {
         "name": "unlockAll",
         "signature": "public function unlockAll(string $owner): int",
         "description": "",
         "doc": "",
-        "line": 359
+        "line": 354
       },
       {
         "name": "isLocked",
         "signature": "public function isLocked(string $key): bool",
         "description": "",
         "doc": "",
-        "line": 373
+        "line": 368
       },
       {
         "name": "ownsLock",
         "signature": "public function ownsLock(string $key, string $owner): bool",
         "description": "",
         "doc": "",
-        "line": 390
+        "line": 385
       },
       {
         "name": "releaseExpiredLocks",
         "signature": "public function releaseExpiredLocks(): int",
         "description": "",
         "doc": "",
-        "line": 397
+        "line": 392
       },
       {
         "name": "extendLock",
         "signature": "public function extendLock(string $key, string $owner, int $additionalSeconds): bool",
         "description": "",
         "doc": "",
-        "line": 424
+        "line": 419
       },
       {
         "name": "getLockInfo",
         "signature": "public function getLockInfo(string $key): ?array",
         "description": "",
         "doc": "",
-        "line": 456
+        "line": 451
       },
       {
         "name": "forceUnlock",
         "signature": "public function forceUnlock(string $key): bool",
         "description": "",
         "doc": "",
-        "line": 470
+        "line": 465
       },
       {
         "name": "optimizeLocks",
         "signature": "public function optimizeLocks(): void",
         "description": "",
         "doc": "",
-        "line": 475
+        "line": 470
       }
     ]
   },
@@ -3162,7 +3148,7 @@
     "file": "Contracts/Http/AuthDriverContract.php",
     "name": "Spark\\Contracts\\Http\\AuthDriverContract",
     "kind": "interface",
-    "sha256": "b69d37450d7292f16ec1bb72f790ab00da11f1dfa1ff291b88538e6644ae8a49",
+    "sha256": "437ea206b26fbaf5ee6290da494a3ed4103183f290cf3fb0334cd693eaa96f1f",
     "methods": [
       {
         "name": "login",
@@ -3180,9 +3166,9 @@
       },
       {
         "name": "getUser",
-        "signature": "public function getUser(): Model|false",
+        "signature": "public function getUser(): ?Model",
         "description": "Get the currently logged-in user.",
-        "doc": "Get the currently logged-in user.\n\n@return Model|false",
+        "doc": "Get the currently logged-in user.\n\n@return ?Model",
         "line": 36
       },
       {
@@ -4011,10 +3997,10 @@
     ]
   },
   {
-    "file": "Contracts/Utils/ImageUtilContract.php",
-    "name": "Spark\\Contracts\\Utils\\ImageUtilContract",
+    "file": "Contracts/Utils/ImageContract.php",
+    "name": "Spark\\Contracts\\Utils\\ImageContract",
     "kind": "interface",
-    "sha256": "58f338495c80fed32e79013aac04c2385d0d07bb537f0589a9ac41e6cfa64f63",
+    "sha256": "10fe15d2a63c0c110042609fa54a3a49942c5ee71fe985388c7e9ad9c3ad5637",
     "methods": [
       {
         "name": "compress",
@@ -4047,10 +4033,10 @@
     ]
   },
   {
-    "file": "Contracts/Utils/MailUtilContract.php",
-    "name": "Spark\\Contracts\\Utils\\MailUtilContract",
+    "file": "Contracts/Utils/MailContract.php",
+    "name": "Spark\\Contracts\\Utils\\MailContract",
     "kind": "interface",
-    "sha256": "b0c8221118ccb2689372d0b2453cb3a3868638d67a66389658ceee653d7d1aad",
+    "sha256": "8f280ba9e25c2ef16c0d444ff7ed30bf84e5d6914d1a1efc99d40b0a53436ecc",
     "methods": [
       {
         "name": "subject",
@@ -4095,8 +4081,8 @@
         "line": 69
       },
       {
-        "name": "mailer",
-        "signature": "public function mailer($address, $name = null): self",
+        "name": "from",
+        "signature": "public function from($address, $name = null): self",
         "description": "Set the sender of the email.",
         "doc": "Set the sender of the email.\n\n@param string $address The email address of the sender.\n@param string|null $name The name of the sender.\n@return self Returns the instance for method chaining.",
         "line": 78
@@ -4118,10 +4104,10 @@
     ]
   },
   {
-    "file": "Contracts/Utils/PaginatorUtilContract.php",
-    "name": "Spark\\Contracts\\Utils\\PaginatorUtilContract",
+    "file": "Contracts/Utils/PaginatorContract.php",
+    "name": "Spark\\Contracts\\Utils\\PaginatorContract",
     "kind": "interface",
-    "sha256": "556ae08922f1e7c280cbf15225a4e7cf058f40eb66fd3cf1bd0b9ef91930a956",
+    "sha256": "9e01cf0c01c0b2d8fbc4185e671a8910edb93d32a411f6be1b57cfddb7fd7a74",
     "methods": [
       {
         "name": "data",
@@ -4154,54 +4140,10 @@
     ]
   },
   {
-    "file": "Contracts/Utils/UploaderUtilContract.php",
-    "name": "Spark\\Contracts\\Utils\\UploaderUtilContract",
+    "file": "Contracts/Utils/ViteContract.php",
+    "name": "Spark\\Contracts\\Utils\\ViteContract",
     "kind": "interface",
-    "sha256": "3302cbaca27ce30e206a7ea2c866945d5dfb4c55e39b773ede3b5e131edf90be",
-    "methods": [
-      {
-        "name": "upload",
-        "signature": "public function upload(string|array|Arrayable $files): string|array",
-        "description": "Uploads a file or multiple files.",
-        "doc": "Uploads a file or multiple files.\n\n@param string|array|Arrayable $files Array containing file details (e.g., $_FILES['file']).\n@return string|array Returns the file path(s) of the uploaded file(s).",
-        "line": 21
-      },
-      {
-        "name": "delete",
-        "signature": "public function delete(string|array $file): bool",
-        "description": "Deletes a file or multiple files.",
-        "doc": "Deletes a file or multiple files.\n\n@param string|array $file The file path(s) to delete.\n@return bool Returns true if the file(s) were successfully deleted, false otherwise.",
-        "line": 29
-      }
-    ]
-  },
-  {
-    "file": "Contracts/Utils/UploaderUtilDriverInterface.php",
-    "name": "Spark\\Contracts\\Utils\\UploaderUtilDriverInterface",
-    "kind": "interface",
-    "sha256": "f3b276d762d42b9a039100030c90cae92f16afc9db9e6285de29ba9bbc08c2f0",
-    "methods": [
-      {
-        "name": "upload",
-        "signature": "public function upload(string $filepath, string $destination): bool",
-        "description": "Upload a file to the specified destination.",
-        "doc": "Upload a file to the specified destination.\n\n@param string $filepath The local path of the file to upload.\n@param string $destination The destination path in the storage.\n@return bool True on success, false on failure.",
-        "line": 20
-      },
-      {
-        "name": "delete",
-        "signature": "public function delete(string $destination): bool",
-        "description": "Delete a file from the specified destination.",
-        "doc": "Delete a file from the specified destination.\n\n@param string $destination The path of the file to delete in the storage.\n@return bool True on success, false on failure.",
-        "line": 28
-      }
-    ]
-  },
-  {
-    "file": "Contracts/Utils/ViteUtilContract.php",
-    "name": "Spark\\Contracts\\Utils\\ViteUtilContract",
-    "kind": "interface",
-    "sha256": "a1608f55bd0f01ce6e7d0bf6a01045029d0a24213943499ae1d38106e2911f0c",
+    "sha256": "4ce2d5af1f0cf54f49bb89b1ecac035f87611a83fe5f5fbf1eb4b9a63f47d19f",
     "methods": [
       {
         "name": "isRunning",
@@ -6888,7 +6830,7 @@
     "file": "Database/QueryBuilder.php",
     "name": "Spark\\Database\\QueryBuilder",
     "kind": "class",
-    "sha256": "856525d9bc6cd528fce956afddc2e92f2843a855ebd59601f68cae60a123ea6e",
+    "sha256": "6afe7d4f4209bccfb986d46ec1d90f6daf7c9c94a7ccc7f71599989de26e2112",
     "methods": [
       {
         "name": "__construct",
@@ -9843,7 +9785,7 @@
     "file": "Foundation/Http/FormRequest.php",
     "name": "Spark\\Foundation\\Http\\FormRequest",
     "kind": "class",
-    "sha256": "d67488ddd0b9b9807d204543ace8cd5460d73148e99fcdf52eebcb509b295bf9",
+    "sha256": "9a962037f6c5145ec4de4885f46c70a02636a5a801ff726dcc77b6a4d606ae73",
     "methods": [
       {
         "name": "__construct",
@@ -9915,21 +9857,21 @@
     "file": "Foundation/Http/Middlewares/CorsAccessControl.php",
     "name": "Spark\\Foundation\\Http\\Middlewares\\CorsAccessControl",
     "kind": "class",
-    "sha256": "e86d623405d4bcee924ba076c3a212b81d88df2f5f1353d208c97f21fb1663cb",
+    "sha256": "98e9570bd27d73f1d6cd1e078103eb81642e7e47151de76665fff557eb8fd0c9",
     "methods": [
       {
         "name": "__construct",
         "signature": "public function __construct(protected null|array $config = null)",
         "description": "Constructor for the CORS middleware.",
         "doc": "Constructor for the CORS middleware.\n\n@param null|array $config Optional configuration array for CORS settings.",
-        "line": 40
+        "line": 43
       },
       {
         "name": "handle",
         "signature": "public function handle(Request $request, \\Closure $next): mixed",
         "description": "Handle CORS requests by setting appropriate headers.\n\nThis method sets the Access-Control-Allow-Origin, Access-Control-Allow-Credentials,\nAccess-Control-Max-Age, Access-Control-Allow-Methods, and Access-Control-Allow-Headers\nheaders based on the request and allowed settings.",
         "doc": "Handle CORS requests by setting appropriate headers.\n\nThis method sets the Access-Control-Allow-Origin, Access-Control-Allow-Credentials,\nAccess-Control-Max-Age, Access-Control-Allow-Methods, and Access-Control-Allow-Headers\nheaders based on the request and allowed settings.\n\n@param Request $request The current HTTP request.\n@return mixed\n  The response when the request is a preflight request, or the current request otherwise",
-        "line": 56
+        "line": 59
       }
     ]
   },
@@ -9959,7 +9901,7 @@
     "file": "Foundation/Http/Middlewares/ThrottleIncomingRequests.php",
     "name": "Spark\\Foundation\\Http\\Middlewares\\ThrottleIncomingRequests",
     "kind": "class",
-    "sha256": "3799850e51418f01e5aee2a9af3033c1a3dbb94c69f0f9036f7c24b96dc246e6",
+    "sha256": "6ffd02a15de8a9b35b4ce94063ac4722b1b02bfece6a61017559ed6c74349557",
     "methods": [
       {
         "name": "handle",
@@ -10025,7 +9967,7 @@
     "file": "Foundation/helpers.php",
     "name": "Foundation/helpers.php",
     "kind": "functions",
-    "sha256": "476a71e8c4938b87b1150bfa76462d8ae779b6ea5e89960471530dffd8020831",
+    "sha256": "9ee8802efea79f8fcb2f45403dfa6485851d97f438ceab15f690f8a9c56b31b8",
     "methods": [
       {
         "name": "app",
@@ -10652,9 +10594,9 @@
       },
       {
         "name": "uploader",
-        "signature": "function uploader( null|string $uploadTo = null, null|string $uploadDir = null, array $extensions = [], null|int $maxSize = 2048, null|array|float $resize = null, null|array $resizes = null, null|int $compress = null, null|UploaderUtilDriverInterface $driver = null ): Uploader",
+        "signature": "function uploader( null|string $uploadTo = null, null|string $uploadDir = null, array $extensions = [], null|int $maxSize = 2048, null|array|float $resize = null, null|array $resizes = null, null|int $compress = null, null|UploaderDriverInterface $driver = null ): Uploader",
         "description": "Retrieves the Uploader instance and optionally sets up a new upload.\n\nThis function fetches the Uploader instance and, if parameters are provided,\nsets up a new upload using the provided parameters.",
-        "doc": "Retrieves the Uploader instance and optionally sets up a new upload.\n\nThis function fetches the Uploader instance and, if parameters are provided,\nsets up a new upload using the provided parameters.\n\n@param string|null $uploadTo Optional. The upload destination path. Default is null.\n@param string|null $uploadDir Optional. The upload directory path. Default is the value of the 'upload_dir' configuration.\n@param array $extensions Optional. The array of allowed file extensions. Default is an empty array.\n@param int|null $maxSize Optional. The maximum allowed file size in KB. Default is 2048 (2MB).\n@param null|array|float $resize Optional. The resize configuration array. Default is an empty array.\n@param array|null $resizes Optional. The resizes configuration array. Default is an empty array.\n@param int|null $compress Optional. The compression ratio for images. Default is null.\n@param UploaderUtilDriverInterface|null $driver Optional. The custom uploader driver instance. Default is null.\n@return Uploader The Uploader instance.",
+        "doc": "Retrieves the Uploader instance and optionally sets up a new upload.\n\nThis function fetches the Uploader instance and, if parameters are provided,\nsets up a new upload using the provided parameters.\n\n@param string|null $uploadTo Optional. The upload destination path. Default is null.\n@param string|null $uploadDir Optional. The upload directory path. Default is the value of the 'upload_dir' configuration.\n@param array $extensions Optional. The array of allowed file extensions. Default is an empty array.\n@param int|null $maxSize Optional. The maximum allowed file size in KB. Default is 2048 (2MB).\n@param null|array|float $resize Optional. The resize configuration array. Default is an empty array.\n@param array|null $resizes Optional. The resizes configuration array. Default is an empty array.\n@param int|null $compress Optional. The compression ratio for images. Default is null.\n@param UploaderDriverInterface|null $driver Optional. The custom uploader driver instance. Default is null.\n@return Uploader The Uploader instance.",
         "line": 2120
       },
       {
@@ -10679,60 +10621,53 @@
         "line": 2188
       },
       {
-        "name": "arr_from_set",
-        "signature": "function arr_from_set(null|string|array|Arrayable $value, ?callable $callback = null, ?string $delimiter = ','): array",
-        "description": "Convert a comma-separated string into an array of trimmed values.",
-        "doc": "Convert a comma-separated string into an array of trimmed values.\n\n@param null|string|array|Arrayable $value\n@param callable|null $callback\n@param string|null $delimiter\n@return array",
-        "line": 2203
-      },
-      {
         "name": "tracer",
         "signature": "function tracer(): Tracer",
         "description": "Retrieves the Tracer instance.\n\nThis function returns the Tracer instance, which provides methods\nfor tracing and logging application events.",
         "doc": "Retrieves the Tracer instance.\n\nThis function returns the Tracer instance, which provides methods\nfor tracing and logging application events.\n\n@return Tracer The Tracer instance.",
-        "line": 2249
+        "line": 2203
       },
       {
         "name": "is_cli",
         "signature": "function is_cli(): bool",
         "description": "Determine if the current execution environment is CLI.\n\nThis function checks if the PHP script is being executed from the command line interface (CLI)\nby comparing the PHP SAPI name to 'cli'.",
         "doc": "Determine if the current execution environment is CLI.\n\nThis function checks if the PHP script is being executed from the command line interface (CLI)\nby comparing the PHP SAPI name to 'cli'.\n\n@return bool True if the script is running in CLI mode, false otherwise.",
-        "line": 2268
+        "line": 2222
       },
       {
         "name": "is_web",
         "signature": "function is_web(): bool",
         "description": "Determine if the current execution environment is web (not CLI).\n\nThis function checks if the PHP script is being executed in a web server\nenvironment by negating the result of the is_cli() function.",
         "doc": "Determine if the current execution environment is web (not CLI).\n\nThis function checks if the PHP script is being executed in a web server\nenvironment by negating the result of the is_cli() function.\n\n@return bool True if the script is running in a web environment, false otherwise.",
-        "line": 2283
+        "line": 2237
       },
       {
         "name": "is_debug_mode",
         "signature": "function is_debug_mode(): bool",
         "description": "Determine if the application is running in debug mode.\n\nThis function checks the application's configuration to see if\ndebug mode is enabled, which is typically used for development\nand troubleshooting purposes.",
         "doc": "Determine if the application is running in debug mode.\n\nThis function checks the application's configuration to see if\ndebug mode is enabled, which is typically used for development\nand troubleshooting purposes.\n\n@return bool True if the application is in debug mode, false otherwise.",
-        "line": 2299
+        "line": 2253
       },
       {
         "name": "tracer_log",
         "signature": "function tracer_log(string $message): void",
         "description": "Log a message using the Tracer instance.\n\nThis function logs a message using the Tracer instance, which provides\nmethods for tracing and logging application events.",
         "doc": "Log a message using the Tracer instance.\n\nThis function logs a message using the Tracer instance, which provides\nmethods for tracing and logging application events.\n\n@param string $message The message to be logged.\n@return void",
-        "line": 2315
+        "line": 2269
       },
       {
         "name": "pipeline",
         "signature": "function pipeline($payload = null): Pipeline",
         "description": "Create a new Pipeline instance.\n\nThis function initializes a new Pipeline instance with the given payload.\nThe Pipeline instance provides a convenient interface for processing\nthe payload through a series of stages.",
         "doc": "Create a new Pipeline instance.\n\nThis function initializes a new Pipeline instance with the given payload.\nThe Pipeline instance provides a convenient interface for processing\nthe payload through a series of stages.\n\n@param mixed $payload The initial payload to be processed by the pipeline.\n\n@return Pipeline The Pipeline instance initialized with the given payload.",
-        "line": 2333
+        "line": 2287
       },
       {
         "name": "concurrency",
         "signature": "function concurrency(null|array $tasks = null): mixed",
         "description": "Create a new Concurrency instance or run tasks concurrently.\n\nThis function either creates a new Concurrency instance or runs\nthe provided tasks concurrently using the Concurrency class.",
         "doc": "Create a new Concurrency instance or run tasks concurrently.\n\nThis function either creates a new Concurrency instance or runs\nthe provided tasks concurrently using the Concurrency class.\n\n@param null|array $tasks An optional array of tasks to run concurrently.\n@return Concurrency|array The Concurrency instance or the results of the concurrent tasks.",
-        "line": 2349
+        "line": 2303
       }
     ]
   },
@@ -10740,7 +10675,7 @@
     "file": "Hash.php",
     "name": "Spark\\Hash",
     "kind": "class",
-    "sha256": "544309c991d5a40b5450af43bec3baf18e5be452080b52c481da23f620d7bdd6",
+    "sha256": "025b599d712d4ede5a08d742a546b93db72bc33fc179c3315411d9eb87db00d2",
     "methods": [
       {
         "name": "__construct",
@@ -10972,6 +10907,13 @@
         "description": "Generate a version 4 UUID.",
         "doc": "Generate a version 4 UUID.\n\n@return string The generated UUID.",
         "line": 604
+      },
+      {
+        "name": "copy",
+        "signature": "public function copy(): Hash",
+        "description": "Create a copy of the current Hash instance.",
+        "doc": "Create a copy of the current Hash instance.\n\n@return Hash A new instance of Hash with the same key.",
+        "line": 621
       }
     ]
   },
@@ -10979,238 +10921,238 @@
     "file": "Http/Auth.php",
     "name": "Spark\\Http\\Auth",
     "kind": "class",
-    "sha256": "af5e3cdd5fa213bfd973d81a0cd057ca9f10117dcea401eb0c05c61d89ec5715",
+    "sha256": "71d04f7aa36c978b20de693419ea45a110582fcfa0c373eb493a520a587a7760",
     "methods": [
       {
         "name": "__construct",
         "signature": "public function __construct(null|string $model = null, null|array $config = null)",
         "description": "Constructor for the Auth class.\n\nInitializes the Auth instance with the specified session management, user model,\nand optional configuration settings.",
         "doc": "Constructor for the Auth class.\n\nInitializes the Auth instance with the specified session management, user model,\nand optional configuration settings.\n\n@param string $model The fully qualified class name of the user model.\n@param ?array $config Optional configuration array for customizing session key,\n                     cache settings, and route redirections.",
-        "line": 65
+        "line": 66
       },
       {
         "name": "register",
         "signature": "public static function register(string $model, array $config, string $guard): void",
         "description": "Registers the Auth instance in the application container.\n\nThis method allows you to register the Auth instance with a specific model,\nconfiguration, and alias in the application container for easy access throughout\nthe application.",
         "doc": "Registers the Auth instance in the application container.\n\nThis method allows you to register the Auth instance with a specific model,\nconfiguration, and alias in the application container for easy access throughout\nthe application.\n\n@param string $model The fully qualified class name of the user model.\n@param array $config Configuration array for customizing session key, cache\n                     settings, and route redirections.\n@param string $guard The alias to use when registering the Auth instance in the container.",
-        "line": 108
+        "line": 109
       },
       {
         "name": "guard",
         "signature": "public static function guard(string $guard): Auth",
         "description": "Retrieves the Auth instance for a specific alias from the application container.\n\nThis method allows you to retrieve the Auth instance that was registered with a specific\nguard in the application container. If no guard is provided, it defaults to 'default'.",
         "doc": "Retrieves the Auth instance for a specific alias from the application container.\n\nThis method allows you to retrieve the Auth instance that was registered with a specific\nguard in the application container. If no guard is provided, it defaults to 'default'.\n\n@param string $guard The alias of the Auth instance to retrieve.\n@return Auth The Auth instance associated with the specified alias.",
-        "line": 129
+        "line": 130
       },
       {
         "name": "configure",
         "signature": "public function configure(array $config): void",
         "description": "Configures the Auth instance with additional settings.\n\nThis method allows you to modify the default configuration\nfor the Auth instance, such as session keys, cache settings,\nand route redirections.",
         "doc": "Configures the Auth instance with additional settings.\n\nThis method allows you to modify the default configuration\nfor the Auth instance, such as session keys, cache settings,\nand route redirections.\n\n@param array $config An associative array of configuration settings.\n@return void",
-        "line": 166
+        "line": 167
       },
       {
         "name": "getUser",
         "signature": "public function getUser(): ?Model",
         "description": "Retrieves the currently logged in user.\n\nThis method returns the currently authenticated user model if the user\nis logged in, or null if no user is authenticated.",
         "doc": "Retrieves the currently logged in user.\n\nThis method returns the currently authenticated user model if the user\nis logged in, or null if no user is authenticated.\n\n@return ?Model The user model or null if no user is logged in.",
-        "line": 181
+        "line": 182
       },
       {
         "name": "getId",
         "signature": "public function getId(): int",
         "description": "Retrieves the ID of the currently logged in user.",
         "doc": "Retrieves the ID of the currently logged in user.\n\n@return int The user ID or 0 if not logged in.",
-        "line": 229
+        "line": 230
       },
       {
         "name": "hasId",
         "signature": "public function hasId(): bool",
         "description": "Checks if the current user has a valid ID (is logged in).",
         "doc": "Checks if the current user has a valid ID (is logged in).\n\n@return bool True if the user has a valid ID, false otherwise.",
-        "line": 239
+        "line": 240
       },
       {
         "name": "user",
         "signature": "public function user(null|string $key = null, $default = null): mixed",
         "description": "Retrieves the user model or a specific field from the user model.\n\nIf a key is provided, it will return the value of that key from the user model.\nIf no key is provided, it will return the entire user model.",
         "doc": "Retrieves the user model or a specific field from the user model.\n\nIf a key is provided, it will return the value of that key from the user model.\nIf no key is provided, it will return the entire user model.\n\n@param string|null $key The key to retrieve from the user model, or null to return the entire model.\n@param mixed $default The default value to return if the key does not exist.\n@return ($key is null ? \\App\\Models\\User : mixed) The user model or false if not logged in, or the value of the specified key.",
-        "line": 254
+        "line": 255
       },
       {
         "name": "id",
         "signature": "public function id(): int",
         "description": "Retrieves the ID of the currently logged in user.",
         "doc": "Retrieves the ID of the currently logged in user.\n\n@return int The user ID or 0 if not logged in.",
-        "line": 274
+        "line": 275
       },
       {
         "name": "attempt",
-        "signature": "public function attempt(array $credentials): bool",
+        "signature": "public function attempt(Arrayable|array $credentials, bool $remember = false): bool",
         "description": "Attempts to authenticate a user with the given credentials.",
-        "doc": "Attempts to authenticate a user with the given credentials.\n\n@param array $credentials An array containing the user's credentials (e.g., email and password).\n@return bool True if authentication is successful, false otherwise.",
-        "line": 285
+        "doc": "Attempts to authenticate a user with the given credentials.\n\n@param array $credentials An array containing the user's credentials (e.g., email and password).\n@param bool $remember Optional parameter to determine if the user should be remembered.\n@return bool True if authentication is successful, false otherwise.",
+        "line": 287
       },
       {
         "name": "getLoginRoute",
         "signature": "public function getLoginRoute(): string",
         "description": "Retrieves the route for guest users.\n\nThis route is used to redirect users who are not logged in\nto the appropriate login page or guest access endpoint.",
         "doc": "Retrieves the route for guest users.\n\nThis route is used to redirect users who are not logged in\nto the appropriate login page or guest access endpoint.\n\n@return string The route path for guest users.",
-        "line": 306
+        "line": 312
       },
       {
         "name": "getRedirectRoute",
         "signature": "public function getRedirectRoute(): string",
         "description": "Retrieves the route for logged in users.\n\nThis route is used to redirect users who are logged in\nto the appropriate admin dashboard or login success endpoint.",
         "doc": "Retrieves the route for logged in users.\n\nThis route is used to redirect users who are logged in\nto the appropriate admin dashboard or login success endpoint.\n\n@return string The route path for logged in users.",
-        "line": 319
+        "line": 325
       },
       {
         "name": "isGuest",
         "signature": "public function isGuest(): bool",
         "description": "Checks if the current user is a guest (not logged in).",
         "doc": "Checks if the current user is a guest (not logged in).\n\n@return bool True if the user is a guest, false otherwise.",
-        "line": 333
+        "line": 339
       },
       {
         "name": "isLogged",
         "signature": "public function isLogged(): bool",
         "description": "Checks if the current user is logged in.",
         "doc": "Checks if the current user is logged in.\n\n@return bool True if the user is logged in, false otherwise.",
-        "line": 343
+        "line": 349
       },
       {
         "name": "login",
         "signature": "public function login(Model $user, bool $remember = false): void",
         "description": "Logs in the specified user by setting the session and user properties.",
         "doc": "Logs in the specified user by setting the session and user properties.\n\n@param Model $user The user model to be logged in.\n@param bool $remember Optional parameter to determine if the user should be remembered.\n@return void",
-        "line": 355
+        "line": 361
       },
       {
         "name": "makeToken",
         "signature": "public function makeToken(Model $user, array $payload = []): string",
         "description": "Generates a JWT token for the specified user with an optional payload.\n\nThis method creates a JWT token that includes the user's ID and an expiration time.\nAdditional payload data can be included by passing an associative array.",
         "doc": "Generates a JWT token for the specified user with an optional payload.\n\nThis method creates a JWT token that includes the user's ID and an expiration time.\nAdditional payload data can be included by passing an associative array.\n\n@param Model $user The user model for whom the JWT token is to be generated.\n@param array $payload Optional associative array of additional payload data to include in the token.\n@return string The generated JWT token as a string.",
-        "line": 417
+        "line": 423
       },
       {
         "name": "createToken",
         "signature": "public function createToken(?Model $user = null, array $payload = []): string",
         "description": "Generates a JWT token for an explicit user, or the current user when omitted.\n\nThis method creates a JWT token that includes the user's ID and an expiration time.\nAdditional payload data can be included by passing an associative array.",
         "doc": "Generates a JWT token for an explicit user, or the current user when omitted.\n\nThis method creates a JWT token that includes the user's ID and an expiration time.\nAdditional payload data can be included by passing an associative array.\n\n@param Model|null $user The user model for whom the JWT token is to be generated. If null, the currently logged in user will be used.\n@param array $payload Optional associative array of additional payload data to include in the token.\n@return string The generated JWT token as a string.",
-        "line": 444
+        "line": 450
       },
       {
         "name": "tokens",
         "signature": "public function tokens(): \\Spark\\Support\\Collection",
         "description": "Retrieves all JWT tokens associated with the currently logged in user.\n\nThis method fetches all JWT tokens from the configured token table for the authenticated user.\nIt returns a collection of tokens, including their hash, expiration time, and creation time.",
         "doc": "Retrieves all JWT tokens associated with the currently logged in user.\n\nThis method fetches all JWT tokens from the configured token table for the authenticated user.\nIt returns a collection of tokens, including their hash, expiration time, and creation time.\n\n@return \\Spark\\Support\\Collection A collection of JWT tokens for the authenticated user.\n@throws \\RuntimeException If no authenticated user is found or if the JWT token table is not configured.",
-        "line": 487
+        "line": 493
       },
       {
         "name": "revokeToken",
         "signature": "public function revokeToken(?string $tokenHash = null): bool",
         "description": "Revokes a specific JWT token for the currently logged in user.\n\nThis method deletes the specified JWT token from the configured token table for the authenticated user.\nIt returns true if the token was successfully revoked, or false if the token was not found.",
         "doc": "Revokes a specific JWT token for the currently logged in user.\n\nThis method deletes the specified JWT token from the configured token table for the authenticated user.\nIt returns true if the token was successfully revoked, or false if the token was not found.\n\n@param ?string $tokenHash The hash of the JWT token to revoke.\n@return bool True if the token was successfully revoked, false otherwise.\n@throws \\RuntimeException If no authenticated user is found or if the JWT token table is not configured.",
-        "line": 515
+        "line": 521
       },
       {
         "name": "token",
         "signature": "public function token(): ?string",
         "description": "Retrieves the unique identifier (jti) of the currently authenticated JWT token.\n\nThis method extracts the 'jti' claim from the JWT payload, which serves as a unique identifier\nfor the token. If no valid JWT token is present, it returns null.",
         "doc": "Retrieves the unique identifier (jti) of the currently authenticated JWT token.\n\nThis method extracts the 'jti' claim from the JWT payload, which serves as a unique identifier\nfor the token. If no valid JWT token is present, it returns null.\n\n@return ?string The unique identifier of the JWT token, or null if not available.",
-        "line": 546
+        "line": 552
       },
       {
         "name": "logout",
         "signature": "public function logout(): void",
         "description": "Logs out the current user by deleting the session and user properties.",
         "doc": "Logs out the current user by deleting the session and user properties.\n\n@return void",
-        "line": 557
+        "line": 563
       },
       {
         "name": "clearCache",
         "signature": "public function clearCache(null|int $id = null): void",
         "description": "Clears the cache for the currently logged in user.\n\nThis method erases the cached user instance if caching is enabled,\nusing the configured cache name and session key to identify the user.",
         "doc": "Clears the cache for the currently logged in user.\n\nThis method erases the cached user instance if caching is enabled,\nusing the configured cache name and session key to identify the user.\n\n@param int|null $id Optional user ID to clear cache for. If not provided, it will clear cache for the currently logged in user.\n\n@return void",
-        "line": 608
+        "line": 614
       },
       {
         "name": "refresh",
         "signature": "public function refresh(): void",
         "description": "Refreshes the user instance if the user is not a guest.\n\nIf the user is not a guest, this method will refresh the user instance by\ndeleting the user property and calling the user method again.",
         "doc": "Refreshes the user instance if the user is not a guest.\n\nIf the user is not a guest, this method will refresh the user instance by\ndeleting the user property and calling the user method again.\n\n@return void",
-        "line": 630
+        "line": 636
       },
       {
         "name": "__get",
         "signature": "public function __get(string $name)",
         "description": "Magic getter for the admin user properties.",
         "doc": "Magic getter for the admin user properties.\n\n@param string $name\n@return mixed",
-        "line": 649
+        "line": 655
       },
       {
         "name": "__set",
         "signature": "public function __set(string $name, $value)",
         "description": "Magic setter for the admin user properties.",
         "doc": "Magic setter for the admin user properties.\n\n@param string $name\n@param mixed $value\n@return void",
-        "line": 661
+        "line": 667
       },
       {
         "name": "__isset",
         "signature": "public function __isset(string $name)",
         "description": "Magic isset for the admin user properties.",
         "doc": "Magic isset for the admin user properties.\n\n@param string $name\n@return bool",
-        "line": 672
+        "line": 678
       },
       {
         "name": "__unset",
         "signature": "public function __unset(string $name)",
         "description": "Magic unset for the admin user properties.",
         "doc": "Magic unset for the admin user properties.\n\n@param string $name\n@return void",
-        "line": 683
+        "line": 689
       },
       {
         "name": "offsetExists",
         "signature": "public function offsetExists($key): bool",
         "description": "Check if the given field exists in the user model.\n\nThis method is used to determine if a specific property or field\nexists in the user model, allowing for dynamic access to user attributes.",
         "doc": "Check if the given field exists in the user model.\n\nThis method is used to determine if a specific property or field\nexists in the user model, allowing for dynamic access to user attributes.\n\n@param string $key The name of the field to check.\n@return bool True if the field exists, false otherwise.",
-        "line": 697
+        "line": 703
       },
       {
         "name": "offsetUnset",
         "signature": "public function offsetUnset($key): void",
         "description": "Method to unset a key-value pair in the user model.",
         "doc": "Method to unset a key-value pair in the user model.\n\n@param string $key The key to unset.\n@return void",
-        "line": 713
+        "line": 719
       },
       {
         "name": "offsetGet",
         "signature": "public function offsetGet($key): mixed",
         "description": "Method to get a value by key from the user model.\n\nThis method allows for accessing user properties dynamically using array-like syntax.",
         "doc": "Method to get a value by key from the user model.\n\nThis method allows for accessing user properties dynamically using array-like syntax.\n\n@param string $key The key to retrieve the value for.\n@return mixed The value associated with the key, or null if the key does not exist.",
-        "line": 731
+        "line": 737
       },
       {
         "name": "offsetSet",
         "signature": "public function offsetSet($key, $value): void",
         "description": "Method to set a value by key in the user model.\n This method allows for dynamically setting user properties using array-like syntax.",
         "doc": "Method to set a value by key in the user model.\n This method allows for dynamically setting user properties using array-like syntax.\n\n@param string $key The key to set the value for.\n@param mixed $value The value to set for the key.\n@return void",
-        "line": 749
+        "line": 755
       },
       {
         "name": "checkId",
         "signature": "public function checkId(): void",
         "description": "Checks and sets the authentication ID from the session.\n\nThis method checks if the session contains the configured session key\nfor the user ID. If it does, it attempts to authenticate via cookie\nif cookie authentication is enabled. Finally, it sets the internal ID\nproperty to the user ID from the session or 0 if not found.",
         "doc": "Checks and sets the authentication ID from the session.\n\nThis method checks if the session contains the configured session key\nfor the user ID. If it does, it attempts to authenticate via cookie\nif cookie authentication is enabled. Finally, it sets the internal ID\nproperty to the user ID from the session or 0 if not found.\n\n@return void",
-        "line": 969
+        "line": 975
       },
       {
         "name": "check",
         "signature": "public function check(): bool",
         "description": "Checks if the user is authenticated.\n\nThis method checks if the user has a valid ID and if the user model is not null,\nindicating that the user is authenticated.",
         "doc": "Checks if the user is authenticated.\n\nThis method checks if the user has a valid ID and if the user model is not null,\nindicating that the user is authenticated.\n\n@return bool True if the user is authenticated, false otherwise.",
-        "line": 1012
+        "line": 1018
       }
     ]
   },
@@ -12422,196 +12364,196 @@
     "file": "Http/Client/HttpResponse.php",
     "name": "Spark\\Http\\Client\\HttpResponse",
     "kind": "class",
-    "sha256": "021c224fd748abea77b12d0bf39b1f3e8409154120d8e7d8c7c4c98cf4197083",
+    "sha256": "156e1db4ce4543005ed5711792f53c55cc26209011e4ad50a9c80462e0b965cc",
     "methods": [
       {
         "name": "__construct",
         "signature": "public function __construct( public mixed $body = '', public int $status = 0, public string $lastUrl = '', public int $length = 0, public array $headers = [], )",
-        "description": "Sets the response data.",
-        "doc": "Sets the response data.\n\n@param array $response The response data.",
-        "line": 28
+        "description": "Create a new HttpResponse instance.",
+        "doc": "Create a new HttpResponse instance.",
+        "line": 24
       },
       {
         "name": "__toString",
         "signature": "public function __toString(): string",
         "description": "Magic method to convert the object to a string.",
         "doc": "Magic method to convert the object to a string.\n\n@return string The response body as a string.",
-        "line": 42
+        "line": 38
       },
       {
         "name": "body",
         "signature": "public function body(): string",
         "description": "Get the raw body of the response.",
         "doc": "Get the raw body of the response.\n\n@return string The raw response body.",
-        "line": 52
+        "line": 48
       },
       {
         "name": "status",
         "signature": "public function status(): int",
         "description": "Get the HTTP status code of the response.",
         "doc": "Get the HTTP status code of the response.\n\n@return int The HTTP status code.",
-        "line": 62
+        "line": 58
       },
       {
         "name": "lastUrl",
         "signature": "public function lastUrl(): string",
         "description": "Get the last URL after redirects.",
         "doc": "Get the last URL after redirects.\n\n@return string The last URL.",
-        "line": 72
+        "line": 68
       },
       {
         "name": "length",
         "signature": "public function length(): int",
         "description": "Get the content length of the response.",
         "doc": "Get the content length of the response.\n\n@return int The content length.",
-        "line": 82
+        "line": 78
       },
       {
         "name": "headers",
         "signature": "public function headers(): array",
         "description": "Get the response headers.",
         "doc": "Get the response headers.\n\n@return array The response headers.",
-        "line": 92
+        "line": 88
       },
       {
         "name": "header",
         "signature": "public function header(string $key, mixed $default = null): mixed",
         "description": "Get a specific header value.",
         "doc": "Get a specific header value.\n\n@param string $key The header key.\n@param mixed $default The default value if the header is not found.\n@return mixed The header value or the default value.",
-        "line": 104
+        "line": 100
       },
       {
         "name": "json",
         "signature": "public function json(?string $key = null, mixed $default = null): mixed",
         "description": "Get the Response body as a JSON object.",
         "doc": "Get the Response body as a JSON object.\n\n@param string|null $key\n@param mixed $default\n@return mixed",
-        "line": 121
+        "line": 117
       },
       {
         "name": "text",
         "signature": "public function text(): string",
         "description": "Get the Response body as a string.",
         "doc": "Get the Response body as a string.\n\n@return string The response body as a string.",
-        "line": 147
+        "line": 143
       },
       {
         "name": "has",
         "signature": "public function has(string $key): bool",
         "description": "Check if a key exists in the JSON-decoded response body using a dot-notated key.",
         "doc": "Check if a key exists in the JSON-decoded response body using a dot-notated key.\n\n@param string $key The key to check.\n@return bool True if the key exists, false otherwise.",
-        "line": 158
+        "line": 154
       },
       {
         "name": "get",
         "signature": "public function get(string $key, mixed $default = null): mixed",
         "description": "Get a value from the JSON-decoded response body using a dot-notated key.",
         "doc": "Get a value from the JSON-decoded response body using a dot-notated key.\n\n@param string $key The key to retrieve.\n@param mixed $default The default value to return if the key does not exist.\n@return mixed The value associated with the key or the default value.",
-        "line": 171
+        "line": 167
       },
       {
         "name": "isOk",
         "signature": "public function isOk(): bool",
         "description": "Check if the response was a successful (2xx) response.",
         "doc": "Check if the response was a successful (2xx) response.\n\n@return bool True if successful, false otherwise.",
-        "line": 181
+        "line": 177
       },
       {
         "name": "ok",
         "signature": "public function ok(): bool",
         "description": "Check if the response status is exactly 200 OK.",
         "doc": "Check if the response status is exactly 200 OK.\n\n@return bool True if status is 200, false otherwise.",
-        "line": 191
+        "line": 187
       },
       {
         "name": "isSuccess",
         "signature": "public function isSuccess(): bool",
         "description": "Check if the response was successful (2xx status code).",
         "doc": "Check if the response was successful (2xx status code).\n\n@return bool True if successful, false otherwise.",
-        "line": 201
+        "line": 197
       },
       {
         "name": "isSuccessful",
         "signature": "public function isSuccessful(): bool",
         "description": "Check if the response was successful (2xx status code).",
         "doc": "Check if the response was successful (2xx status code).\n\n@return bool True if successful, false otherwise.",
-        "line": 211
+        "line": 207
       },
       {
         "name": "success",
         "signature": "public function success(): bool",
         "description": "Check if the response was successful (2xx status code).",
         "doc": "Check if the response was successful (2xx status code).\n\n@return bool True if successful, false otherwise.",
-        "line": 221
+        "line": 217
       },
       {
         "name": "successful",
         "signature": "public function successful(): bool",
         "description": "Check if the response was successful (2xx status code).",
         "doc": "Check if the response was successful (2xx status code).\n\n@return bool True if successful, false otherwise.",
-        "line": 231
+        "line": 227
       },
       {
         "name": "isClientError",
         "signature": "public function isClientError(): bool",
         "description": "Check if the response was a client error (4xx status code).",
         "doc": "Check if the response was a client error (4xx status code).\n\n@return bool True if client error, false otherwise.",
-        "line": 241
+        "line": 237
       },
       {
         "name": "failed",
         "signature": "public function failed(): bool",
         "description": "Check if the response was a failure (non-2xx status code).",
         "doc": "Check if the response was a failure (non-2xx status code).\n\n@return bool True if failed, false otherwise.",
-        "line": 251
+        "line": 247
       },
       {
         "name": "isServerError",
         "signature": "public function isServerError(): bool",
         "description": "Check if the response was a server error (5xx status code).",
         "doc": "Check if the response was a server error (5xx status code).\n\n@return bool True if server error, false otherwise.",
-        "line": 261
+        "line": 257
       },
       {
         "name": "isRedirect",
         "signature": "public function isRedirect(): bool",
         "description": "Check if the response was a redirect (3xx status code).",
         "doc": "Check if the response was a redirect (3xx status code).\n\n@return bool True if redirect, false otherwise.",
-        "line": 271
+        "line": 267
       },
       {
         "name": "offsetExists",
         "signature": "public function offsetExists(mixed $offset): bool",
         "description": "Check if the response was a success (2xx status code).",
         "doc": "Check if the response was a success (2xx status code).\n\n@param mixed $offset The offset to check.\n@return bool True if success, false otherwise.",
-        "line": 282
+        "line": 278
       },
       {
         "name": "offsetGet",
         "signature": "public function offsetGet(mixed $offset): mixed",
         "description": "Get the value at the specified offset.",
         "doc": "Get the value at the specified offset.\n\n@param mixed $offset The offset to retrieve.\n@return mixed The value at the specified offset or null if not set.",
-        "line": 293
+        "line": 289
       },
       {
         "name": "offsetSet",
         "signature": "public function offsetSet(mixed $offset, mixed $value): void",
         "description": "Set the value at the specified offset.",
         "doc": "Set the value at the specified offset.\n\n@param mixed $offset The offset to set.\n@param mixed $value The value to set at the specified offset.",
-        "line": 308
+        "line": 304
       },
       {
         "name": "offsetUnset",
         "signature": "public function offsetUnset(mixed $offset): void",
         "description": "Unset the value at the specified offset.",
         "doc": "Unset the value at the specified offset.\n\n@param mixed $offset The offset to unset.",
-        "line": 318
+        "line": 314
       },
       {
         "name": "toArray",
         "signature": "public function toArray(): array",
         "description": "Convert the HttpResponse object to an array.",
         "doc": "Convert the HttpResponse object to an array.\n\n@return array The array representation of the HttpResponse object.",
-        "line": 328
+        "line": 324
       }
     ]
   },
@@ -12704,371 +12646,399 @@
     "file": "Http/Input.php",
     "name": "Spark\\Http\\Input",
     "kind": "class",
-    "sha256": "371d71b66370e0640d92e3c7787cc610b26d7f90387b210564cb2a7f1b427adc",
+    "sha256": "68c7b5b565fc546631072a90a7c02416f0a972e8ff333394d80338adabcb9862",
     "methods": [
       {
         "name": "__construct",
         "signature": "public function __construct(array|Request|Collection|Arrayable $data = [])",
         "description": "Constructs a new input instance with optional initial data.",
         "doc": "Constructs a new input instance with optional initial data.\n\n@param array|Request|Collection|Arrayable $data Key-value data array to be sanitized.",
-        "line": 44
+        "line": 46
       },
       {
         "name": "make",
         "signature": "public static function make(array|Request|Collection|Arrayable $data = []): self",
         "description": "Static factory method to create a new input instance with optional initial data.",
         "doc": "Static factory method to create a new input instance with optional initial data.\n\n@param array|Request|Collection|Arrayable $data Key-value data array to be sanitized.\n@return self Returns a new instance of the Input class with the provided data.",
-        "line": 65
+        "line": 67
       },
       {
         "name": "email",
         "signature": "public function email(?string $key = null): ?string",
         "description": "Sanitizes an email address.",
         "doc": "Sanitizes an email address.\n\n@param ?string $key Key in the data array to sanitize.\n@return string|null Sanitized email or null if invalid.",
-        "line": 76
+        "line": 78
       },
       {
         "name": "text",
         "signature": "public function text(string $key, bool $stripTags = true): ?string",
         "description": "Sanitizes plain text, with optional HTML tag stripping.",
         "doc": "Sanitizes plain text, with optional HTML tag stripping.\n\n@param string $key Key in the data array to sanitize.\n@param bool $stripTags Whether to strip HTML tags from the text.\n@return string|null Sanitized text or null if invalid.",
-        "line": 96
+        "line": 98
       },
       {
         "name": "string",
         "signature": "public function string(string $key, $default = null): ?string",
         "description": "Sanitizes a string value.",
         "doc": "Sanitizes a string value.\n\n@param string $key Key in the data array to sanitize.\n@param mixed $default Default value to return if key is not found.\n@return string|null Sanitized string or null if invalid.",
-        "line": 116
+        "line": 118
       },
       {
         "name": "escapeHtml",
         "signature": "public function escapeHtml(string $key): ?string",
         "description": "Escapes HTML special characters for safe output.",
         "doc": "Escapes HTML special characters for safe output.\n\n@param string $key Key in the data array to sanitize.\n@return string|null Sanitized HTML or null if invalid.",
-        "line": 145
+        "line": 155
       },
       {
         "name": "number",
         "signature": "public function number(string $key): ?int",
         "description": "Sanitizes an integer value.",
         "doc": "Sanitizes an integer value.\n\n@param string $key Key in the data array to sanitize.\n@return int|null Sanitized integer or null if invalid.",
-        "line": 162
+        "line": 172
       },
       {
         "name": "float",
         "signature": "public function float(string $key): ?float",
         "description": "Sanitizes a floating-point number.",
         "doc": "Sanitizes a floating-point number.\n\n@param string $key Key in the data array to sanitize.\n@return float|null Sanitized float or null if invalid.",
-        "line": 181
+        "line": 191
       },
       {
         "name": "boolean",
         "signature": "public function boolean(string $key): ?bool",
         "description": "Sanitizes a boolean value.",
         "doc": "Sanitizes a boolean value.\n\n@param string $key Key in the data array to validate.\n@return bool|null Sanitized boolean or null if invalid.",
-        "line": 200
+        "line": 210
       },
       {
         "name": "url",
         "signature": "public function url(string $key): ?string",
         "description": "Sanitizes a URL.",
         "doc": "Sanitizes a URL.\n\n@param string $key Key in the data array to sanitize.\n@return string|null Sanitized URL or null if invalid.",
-        "line": 211
+        "line": 221
       },
       {
         "name": "ip",
         "signature": "public function ip(string $key): ?string",
         "description": "Validates an IP address.",
         "doc": "Validates an IP address.\n\n@param string $key Key in the data array to validate.\n@return string|null Valid IP address or null if invalid.",
-        "line": 229
+        "line": 239
       },
       {
         "name": "alpha",
         "signature": "public function alpha(string $key, bool $ascii = false): ?string",
         "description": "Sanitizes a string to contain only Unicode letters/marks (matches the 'alpha' rule).",
         "doc": "Sanitizes a string to contain only Unicode letters/marks (matches the 'alpha' rule).\n\n@param string $key Key in the data array to sanitize.\n@param bool $ascii Restrict to plain ASCII letters only, like validateAlphabetic()'s 'ascii' param.\n@return string|null Sanitized alphabetic string or null if invalid.",
-        "line": 247
+        "line": 257
       },
       {
         "name": "alphaNum",
         "signature": "public function alphaNum(string $key, bool $ascii = false): ?string",
         "description": "Sanitizes a string to contain only Unicode letters/marks/numbers (matches 'alpha_num').",
         "doc": "Sanitizes a string to contain only Unicode letters/marks/numbers (matches 'alpha_num').\n\n@param string $key Key in the data array to sanitize.\n@param bool $ascii Restrict to plain ASCII letters/digits only.\n@return string|null Sanitized alphanumeric string or null if invalid.",
-        "line": 259
+        "line": 269
       },
       {
         "name": "alphaDash",
         "signature": "public function alphaDash(string $key, bool $ascii = false): ?string",
         "description": "Sanitizes a string to contain only Unicode letters/marks/numbers, dashes,\nand underscores (matches 'alpha_dash').",
         "doc": "Sanitizes a string to contain only Unicode letters/marks/numbers, dashes,\nand underscores (matches 'alpha_dash').\n\n@param string $key Key in the data array to sanitize.\n@param bool $ascii Restrict to plain ASCII letters/digits/dash/underscore only.\n@return string|null Sanitized string or null if invalid.",
-        "line": 272
+        "line": 282
       },
       {
         "name": "digits",
         "signature": "public function digits(string $key): ?string",
         "description": "Sanitizes a string to contain only digits.",
         "doc": "Sanitizes a string to contain only digits.\n\n@param string $key Key in the data array to sanitize.\n@return string|null Sanitized digit string or null if invalid.",
-        "line": 313
+        "line": 323
       },
       {
         "name": "phone",
         "signature": "public function phone(?string $key = null, bool $keepPlus = true): ?string",
         "description": "Sanitizes a phone number by removing non-digit characters.",
         "doc": "Sanitizes a phone number by removing non-digit characters.\n\n@param string $key Key in the data array to sanitize.\n@param bool $keepPlus Whether to keep the plus sign for international numbers.\n@return string|null Sanitized phone number or null if invalid.",
-        "line": 330
+        "line": 341
       },
       {
         "name": "date",
         "signature": "public function date(?string $key = null, string $format = 'Y-m-d'): ?string",
         "description": "Sanitizes a date string and optionally formats it.",
         "doc": "Sanitizes a date string and optionally formats it.\n\n@param ?string $key Key in the data array to sanitize.\n@param string $format Output date format (default: 'Y-m-d').\n@return string|null Sanitized date or null if invalid.",
-        "line": 349
+        "line": 361
       },
       {
         "name": "json",
         "signature": "public function json(string $key, bool $decode = false): string|array|null",
         "description": "Sanitizes a JSON string and optionally decodes it.",
         "doc": "Sanitizes a JSON string and optionally decodes it.\n\n@param string $key Key in the data array to sanitize.\n@param bool $decode Whether to decode the JSON to array.\n@return string|array|null Sanitized JSON or decoded array, null if invalid.",
-        "line": 367
+        "line": 380
       },
       {
         "name": "array",
         "signature": "public function array(string $key, ?callable $callback = null, bool $removeEmpty = true): ?array",
         "description": "Sanitizes an array by filtering out empty values and optionally applying a callback.",
         "doc": "Sanitizes an array by filtering out empty values and optionally applying a callback.\n\n@param string $key Key in the data array to sanitize.\n@param callable|null $callback Optional callback to apply to each array element.\n@param bool $removeEmpty Whether to remove empty values.\n@return array|null Sanitized array or null if invalid.",
-        "line": 388
+        "line": 403
+      },
+      {
+        "name": "convertArr",
+        "signature": "public static function convertArr(null|string|array|Arrayable $value, ?callable $callback = null, ?string $delimiter = ','): array",
+        "description": "Convert a comma-separated string into an array of trimmed values.",
+        "doc": "Convert a comma-separated string into an array of trimmed values.\n\n@param null|string|array|Arrayable $value\n@param callable|null $callback\n@param string|null $delimiter\n@return array",
+        "line": 432
       },
       {
         "name": "file",
         "signature": "public function file(?string $key = null): ?array",
-        "description": "Sanitizes a file upload array.",
-        "doc": "Sanitizes a file upload array.\n\n@param ?string $key Key in the data array to sanitize.\n@return array|null Sanitized file array or null if invalid.",
-        "line": 415
+        "description": "Sanitizes a single file upload.",
+        "doc": "Sanitizes a single file upload.\n\n@param ?string $key Key in the data array to sanitize.\n@return array|null Sanitized file array (or list of files for multi-uploads), null if invalid.",
+        "line": 474
+      },
+      {
+        "name": "files",
+        "signature": "public function files(?string $key = null): array",
+        "description": "Sanitizes multiple file uploads.",
+        "doc": "Sanitizes multiple file uploads.\n\n@param ?string $key Key in the data array to sanitize.\n@return array Sanitized files array or empty array if invalid.",
+        "line": 502
+      },
+      {
+        "name": "hasFile",
+        "signature": "public function hasFile(?string $key = null): bool",
+        "description": "Checks if at least one valid uploaded file exists for the given key.\n\nNote: is_uploaded_file() is always false outside real SAPI uploads\n(CLI tests, Swoole, etc.).",
+        "doc": "Checks if at least one valid uploaded file exists for the given key.\n\nNote: is_uploaded_file() is always false outside real SAPI uploads\n(CLI tests, Swoole, etc.).\n\n@param ?string $key Key in the data array to check.",
+        "line": 547
+      },
+      {
+        "name": "moveFile",
+        "signature": "public function moveFile(string $key, null|string $disk = null, array $options = []): string|array|false",
+        "description": "Moves an uploaded file to a new destination.",
+        "doc": "Moves an uploaded file to a new destination.\n\n@param string $key The file key.\n@param null|string $disk The disk to use for the upload.\n@param array $options Additional options for the upload.\n@return string|array|false The path(s) of the moved file(s) or false on failure.",
+        "line": 597
       },
       {
         "name": "password",
-        "signature": "public function password(?string $key = null, bool $hash = false, array $options = []): ?string",
+        "signature": "public function password(?string $key = null, bool $hash = false, null|string|int $algorithm = null, array $options = []): ?string",
         "description": "Sanitizes a password by trimming and optionally hashing.",
         "doc": "Sanitizes a password by trimming and optionally hashing.\n\n@param ?string $key Key in the data array to sanitize.\n@param bool $hash Whether to hash the password.\n@param array $options Password hashing options.\n@return string|null Sanitized password or null if invalid.",
-        "line": 440
+        "line": 618
       },
       {
         "name": "safe",
         "signature": "public function safe(string $key, array $allowedTags = []): ?string",
         "description": "Removes or escapes potentially dangerous content from text.",
         "doc": "Removes or escapes potentially dangerous content from text.\n\n@param string $key Key in the data array to sanitize.\n@param array $allowedTags Array of allowed HTML tags.\n@return string|null Sanitized content or null if invalid.",
-        "line": 467
+        "line": 652
       },
       {
         "name": "collect",
         "signature": "public function collect(string $key): Collection",
         "description": "Collects values from the data array into a Spark\\Support\\Collection.",
         "doc": "Collects values from the data array into a Spark\\Support\\Collection.\n\n@template TKey of array-key\n\n@template-covariant TValue\n\n@param string $key\n@return Collection<TKey, TValue>",
-        "line": 491
+        "line": 677
       },
       {
         "name": "set",
         "signature": "public function set(string $key, mixed $value): void",
         "description": "Sets a key-value pair in the sanitizer data array.",
         "doc": "Sets a key-value pair in the sanitizer data array.\n\n@param string $key Key in the data array.\n@param mixed $value Value to set.",
-        "line": 507
+        "line": 693
       },
       {
         "name": "get",
         "signature": "public function get(string $key, $default = null): mixed",
         "description": "Retrieves the value of a key from the data array or returns a default value.",
         "doc": "Retrieves the value of a key from the data array or returns a default value.\n\n@param string $key Key to retrieve.\n@param mixed $default Default value if key does not exist.\n@return mixed Retrieved value or default.",
-        "line": 519
+        "line": 705
       },
       {
         "name": "has",
         "signature": "public function has(string $key): bool",
         "description": "Checks if a key exists in the sanitizer data array.",
         "doc": "Checks if a key exists in the sanitizer data array.\n\n@param string $key Key to check.\n@return bool True if key exists, false otherwise.",
-        "line": 530
+        "line": 716
       },
       {
         "name": "hasAny",
         "signature": "public function hasAny(array|string $keys): bool",
         "description": "Checks if any of the specified keys exist in the sanitizer data array.",
         "doc": "Checks if any of the specified keys exist in the sanitizer data array.\n\n@param array|string $keys Keys to check.\n@return bool True if any key exists, false otherwise.",
-        "line": 541
+        "line": 727
       },
       {
         "name": "hasAll",
         "signature": "public function hasAll(array|string $keys): bool",
         "description": "Checks if all of the specified keys exist in the sanitizer data array.",
         "doc": "Checks if all of the specified keys exist in the sanitizer data array.\n\n@param array|string $keys Keys to check.\n@return bool True if all keys exist, false otherwise.",
-        "line": 558
+        "line": 744
       },
       {
         "name": "all",
-        "signature": "public function all(): array",
+        "signature": "public function all(array $filter = []): array",
         "description": "Retrieves all sanitized data as an associative array.",
-        "doc": "Retrieves all sanitized data as an associative array.\n\n@return array All key-value pairs in the sanitizer data array.",
-        "line": 574
+        "doc": "Retrieves all sanitized data as an associative array.\n\n@param array $filter Optional list of keys to filter by.\n@return array All key-value pairs in the sanitizer data array.",
+        "line": 761
       },
       {
         "name": "isEmpty",
         "signature": "public function isEmpty(): bool",
         "description": "Checks if the sanitizer data array is empty.",
         "doc": "Checks if the sanitizer data array is empty.\n\n@return bool True if empty, false otherwise.",
-        "line": 584
+        "line": 775
       },
       {
         "name": "isNotEmpty",
         "signature": "public function isNotEmpty(): bool",
         "description": "Checks if the sanitizer data array is not empty.",
         "doc": "Checks if the sanitizer data array is not empty.\n\n@return bool True if not empty, false otherwise.",
-        "line": 594
+        "line": 785
       },
       {
         "name": "__get",
         "signature": "public function __get($name): mixed",
         "description": "Magic method to retrieve a value from the sanitizer data array.",
         "doc": "Magic method to retrieve a value from the sanitizer data array.\n\n@param string $name Key to retrieve.\n@return mixed The value associated with the key, or null if not found.",
-        "line": 605
+        "line": 796
       },
       {
         "name": "__set",
         "signature": "public function __set($name, $value): void",
         "description": "Magic method to set a key-value pair in the sanitizer data array.",
         "doc": "Magic method to set a key-value pair in the sanitizer data array.\n\n@param string $name Key to set.\n@param mixed $value Value to set.\n@return void",
-        "line": 617
+        "line": 808
       },
       {
         "name": "__isset",
         "signature": "public function __isset($name): bool",
         "description": "Magic method to check if a key is set in the sanitizer data array.",
         "doc": "Magic method to check if a key is set in the sanitizer data array.\n\n@param string $name Key to check.\n@return bool True if key is set, false otherwise.",
-        "line": 628
+        "line": 819
       },
       {
         "name": "offsetExists",
         "signature": "public function offsetExists($name): bool",
         "description": "Magic method to unset a key-value pair in the sanitizer data array.",
         "doc": "Magic method to unset a key-value pair in the sanitizer data array.\n\n@param string $name name to unset.\n@return void",
-        "line": 639
+        "line": 830
       },
       {
         "name": "offsetUnset",
         "signature": "public function offsetUnset($name): void",
         "description": "Magic method to unset a key-value pair in the sanitizer data array.",
         "doc": "Magic method to unset a key-value pair in the sanitizer data array.\n\n@param string $name name to unset.\n@return void",
-        "line": 650
+        "line": 841
       },
       {
         "name": "offsetGet",
         "signature": "public function offsetGet($name): mixed",
         "description": "Magic method to retrieve a value from the sanitizer data array.",
         "doc": "Magic method to retrieve a value from the sanitizer data array.\n\n@param string $name Key to retrieve.\n@return mixed The value associated with the key, or null if not found.",
-        "line": 661
+        "line": 852
       },
       {
         "name": "offsetSet",
         "signature": "public function offsetSet($name, $value): void",
         "description": "Magic method to set a key-value pair in the sanitizer data array.",
         "doc": "Magic method to set a key-value pair in the sanitizer data array.\n\n@param string $name Key to set.\n@param mixed $value Value to set.\n@return void",
-        "line": 673
+        "line": 864
       },
       {
         "name": "to",
         "signature": "public function to(array $config): array",
         "description": "Converts the sanitizer data array to an associative array based on the provided configuration.",
         "doc": "Converts the sanitizer data array to an associative array based on the provided configuration.\n\n @param array $config An associative array where keys are the data keys and values are the types to sanitize.\n @return array An associative array with sanitized values based on the provided configuration.\n Supported types: 'email', 'text', 'html', 'number', 'float', 'boolean', 'url', 'ip', 'alpha', 'alpha_num',\n                  'alpha_dash', 'digits', 'phone', 'slug', 'string', 'date', 'json', 'array', 'file',\n                  'password', 'safe'.\n If a type is not recognized, it defaults to returning the raw value.\n \n Example:\n $config = [\n     'user_email' => 'email',\n     'user_name' => 'text',\n     'user_age' => 'number',\n     'username' => 'alpha_dash',\n     'phone_number' => 'phone',\n ];\n $sanitizedData = $sanitizer->to($config);\n\n This will return an associative array with sanitized values for each key based on the specified type.\n If a key does not exist in the sanitizer data, it will return null for that key.\n If a type is not recognized, it will return the raw value for that key.",
-        "line": 702
+        "line": 893
       },
       {
         "name": "only",
         "signature": "public function only(array|string $keys): self",
         "description": "Filters the sanitizer data array to include only specified keys.",
         "doc": "Filters the sanitizer data array to include only specified keys.\n\n@param array|string $keys Keys to include in the filtered data.\n@return self Returns a new instance with filtered data.",
-        "line": 786
+        "line": 985
       },
       {
         "name": "except",
         "signature": "public function except(array|string $keys): self",
         "description": "Filters the sanitizer data array to exclude specified keys.",
         "doc": "Filters the sanitizer data array to exclude specified keys.\n\n@param array|string $keys Keys to exclude from the filtered data.\n@return self Returns a new instance with filtered data.",
-        "line": 798
+        "line": 997
       },
       {
         "name": "map",
         "signature": "public function map(callable $callback): self",
         "description": "Maps the sanitizer data array using a callback function.",
         "doc": "Maps the sanitizer data array using a callback function.\n\n@param callable $callback Callback function to apply to each element.\n@return self Returns a new instance with mapped data.",
-        "line": 810
+        "line": 1009
       },
       {
         "name": "filter",
         "signature": "public function filter(null|callable $callback = null): self",
         "description": "Filters the sanitizer data array using a callback function.",
         "doc": "Filters the sanitizer data array using a callback function.\n\n@param null|callable $callback Callback function to filter elements.\n@return self Returns a new instance with filtered data.",
-        "line": 821
+        "line": 1020
       },
       {
         "name": "toCollection",
         "signature": "public function toCollection(): Collection",
         "description": "Converts the sanitizer data array to a Spark\\Support\\Collection.",
         "doc": "Converts the sanitizer data array to a Spark\\Support\\Collection.\n\n@return Collection The collection containing sanitized data.",
-        "line": 831
+        "line": 1030
       },
       {
         "name": "slug",
         "signature": "public function slug(?string $key = null, string $separator = '-', string $language = 'en', array $dictionary = ['@' => 'at']): ?string",
         "description": "Sanitizes a string into a URL-friendly slug.",
         "doc": "Sanitizes a string into a URL-friendly slug.\n\n@param ?string $key Key in the data array to sanitize.\n@param string $separator Separator character.\n@param string $language Language for transliteration.\n@param array $dictionary Optional replacements for transliteration.\n@return string|null",
-        "line": 845
+        "line": 1044
       },
       {
         "name": "str",
         "signature": "public function str(string $key, string $default = ''): Stringable",
         "description": "Converts the sanitizer data array to a Spark\\Support\\Stringable instance.",
         "doc": "Converts the sanitizer data array to a Spark\\Support\\Stringable instance.\n\n@param string $key Key in the data array to convert to Stringable.\n@param string $default Default value if key is not found.\n@return Stringable The Stringable instance containing the sanitized string.",
-        "line": 864
+        "line": 1063
       },
       {
         "name": "toArray",
         "signature": "public function toArray(): array",
         "description": "Converts the sanitizer data array to an associative array.",
         "doc": "Converts the sanitizer data array to an associative array.\n\n@return array The sanitizer data array.",
-        "line": 876
+        "line": 1075
       },
       {
         "name": "copy",
         "signature": "public function copy(): self",
         "description": "Create a copy of the sanitizer instance.",
         "doc": "Create a copy of the sanitizer instance.\n\n@return self A new instance that is a copy of the current instance.",
-        "line": 886
+        "line": 1085
       },
       {
         "name": "__clone",
         "signature": "public function __clone(): void",
         "description": "",
         "doc": "",
-        "line": 891
+        "line": 1090
       },
       {
         "name": "toJson",
         "signature": "public function toJson($options = 0): string",
         "description": "Converts the sanitizer data array to a JSON string.",
         "doc": "Converts the sanitizer data array to a JSON string.\n\n@param int $options JSON encoding options.\n@return string The JSON representation of the sanitizer data.",
-        "line": 902
+        "line": 1101
       },
       {
         "name": "getIterator",
         "signature": "public function getIterator(): \\Traversable",
         "description": "Get an iterator for the items.\n\nThis method allows the model to be iterated over like an array.",
         "doc": "Get an iterator for the items.\n\nThis method allows the model to be iterated over like an array.\n\n@template TKey of array-key\n\n@template-covariant TValue\n\n@implements \\ArrayAccess<TKey, TValue>\n\n@return \\ArrayIterator<TKey, TValue>",
-        "line": 920
+        "line": 1119
       },
       {
         "name": "__toString",
         "signature": "public function __toString(): string",
         "description": "Converts the sanitizer data to a string representation.",
         "doc": "Converts the sanitizer data to a string representation.\n\n @return string The string representation of the first sanitized text value.\n If no text is found, returns an empty string.",
-        "line": 931
+        "line": 1130
       }
     ]
   },
@@ -13393,7 +13363,7 @@
     "file": "Http/Request.php",
     "name": "Spark\\Http\\Request",
     "kind": "class",
-    "sha256": "6ff9066cf9415e8cb52e08faa14946c7cc1ec265ce0915155824dc4afb0b1d2d",
+    "sha256": "224365352cdec8e904e61cca29884598e761541724783e54956c22f0bf9adfe1",
     "methods": [
       {
         "name": "__construct",
@@ -13403,606 +13373,606 @@
         "line": 82
       },
       {
+        "name": "initializeFrom",
+        "signature": "public function initializeFrom(self $request): static",
+        "description": "Initializes the request object from another request instance.",
+        "doc": "Initializes the request object from another request instance.\n\n@param self $request The request instance to copy from.\n@return static The current request instance with copied properties.",
+        "line": 111
+      },
+      {
         "name": "route",
         "signature": "public function route(string $key, ?string $default = null): ?string",
         "description": "Retrieves a route parameter value by key.",
         "doc": "Retrieves a route parameter value by key.\n\n@param string $key The key of the route parameter.\n@param ?string $default The default value to return if the key does not exist.\n\n@return ?string The value associated with the given key, or the default value if the key does not exist.",
-        "line": 316
+        "line": 331
       },
       {
         "name": "hasRouteParam",
         "signature": "public function hasRouteParam(string|array $key): bool",
         "description": "Checks if a route parameter exists.",
         "doc": "Checks if a route parameter exists.\n\n@param string|array $key The route parameter key(s) to check.\n@return bool True if the route parameter exists, false otherwise.",
-        "line": 331
+        "line": 346
       },
       {
         "name": "getMethod",
         "signature": "public function getMethod(): string",
         "description": "Retrieves the HTTP request method.",
         "doc": "Retrieves the HTTP request method.\n\n@return string The request method in uppercase.",
-        "line": 351
+        "line": 366
       },
       {
         "name": "isPostBack",
         "signature": "public function isPostBack(): bool",
         "description": "Checks if the current request is a POST, PUT, PATCH, or DELETE request.",
         "doc": "Checks if the current request is a POST, PUT, PATCH, or DELETE request.\n\n@return bool True if the request is a POST, PUT, PATCH, or DELETE request, false otherwise.",
-        "line": 361
+        "line": 376
       },
       {
         "name": "isGet",
         "signature": "public function isGet(): bool",
         "description": "Checks if the current request is a GET request.",
         "doc": "Checks if the current request is a GET request.\n\n@return bool True if the request is a GET request, false otherwise.",
-        "line": 372
+        "line": 387
       },
       {
         "name": "isPost",
         "signature": "public function isPost(): bool",
         "description": "Checks if the current request is a POST request.",
         "doc": "Checks if the current request is a POST request.\n\n@return bool True if the request is a POST request, false otherwise.",
-        "line": 382
+        "line": 397
       },
       {
         "name": "isPut",
         "signature": "public function isPut(): bool",
         "description": "Checks if the current request is a PUT request.",
         "doc": "Checks if the current request is a PUT request.\n\n@return bool True if the request is a PUT request, false otherwise.",
-        "line": 392
+        "line": 407
       },
       {
         "name": "isDelete",
         "signature": "public function isDelete(): bool",
         "description": "Checks if the current request is a DELETE request.",
         "doc": "Checks if the current request is a DELETE request.\n\n@return bool True if the request is a DELETE request, false otherwise.",
-        "line": 402
+        "line": 417
       },
       {
         "name": "isMethod",
         "signature": "public function isMethod(string|array $method): bool",
         "description": "Checks if the current request method matches any of the specified methods.",
         "doc": "Checks if the current request method matches any of the specified methods.\n\n@param string|array $method The method or array of methods to check against.\n@return bool True if the current request method is in the specified methods, false otherwise.",
-        "line": 413
+        "line": 428
       },
       {
         "name": "isAjax",
         "signature": "public function isAjax(): bool",
         "description": "Checks if the current request is an AJAX request.\n\nAJAX requests contain the 'X-Requested-With' header with the value 'xmlhttpRequest'.\nThis method checks for the presence of this header to determine if the current\nrequest is an AJAX request.",
         "doc": "Checks if the current request is an AJAX request.\n\nAJAX requests contain the 'X-Requested-With' header with the value 'xmlhttpRequest'.\nThis method checks for the presence of this header to determine if the current\nrequest is an AJAX request.\n\n@return bool True if the current request is an AJAX request, false otherwise.",
-        "line": 434
+        "line": 449
       },
       {
         "name": "isPrecognitive",
         "signature": "public function isPrecognitive(): bool",
         "description": "Checks if the current request is a precognitive request.\n\nPrecognitive requests contain specific headers that indicate they are intended\nfor pre-validation before the main request is processed. This method checks\nfor the presence of these headers to determine if the current request is\na precognitive request.",
         "doc": "Checks if the current request is a precognitive request.\n\nPrecognitive requests contain specific headers that indicate they are intended\nfor pre-validation before the main request is processed. This method checks\nfor the presence of these headers to determine if the current request is\na precognitive request.\n\n@return bool True if the current request is a precognitive request, false otherwise.",
-        "line": 449
+        "line": 464
       },
       {
         "name": "is",
         "signature": "public function is(string $path): bool",
         "description": "Checks if the current request's path matches the given path.\n\nThe current request's path is compared to the given path after both\npaths are trimmed of leading and trailing slashes.",
         "doc": "Checks if the current request's path matches the given path.\n\nThe current request's path is compared to the given path after both\npaths are trimmed of leading and trailing slashes.\n\n@param string $path The path to check against.\n@return bool True if the current request's path matches the given path, false otherwise.",
-        "line": 463
+        "line": 478
       },
       {
         "name": "getPath",
         "signature": "public function getPath(): string",
         "description": "Retrieves the URI path of the current request.",
         "doc": "Retrieves the URI path of the current request.\n\n@return string The request URI path.",
-        "line": 478
+        "line": 493
       },
       {
         "name": "getUrl",
         "signature": "public function getUrl(): string",
         "description": "Retrieves the full URL of the current request.",
         "doc": "Retrieves the full URL of the current request.\n\n@return string The full URL including protocol, host, and path.",
-        "line": 488
+        "line": 503
       },
       {
         "name": "getUri",
         "signature": "public function getUri(): string",
         "description": "Retrieves the URI path without the query string.\n\nThis method returns the URI path of the current request, excluding any\nquery parameters that may be present in the URL.",
         "doc": "Retrieves the URI path without the query string.\n\nThis method returns the URI path of the current request, excluding any\nquery parameters that may be present in the URL.\n\n@return string The URI path of the request.",
-        "line": 501
+        "line": 516
       },
       {
         "name": "getRootUrl",
         "signature": "public function getRootUrl(): string",
         "description": "Retrieves the root URL of the application.",
         "doc": "Retrieves the root URL of the application.\n\n@return string The root URL including protocol and host.",
-        "line": 512
+        "line": 527
       },
       {
         "name": "query",
         "signature": "public function query(null|string $key = null, $default = null): mixed",
         "description": "Retrieves a query parameter value.",
         "doc": "Retrieves a query parameter value.\n\n@param null|string $key The parameter key.\n@param mixed $default Default value if key does not exist.\n@return ($key is null ? \\Spark\\Http\\Input : mixed) The parameter value or default.",
-        "line": 524
+        "line": 539
       },
       {
         "name": "hasQuery",
         "signature": "public function hasQuery(string $key): bool",
         "description": "Checks if a query parameter exists.",
         "doc": "Checks if a query parameter exists.\n\n@param string $key The parameter key.\n@return bool True if the query parameter exists, false otherwise.",
-        "line": 538
+        "line": 553
       },
       {
         "name": "post",
         "signature": "public function post(null|string $key = null, $default = null): mixed",
         "description": "Retrieves a POST parameter value.",
         "doc": "Retrieves a POST parameter value.\n\n@param null|string $key The parameter key.\n@param mixed $default Default value if key does not exist.\n@return ($key is null ? \\Spark\\Http\\Input : mixed) The parameter value or default.",
-        "line": 550
+        "line": 565
       },
       {
         "name": "hasPost",
         "signature": "public function hasPost(string $key): bool",
         "description": "Checks if a POST parameter exists.",
         "doc": "Checks if a POST parameter exists.\n\n@param string $key The parameter key.\n@return bool True if the POST parameter exists, false otherwise.",
-        "line": 564
+        "line": 579
       },
       {
         "name": "file",
         "signature": "public function file(string $key, $default = null): mixed",
         "description": "Retrieves an uploaded file by key.",
         "doc": "Retrieves an uploaded file by key.\n\n@param string $key The file key.\n@param mixed $default Default value if key does not exist.\n@return mixed The file array or default.",
-        "line": 576
+        "line": 591
       },
       {
         "name": "hasFile",
         "signature": "public function hasFile(string $key): bool",
         "description": "Check if one or more file uploads are available for the given key.",
         "doc": "Check if one or more file uploads are available for the given key.\n\n@param string $key The key to check in the file uploads array.\n@return bool True if at least one file exists and has a valid size, false otherwise.",
-        "line": 587
+        "line": 602
       },
       {
         "name": "moveFile",
-        "signature": "public function moveFile(string $key, string $destination): bool",
+        "signature": "public function moveFile(string $key, null|string $disk = null, array $options = []): string|array|false",
         "description": "Moves an uploaded file to a new destination.",
-        "doc": "Moves an uploaded file to a new destination.\n\n@param string $key The file key.\n@param string $destination The destination path to move the file to.\n@return bool True on success, false on failure.",
-        "line": 616
+        "doc": "Moves an uploaded file to a new destination.\n\n@param string $key The file key.\n@param null|string $disk The disk to use for the upload.\n@param array $options Additional options for the upload.\n@return string|array|false The path(s) of the moved file(s) or false on failure.",
+        "line": 615
       },
       {
         "name": "all",
         "signature": "public function all(array $filter = []): array",
         "description": "Retrieves all request data (query, post, files) optionally filtered.",
         "doc": "Retrieves all request data (query, post, files) optionally filtered.\n\n@param array $filter Optional list of keys to filter by.\n@return array Merged array of request data.",
-        "line": 633
+        "line": 626
       },
       {
         "name": "only",
         "signature": "public function only(array|string $keys): array",
         "description": "Retrieves only the specified request data.",
         "doc": "Retrieves only the specified request data.\n\n@param array|string $keys An array of keys to include in the result.\n@return array The filtered request data.",
-        "line": 658
+        "line": 651
       },
       {
         "name": "except",
         "signature": "public function except(array|string $keys): array",
         "description": "Retrieves all request data except the specified keys.",
         "doc": "Retrieves all request data except the specified keys.\n\n@param array|string $keys An array of keys to exclude from the result.\n@return array The filtered request data.",
-        "line": 670
+        "line": 663
       },
       {
         "name": "server",
         "signature": "public function server(string $key, $default = null): ?string",
         "description": "Retrieves a server parameter by key.",
         "doc": "Retrieves a server parameter by key.\n\n@param string $key The parameter key.\n@param mixed $default Default value if key does not exist.\n@return ?string The server parameter or default.",
-        "line": 683
+        "line": 676
       },
       {
         "name": "header",
         "signature": "public function header(string $name, $defaultValue = null): ?string",
         "description": "Retrieves a request header by name.",
         "doc": "Retrieves a request header by name.\n\n@param string $name Header name.\n@param mixed $defaultValue Default if header is not set.\n@return ?string The header value or default.",
-        "line": 695
+        "line": 688
       },
       {
         "name": "acceptedTypes",
         "signature": "public function acceptedTypes(): array",
         "description": "Parse the Accept header into [mime type => quality], highest quality first.",
         "doc": "Parse the Accept header into [mime type => quality], highest quality first.\n\n@return array<string, float>",
-        "line": 705
+        "line": 698
       },
       {
         "name": "accept",
         "signature": "public function accept(string $contentType): bool",
         "description": "Checks if the client explicitly lists this content type (wildcards do not count).",
         "doc": "Checks if the client explicitly lists this content type (wildcards do not count).",
-        "line": 739
+        "line": 732
       },
       {
         "name": "accepts",
         "signature": "public function accepts(string $contentType): bool",
         "description": "Checks if the client accepts this content type, honoring wildcards\n(*&#47;* and type/*) and explicit q=0 rejections.",
         "doc": "Checks if the client accepts this content type, honoring wildcards\n(*&#47;* and type/*) and explicit q=0 rejections.",
-        "line": 750
+        "line": 743
       },
       {
         "name": "ip",
         "signature": "public function ip(): false|string",
         "description": "Get the IP address of the current request.",
         "doc": "Get the IP address of the current request.\n\n@return false|string The client's IP address, or false if no valid IP found.",
-        "line": 783
+        "line": 776
       },
       {
         "name": "bearerToken",
         "signature": "public function bearerToken(): ?string",
         "description": "Retrieves the Bearer token from the Authorization header.",
         "doc": "Retrieves the Bearer token from the Authorization header.\n\n@return ?string The Bearer token, or null if not present.",
-        "line": 906
+        "line": 899
       },
       {
         "name": "basicAuth",
         "signature": "public function basicAuth(): ?array",
         "description": "Retrieves the Basic Auth credentials from the Authorization header.",
         "doc": "Retrieves the Basic Auth credentials from the Authorization header.\n\n@return ?array An associative array with 'username' and 'password', or null if not present.",
-        "line": 922
+        "line": 915
       },
       {
         "name": "useragent",
         "signature": "public function useragent(): ?string",
         "description": "Get the User-Agent string from the request headers.",
         "doc": "Get the User-Agent string from the request headers.\n\n@return ?string The User-Agent string, or null if not present.",
-        "line": 946
+        "line": 939
       },
       {
         "name": "isBot",
         "signature": "public function isBot(): bool",
         "description": "Determines if the request is made by a bot.\n\nThis method checks the User-Agent header against a list of common bot signatures.",
         "doc": "Determines if the request is made by a bot.\n\nThis method checks the User-Agent header against a list of common bot signatures.\n\n@return bool True if the request is from a bot, false otherwise.",
-        "line": 958
+        "line": 951
       },
       {
         "name": "referer",
         "signature": "public function referer(): ?string",
         "description": "Get the referer URL from the request headers.",
         "doc": "Get the referer URL from the request headers.\n\n@return ?string The referer URL, or null if not present.",
-        "line": 977
+        "line": 970
       },
       {
         "name": "setServerParam",
         "signature": "public function setServerParam(string $key, string $value): void",
         "description": "Set a server parameter.",
         "doc": "Set a server parameter.\n\n@param string $key Server parameter name.\n@param string $value Server parameter value.\n@return void",
-        "line": 989
+        "line": 982
       },
       {
         "name": "setQueryParam",
         "signature": "public function setQueryParam(string $key, string $value): void",
         "description": "Sets a query parameter by key.\n\nThis method adds or updates a query parameter in the current request.",
         "doc": "Sets a query parameter by key.\n\nThis method adds or updates a query parameter in the current request.\n\n@param string $key The name of the query parameter.\n@param string $value The value to set for the query parameter.\n@return void",
-        "line": 1003
+        "line": 996
       },
       {
         "name": "setPostParam",
         "signature": "public function setPostParam(string $key, string $value): void",
         "description": "Sets a post parameter by key.\n\nThis method adds or updates a post parameter in the current request.",
         "doc": "Sets a post parameter by key.\n\nThis method adds or updates a post parameter in the current request.\n\n@param string $key The name of the post parameter.\n@param string $value The value to set for the post parameter.\n@return void",
-        "line": 1017
+        "line": 1010
       },
       {
         "name": "setRouteParam",
         "signature": "public function setRouteParam(string $key, string $value): void",
         "description": "Sets a route parameter by key.\n\nThis method adds or updates a route parameter in the current request.",
         "doc": "Sets a route parameter by key.\n\nThis method adds or updates a route parameter in the current request.\n\n@param string $key The name of the route parameter.\n@param string $value The value to set for the route parameter.\n@return void",
-        "line": 1031
+        "line": 1024
       },
       {
         "name": "setFile",
         "signature": "public function setFile(string $key, array $value): void",
         "description": "Sets a file upload by key.\n\nThis method adds or updates a file upload in the current request.",
         "doc": "Sets a file upload by key.\n\nThis method adds or updates a file upload in the current request.\n\n@param string $key The name of the file upload.\n@param array $value The file upload array to set.\n@return void",
-        "line": 1045
+        "line": 1038
       },
       {
         "name": "mergeServerParams",
         "signature": "public function mergeServerParams(array $params): void",
         "description": "Merge the server parameters with additional key-value pairs.",
         "doc": "Merge the server parameters with additional key-value pairs.\n\n@param array $params Associative array of server parameters to extend.\n@return void",
-        "line": 1056
+        "line": 1049
       },
       {
         "name": "mergeQueryParams",
         "signature": "public function mergeQueryParams(array $params): void",
         "description": "Merge the query parameters with additional key-value pairs.",
         "doc": "Merge the query parameters with additional key-value pairs.\n\n@param array $params Associative array of query parameters to extend.\n@return void",
-        "line": 1067
+        "line": 1060
       },
       {
         "name": "mergePostParams",
         "signature": "public function mergePostParams(array $params): void",
         "description": "Merge the POST parameters with additional key-value pairs.",
         "doc": "Merge the POST parameters with additional key-value pairs.\n\n@param array $params Associative array of parameters to add.\n@return void",
-        "line": 1078
+        "line": 1071
       },
       {
         "name": "mergeRouteParams",
         "signature": "public function mergeRouteParams(array $params): void",
         "description": "Merge the route parameters with additional key-value pairs.",
         "doc": "Merge the route parameters with additional key-value pairs.\n\n@param array $params Associative array of route parameters to extend.\n@return void",
-        "line": 1089
+        "line": 1082
       },
       {
         "name": "mergeFiles",
         "signature": "public function mergeFiles(array $params): void",
         "description": "Merge the file uploads with additional key-value pairs.",
         "doc": "Merge the file uploads with additional key-value pairs.\n\n@param array $params Associative array of file uploads to extend.\n@return void",
-        "line": 1100
+        "line": 1093
       },
       {
         "name": "getPostParams",
         "signature": "public function getPostParams(): Collection",
         "description": "Return the associative array of POST parameters.",
         "doc": "Return the associative array of POST parameters.\n\n@return Collection POST parameters for the current request.",
-        "line": 1110
+        "line": 1103
       },
       {
         "name": "getQueryParams",
         "signature": "public function getQueryParams(): Collection",
         "description": "Get the associative array of query parameters.",
         "doc": "Get the associative array of query parameters.\n\n@return Collection Query parameters for the current request.",
-        "line": 1120
+        "line": 1113
       },
       {
         "name": "getServerParams",
         "signature": "public function getServerParams(): Collection",
         "description": "Get the associative array of server parameters.",
         "doc": "Get the associative array of server parameters.\n\n@return Collection Server parameters for the current request.",
-        "line": 1130
-      },
-      {
-        "name": "getFileUploads",
-        "signature": "public function getFileUploads(): Collection",
-        "description": "Return the array of file uploads.",
-        "doc": "Return the array of file uploads.\n\n@return Collection Array of file uploads.",
-        "line": 1140
+        "line": 1123
       },
       {
         "name": "getHeaders",
         "signature": "public function getHeaders(): Collection",
         "description": "Retrieves all request headers.",
         "doc": "Retrieves all request headers.\n\n@return Collection A collection of all request headers.",
-        "line": 1150
+        "line": 1133
       },
       {
         "name": "getFiles",
         "signature": "public function getFiles(): Collection",
         "description": "Retrieves all uploaded files associated with the current request.",
         "doc": "Retrieves all uploaded files associated with the current request.\n\n@return Collection<TKey, TValue> A collection of all uploaded files.",
-        "line": 1160
+        "line": 1143
       },
       {
         "name": "getRouteParams",
         "signature": "public function getRouteParams(): array",
         "description": "Retrieves all route parameters associated with the current request.\n\nRoute parameters are typically set by the router when a route is matched.\nThey can also be set manually using mergeRouteParams.",
         "doc": "Retrieves all route parameters associated with the current request.\n\nRoute parameters are typically set by the router when a route is matched.\nThey can also be set manually using mergeRouteParams.\n\n@return array A associative array of all route parameters.",
-        "line": 1173
+        "line": 1156
       },
       {
         "name": "expectsJson",
         "signature": "public function expectsJson(): bool",
         "description": "Determines if the request expects a JSON response.\n\nThis method checks if the request is an AJAX request, accepts JSON,\nor is an API path.",
         "doc": "Determines if the request expects a JSON response.\n\nThis method checks if the request is an AJAX request, accepts JSON,\nor is an API path.\n\n@return bool True if the request expects a JSON response, false otherwise.",
-        "line": 1186
+        "line": 1169
       },
       {
         "name": "wantsJson",
         "signature": "public function wantsJson(): bool",
         "description": "Determines if the request wants a JSON response based on the 'Accept' header.\n\nThe highest-ranked positive-quality type must end in '/json' or '+json'.",
         "doc": "Determines if the request wants a JSON response based on the 'Accept' header.\n\nThe highest-ranked positive-quality type must end in '/json' or '+json'.\n\n@return bool True if the request wants a JSON response, false otherwise.",
-        "line": 1200
+        "line": 1183
       },
       {
         "name": "acceptsAnyContentType",
         "signature": "public function acceptsAnyContentType(): bool",
         "description": "Determines if the request accepts any content type.\n\nAccept must be empty, or its preferred positive-quality type a global wildcard.",
         "doc": "Determines if the request accepts any content type.\n\nAccept must be empty, or its preferred positive-quality type a global wildcard.\n\n@return bool True if the request accepts any content type, false otherwise.",
-        "line": 1215
+        "line": 1198
       },
       {
         "name": "input",
         "signature": "public function input(null|string|array $filter = null, $default = null): mixed",
         "description": "Creates an Sanitizer instance with the current request data.",
         "doc": "Creates an Sanitizer instance with the current request data.\n\n@param null|string|array $filter Optional filter to apply to the input data.\n@param mixed $default Default value to return if the filter is a string and the key does not exist.\n@return ($filter is null ? \\Spark\\Http\\Input : mixed) The Sanitizer instance or filtered input value.",
-        "line": 1254
+        "line": 1237
       },
       {
         "name": "safe",
         "signature": "public function safe(string $key, array $allowedTags = []): null|string",
         "description": "Retrieves a sanitized request value by key.",
         "doc": "Retrieves a sanitized request value by key.\n\n@param string $key The key to retrieve the sanitized value for.\n@param array $allowedTags An array of allowed HTML tags for sanitization.\n\n@return null|string The sanitized value associated with the given key, or null if the key does not exist.",
-        "line": 1279
+        "line": 1262
       },
       {
         "name": "integer",
         "signature": "public function integer(string $key, int $default = 0): int",
         "description": "Retrieves a sanitized request value as an integer.",
         "doc": "Retrieves a sanitized request value as an integer.\n\n@param string $key The key to retrieve the sanitized integer value for.\n@param int $default The default value to return if the key does not exist or is not a valid integer.\n\n@return int The sanitized integer value associated with the given key, or the default value if the key does not exist or is invalid.",
-        "line": 1292
+        "line": 1275
       },
       {
         "name": "float",
         "signature": "public function float(string $key, float $default = 0.0): float",
         "description": "Retrieves a sanitized request value as a float.",
         "doc": "Retrieves a sanitized request value as a float.\n\n@param string $key The key to retrieve the sanitized float value for.\n@param float $default The default value to return if the key does not exist or is not a valid float.\n\n@return float The sanitized float value associated with the given key, or the default value if the key does not exist or is invalid.",
-        "line": 1305
+        "line": 1288
       },
       {
         "name": "boolean",
         "signature": "public function boolean(string $key, bool $default = false): bool",
         "description": "Retrieves a sanitized request value as a boolean.",
         "doc": "Retrieves a sanitized request value as a boolean.\n\n@param string $key The key to retrieve the sanitized boolean value for.\n@param bool $default The default value to return if the key does not exist or is not a valid boolean.\n\n@return bool The sanitized boolean value associated with the given key, or the default value if the key does not exist or is invalid.",
-        "line": 1318
+        "line": 1301
       },
       {
         "name": "__get",
         "signature": "public function __get($name): mixed",
         "description": "Magic Method: Retrieves a request value by key.",
         "doc": "Magic Method: Retrieves a request value by key.\n\n@param string $name The key to retrieve the value for.\n\n@return mixed The retrieved value, or null if the key does not exist.",
-        "line": 1330
+        "line": 1313
       },
       {
         "name": "__set",
         "signature": "public function __set($name, $value): void",
         "description": "Magic Method: Sets a request value by key.",
         "doc": "Magic Method: Sets a request value by key.\n\n@param string $name The key to set the value for.\n@param mixed $value The value to set for the key.",
-        "line": 1341
+        "line": 1324
       },
       {
         "name": "__isset",
         "signature": "public function __isset($name): bool",
         "description": "Magic Method: Checks if a request value exists by key.",
         "doc": "Magic Method: Checks if a request value exists by key.\n\n@param string $name The key to check for existence.\n\n@return bool True if the key exists, false otherwise.",
-        "line": 1353
+        "line": 1336
       },
       {
         "name": "__unset",
         "signature": "public function __unset($name): void",
         "description": "Magic Method: Unsets a request value by key.",
         "doc": "Magic Method: Unsets a request value by key.\n@param string $name The key to unset.\n@return void\n\nThis method allows unsetting a request value by key, which can be useful\nfor removing query parameters, post parameters, file uploads, or route parameters.\nIt uses the offsetUnset method to perform the actual unsetting operation.",
-        "line": 1367
+        "line": 1350
       },
       {
         "name": "offsetExists",
         "signature": "public function offsetExists($name): bool",
         "description": "Checks if a request value exists by key.",
         "doc": "Checks if a request value exists by key.\n\n@param string $name The key to check for existence.\n\n@return bool True if the key exists, false otherwise.",
-        "line": 1379
+        "line": 1362
       },
       {
         "name": "offsetUnset",
         "signature": "public function offsetUnset($name): void",
         "description": "Unsets a request value by key.",
         "doc": "Unsets a request value by key.\n\n@param string $name The key to unset.\n@return void",
-        "line": 1396
+        "line": 1379
       },
       {
         "name": "offsetGet",
         "signature": "public function offsetGet($name): mixed",
         "description": "Retrieves a request value by key.",
         "doc": "Retrieves a request value by key.\n@param string $name The key to retrieve the value for.\n\n@return mixed The retrieved value, or null if the key does not exist.",
-        "line": 1417
+        "line": 1400
       },
       {
         "name": "offsetSet",
         "signature": "public function offsetSet($name, $value): void",
         "description": "Sets a request value by key.",
         "doc": "Sets a request value by key.\n\n@param string $name The key to set the value for.\n@param mixed $value The value to set for the key.\n\nThis method allows setting values for query parameters, post parameters,\nfile uploads, or route parameters based on the key provided.\n\nIf the key corresponds to a query parameter, it will be set using\nsetQueryParam. If it corresponds to a post parameter, it will be set\nusing setPostParam. If it corresponds to a file upload, it will be added\nto the files collection. If it corresponds to a route parameter, it will\nbe added to the route collection.\n\n@return void",
-        "line": 1445
+        "line": 1428
       },
       {
         "name": "getIterator",
         "signature": "public function getIterator(): \\Traversable",
         "description": "Get an iterator for the items.\n\nThis method allows the model to be iterated over like an array.",
         "doc": "Get an iterator for the items.\n\nThis method allows the model to be iterated over like an array.\n\n@implements \\ArrayAccess<TKey, TValue>\n\n@return ArrayIterator<TKey, TValue>",
-        "line": 1465
+        "line": 1448
       },
       {
         "name": "has",
         "signature": "public function has(string|array $key): bool",
         "description": "Checks if a specific key exists in the request.\n\nThis method checks if the specified key exists in the request data\n(query parameters, post parameters, file uploads, or route parameters).",
         "doc": "Checks if a specific key exists in the request.\n\nThis method checks if the specified key exists in the request data\n(query parameters, post parameters, file uploads, or route parameters).\n\n@param string|array $key The key to check for existence.\n@return bool True if the key exists, false otherwise.",
-        "line": 1479
+        "line": 1462
       },
       {
         "name": "filled",
         "signature": "public function filled(string|array $key): bool",
         "description": "Checks if a specific key exists and is not empty in the request.\n\nThis method checks if the specified key exists in the request data\n(query parameters, post parameters, file uploads, or route parameters)\nand that its value is not empty.",
         "doc": "Checks if a specific key exists and is not empty in the request.\n\nThis method checks if the specified key exists in the request data\n(query parameters, post parameters, file uploads, or route parameters)\nand that its value is not empty.\n\n@param string|array $key The key or array of keys to check for existence and non-emptiness.\n@return bool True if all keys exist and are not empty, false otherwise.",
-        "line": 1501
+        "line": 1484
       },
       {
         "name": "get",
         "signature": "public function get(string $key, $default = null): mixed",
         "description": "Retrieves a request value by key, returning a default value if the key does not exist.\n\nThis method retrieves the value associated with the specified key from the request data.\nIf the key does not exist, it returns the provided default value.",
         "doc": "Retrieves a request value by key, returning a default value if the key does not exist.\n\nThis method retrieves the value associated with the specified key from the request data.\nIf the key does not exist, it returns the provided default value.\n\n@param string $key The key to retrieve the value for.\n@param mixed $default The default value to return if the key does not exist.\n@return mixed The retrieved value or the default value if the key does not exist.",
-        "line": 1523
+        "line": 1506
       },
       {
         "name": "hasAny",
         "signature": "public function hasAny(string|array $key): bool",
         "description": "Checks if any of the specified keys exist in the request.\n\nThis method checks if at least one of the provided keys exists in the\nrequest data (query parameters, post parameters, file uploads, or route parameters).",
         "doc": "Checks if any of the specified keys exist in the request.\n\nThis method checks if at least one of the provided keys exists in the\nrequest data (query parameters, post parameters, file uploads, or route parameters).\n\n@param string|array $key The key or array of keys to check for existence.\n@return bool True if any of the keys exist, false otherwise.",
-        "line": 1541
+        "line": 1524
       },
       {
         "name": "hasAll",
         "signature": "public function hasAll(string|array $key): bool",
         "description": "Checks if all of the specified keys exist in the request.\n\nThis method checks if all of the provided keys exist in the\nrequest data (query parameters, post parameters, file uploads, or route parameters).",
         "doc": "Checks if all of the specified keys exist in the request.\n\nThis method checks if all of the provided keys exist in the\nrequest data (query parameters, post parameters, file uploads, or route parameters).\n\n@param string|array $key The key or array of keys to check for existence.\n@return bool True if all of the keys exist, false otherwise.",
-        "line": 1562
+        "line": 1545
       },
       {
         "name": "validate",
         "signature": "public function validate(array $rules, null|array $attributes = null, null|array $messages = null): Input",
         "description": "Validates the request with given rules.\n\nThe method gets the input attributes from the current request and\nvalidates them with the given rules. If the validation fails, the\nmethod redirects the user back to the previous page with the\nvalidation errors. If the request wants a JSON response, the method\nreturns the validation errors as a JSON response.",
         "doc": "Validates the request with given rules.\n\nThe method gets the input attributes from the current request and\nvalidates them with the given rules. If the validation fails, the\nmethod redirects the user back to the previous page with the\nvalidation errors. If the request wants a JSON response, the method\nreturns the validation errors as a JSON response.\n\n@param array $rules\n  The validation rules.\n\n@return Input\n  Returns the validated attributes as an Sanitizer instance.",
-        "line": 1589
+        "line": 1572
       },
       {
         "name": "prepareValidationError",
         "signature": "public function prepareValidationError(string $message, array $errors, array $attributes = []): Response",
         "description": "Handle validation errors and return an appropriate response.",
         "doc": "Handle validation errors and return an appropriate response.\n\n@param string $message The error message to display.\n@param array $errors The validation errors.\n@param array $attributes The input attributes that were validated.\n@return Response The response to return to the client.",
-        "line": 1640
+        "line": 1623
       },
       {
         "name": "validated",
         "signature": "public function validated(?string $key = null, $default = null): mixed",
         "description": "Get the validated data as a Sanitizer instance.\n\nThis method returns the validated data from the request as a Sanitizer instance.\nIt assumes that the validate() method has been called previously to perform validation.",
         "doc": "Get the validated data as a Sanitizer instance.\n\nThis method returns the validated data from the request as a Sanitizer instance.\nIt assumes that the validate() method has been called previously to perform validation.\n\n@param string|null $key Optional key to retrieve a specific value from the validated data.\n@param mixed $default Default value to return if the key does not exist.\n\n@return ($key is null ? \\Spark\\Http\\Input : mixed)\n  The validated data as a Sanitizer instance, or \n  the value associated with the given key.\n\n@throws \\RuntimeException\n  If no data has been validated yet.",
-        "line": 1716
+        "line": 1699
       },
       {
         "name": "errors",
         "signature": "public function errors(null|array|string $field = null): bool|InputErrors",
         "description": "Get the errors from the current request.",
         "doc": "Get the errors from the current request.\n\n@param null|array|string $field The field name to retrieve the error messages for.\n                                 If null, all error object will be returned.\n@return ($field is null ? \\Spark\\Http\\InputErrors : bool) An object containing the error messages from the current request.",
-        "line": 1736
+        "line": 1719
       },
       {
         "name": "old",
         "signature": "public function old(string $field, null|string $default = null): null|string",
         "description": "Get the value of a field from the previous request using the old input.",
         "doc": "Get the value of a field from the previous request using the old input.\n\n@param string $field The name of the field to retrieve.\n@param null|string $default The default value to return if the field is not found.\n@return string|null The value of the field from the previous request, or the default value if not found.",
-        "line": 1760
+        "line": 1743
       },
       {
         "name": "session",
         "signature": "public function session(null|string $key = null, $default = null): mixed",
         "description": "Get the session instance.\n\nThis method retrieves the session instance from the application container.",
         "doc": "Get the session instance.\n\nThis method retrieves the session instance from the application container.\n\n@param null|string $key The session key to retrieve (optional).\n@param mixed $default The default value to return if the key does not exist (optional).\n@return ($key is null ? \\Spark\\Http\\Session : mixed) The session instance or the value associated with the given key.",
-        "line": 1774
+        "line": 1757
       },
       {
         "name": "auth",
         "signature": "public function auth(?string $guard = null): Auth",
         "description": "Get the Auth service instance.\n\nThis method retrieves the Auth service instance from the application container.",
         "doc": "Get the Auth service instance.\n\nThis method retrieves the Auth service instance from the application container.\n\n@param ?string $guard The guard to use for authentication.\n@return \\Spark\\Http\\Auth The Auth service instance.",
-        "line": 1794
+        "line": 1777
       },
       {
         "name": "user",
         "signature": "public function user(null|string $key = null, $default = null, ?string $guard = null): mixed",
         "description": "Retrieves the currently authenticated user or a specific attribute of the user.\n\nThis method utilizes the Auth service to fetch the currently authenticated user.\nIf a key is provided, it returns the value of that specific attribute from the user object.\nIf no key is provided, it returns the entire user object. If no user is authenticated,\nit returns null or the specified default value.",
         "doc": "Retrieves the currently authenticated user or a specific attribute of the user.\n\nThis method utilizes the Auth service to fetch the currently authenticated user.\nIf a key is provided, it returns the value of that specific attribute from the user object.\nIf no key is provided, it returns the entire user object. If no user is authenticated,\nit returns null or the specified default value.\n\n@param null|string $key The specific attribute of the user to retrieve (optional).\n@param mixed $default The default value to return if no user is authenticated or the key does not exist (optional).\n@param ?string $guard The guard to check against.\n\n@return ($key is null ? \\App\\Models\\User : mixed) The authenticated user object, a specific attribute value, or the default value.",
-        "line": 1816
+        "line": 1799
       },
       {
         "name": "isAuthenticated",
         "signature": "public function isAuthenticated(?string $guard = null): bool",
         "description": "Checks if the current user is authenticated.\n\nThis method checks if there is a currently authenticated user\nby utilizing the Auth service. It returns true if a user is logged in,\nand false if no user is authenticated.",
         "doc": "Checks if the current user is authenticated.\n\nThis method checks if there is a currently authenticated user\nby utilizing the Auth service. It returns true if a user is logged in,\nand false if no user is authenticated.\n\n@param ?string $guard The guard to check against.\n@return bool True if the user is authenticated, false otherwise.",
-        "line": 1831
+        "line": 1814
       },
       {
         "name": "isNotAuthenticated",
         "signature": "public function isNotAuthenticated(?string $guard = null): bool",
         "description": "Checks if the current user is not authenticated.\n\nThis method checks if there is no currently authenticated user\nby utilizing the Auth service. It returns true if no user is logged in,\nand false if a user is authenticated.",
         "doc": "Checks if the current user is not authenticated.\n\nThis method checks if there is no currently authenticated user\nby utilizing the Auth service. It returns true if no user is logged in,\nand false if a user is authenticated.\n\n@param ?string $guard The guard to check against.\n@return bool True if the user is not authenticated, false otherwise.",
-        "line": 1846
+        "line": 1829
       }
     ]
   },
@@ -15982,14 +15952,14 @@
     "file": "Queue/Contracts/JobInterface.php",
     "name": "Spark\\Queue\\Contracts\\JobInterface",
     "kind": "interface",
-    "sha256": "1f90098a47ccc24289f7297d472c86dbaed6e991ac5e52f76bd07e5e60ba037b",
+    "sha256": "ead6a08c603554b386eff0007eb2afcb3076d618fc7fd5a58631a81a2f459a1b",
     "methods": [
       {
         "name": "handle",
-        "signature": "public function handle(): void",
-        "description": "Handle the job.",
-        "doc": "Handle the job.\n\n@return void",
-        "line": 12
+        "signature": "public function handle(mixed ...$args): void",
+        "description": "Handle the job.\n\nImplementations may declare additional optional parameters.",
+        "doc": "Handle the job.\n\nImplementations may declare additional optional parameters.\n\n@param mixed ...$args\n@return void",
+        "line": 15
       }
     ]
   },
@@ -17105,7 +17075,7 @@
     "file": "Storage/Contracts/StorageContract.php",
     "name": "Spark\\Storage\\Contracts\\StorageContract",
     "kind": "interface",
-    "sha256": "c3ace6a733684f2e0117b09f829981d11a3ab56b1b4dfbff2a1371149194916e",
+    "sha256": "9ae8e45b6963f8a46e9128b6d5dcb3accaed60e5f2875e4a55b387041ba39ace",
     "methods": [
       {
         "name": "put",
@@ -17228,7 +17198,7 @@
       },
       {
         "name": "getDriver",
-        "signature": "public function getDriver(): UploaderUtilDriverInterface",
+        "signature": "public function getDriver(): UploaderDriverInterface",
         "description": "",
         "doc": "",
         "line": 50
@@ -17243,10 +17213,54 @@
     ]
   },
   {
+    "file": "Storage/Contracts/UploaderContract.php",
+    "name": "Spark\\Storage\\Contracts\\UploaderContract",
+    "kind": "interface",
+    "sha256": "5d56bd11a4d80b433330c881be26d8e0a1ee23b151b8024b1c184d48ffc01a51",
+    "methods": [
+      {
+        "name": "upload",
+        "signature": "public function upload(string|array|Arrayable $files): string|array",
+        "description": "Uploads a file or multiple files.",
+        "doc": "Uploads a file or multiple files.\n\n@param string|array|Arrayable $files Array containing file details (e.g., $_FILES['file']).\n@return string|array Returns the file path(s) of the uploaded file(s).",
+        "line": 21
+      },
+      {
+        "name": "delete",
+        "signature": "public function delete(string|array $file): bool",
+        "description": "Deletes a file or multiple files.",
+        "doc": "Deletes a file or multiple files.\n\n@param string|array $file The file path(s) to delete.\n@return bool Returns true if the file(s) were successfully deleted, false otherwise.",
+        "line": 29
+      }
+    ]
+  },
+  {
+    "file": "Storage/Contracts/UploaderDriverInterface.php",
+    "name": "Spark\\Storage\\Contracts\\UploaderDriverInterface",
+    "kind": "interface",
+    "sha256": "8e72bf1558e2e737b61be9be213941c6cd0be8024b114fda0db6c43eaf279619",
+    "methods": [
+      {
+        "name": "upload",
+        "signature": "public function upload(string $filepath, string $destination): bool",
+        "description": "Upload a file to the specified destination.",
+        "doc": "Upload a file to the specified destination.\n\n@param string $filepath The local path of the file to upload.\n@param string $destination The destination path in the storage.\n@return bool True on success, false on failure.",
+        "line": 18
+      },
+      {
+        "name": "delete",
+        "signature": "public function delete(string $destination): bool",
+        "description": "Delete a file from the specified destination.",
+        "doc": "Delete a file from the specified destination.\n\n@param string $destination The path of the file to delete in the storage.\n@return bool True on success, false on failure.",
+        "line": 26
+      }
+    ]
+  },
+  {
     "file": "Storage/LocalStorage.php",
     "name": "Spark\\Storage\\LocalStorage",
     "kind": "class",
-    "sha256": "7b1a8eea39a43b202b14b8f5577dfb9d4b8b696c77247ca05d3f3d7fb6dbafa4",
+    "sha256": "b9ddd318551c12966b614a283b0532fda6742a6bf361e67ba059f2b3d09741c9",
     "methods": [
       {
         "name": "__construct",
@@ -17430,7 +17444,7 @@
     "file": "Storage/S3UploaderDriver.php",
     "name": "Spark\\Storage\\S3UploaderDriver",
     "kind": "class",
-    "sha256": "0a3e20e4830f736813bea8ee5bbb4f327926f450958d0841148a56517b8ebec8",
+    "sha256": "89043521ebb9a25d7cc3e4c252d14f8b98ae43f7a7a7216ae23dc97669d0ce76",
     "methods": [
       {
         "name": "__construct",
@@ -17473,7 +17487,7 @@
     "file": "Storage/Storage.php",
     "name": "Spark\\Storage\\Storage",
     "kind": "class",
-    "sha256": "6eac49b6e419d190fa83f0102a7ac38322eaf2f42d8b85a502c52295e8226449",
+    "sha256": "4fc531f8ef05da212db74d52534dc4a114aa796e568389ffd0e53b56c26e0356",
     "methods": [
       {
         "name": "__construct",
@@ -17631,7 +17645,7 @@
       },
       {
         "name": "getDriver",
-        "signature": "public function getDriver(): UploaderUtilDriverInterface",
+        "signature": "public function getDriver(): UploaderDriverInterface",
         "description": "Uploader driver for integrations that already manage relative destinations.",
         "doc": "Uploader driver for integrations that already manage relative destinations.",
         "line": 302
@@ -17678,27 +17692,27 @@
     "file": "Storage/Uploader.php",
     "name": "Spark\\Storage\\Uploader",
     "kind": "class",
-    "sha256": "467d4d4d6df2877314535be89b9479e7d20bb7662ad31d92ce8e0d387eb15fde",
+    "sha256": "6be2af279367d520cc3cc1bb9012b4ddecd6ba80dfa8165a480de1ec54c1bfc7",
     "methods": [
       {
         "name": "__construct",
-        "signature": "public function __construct( null|string $uploadTo = null, null|string $uploadDir = null, null|array $extensions = [], null|bool $multiple = null, null|int $maxSize = 2048, null|float|array $resize = null, null|array $resizes = null, null|int $compress = null, null|UploaderUtilDriverInterface $driver = null, null|string $relativeTo = null )",
+        "signature": "public function __construct( null|string $uploadTo = null, null|string $uploadDir = null, null|array $extensions = [], null|bool $multiple = null, null|int $maxSize = 2048, null|float|array $resize = null, null|array $resizes = null, null|int $compress = null, null|UploaderDriverInterface $driver = null, null|string $relativeTo = null )",
         "description": "Sets up the uploader configuration.",
         "doc": "Sets up the uploader configuration.\n\n@param null|string $uploadTo Upload directory path.\n@param null|string $uploadDir Upload directory path.\n@param array $extensions Supported file extensions.\n@param null|bool $multiple Whether to support multiple file uploads.\n@param null|int $maxSize Maximum file size (in KB).\n@param null|array $resize Resize options for images.\n@param null|array $resizes Bulk resize options for images.\n@param null|int $compress Compression level for images.\n@param ?string $relativeTo Base directory stripped from driver destinations and returned paths.",
         "line": 72
       },
       {
         "name": "make",
-        "signature": "public static function make( null|string $uploadTo = null, null|string $uploadDir = null, null|array $extensions = [], null|bool $multiple = null, null|int $maxSize = 2048, null|float|array $resize = null, null|array $resizes = null, null|int $compress = null, null|UploaderUtilDriverInterface $driver = null, null|string $relativeTo = null ): self",
+        "signature": "public static function make( null|string $uploadTo = null, null|string $uploadDir = null, null|array $extensions = [], null|bool $multiple = null, null|int $maxSize = 2048, null|float|array $resize = null, null|array $resizes = null, null|int $compress = null, null|UploaderDriverInterface $driver = null, null|string $relativeTo = null ): self",
         "description": "Factory method to create a new instance of the Uploader class.",
-        "doc": "Factory method to create a new instance of the Uploader class.\n\n@param null|string $uploadTo Upload directory path.\n@param null|string $uploadDir Upload directory path.\n@param array $extensions Supported file extensions.\n@param null|bool $multiple Whether to support multiple file uploads.\n@param null|int $maxSize Maximum file size (in KB).\n@param null|array $resize Resize options for images.\n@param null|array $resizes Bulk resize options for images.\n@param null|int $compress Compression level for images.\n@param ?string $relativeTo Base directory stripped from driver destinations and returned paths.\n@param null|UploaderUtilDriverInterface $driver File upload driver.\n@return self Returns a new instance of the Uploader class.",
+        "doc": "Factory method to create a new instance of the Uploader class.\n\n@param null|string $uploadTo Upload directory path.\n@param null|string $uploadDir Upload directory path.\n@param array $extensions Supported file extensions.\n@param null|bool $multiple Whether to support multiple file uploads.\n@param null|int $maxSize Maximum file size (in KB).\n@param null|array $resize Resize options for images.\n@param null|array $resizes Bulk resize options for images.\n@param null|int $compress Compression level for images.\n@param ?string $relativeTo Base directory stripped from driver destinations and returned paths.\n@param null|UploaderDriverInterface $driver File upload driver.\n@return self Returns a new instance of the Uploader class.",
         "line": 132
       },
       {
         "name": "setUploadDir",
         "signature": "public function setUploadDir(string $uploadDir): self",
         "description": "Sets the upload directory.",
-        "doc": "Sets the upload directory.\n\n@param string $uploadDir Upload directory path.\n@return $this\n@throws UploaderUtilException If the upload directory cannot be created or is not writable.",
+        "doc": "Sets the upload directory.\n\n@param string $uploadDir Upload directory path.\n@return $this\n@throws UploaderException If the upload directory cannot be created or is not writable.",
         "line": 165
       },
       {
@@ -17713,21 +17727,21 @@
         "signature": "public function delete(string|array $file): bool",
         "description": "Deletes a file or multiple files.",
         "doc": "Deletes a file or multiple files.\n\n@param string|array $file The file(s) to delete.\n@return bool Returns true if the file(s) were successfully deleted, false otherwise.",
-        "line": 250
+        "line": 322
       },
       {
         "name": "removeUploadDir",
         "signature": "public function removeUploadDir(string|array $files): string|array",
         "description": "Removes the upload directory path from a file path or an array of file paths.",
         "doc": "Removes the upload directory path from a file path or an array of file paths.\n\n@param string|array $files The file path(s) to process.\n@return string|array Returns the file path(s) without the upload directory.",
-        "line": 275
+        "line": 347
       },
       {
         "name": "copy",
         "signature": "public function copy(): self",
         "description": "Create a copy of the uploader instance.",
         "doc": "Create a copy of the uploader instance.\n\n@return self A new instance that is a copy of the current instance.",
-        "line": 296
+        "line": 368
       }
     ]
   },
@@ -24977,7 +24991,7 @@
     "file": "Utils/Image.php",
     "name": "Spark\\Utils\\Image",
     "kind": "class",
-    "sha256": "8b9c5010a4ad122d8566588a5eb451aaa57842b52a2738215966f606f0de838d",
+    "sha256": "7d6788b504d330e359a5bfcef8350a0b3639c26deb368bba3cfe52a1c4b7626e",
     "methods": [
       {
         "name": "__construct",
@@ -24997,7 +25011,7 @@
         "name": "setImageSource",
         "signature": "public function setImageSource(string $imageSource): void",
         "description": "Set the source of the image.\n\nThis method sets the source of the image by checking if the GD extension\nis loaded, and if the required functions are enabled in this system.\nIt also checks if the source image file exists or not, and extracts the\nimages information using the getimagesize and pathinfo functions.",
-        "doc": "Set the source of the image.\n\nThis method sets the source of the image by checking if the GD extension\nis loaded, and if the required functions are enabled in this system.\nIt also checks if the source image file exists or not, and extracts the\nimages information using the getimagesize and pathinfo functions.\n\n@param string $imageSource The source path of the image to be loaded.\n@throws ImageUtilException If the GD extension is not loaded, or if the required functions are not enabled in this system.\n@throws ImageUtilException If the source image file does not exist.",
+        "doc": "Set the source of the image.\n\nThis method sets the source of the image by checking if the GD extension\nis loaded, and if the required functions are enabled in this system.\nIt also checks if the source image file exists or not, and extracts the\nimages information using the getimagesize and pathinfo functions.\n\n@param string $imageSource The source path of the image to be loaded.\n@throws ImageException If the GD extension is not loaded, or if the required functions are not enabled in this system.\n@throws ImageException If the source image file does not exist.",
         "line": 73
       },
       {
@@ -25032,28 +25046,28 @@
         "name": "getImage",
         "signature": "public function getImage(): GdImage",
         "description": "Creates a GD image resource from the image file.",
-        "doc": "Creates a GD image resource from the image file.\n\n@return GdImage|resource The GD image resource.\n\n@throws ImageUtilException If the image type is unsupported.",
+        "doc": "Creates a GD image resource from the image file.\n\n@return GdImage|resource The GD image resource.\n\n@throws ImageException If the image type is unsupported.",
         "line": 185
       },
       {
         "name": "image",
         "signature": "public function image()",
         "description": "Creates a GD image resource from the image file.",
-        "doc": "Creates a GD image resource from the image file.\n\n@return GdImage|resource The GD image resource.\n\n@throws ImageUtilException If the image type is unsupported.",
+        "doc": "Creates a GD image resource from the image file.\n\n@return GdImage|resource The GD image resource.\n\n@throws ImageException If the image type is unsupported.",
         "line": 210
       },
       {
         "name": "compress",
         "signature": "public function compress(int $quality = 75, $destination = null): bool",
         "description": "Compresses the image.",
-        "doc": "Compresses the image.\n\n@param int $quality The compression quality (0-100 for JPEG/GIF, 0-100 for PNG where higher is better).\n@param string|null $destination The file path to save the compressed image.\n\n@return bool Returns true on success, false on failure.\n\n@throws ImageUtilException If quality is out of range.",
+        "doc": "Compresses the image.\n\n@param int $quality The compression quality (0-100 for JPEG/GIF, 0-100 for PNG where higher is better).\n@param string|null $destination The file path to save the compressed image.\n\n@return bool Returns true on success, false on failure.\n\n@throws ImageException If quality is out of range.",
         "line": 225
       },
       {
         "name": "resize",
         "signature": "public function resize(int $imgWidth, int $imgHeight, ?string $destination = null): bool",
         "description": "Resizes the image to specified width and height.",
-        "doc": "Resizes the image to specified width and height.\n\n@param int $imgWidth The desired width of the image.\n@param int $imgHeight The desired height of the image.\n@param string|null $destination The file path to save the resized image.\n\n@return bool Returns true on success, false on failure.\n\n@throws ImageUtilException If dimensions are invalid.",
+        "doc": "Resizes the image to specified width and height.\n\n@param int $imgWidth The desired width of the image.\n@param int $imgHeight The desired height of the image.\n@param string|null $destination The file path to save the resized image.\n\n@return bool Returns true on success, false on failure.\n\n@throws ImageException If dimensions are invalid.",
         "line": 269
       },
       {
@@ -25067,7 +25081,7 @@
         "name": "rotate",
         "signature": "public function rotate(float $degrees): bool",
         "description": "Rotates the image by the specified degree.",
-        "doc": "Rotates the image by the specified degree.\n\n@param float $degrees The degree of rotation (counter-clockwise).\n\n@return bool Returns true on success, false on failure.\n\n@throws ImageUtilException If rotation fails.",
+        "doc": "Rotates the image by the specified degree.\n\n@param float $degrees The degree of rotation (counter-clockwise).\n\n@return bool Returns true on success, false on failure.\n\n@throws ImageException If rotation fails.",
         "line": 409
       }
     ]
@@ -25140,147 +25154,140 @@
     "file": "Utils/Mail.php",
     "name": "Spark\\Utils\\Mail",
     "kind": "class",
-    "sha256": "9dd6c8a8966a27020d96a9c69171e1e31a7205267b6b250292f86b6e19140350",
+    "sha256": "fc49d8f0ebc59f8e5c89952943a6156f6e2b8f45a875298df3b4817c8f6cf7b5",
     "methods": [
       {
         "name": "__construct",
         "signature": "public function __construct(array $config = [])",
         "description": "Construct a new instance of the Mail utility class.\n\nThe constructor takes an array of configuration options as its argument.\nThe configuration options are merged with the environment configuration\nand are used to configure the mailer instance.",
         "doc": "Construct a new instance of the Mail utility class.\n\nThe constructor takes an array of configuration options as its argument.\nThe configuration options are merged with the environment configuration\nand are used to configure the mailer instance.\n\n@param array $config An associative array of configuration options.",
-        "line": 39
+        "line": 44
       },
       {
         "name": "make",
         "signature": "public static function make(array $config = []): self",
         "description": "Create a new instance of the Mail utility class.\n\nThis static method serves as a factory method for creating new instances of the Mail class.\nIt takes an optional array of configuration options and returns a new instance of the Mail class.",
         "doc": "Create a new instance of the Mail utility class.\n\nThis static method serves as a factory method for creating new instances of the Mail class.\nIt takes an optional array of configuration options and returns a new instance of the Mail class.\n\n@param array $config An associative array of configuration options.\n\n@return self Returns a new instance of the Mail class.",
-        "line": 78
+        "line": 94
       },
       {
         "name": "configureSmtp",
         "signature": "public function configureSmtp(array $config): self",
         "description": "Configure the mailer instance using SMTP configuration.\n\nThis method takes an associative array of SMTP configuration options\nand sets the corresponding properties on the mailer instance.\n\nThe configuration array should contain the following keys:\n\n  - `host`: The SMTP host.\n  - `port`: The SMTP port.\n  - `username`: The SMTP username.\n  - `password`: The SMTP password.\n  - `encryption`: The encryption type (either 'tls' or 'ssl').",
         "doc": "Configure the mailer instance using SMTP configuration.\n\nThis method takes an associative array of SMTP configuration options\nand sets the corresponding properties on the mailer instance.\n\nThe configuration array should contain the following keys:\n\n  - `host`: The SMTP host.\n  - `port`: The SMTP port.\n  - `username`: The SMTP username.\n  - `password`: The SMTP password.\n  - `encryption`: The encryption type (either 'tls' or 'ssl').\n\n@param array $config An associative array of SMTP configuration options.\n\n@return self",
-        "line": 101
+        "line": 117
       },
       {
         "name": "configure",
         "signature": "public function configure(callable $callback): self",
         "description": "Configure the mailer instance using a callback function.\n\nThis method takes a callback function as its argument, which receives the\nmailer instance as its parameter. The callback function can be used to\nconfigure the mailer instance using any of the available methods.",
         "doc": "Configure the mailer instance using a callback function.\n\nThis method takes a callback function as its argument, which receives the\nmailer instance as its parameter. The callback function can be used to\nconfigure the mailer instance using any of the available methods.\n\n@param callable $callback A callback function that receives the mailer instance as its parameter.\n\n@return self Returns the instance of the class for method chaining.",
-        "line": 136
+        "line": 152
       },
       {
         "name": "smtpKeepAlive",
         "signature": "public function smtpKeepAlive(): self",
         "description": "Enable or disable SMTP keep-alive.\n\nThis method sets the SMTPKeepAlive property to the specified value.",
         "doc": "Enable or disable SMTP keep-alive.\n\nThis method sets the SMTPKeepAlive property to the specified value.\n\n@return self Returns the instance of the class for method chaining.",
-        "line": 149
+        "line": 165
       },
       {
         "name": "view",
         "signature": "public function view(string $template, array $context = []): self",
         "description": "Set the email body content using a template.\n\nThis method allows you to set the email body content using a template.\nThe template is rendered using the Hyper\\template engine.\nThe engine is configured to look for the template file in the mail\ndirectory of the application.",
         "doc": "Set the email body content using a template.\n\nThis method allows you to set the email body content using a template.\nThe template is rendered using the Hyper\\template engine.\nThe engine is configured to look for the template file in the mail\ndirectory of the application.\n\n@param string $template The name of the template file to render.\n@param array $context An associative array of context to pass to the template.\n@return self Returns the instance of the class for method chaining.",
-        "line": 167
+        "line": 183
       },
       {
         "name": "withHeader",
         "signature": "public function withHeader(string $name, string $value): self",
         "description": "Add a custom header to the email.\n\nThis method takes a header name and value, and adds the custom header to the email.\nThe method returns the instance of the class for method chaining.",
         "doc": "Add a custom header to the email.\n\nThis method takes a header name and value, and adds the custom header to the email.\nThe method returns the instance of the class for method chaining.\n\n@param string $name The name of the header.\n@param string $value The value of the header.\n\n@return self Returns the instance of the class for method chaining.",
-        "line": 186
+        "line": 202
       },
       {
         "name": "withHeaders",
         "signature": "public function withHeaders(array $headers): self",
         "description": "Add multiple custom headers to the email.\n\nThis method takes an associative array of header names and values, and adds the custom headers to the email.\nThe method returns the instance of the class for method chaining.",
         "doc": "Add multiple custom headers to the email.\n\nThis method takes an associative array of header names and values, and adds the custom headers to the email.\nThe method returns the instance of the class for method chaining.\n\n@param array $headers An associative array of header names and values.\n\n@return self Returns the instance of the class for method chaining.",
-        "line": 202
+        "line": 218
       },
       {
         "name": "body",
         "signature": "public function body(string $body, bool $isHtml = false): self",
         "description": "Set the email body content directly.\n\nThis method allows you to set the email body content directly.\nThe second parameter determines whether the content is HTML or plain text.",
         "doc": "Set the email body content directly.\n\nThis method allows you to set the email body content directly.\nThe second parameter determines whether the content is HTML or plain text.\n\n@param string $body The content of the email.\n@param bool $isHtml Whether the content is HTML or plain text.\n@return self Returns the instance of the class for method chaining.",
-        "line": 220
+        "line": 236
       },
       {
         "name": "subject",
         "signature": "public function subject(string $subject): self",
         "description": "Set the email subject.\n\nThis method takes a string argument and sets the email subject.\nThe method returns the instance of the class for method chaining.",
         "doc": "Set the email subject.\n\nThis method takes a string argument and sets the email subject.\nThe method returns the instance of the class for method chaining.\n\n@param string $subject The subject of the email.\n\n@return self Returns the instance of the class for method chaining.",
-        "line": 239
+        "line": 255
       },
       {
         "name": "to",
         "signature": "public function to($address, $name = null): self",
         "description": "Add a recipient to the email.\n\nThis method takes a string argument and a name argument, and adds the recipient to the email.\nThe method returns the instance of the class for method chaining.",
         "doc": "Add a recipient to the email.\n\nThis method takes a string argument and a name argument, and adds the recipient to the email.\nThe method returns the instance of the class for method chaining.\n\n@param string $address The email address of the recipient.\n@param string $name The name of the recipient.\n\n@return self Returns the instance of the class for method chaining.",
-        "line": 256
+        "line": 272
       },
       {
         "name": "cc",
         "signature": "public function cc($address, $name = null): self",
         "description": "Add a carbon copy (CC) recipient to the email.\n\nThis method takes a string argument and a name argument, and adds the CC recipient to the email.\nThe method returns the instance of the class for method chaining.",
         "doc": "Add a carbon copy (CC) recipient to the email.\n\nThis method takes a string argument and a name argument, and adds the CC recipient to the email.\nThe method returns the instance of the class for method chaining.\n\n@param string $address The email address of the CC recipient.\n@param string $name The name of the CC recipient.\n\n@return self Returns the instance of the class for method chaining.",
-        "line": 273
+        "line": 289
       },
       {
         "name": "bcc",
         "signature": "public function bcc($address, $name = null): self",
         "description": "Add a blind carbon copy (BCC) recipient to the email.\n\nThis method takes an email address and an optional name, and adds the BCC recipient to the email.\nThe method returns the instance of the class for method chaining.",
         "doc": "Add a blind carbon copy (BCC) recipient to the email.\n\nThis method takes an email address and an optional name, and adds the BCC recipient to the email.\nThe method returns the instance of the class for method chaining.\n\n@param string $address The email address of the BCC recipient.\n@param string|null $name The name of the BCC recipient.\n\n@return self Returns the instance of the class for method chaining.",
-        "line": 291
+        "line": 307
       },
       {
         "name": "attachFile",
         "signature": "public function attachFile($path, $name = null): self",
         "description": "Attach a file to the email.\n\nThis method takes a file path and an optional name, and attaches the file to the email.\nThe method returns the instance of the class for method chaining.",
         "doc": "Attach a file to the email.\n\nThis method takes a file path and an optional name, and attaches the file to the email.\nThe method returns the instance of the class for method chaining.\n\n@param string $path The file path of the attachment.\n@param string|null $name The name of the attachment.\n\n@return self Returns the instance of the class for method chaining.",
-        "line": 308
+        "line": 324
       },
       {
         "name": "from",
         "signature": "public function from($address, $name = null): self",
         "description": "Set the sender of the email.\n\nThis method takes an email address and an optional name, and sets the sender of the email.\nThe method returns the instance of the class for method chaining.",
         "doc": "Set the sender of the email.\n\nThis method takes an email address and an optional name, and sets the sender of the email.\nThe method returns the instance of the class for method chaining.\n\n@param string $address The email address of the sender.\n@param string|null $name The name of the sender.\n\n@return self Returns the instance of the class for method chaining.",
-        "line": 325
-      },
-      {
-        "name": "mailer",
-        "signature": "public function mailer($address, $name = null): self",
-        "description": "Set the sender of the email.\n\nAlias for `from()` to match the service contract.",
-        "doc": "Set the sender of the email.\n\nAlias for `from()` to match the service contract.\n\n@param string $address The email address of the sender.\n@param string|null $name The name of the sender.\n@return self Returns the instance for method chaining.",
-        "line": 340
+        "line": 341
       },
       {
         "name": "reply",
         "signature": "public function reply($address, $name = null): self",
         "description": "Set the reply-to email address and name.\n\nThis method takes an email address and an optional name, and sets the reply-to\nemail address and name of the email.\nThe method returns the instance of the class for method chaining.",
         "doc": "Set the reply-to email address and name.\n\nThis method takes an email address and an optional name, and sets the reply-to\nemail address and name of the email.\nThe method returns the instance of the class for method chaining.\n\n@param string $address The email address of the reply-to.\n@param string|null $name The name of the reply-to.\n\n@return self Returns the instance of the class for method chaining.",
-        "line": 357
+        "line": 359
       },
       {
         "name": "send",
         "signature": "public function send(): bool",
         "description": "Send the email.\n\nThis method sends the email and returns true if it was sent successfully,\nand false otherwise.",
         "doc": "Send the email.\n\nThis method sends the email and returns true if it was sent successfully,\nand false otherwise.\n\n@return bool Returns true if the email was sent successfully, and false otherwise.",
-        "line": 371
+        "line": 373
       },
       {
         "name": "copy",
         "signature": "public function copy(): self",
         "description": "Create a copy of the mailer instance.",
         "doc": "Create a copy of the mailer instance.\n\n@return self A new instance that is a copy of the current instance.",
-        "line": 387
+        "line": 404
       },
       {
         "name": "reset",
         "signature": "public function reset(): self",
         "description": "Reset the mailer instance to its initial state.\n\nThis method clears all recipients, subject, and body of the email,\neffectively resetting the mailer instance to its initial state.",
         "doc": "Reset the mailer instance to its initial state.\n\nThis method clears all recipients, subject, and body of the email,\neffectively resetting the mailer instance to its initial state.\n\n@return self Returns the instance of the class for method chaining.",
-        "line": 400
+        "line": 417
       }
     ]
   },
@@ -25288,7 +25295,7 @@
     "file": "Utils/Paginator.php",
     "name": "Spark\\Utils\\Paginator",
     "kind": "class",
-    "sha256": "a84bdb2b9bf31f71a3f794411403910e89bad22a9cad2f738e8e18868563657d",
+    "sha256": "ad57c0a7e6a72826f70f9960b58a1a7c4ea3742b89a8920f2db0f1f6f34aec6c",
     "methods": [
       {
         "name": "__construct",
@@ -25703,7 +25710,7 @@
     "file": "Utils/Vite.php",
     "name": "Spark\\Utils\\Vite",
     "kind": "class",
-    "sha256": "0af63b5b9795c9e84df90db53700710fec944c4689b796623492de0531acf795",
+    "sha256": "6930872804fe2f8c109a0d9d95a966f6b3e326f39bf410e27d73bb8896e1398d",
     "methods": [
       {
         "name": "__construct",
