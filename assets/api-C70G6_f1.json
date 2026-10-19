@@ -785,196 +785,196 @@
     "file": "Cache/Storage/DatabaseStorage.php",
     "name": "Spark\\Cache\\Storage\\DatabaseStorage",
     "kind": "class",
-    "sha256": "378d31d6486ed4be1058c1ab93571f118757627479c57f722c93edc185a69815",
+    "sha256": "6b0b299f577cad6fc7a05d993eeec9ab554af3fbd17b74696566d49b9bb87140",
     "methods": [
       {
         "name": "__construct",
         "signature": "public function __construct( private readonly string $name = 'default', private readonly array $config = [], private readonly string $type = 'cache', )",
         "description": "@param string $type Kept for constructor compatibility with Cache/Lock; both tables are resolved lazily.",
         "doc": "@param string $type Kept for constructor compatibility with Cache/Lock; both tables are resolved lazily.",
-        "line": 92
+        "line": 94
       },
       {
         "name": "has",
         "signature": "public function has(string $key, bool $eraseExpired = false): bool",
         "description": "",
         "doc": "",
-        "line": 104
+        "line": 106
       },
       {
         "name": "store",
         "signature": "public function store(string $key, mixed $data, null|string $expire = null): void",
         "description": "",
         "doc": "",
-        "line": 128
+        "line": 129
       },
       {
         "name": "retrieve",
         "signature": "public function retrieve(string|array $keys, bool $eraseExpired = false): mixed",
         "description": "",
         "doc": "",
-        "line": 140
+        "line": 141
       },
       {
         "name": "retrieveAll",
         "signature": "public function retrieveAll(bool $eraseExpired = false): array",
         "description": "",
         "doc": "",
-        "line": 201
+        "line": 192
       },
       {
         "name": "erase",
         "signature": "public function erase(array $keys): void",
         "description": "",
         "doc": "",
-        "line": 221
+        "line": 212
       },
       {
         "name": "eraseExpired",
         "signature": "public function eraseExpired(): int",
         "description": "",
         "doc": "",
-        "line": 236
+        "line": 227
       },
       {
         "name": "getExpired",
         "signature": "public function getExpired(): array",
         "description": "",
         "doc": "",
-        "line": 247
+        "line": 238
       },
       {
         "name": "flush",
         "signature": "public function flush(): void",
         "description": "",
         "doc": "",
-        "line": 265
+        "line": 256
       },
       {
         "name": "storeMany",
         "signature": "public function storeMany(array $items, null|string $expire = null): void",
         "description": "",
         "doc": "",
-        "line": 271
+        "line": 262
       },
       {
         "name": "increment",
         "signature": "public function increment(string $key, int $amount = 1): int|false",
         "description": "",
         "doc": "",
-        "line": 292
+        "line": 283
       },
       {
         "name": "add",
         "signature": "public function add(string $key, mixed $value, null|string $expire = null): bool",
         "description": "",
         "doc": "",
-        "line": 325
+        "line": 316
       },
       {
         "name": "stats",
         "signature": "public function stats(): array",
         "description": "",
         "doc": "",
-        "line": 351
+        "line": 342
       },
       {
         "name": "pull",
         "signature": "public function pull(string $key, mixed $default = null): mixed",
         "description": "",
         "doc": "",
-        "line": 376
+        "line": 367
       },
       {
         "name": "storeManyWithExpiry",
         "signature": "public function storeManyWithExpiry(array $items): void",
         "description": "",
         "doc": "",
-        "line": 403
+        "line": 394
       },
       {
         "name": "ttl",
         "signature": "public function ttl(string $key): ?int",
         "description": "",
         "doc": "",
-        "line": 432
+        "line": 423
       },
       {
         "name": "optimizeCache",
         "signature": "public function optimizeCache(): void",
         "description": "",
         "doc": "",
-        "line": 459
+        "line": 450
       },
       {
         "name": "lock",
         "signature": "public function lock(string $key, string $owner, int $timeout = 10, int $waitTimeout = 5): bool",
         "description": "",
         "doc": "",
-        "line": 472
+        "line": 463
       },
       {
         "name": "unlock",
         "signature": "public function unlock(string $key, string $owner): bool",
         "description": "",
         "doc": "",
-        "line": 505
+        "line": 496
       },
       {
         "name": "unlockAll",
         "signature": "public function unlockAll(string $owner): int",
         "description": "",
         "doc": "",
-        "line": 523
+        "line": 514
       },
       {
         "name": "isLocked",
         "signature": "public function isLocked(string $key): bool",
         "description": "",
         "doc": "",
-        "line": 536
+        "line": 527
       },
       {
         "name": "ownsLock",
         "signature": "public function ownsLock(string $key, string $owner): bool",
         "description": "",
         "doc": "",
-        "line": 550
+        "line": 541
       },
       {
         "name": "releaseExpiredLocks",
         "signature": "public function releaseExpiredLocks(): int",
         "description": "",
         "doc": "",
-        "line": 564
+        "line": 555
       },
       {
         "name": "extendLock",
         "signature": "public function extendLock(string $key, string $owner, int $additionalSeconds): bool",
         "description": "",
         "doc": "",
-        "line": 575
+        "line": 566
       },
       {
         "name": "getLockInfo",
         "signature": "public function getLockInfo(string $key): ?array",
         "description": "",
         "doc": "",
-        "line": 591
+        "line": 582
       },
       {
         "name": "forceUnlock",
         "signature": "public function forceUnlock(string $key): bool",
         "description": "",
         "doc": "",
-        "line": 612
+        "line": 603
       },
       {
         "name": "optimizeLocks",
         "signature": "public function optimizeLocks(): void",
         "description": "",
         "doc": "",
-        "line": 623
+        "line": 614
       }
     ]
   },
@@ -8474,7 +8474,7 @@
     "file": "Database/Schema/Blueprint.php",
     "name": "Spark\\Database\\Schema\\Blueprint",
     "kind": "class",
-    "sha256": "6e1a891a76a106c4ede5311ae765353edacb81ee8aaa5333fdabc5e081178589",
+    "sha256": "2e74915b5710a9331dce4c1cdafb42d92b933af1b36acc96fa7de09e20b29ffb",
     "methods": [
       {
         "name": "__construct",
@@ -8723,192 +8723,192 @@
       },
       {
         "name": "binary",
-        "signature": "public function binary(string $name): Column",
-        "description": "Add a 'binary' column to the blueprint.",
-        "doc": "Add a 'binary' column to the blueprint.\n\n@param string $name The name of the column.\n@return Column",
-        "line": 493
+        "signature": "public function binary(string $name, ?int $length = null, bool $fixed = false): Column",
+        "description": "Add a 'binary' column to the blueprint.\nMySQL uses BLOB without a length, VARBINARY with a length, or BINARY when fixed.\nSQLite uses BLOB and PostgreSQL uses BYTEA without enforcing length or padding.",
+        "doc": "Add a 'binary' column to the blueprint.\nMySQL uses BLOB without a length, VARBINARY with a length, or BINARY when fixed.\nSQLite uses BLOB and PostgreSQL uses BYTEA without enforcing length or padding.\n\n@param string $name The name of the column.\n@param int|null $length Maximum bytes, or fixed bytes when $fixed is true.\n@param bool $fixed Whether to use a fixed-length MySQL BINARY column.\n@return Column",
+        "line": 497
       },
       {
         "name": "uuid",
         "signature": "public function uuid(string $name): Column",
         "description": "Add a 'uuid' column to the blueprint.",
         "doc": "Add a 'uuid' column to the blueprint.\n\n@param string $name The name of the column.\n@return Column",
-        "line": 504
+        "line": 508
       },
       {
         "name": "ipAddress",
         "signature": "public function ipAddress(string $name): Column",
         "description": "Add a 'ipAddress' column to the blueprint.",
         "doc": "Add a 'ipAddress' column to the blueprint.\n\n@param string $name The name of the column.\n@return Column",
-        "line": 515
+        "line": 519
       },
       {
         "name": "macAddress",
         "signature": "public function macAddress(string $name): Column",
         "description": "Add a 'macAddress' column to the blueprint.",
         "doc": "Add a 'macAddress' column to the blueprint.\n\n@param string $name The name of the column.\n@return Column",
-        "line": 526
+        "line": 530
       },
       {
         "name": "rememberToken",
         "signature": "public function rememberToken(): void",
         "description": "Add a 'rememberToken' column to the blueprint.",
         "doc": "Add a 'rememberToken' column to the blueprint.",
-        "line": 534
+        "line": 538
       },
       {
         "name": "softDeletes",
         "signature": "public function softDeletes(): void",
         "description": "Add 'deleted_at' column to the blueprint.",
         "doc": "Add 'deleted_at' column to the blueprint.",
-        "line": 542
+        "line": 546
       },
       {
         "name": "nullableTimestamps",
         "signature": "public function nullableTimestamps(): void",
         "description": "Add nullable timestamps to the blueprint.",
         "doc": "Add nullable timestamps to the blueprint.",
-        "line": 550
+        "line": 554
       },
       {
         "name": "primary",
         "signature": "public function primary(array|string $columns, ?string $name = null): void",
         "description": "Add a primary key to the blueprint.",
         "doc": "Add a primary key to the blueprint.\n\n@param string|array $columns The column(s) to set as primary key.\n@return void",
-        "line": 562
+        "line": 566
       },
       {
         "name": "unique",
         "signature": "public function unique(string|array $columns, ?string $name = null): void",
         "description": "Add a unique index to the blueprint.",
         "doc": "Add a unique index to the blueprint.\n\n@param string|array $columns The column(s) to set as unique index.\n@return void",
-        "line": 573
+        "line": 577
       },
       {
         "name": "index",
         "signature": "public function index(string|array $columns, ?string $name = null): void",
         "description": "Add an index to the blueprint.",
         "doc": "Add an index to the blueprint.\n\n@param string|array $columns The column(s) to set as index.\n@return void",
-        "line": 584
+        "line": 588
       },
       {
         "name": "fullText",
         "signature": "public function fullText(string|array $columns, ?string $name = null): void",
         "description": "Add a full text index to the blueprint.",
         "doc": "Add a full text index to the blueprint.\n\n@param string|array $columns The column(s) to set as full text index.\n@return void",
-        "line": 595
+        "line": 599
       },
       {
         "name": "spatialIndex",
         "signature": "public function spatialIndex(string|array $columns, ?string $name = null): void",
         "description": "Add a spatial index to the blueprint.",
         "doc": "Add a spatial index to the blueprint.\n\n@param string|array $columns The column(s) to set as spatial index.\n@return void",
-        "line": 606
+        "line": 610
       },
       {
         "name": "engine",
         "signature": "public function engine(string $engine): self",
         "description": "Set the storage engine for MySQL tables.",
         "doc": "Set the storage engine for MySQL tables.\n\n@param string $engine The storage engine to use.\n@return self",
-        "line": 617
+        "line": 621
       },
       {
         "name": "charset",
         "signature": "public function charset(string $charset): self",
         "description": "Set the character set for the blueprint.",
         "doc": "Set the character set for the blueprint.\n\n@param string $charset The character set to use.\n@return self",
-        "line": 629
+        "line": 633
       },
       {
         "name": "collation",
         "signature": "public function collation(string $collation): self",
         "description": "Set the collation for the blueprint.",
         "doc": "Set the collation for the blueprint.\n\n@param string $collation The collation to use.\n@return self",
-        "line": 641
+        "line": 645
       },
       {
         "name": "compileCreate",
         "signature": "public function compileCreate(): string",
         "description": "Compile the blueprint into a SQL statement.",
         "doc": "Compile the blueprint into a SQL statement.\n\n@return string",
-        "line": 652
+        "line": 656
       },
       {
         "name": "compileCreateStatements",
         "signature": "public function compileCreateStatements(): array",
         "description": "Compile the blueprint into SQL statements.",
         "doc": "Compile the blueprint into SQL statements.\n\n@return array",
-        "line": 662
+        "line": 666
       },
       {
         "name": "dropColumn",
         "signature": "public function dropColumn(string|array $columns): self",
         "description": "Drop a column from the blueprint.",
         "doc": "Drop a column from the blueprint.\n\n@param string|array $columns The column(s) to drop.\n@return self",
-        "line": 710
+        "line": 714
       },
       {
         "name": "dropIndex",
         "signature": "public function dropIndex($index, ?string $type = null): self",
         "description": "Drop an index from the blueprint.",
         "doc": "Drop an index from the blueprint.\n\n@param string|array $index The index name or columns.\n@param string|null $type The type of index to drop.\n@return self",
-        "line": 724
+        "line": 728
       },
       {
         "name": "dropUnique",
         "signature": "public function dropUnique($index): self",
         "description": "Drop a unique index from the blueprint.",
         "doc": "Drop a unique index from the blueprint.\n\n@param string|array $index The index name or columns.\n@return self",
-        "line": 738
+        "line": 742
       },
       {
         "name": "dropPrimary",
         "signature": "public function dropPrimary(string|array|null $index = null): self",
         "description": "Drop a primary key from the blueprint.",
         "doc": "Drop a primary key from the blueprint.\n\n@param string|array|null $index The primary key name or columns.\n@return self",
-        "line": 749
+        "line": 753
       },
       {
         "name": "dropFullText",
         "signature": "public function dropFullText(string|array $index): self",
         "description": "Drop a full text index from the blueprint.",
         "doc": "Drop a full text index from the blueprint.\n\n@param string|array $index The index name or columns.\n@return self",
-        "line": 761
+        "line": 765
       },
       {
         "name": "dropSpatialIndex",
         "signature": "public function dropSpatialIndex(string|array $index): self",
         "description": "Drop a spatial index from the blueprint.",
         "doc": "Drop a spatial index from the blueprint.\n\n@param string|array $index The index name or columns.\n@return self",
-        "line": 772
+        "line": 776
       },
       {
         "name": "dropForeign",
         "signature": "public function dropForeign($index): self",
         "description": "Drop a foreign key constraint from the blueprint.",
         "doc": "Drop a foreign key constraint from the blueprint.\n\n@param string|array $index The index name or columns.\n@return self",
-        "line": 783
+        "line": 787
       },
       {
         "name": "renameColumn",
         "signature": "public function renameColumn(string $from, string $to): self",
         "description": "Rename a column in the blueprint.",
         "doc": "Rename a column in the blueprint.\n\n@param string $from The original name of the column.\n@param string $to The new name of the column.\n@return self",
-        "line": 796
+        "line": 800
       },
       {
         "name": "compileAlter",
         "signature": "public function compileAlter(): string",
         "description": "Compile the blueprint into an ALTER TABLE statement.",
         "doc": "Compile the blueprint into an ALTER TABLE statement.\n\n@return string",
-        "line": 807
+        "line": 811
       },
       {
         "name": "compileAlterStatements",
         "signature": "public function compileAlterStatements(): array",
         "description": "Compile the blueprint into ALTER TABLE SQL statements.",
         "doc": "Compile the blueprint into ALTER TABLE SQL statements.\n\n@return array",
-        "line": 817
+        "line": 821
       }
     ]
   },
@@ -8916,7 +8916,7 @@
     "file": "Database/Schema/Column.php",
     "name": "Spark\\Database\\Schema\\Column",
     "kind": "class",
-    "sha256": "612fb52e16a2b1adcadb18c3cd6d393c24099fa31b3c133c68ddaaef4a9262b9",
+    "sha256": "2064a03d6b2e28e5568327bbe6ab8997e747a5e0efc03e317fe77aa4220cdd48",
     "methods": [
       {
         "name": "__construct",
@@ -8983,14 +8983,14 @@
       },
       {
         "name": "charset",
-        "signature": "public function charset(string $charset)",
+        "signature": "public function charset(string $charset): self",
         "description": "Sets the character set for the column.",
         "doc": "Sets the character set for the column.\n\n@param string $charset The character set\n@return self",
         "line": 139
       },
       {
         "name": "collation",
-        "signature": "public function collation(string $collation)",
+        "signature": "public function collation(string $collation): self",
         "description": "Sets the collation for the column.",
         "doc": "Sets the collation for the column.\n\n@param string $collation The collation\n@return self",
         "line": 151
@@ -9057,7 +9057,7 @@
     "file": "Database/Schema/Contracts/BlueprintContract.php",
     "name": "Spark\\Database\\Schema\\Contracts\\BlueprintContract",
     "kind": "interface",
-    "sha256": "80334f16a5853bd5b7e0a83802f4feca225c646e943212b6c50400f766313f38",
+    "sha256": "2213c611dc42c7d2faeea3e6a20de9f6b1d5f3c7af0b2c4779d571a8542aa687",
     "methods": [
       {
         "name": "id",
@@ -9320,129 +9320,129 @@
       },
       {
         "name": "binary",
-        "signature": "public function binary(string $name): Column",
-        "description": "Add a 'binary' column to the blueprint.",
-        "doc": "Add a 'binary' column to the blueprint.\n\n@param string $name\n@return Column",
-        "line": 350
+        "signature": "public function binary(string $name, ?int $length = null, bool $fixed = false): Column",
+        "description": "Add a 'binary' column to the blueprint.\nMySQL uses BLOB without a length, VARBINARY with a length, or BINARY when fixed.\nSQLite uses BLOB and PostgreSQL uses BYTEA without enforcing length or padding.",
+        "doc": "Add a 'binary' column to the blueprint.\nMySQL uses BLOB without a length, VARBINARY with a length, or BINARY when fixed.\nSQLite uses BLOB and PostgreSQL uses BYTEA without enforcing length or padding.\n\n@param string $name\n@param int|null $length Maximum bytes, or fixed bytes when $fixed is true.\n@param bool $fixed Whether to use a fixed-length MySQL BINARY column.\n@return Column",
+        "line": 354
       },
       {
         "name": "tinyInteger",
         "signature": "public function tinyInteger(string $name): Column",
         "description": "Add a 'tinyInteger' column to the blueprint.",
         "doc": "Add a 'tinyInteger' column to the blueprint.\n\n@param string $name\n@return Column",
-        "line": 358
+        "line": 362
       },
       {
         "name": "unsignedTinyInteger",
         "signature": "public function unsignedTinyInteger(string $name): Column",
         "description": "Add an unsigned tiny integer column.",
         "doc": "Add an unsigned tiny integer column.\n\n@param string $name\n@return Column",
-        "line": 366
+        "line": 370
       },
       {
         "name": "unsignedSmallInteger",
         "signature": "public function unsignedSmallInteger(string $name): Column",
         "description": "Add an unsigned small integer column.",
         "doc": "Add an unsigned small integer column.\n\n@param string $name\n@return Column",
-        "line": 374
+        "line": 378
       },
       {
         "name": "unsignedMediumInteger",
         "signature": "public function unsignedMediumInteger(string $name): Column",
         "description": "Add an unsigned medium integer column.",
         "doc": "Add an unsigned medium integer column.\n\n@param string $name\n@return Column",
-        "line": 382
+        "line": 386
       },
       {
         "name": "tinyIncrements",
         "signature": "public function tinyIncrements(string $name): Column",
         "description": "Add an auto-incrementing tiny integer.",
         "doc": "Add an auto-incrementing tiny integer.\n\n@param string $name\n@return Column",
-        "line": 390
+        "line": 394
       },
       {
         "name": "smallIncrements",
         "signature": "public function smallIncrements(string $name): Column",
         "description": "Add an auto-incrementing small integer.",
         "doc": "Add an auto-incrementing small integer.\n\n@param string $name\n@return Column",
-        "line": 398
+        "line": 402
       },
       {
         "name": "nullableTimestamp",
         "signature": "public function nullableTimestamp(string $name, int $precision = 0): Column",
         "description": "Add a nullable timestamp column.",
         "doc": "Add a nullable timestamp column.\n\n@param string $name\n@param int $precision\n@return Column",
-        "line": 407
+        "line": 411
       },
       {
         "name": "nullableTimestamps",
         "signature": "public function nullableTimestamps(): void",
         "description": "Add nullable 'created_at' and 'updated_at' timestamp columns.",
         "doc": "Add nullable 'created_at' and 'updated_at' timestamp columns.\n\n@return void",
-        "line": 414
+        "line": 418
       },
       {
         "name": "rememberToken",
         "signature": "public function rememberToken(): void",
         "description": "Add a 'remember_token' column.",
         "doc": "Add a 'remember_token' column.\n\n@return void",
-        "line": 421
+        "line": 425
       },
       {
         "name": "softDeletes",
         "signature": "public function softDeletes(): void",
         "description": "Add a 'deleted_at' timestamp column for soft deletes.",
         "doc": "Add a 'deleted_at' timestamp column for soft deletes.\n\n@return void",
-        "line": 428
+        "line": 432
       },
       {
         "name": "dropColumn",
         "signature": "public function dropColumn(array|string $columns): self",
         "description": "Drop column(s) from the blueprint.",
         "doc": "Drop column(s) from the blueprint.\n\n@param array|string $columns\n@return self",
-        "line": 436
+        "line": 440
       },
       {
         "name": "dropPrimary",
         "signature": "public function dropPrimary(array|string|null $index = null): self",
         "description": "Drop primary key index.",
         "doc": "Drop primary key index.\n\n@param array|string|null $index\n@return self",
-        "line": 444
+        "line": 448
       },
       {
         "name": "renameColumn",
         "signature": "public function renameColumn(string $from, string $to): self",
         "description": "Rename a column.",
         "doc": "Rename a column.\n\n@param string $from\n@param string $to\n@return self",
-        "line": 453
+        "line": 457
       },
       {
         "name": "compileCreate",
         "signature": "public function compileCreate(): string",
         "description": "Compile the blueprint into a SQL statement.",
         "doc": "Compile the blueprint into a SQL statement.\n\n@return string",
-        "line": 460
+        "line": 464
       },
       {
         "name": "compileCreateStatements",
         "signature": "public function compileCreateStatements(): array",
         "description": "Compile the blueprint into SQL statements.",
         "doc": "Compile the blueprint into SQL statements.\n\n@return array",
-        "line": 467
+        "line": 471
       },
       {
         "name": "compileAlter",
         "signature": "public function compileAlter(): string",
         "description": "Compile the blueprint into an ALTER TABLE statement.",
         "doc": "Compile the blueprint into an ALTER TABLE statement.\n\n@return string",
-        "line": 474
+        "line": 478
       },
       {
         "name": "compileAlterStatements",
         "signature": "public function compileAlterStatements(): array",
         "description": "Compile the blueprint into ALTER TABLE SQL statements.",
         "doc": "Compile the blueprint into ALTER TABLE SQL statements.\n\n@return array",
-        "line": 481
+        "line": 485
       }
     ]
   },
@@ -9450,7 +9450,7 @@
     "file": "Database/Schema/Contracts/ColumnContract.php",
     "name": "Spark\\Database\\Schema\\Contracts\\ColumnContract",
     "kind": "interface",
-    "sha256": "fb0d5cc4bc793a12b15ca0c99704c01295a4301678e6b93597c3cf93cce170fa",
+    "sha256": "a0006cf4c93101a87208419f247f56a0c9d8266f70a35c96ad78677e8a270a47",
     "methods": [
       {
         "name": "nullable",
@@ -9537,18 +9537,32 @@
         "line": 99
       },
       {
+        "name": "charset",
+        "signature": "public function charset(string $charset): self",
+        "description": "Set the column character set (MySQL).",
+        "doc": "Set the column character set (MySQL).",
+        "line": 102
+      },
+      {
+        "name": "collation",
+        "signature": "public function collation(string $collation): self",
+        "description": "Set the column collation (MySQL and SQLite).",
+        "doc": "Set the column collation (MySQL and SQLite).",
+        "line": 105
+      },
+      {
         "name": "comment",
         "signature": "public function comment(string $comment)",
         "description": "Add a comment to the column.",
         "doc": "Add a comment to the column.\n\n@param string $comment\n@return self",
-        "line": 107
+        "line": 113
       },
       {
         "name": "toSql",
         "signature": "public function toSql(): string",
         "description": "Generate the SQL representation of the column.",
         "doc": "Generate the SQL representation of the column.\n\n@return string",
-        "line": 114
+        "line": 120
       }
     ]
   },
@@ -10016,7 +10030,7 @@
     "file": "Database/Schema/Grammar.php",
     "name": "Spark\\Database\\Schema\\Grammar",
     "kind": "class",
-    "sha256": "3d560159d94489c7896de507419a86cdc9694fed9d448be89972cd76d6c3d971",
+    "sha256": "c18dd0e81ae9359184e9e2ecc82f6836a1d728fb5eb351936f373d4c68dea7fb",
     "methods": [
       {
         "name": "__construct",
@@ -10079,91 +10093,91 @@
         "signature": "public function mapModifier(string $modifier, $value = null): string",
         "description": "Map a column modifier to a database-specific clause.",
         "doc": "Map a column modifier to a database-specific clause.\n\n@param string $modifier The modifier name.\n@param mixed $value The value associated with the modifier.\n@return string The database-specific clause.",
-        "line": 225
+        "line": 226
       },
       {
         "name": "compileForeignKey",
         "signature": "public function compileForeignKey(ForeignKeyConstraint $fk, ?string $table = null): string",
         "description": "Compile a foreign key constraint.",
         "doc": "Compile a foreign key constraint.\n\n@param ForeignKeyConstraint $fk The foreign key constraint object.\n@return string The SQL for the foreign key constraint.",
-        "line": 259
+        "line": 260
       },
       {
         "name": "compileIndex",
         "signature": "public function compileIndex(string $table, array $index): string",
         "description": "Compile an index statement.",
         "doc": "Compile an index statement.\n\n@param string $table The table name.\n@param array $index The index details.\n@return string The SQL for the index statement.",
-        "line": 304
+        "line": 305
       },
       {
         "name": "compileAddColumn",
         "signature": "public function compileAddColumn(string $table, Column $column): string",
         "description": "Compile an ADD COLUMN statement.",
         "doc": "Compile an ADD COLUMN statement.\n\n@param string $table The table name.\n@param Column $column The column to add.\n@return string The SQL for the ADD COLUMN statement.",
-        "line": 334
+        "line": 335
       },
       {
         "name": "compileAddForeignKey",
         "signature": "public function compileAddForeignKey(string $table, ForeignKeyConstraint $fk): string",
         "description": "Compile an ADD FOREIGN KEY statement for ALTER TABLE.",
         "doc": "Compile an ADD FOREIGN KEY statement for ALTER TABLE.\n\n@param string $table The table name.\n@param ForeignKeyConstraint $fk The foreign key constraint object.\n@return string The SQL for the ADD FOREIGN KEY statement.",
-        "line": 346
+        "line": 347
       },
       {
         "name": "compileDrop",
         "signature": "public function compileDrop(string $table, array $drop): string",
         "description": "Compile a drop statement.",
         "doc": "Compile a drop statement.\n\n@param string $table The table name.\n@param array $drop The drop details.\n@return string The SQL for the drop statement.",
-        "line": 385
+        "line": 386
       },
       {
         "name": "compilePrimaryKey",
         "signature": "public function compilePrimaryKey(string $table, array $primary): string",
         "description": "Compile a primary key definition.",
         "doc": "Compile a primary key definition.\n\n@param string $table\n@param array $primary\n@return string",
-        "line": 403
+        "line": 404
       },
       {
         "name": "compileAddPrimaryKey",
         "signature": "public function compileAddPrimaryKey(string $table, array $primary): string",
         "description": "Compile an ALTER TABLE ADD PRIMARY KEY statement.",
         "doc": "Compile an ALTER TABLE ADD PRIMARY KEY statement.\n\n@param string $table\n@param array $primary\n@return string",
-        "line": 421
+        "line": 422
       },
       {
         "name": "compileDropColumn",
         "signature": "public function compileDropColumn(string $table, array $columns): string",
         "description": "Compile a DROP COLUMN statement.",
         "doc": "Compile a DROP COLUMN statement.\n\n@param string $table The table name.\n@param array $columns The column names.\n@return string The SQL for the DROP COLUMN statement.\n\n@throws SqliteAlterFailedException",
-        "line": 441
+        "line": 442
       },
       {
         "name": "compileDropIndex",
         "signature": "public function compileDropIndex(string $table, array $index): string",
         "description": "Compile a DROP INDEX statement.",
         "doc": "Compile a DROP INDEX statement.\n\n@param string $table The table name.\n@param array $index The index details.\n@return string The compiled SQL statement.",
-        "line": 454
+        "line": 455
       },
       {
         "name": "compileDropPrimaryKey",
         "signature": "public function compileDropPrimaryKey(string $table, array $primary): string",
         "description": "Compile a DROP PRIMARY KEY statement.",
         "doc": "Compile a DROP PRIMARY KEY statement.\n\n@param string $table\n@param array $primary\n@return string",
-        "line": 471
+        "line": 472
       },
       {
         "name": "compileDropForeign",
         "signature": "public function compileDropForeign(string $table, array $fk): string",
         "description": "Compile a DROP FOREIGN KEY statement.",
         "doc": "Compile a DROP FOREIGN KEY statement.\n\n@param string $table The table name.\n@param array $fk The foreign key details.\n@return string The compiled SQL statement.\n@throws SqliteAlterFailedException If the database driver is SQLite.",
-        "line": 492
+        "line": 493
       },
       {
         "name": "compileRenameColumn",
         "signature": "public function compileRenameColumn(string $table, string $from, string $to): string",
         "description": "Compile a column rename operation.\n\nThis method will compile a column rename operation for the\ngiven table. The operation will be adapted according to the\ndatabase driver.",
         "doc": "Compile a column rename operation.\n\nThis method will compile a column rename operation for the\ngiven table. The operation will be adapted according to the\ndatabase driver.\n\n@param string $table\n  The table name.\n@param string $from\n  The old column name.\n@param string $to\n  The new column name.\n\n@return string\n  The SQL for the column rename operation.",
-        "line": 523
+        "line": 524
       }
     ]
   },
