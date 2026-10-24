@@ -14,11 +14,12 @@ You write routes, controllers, and models in your application. TinyCore supplies
 | --- | --- | --- |
 | Blade + Alpine | Server-rendered pages with focused interactivity | [Blade](./blade.md) and [Vite & Alpine](./vite.md) |
 | Blade + FireLine | PHP-rendered pages with client-side navigation and forms | [FireLine](./fireline.md) |
+| Nova | A Blade and Alpine starter with authentication, account settings and projects | [Nova starter kit](./nova.md) |
 | Inertia + React or Vue | Application interfaces backed by PHP routes and controllers | [Inertia](./inertia.md) |
 | Orbit | A ready-made administration starting point | [Orbit admin](./orbit.md) |
 | JSON API | Mobile clients, integrations, or a separate frontend | [Routing](./routing.md) and [Responses](./response.md) |
 
-FireLine, Inertia, and Orbit are separate integrations. Install only the pieces your application needs.
+Nova and Orbit are ready-configured application starters. FireLine and Inertia are separately installable frontend integrations. For live notifications, presence and channel broadcasts, add [Relay](./relay.md) and connect with \`pusher-js\`.
 
 ## What is included
 
