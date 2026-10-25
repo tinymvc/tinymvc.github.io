@@ -61,6 +61,8 @@ Deferred callbacks are invoked through the container, so dependencies can be typ
 
 On supported servers, termination uses \`fastcgi_finish_request()\` or \`litespeed_finish_request()\`; otherwise it flushes output buffers. A shutdown fallback also handles code paths that send a response and exit early. Errors are reported without stopping later deferred callbacks. Debug mode dispatches \`app:terminated\`.
 
+A host-owned output buffer that cannot be removed is flushed when possible and left to its host; it does not trap termination in a loop or prevent deferred work.
+
 Deferred work still runs in the PHP process serving the request. For tasks that need retries or must survive a process crash, use a [queue job](./queues.md).
 
 ## Extending the framework
