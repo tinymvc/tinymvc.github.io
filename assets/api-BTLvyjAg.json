@@ -669,84 +669,6 @@
     ]
   },
   {
-    "file": "Cache/Contracts/LockContract.php",
-    "name": "Spark\\Cache\\Contracts\\LockContract",
-    "kind": "interface",
-    "sha256": "29788e6f373179a335ff33d9278dfef9eece027538e305e02bfedec4bc85dca9",
-    "methods": [
-      {
-        "name": "lock",
-        "signature": "public function lock(string $key, int|string|DateTimeInterface|Carbon|DateInterval $timeout = 10, int $waitTimeout = 5): bool",
-        "description": "Attempts to acquire a lock for the given key.",
-        "doc": "Attempts to acquire a lock for the given key.\n\n@param string $key The lock key.\n@param int|string|DateTimeInterface|Carbon|DateInterval $timeout Seconds, a date expression, interval, or absolute deadline.\n@param int $waitTimeout The maximum time to wait for the lock in seconds.\n@return bool True if the lock was acquired, false otherwise.",
-        "line": 22
-      },
-      {
-        "name": "unlock",
-        "signature": "public function unlock(string $key): bool",
-        "description": "Releases the lock for the given key.",
-        "doc": "Releases the lock for the given key.\n\n@param string $key The lock key.\n@return bool True if the lock was released, false otherwise.",
-        "line": 30
-      },
-      {
-        "name": "isLocked",
-        "signature": "public function isLocked(string $key): bool",
-        "description": "Checks if the given key is currently locked.",
-        "doc": "Checks if the given key is currently locked.\n\n@param string $key The lock key.\n@return bool True if the key is locked, false otherwise.",
-        "line": 38
-      },
-      {
-        "name": "ownsLock",
-        "signature": "public function ownsLock(string $key): bool",
-        "description": "Checks if the current process owns the lock for the given key.",
-        "doc": "Checks if the current process owns the lock for the given key.\n\n@param string $key The lock key.\n@return bool True if the current process owns the lock, false otherwise.",
-        "line": 46
-      },
-      {
-        "name": "extendLock",
-        "signature": "public function extendLock(string $key, int $additionalSeconds): bool",
-        "description": "Extends the lock for the given key by the specified additional seconds.",
-        "doc": "Extends the lock for the given key by the specified additional seconds.\n\n@param string $key The lock key.\n@param int $additionalSeconds The number of additional seconds to extend the lock.\n@return bool True if the lock was successfully extended, false otherwise.",
-        "line": 55
-      },
-      {
-        "name": "forceUnlock",
-        "signature": "public function forceUnlock(string $key): bool",
-        "description": "Forcefully releases the lock for the given key, regardless of ownership.",
-        "doc": "Forcefully releases the lock for the given key, regardless of ownership.\n\n@param string $key The lock key.\n@return bool True if the lock was forcefully released, false otherwise.",
-        "line": 63
-      },
-      {
-        "name": "withLock",
-        "signature": "public function withLock(string $key, callable $callback, int|string|DateTimeInterface|Carbon|DateInterval $timeout = 10, int $waitTimeout = 5): mixed",
-        "description": "Execute a callback while holding the acquired lock, then release it.",
-        "doc": "Execute a callback while holding the acquired lock, then release it.\n\n@param string $key\n@param callable $callback\n@param int|string|DateTimeInterface|Carbon|DateInterval $timeout\n@param int $waitTimeout\n@return mixed",
-        "line": 74
-      },
-      {
-        "name": "unlockAll",
-        "signature": "public function unlockAll(): int",
-        "description": "Releases all locks held by the current process/owner.",
-        "doc": "Releases all locks held by the current process/owner.\n\n@return int Number of locks released.",
-        "line": 81
-      },
-      {
-        "name": "getLockOwner",
-        "signature": "public function getLockOwner(): string",
-        "description": "Get the current lock owner identifier.",
-        "doc": "Get the current lock owner identifier.\n\n@return string",
-        "line": 88
-      },
-      {
-        "name": "getLockInfo",
-        "signature": "public function getLockInfo(string $key): ?array",
-        "description": "Get information about a lock.",
-        "doc": "Get information about a lock.\n\n@param string $key\n@return array|null",
-        "line": 96
-      }
-    ]
-  },
-  {
     "file": "Cache/Expiration.php",
     "name": "Spark\\Cache\\Expiration",
     "kind": "class",
@@ -769,151 +691,10 @@
     ]
   },
   {
-    "file": "Cache/Lock.php",
-    "name": "Spark\\Cache\\Lock",
-    "kind": "class",
-    "sha256": "87daac687fecc23c2a68f881715d90ea395ced038d4cc0d54b868635c2216b50",
-    "methods": [
-      {
-        "name": "__construct",
-        "signature": "public function __construct(string $name = 'default')",
-        "description": "Create a named lock manager.\n\nThe name isolates lock storage in the same way cache names isolate cache\ndata: separate SQLite files or Redis namespaces per name.",
-        "doc": "Create a named lock manager.\n\nThe name isolates lock storage in the same way cache names isolate cache\ndata: separate SQLite files or Redis namespaces per name.",
-        "line": 46
-      },
-      {
-        "name": "make",
-        "signature": "public static function make(string $name = 'default'): static",
-        "description": "Create an independent lock owner in the named namespace.\n\nThis is a convenience method for creating a new instance without using the `new` keyword.",
-        "doc": "Create an independent lock owner in the named namespace.\n\nThis is a convenience method for creating a new instance without using the `new` keyword.\n\n@param string $name The name of the lock manager.\n@return static A new instance of the Lock class.",
-        "line": 69
-      },
-      {
-        "name": "lock",
-        "signature": "public function lock(string $key, int|string|DateTimeInterface|Carbon|DateInterval $timeout = 10, int $waitTimeout = 5): bool",
-        "description": "Attempt to acquire a lock for the current owner.",
-        "doc": "Attempt to acquire a lock for the current owner.\n\n@param string $key The lock key to acquire.\n@param int|string|DateTimeInterface|Carbon|DateInterval $timeout Seconds, a relative date expression, or an absolute deadline.\n@param int $waitTimeout The maximum time to wait for the lock in seconds (default is 5).\n@return bool True if the lock was acquired, false otherwise.",
-        "line": 82
-      },
-      {
-        "name": "unlock",
-        "signature": "public function unlock(string $key): bool",
-        "description": "Release a lock only when it belongs to the current owner.",
-        "doc": "Release a lock only when it belongs to the current owner.\n\n@param string $key The lock key to release.\n@return bool True if the lock was released, false otherwise.",
-        "line": 112
-      },
-      {
-        "name": "unlockAll",
-        "signature": "public function unlockAll(): int",
-        "description": "Release all locks owned by this instance.",
-        "doc": "Release all locks owned by this instance.\n\n@return int The number of locks released.",
-        "line": 122
-      },
-      {
-        "name": "isLocked",
-        "signature": "public function isLocked(string $key): bool",
-        "description": "Determine whether a lock key is currently held by any owner.",
-        "doc": "Determine whether a lock key is currently held by any owner.\n\n@param string $key The lock key to check.\n@return bool True if the lock is held, false otherwise.",
-        "line": 133
-      },
-      {
-        "name": "ownsLock",
-        "signature": "public function ownsLock(string $key): bool",
-        "description": "Determine whether this instance owns the lock key.",
-        "doc": "Determine whether this instance owns the lock key.\n\n@param string $key The lock key to check.\n@return bool True if this instance owns the lock, false otherwise.",
-        "line": 144
-      },
-      {
-        "name": "releaseExpiredLocks",
-        "signature": "public function releaseExpiredLocks(): int",
-        "description": "Release expired lock records.",
-        "doc": "Release expired lock records.\n\n@return int The number of expired locks released.",
-        "line": 154
-      },
-      {
-        "name": "extendLock",
-        "signature": "public function extendLock(string $key, int $additionalSeconds): bool",
-        "description": "Extend a lock owned by this instance.",
-        "doc": "Extend a lock owned by this instance.\n\n@param string $key The lock key to extend.\n@param int $additionalSeconds The additional time in seconds to extend the lock.\n@return bool True if the lock was extended, false otherwise.",
-        "line": 166
-      },
-      {
-        "name": "withLock",
-        "signature": "public function withLock(string $key, callable $callback, int|string|DateTimeInterface|Carbon|DateInterval $timeout = 10, int $waitTimeout = 5): mixed",
-        "description": "Execute a callback while holding a lock.",
-        "doc": "Execute a callback while holding a lock.\n\n@param string $key The lock key to acquire.\n@param callable $callback The callback to execute while holding the lock.\n@param int|string|DateTimeInterface|Carbon|DateInterval $timeout Seconds, a relative date expression, or an absolute deadline.\n@param int $waitTimeout The maximum time to wait for the lock in seconds (default is 5).\n@return mixed The result of the callback execution.\n@throws LockException If the lock cannot be acquired.",
-        "line": 181
-      },
-      {
-        "name": "getLockOwner",
-        "signature": "public function getLockOwner(): string",
-        "description": "Get the process-specific owner token.",
-        "doc": "Get the process-specific owner token.",
-        "line": 197
-      },
-      {
-        "name": "getLockInfo",
-        "signature": "public function getLockInfo(string $key): null|array",
-        "description": "Return owner and expiration metadata for a lock key.",
-        "doc": "Return owner and expiration metadata for a lock key.\n\n@param string $key The lock key to retrieve information for.\n@return null|array An associative array with 'owner' and 'expires_at'",
-        "line": 208
-      },
-      {
-        "name": "forceUnlock",
-        "signature": "public function forceUnlock(string $key): bool",
-        "description": "Release a lock without checking ownership.",
-        "doc": "Release a lock without checking ownership.\n\n@param string $key The lock key to forcefully release.\n@return bool True if the lock was released, false otherwise.",
-        "line": 219
-      },
-      {
-        "name": "optimize",
-        "signature": "public function optimize(): self",
-        "description": "Optimize lock storage by clearing expired lock records.",
-        "doc": "Optimize lock storage by clearing expired lock records.",
-        "line": 227
-      },
-      {
-        "name": "__destruct",
-        "signature": "public function __destruct()",
-        "description": "Best-effort cleanup of locks owned by this instance.",
-        "doc": "Best-effort cleanup of locks owned by this instance.",
-        "line": 237
-      },
-      {
-        "name": "offsetExists",
-        "signature": "public function offsetExists(mixed $offset): bool",
-        "description": "Determine whether a lock exists for ArrayAccess.",
-        "doc": "Determine whether a lock exists for ArrayAccess.",
-        "line": 249
-      },
-      {
-        "name": "offsetGet",
-        "signature": "public function offsetGet(mixed $offset): mixed",
-        "description": "Return lock metadata for ArrayAccess.",
-        "doc": "Return lock metadata for ArrayAccess.",
-        "line": 257
-      },
-      {
-        "name": "offsetSet",
-        "signature": "public function offsetSet(mixed $offset, mixed $value): void",
-        "description": "Acquire a lock for ArrayAccess.",
-        "doc": "Acquire a lock for ArrayAccess.",
-        "line": 265
-      },
-      {
-        "name": "offsetUnset",
-        "signature": "public function offsetUnset(mixed $offset): void",
-        "description": "Release a lock for ArrayAccess.",
-        "doc": "Release a lock for ArrayAccess.",
-        "line": 278
-      }
-    ]
-  },
-  {
     "file": "Cache/LockHandle.php",
     "name": "Spark\\Cache\\LockHandle",
     "kind": "class",
-    "sha256": "5c32fdf4576b49c0ba911fa1d741719e88e8dcdbd0aff127b603d7af071825db",
+    "sha256": "5de9d34159831ce2ef3bf92721cd622d49dc26ca6349849b3f4acd95d1d5a76f",
     "methods": [
       {
         "name": "__construct",
@@ -970,6 +751,27 @@
         "description": "",
         "doc": "",
         "line": 79
+      },
+      {
+        "name": "extend",
+        "signature": "public function extend(int $seconds): bool",
+        "description": "Extend an active lease only when this handle owns it.",
+        "doc": "Extend an active lease only when this handle owns it.",
+        "line": 85
+      },
+      {
+        "name": "isLocked",
+        "signature": "public function isLocked(): bool",
+        "description": "Whether any owner currently holds this lock.",
+        "doc": "Whether any owner currently holds this lock.",
+        "line": 94
+      },
+      {
+        "name": "info",
+        "signature": "public function info(): ?array",
+        "description": "@return array{owner: string, expire_at: int}|null Active lock metadata, regardless of owner.",
+        "doc": "@return array{owner: string, expire_at: int}|null Active lock metadata, regardless of owner.",
+        "line": 100
       }
     ]
   },
@@ -11199,7 +11001,7 @@
     "file": "Foundation/Application.php",
     "name": "Spark\\Foundation\\Application",
     "kind": "class",
-    "sha256": "666ade3e2612028e18b2c7c794a81b15a41df2352a4e005653929dadd3751087",
+    "sha256": "734aa3909a1fe0e0afcff7e1cb30b4442132134a9d5c65393216d0c4cc6fde49",
     "methods": [
       {
         "name": "__construct",
@@ -11213,210 +11015,210 @@
         "signature": "public static function create(string $path, null|string|array $config = 'config', null|array $providers = null): self",
         "description": "Creates a new instance of the application.",
         "doc": "Creates a new instance of the application.\n\n@param string $path The path to the root directory of the application.\n@param null|string|array $config An optional array of configuration values.\n@param null|array $providers An optional array of service provider classes to register.\n\n@return self A new instance of the application.",
-        "line": 263
+        "line": 261
       },
       {
         "name": "isTesting",
         "signature": "public function isTesting(): bool",
         "description": "Checks if the application is running in testing mode.",
         "doc": "Checks if the application is running in testing mode.\n\n@return bool True if the application is in testing mode, false otherwise.",
-        "line": 276
+        "line": 274
       },
       {
         "name": "isBooted",
         "signature": "public function isBooted(): bool",
         "description": "Checks if the application has been booted.",
         "doc": "Checks if the application has been booted.\n\n@return bool True if the application has been booted, false otherwise.",
-        "line": 286
+        "line": 284
       },
       {
         "name": "isTerminating",
         "signature": "public function isTerminating(): bool",
         "description": "Checks if the application is currently running termination callbacks.",
         "doc": "Checks if the application is currently running termination callbacks.\n\n@return bool True if the application is terminating, false otherwise.",
-        "line": 296
+        "line": 294
       },
       {
         "name": "isTerminated",
         "signature": "public function isTerminated(): bool",
         "description": "Checks if the application has already emitted its termination event.",
         "doc": "Checks if the application has already emitted its termination event.\n\n@return bool True if the application has terminated, false otherwise.",
-        "line": 306
+        "line": 304
       },
       {
         "name": "getPath",
         "signature": "public function getPath(): string",
         "description": "Returns the root path of the application.",
         "doc": "Returns the root path of the application.\n\n@return string The root path of the application.",
-        "line": 316
+        "line": 314
       },
       {
         "name": "getConfig",
         "signature": "public function getConfig(string $key, $default = null): mixed",
         "description": "Retrieves a configuration value.",
         "doc": "Retrieves a configuration value.\n\n@param string $key The name of the configuration value.\n@param mixed $default The default value to return if the configuration value is not set.\n\n@return mixed The value of the configuration value, or the default value if not set.",
-        "line": 329
+        "line": 327
       },
       {
         "name": "setConfig",
         "signature": "public function setConfig(string $key, mixed $value): void",
         "description": "Sets the value of a configuration value.\n\nThis method allows updating or creating a configuration value\nwith the given key and value.",
         "doc": "Sets the value of a configuration value.\n\nThis method allows updating or creating a configuration value\nwith the given key and value.\n\n@param string $key The name of the configuration value to set.\n@param mixed $value The value to assign to the configuration value.\n@return void",
-        "line": 344
+        "line": 342
       },
       {
         "name": "mergeConfig",
         "signature": "public function mergeConfig(array $config): void",
         "description": "Merges the provided configuration values with the existing ones.",
         "doc": "Merges the provided configuration values with the existing ones.\n\n@param array $config An associative array of configuration values to merge.\n\n@return void",
-        "line": 356
+        "line": 354
       },
       {
         "name": "isDebugMode",
         "signature": "public function isDebugMode(): bool",
         "description": "Checks if the application is running in debug mode.\n\nThis method checks the 'debug' key in the configuration values\nto determine if the application is in debug mode.",
         "doc": "Checks if the application is running in debug mode.\n\nThis method checks the 'debug' key in the configuration values\nto determine if the application is in debug mode.\n\n@return bool True if the application is in debug mode, false otherwise.",
-        "line": 390
+        "line": 388
       },
       {
         "name": "withApp",
         "signature": "public function withApp( null|string|array $config = null, null|array $providers = null, null|array $middlewares = null, null|callable $then = null ): self",
         "description": "Applies a callback to the application's container.\n\nThis method takes a callback function, which receives the container,\nallowing custom logic to be executed on the application's dependency\ninjection container.",
         "doc": "Applies a callback to the application's container.\n\nThis method takes a callback function, which receives the container,\nallowing custom logic to be executed on the application's dependency\ninjection container.\n\n@param null|string|array $config An array of configuration values to set.\n@param null|array $providers An array of service providers to register.\n@param null|array $middlewares An array of middlewares to apply.\n@param null|callable $then The callback to be applied to the container.\n@return self",
-        "line": 408
+        "line": 406
       },
       {
         "name": "withRouting",
         "signature": "public function withRouting( null|string $web = null, null|string $api = null, null|string $webhook = null, null|string $commands = null, null|callable $then = null ): self",
         "description": "Applies a callback to the application's router.\n\nThis method takes a callback function, which receives the router\nfrom the dependency injection container, allowing custom router\nlogic to be executed.",
         "doc": "Applies a callback to the application's router.\n\nThis method takes a callback function, which receives the router\nfrom the dependency injection container, allowing custom router\nlogic to be executed.\n\n@param null|string $web The path to the web routes file.\n@param null|string $api The path to the API routes file.\n@param null|string $webhook The path to the webhook routes file.\n@param null|string $commands The path to the commands routes file.\n@param null|callable $then The callback to be applied to the router.\n@return self",
-        "line": 474
+        "line": 472
       },
       {
         "name": "withCommands",
         "signature": "public function withCommands( null|string $load = null, null|callable $then = null, ): self",
         "description": "Applies a callback to the application's command manager.\n\nThis method takes a callback function, which receives the command\nmanager from the dependency injection container, allowing custom\ncommand logic to be executed.",
         "doc": "Applies a callback to the application's command manager.\n\nThis method takes a callback function, which receives the command\nmanager from the dependency injection container, allowing custom\ncommand logic to be executed.\n\n@param null|string $load The path to the commands file to load.\n@param null|callable $then The callback to be applied to the command manager.\n@return self",
-        "line": 514
+        "line": 512
       },
       {
         "name": "withMiddleware",
         "signature": "public function withMiddleware( null|string $load = null, null|array $register = null, null|string|array $queue = null, null|callable $then = null, ): self",
         "description": "Applies a middleware to the application.\n\nThis method takes a callback function which receives the middleware\nmanager from the dependency injection container, allowing custom\nmiddleware logic to be executed.",
         "doc": "Applies a middleware to the application.\n\nThis method takes a callback function which receives the middleware\nmanager from the dependency injection container, allowing custom\nmiddleware logic to be executed.\n\n@param null|string $load The path to the middleware file to load.\n@param null|array $register An array of middleware to register.\n@param null|string|array $queue A middleware or array of middleware to queue.\n@param null|callable $then The callback to be applied to the middleware manager\n@return self",
-        "line": 538
+        "line": 536
       },
       {
         "name": "withEvents",
         "signature": "public function withEvents( null|array $listeners = null, null|callable $then = null ): self",
         "description": "Applies a callback to the application's event dispatcher.\n\nThis method takes a callback function, which receives the event\ndispatcher from the dependency injection container, allowing custom\nevent logic to be executed.",
         "doc": "Applies a callback to the application's event dispatcher.\n\nThis method takes a callback function, which receives the event\ndispatcher from the dependency injection container, allowing custom\nevent logic to be executed.\n\n@param null|array $listeners An array of event listeners to register.\n@param null|callable $then The callback to be applied to the event dispatcher\n@return self",
-        "line": 569
+        "line": 567
       },
       {
         "name": "withExceptions",
         "signature": "public function withExceptions(array $exceptions): self",
         "description": "Adds exception handlers to the application.\n\nThis method allows you to register custom exception handlers for specific\nexception types. The handlers will be called when the corresponding\nexception is thrown.",
         "doc": "Adds exception handlers to the application.\n\nThis method allows you to register custom exception handlers for specific\nexception types. The handlers will be called when the corresponding\nexception is thrown.\n\n@param array $exceptions An associative array of exception types and their handlers.\n@return self",
-        "line": 593
+        "line": 591
       },
       {
         "name": "withQueue",
         "signature": "public function withQueue(null|array $jobs = null, null|callable $then = null): self",
         "description": "Configures the application's queue system.\n\nThis method allows you to set up the queue system by providing an array of jobs to be queued,\na logging option, and an optional callback for additional configuration.",
         "doc": "Configures the application's queue system.\n\nThis method allows you to set up the queue system by providing an array of jobs to be queued,\na logging option, and an optional callback for additional configuration.\n\n@param null|array $jobs An array of jobs to be added to the queue.\n@param null|callable $then An optional callback for additional configuration of the queue.\n@return self",
-        "line": 616
+        "line": 614
       },
       {
         "name": "on",
         "signature": "public function on(string $event, string|array|callable $listener): self",
         "description": "Registers an event listener for a specific event.\n\nThis method allows you to register a listener callback for a specific\nevent. The listener will be called when the event is dispatched.",
         "doc": "Registers an event listener for a specific event.\n\nThis method allows you to register a listener callback for a specific\nevent. The listener will be called when the event is dispatched.\n\n@param string $event The name of the event to listen for.\n@param string|array|callable $listener The listener callback to be called when the event is dispatched.\n@return self",
-        "line": 633
+        "line": 631
       },
       {
         "name": "off",
         "signature": "public function off(string $event, string|array|callable $listener): self",
         "description": "Removes an event listener for a specific event.\n\nThis method allows you to remove a listener callback for a specific\nevent. The listener will no longer be called when the event is dispatched.",
         "doc": "Removes an event listener for a specific event.\n\nThis method allows you to remove a listener callback for a specific\nevent. The listener will no longer be called when the event is dispatched.\n\n@param string $event The name of the event to remove the listener from.\n@param string|array|callable $listener The listener callback to be removed.\n@return self",
-        "line": 649
+        "line": 647
       },
       {
         "name": "events",
         "signature": "public function events(): Events",
         "description": "Retrieves the event dispatcher from the application's container.\n\nThe event dispatcher is responsible for managing and dispatching events\nthroughout the application.",
         "doc": "Retrieves the event dispatcher from the application's container.\n\nThe event dispatcher is responsible for managing and dispatching events\nthroughout the application.\n\n@return Events The event dispatcher instance.",
-        "line": 663
+        "line": 661
       },
       {
         "name": "dispatch",
         "signature": "public function dispatch(string $event, mixed ...$args): void",
         "description": "Dispatches an event with the given arguments.\n\nThis method allows you to dispatch an event by its name, along with\nany additional arguments that should be passed to the event listeners.",
         "doc": "Dispatches an event with the given arguments.\n\nThis method allows you to dispatch an event by its name, along with\nany additional arguments that should be passed to the event listeners.\n\n@param string $event The name of the event to dispatch.\n@param mixed ...$args Additional arguments to be passed to the event listeners.\n@return void",
-        "line": 678
+        "line": 676
       },
       {
         "name": "run",
         "signature": "public function run(): void",
         "description": "Runs the application.\n\nBootstraps the application by registering providers and calling the `boot` method\non each provider. Then, it loads the routes from the routes file and adds them to\nthe router. Finally, it dispatches the current request and sends the response.",
         "doc": "Runs the application.\n\nBootstraps the application by registering providers and calling the `boot` method\non each provider. Then, it loads the routes from the routes file and adds them to\nthe router. Finally, it dispatches the current request and sends the response.\n\n@return void",
-        "line": 692
+        "line": 690
       },
       {
         "name": "handle",
         "signature": "public function handle(Request|ServerRequestInterface $request): Response",
         "description": "Dispatch a request through providers, routes, and middleware.\nTesting captures early responses and lets unexpected exceptions reach the runner.",
         "doc": "Dispatch a request through providers, routes, and middleware.\nTesting captures early responses and lets unexpected exceptions reach the runner.",
-        "line": 706
+        "line": 704
       },
       {
         "name": "isHandlingRequest",
         "signature": "public function isHandlingRequest(): bool",
         "description": "Checks if the application is currently handling a request.",
         "doc": "Checks if the application is currently handling a request.",
-        "line": 733
+        "line": 731
       },
       {
         "name": "handlePsr",
         "signature": "public function handlePsr(ServerRequestInterface $request): ResponseInterface",
         "description": "Handle a PSR request without emitting output; the host calls terminate() afterward.",
         "doc": "Handle a PSR request without emitting output; the host calls terminate() afterward.",
-        "line": 739
+        "line": 737
       },
       {
         "name": "prepareResponseUsing",
         "signature": "public function prepareResponseUsing(\\Closure $callback): void",
         "description": "Register response preparation that also runs for early sends and errors.\nCallbacks are cleared at the start of each request.",
         "doc": "Register response preparation that also runs for early sends and errors.\nCallbacks are cleared at the start of each request.",
-        "line": 748
+        "line": 746
       },
       {
         "name": "prepareResponse",
         "signature": "public function prepareResponse(Response $response): Response",
         "description": "Apply each request's response preparation callbacks once per response.",
         "doc": "Apply each request's response preparation callbacks once per response.",
-        "line": 754
+        "line": 752
       },
       {
         "name": "handleCommand",
         "signature": "public function handleCommand(): void",
         "description": "Runs the command line interface.\n\nBootstraps the application by registering providers and calling the `boot` method\non each provider. Then, it runs the command line interface.",
         "doc": "Runs the command line interface.\n\nBootstraps the application by registering providers and calling the `boot` method\non each provider. Then, it runs the command line interface.\n\n@return void",
-        "line": 857
+        "line": 855
       },
       {
         "name": "defer",
         "signature": "public function defer(callable $callback): self",
         "description": "Registers a callback to be executed after the response is sent to the client.\n\nThis method allows you to defer the execution of a callback until after the\nresponse has been sent. It is useful for performing background tasks or\ncleanup operations without delaying the response to the client.",
         "doc": "Registers a callback to be executed after the response is sent to the client.\n\nThis method allows you to defer the execution of a callback until after the\nresponse has been sent. It is useful for performing background tasks or\ncleanup operations without delaying the response to the client.\n\n@param callable $callback The callback function to execute after sending the response.\n@return self Current response instance for method chaining.",
-        "line": 875
+        "line": 873
       },
       {
         "name": "terminate",
         "signature": "public function terminate(): void",
         "description": "Execute callbacks registered to run after the response has been sent.\n\nThis method is idempotent so it can safely be called directly by run() and\nagain by PHP's shutdown handler for responses that exit early.",
         "doc": "Execute callbacks registered to run after the response has been sent.\n\nThis method is idempotent so it can safely be called directly by run() and\nagain by PHP's shutdown handler for responses that exit early.",
-        "line": 888
+        "line": 886
       }
     ]
   },
@@ -11897,7 +11699,7 @@
     "file": "Foundation/helpers.php",
     "name": "Foundation/helpers.php",
     "kind": "functions",
-    "sha256": "fd0a907b0cd988794b13e518b7ae4d4516b648032e02e045d7ecb5c994a33eaa",
+    "sha256": "1a9bd024a3740f38c3bb38c0fbd40a8e8911bfa5f63fc62ca0df4cba0fe640dc",
     "methods": [
       {
         "name": "app",
@@ -12342,262 +12144,262 @@
       },
       {
         "name": "cache",
-        "signature": "function cache(string $name = 'default'): Cache",
-        "description": "Retrieve or create a cache instance by name.\n\nThis function returns an existing cache instance by the given name,\nor creates a new one if it doesn't already exist. Cache instances\nbelong to the current application and can be accessed using their names.",
-        "doc": "Retrieve or create a cache instance by name.\n\nThis function returns an existing cache instance by the given name,\nor creates a new one if it doesn't already exist. Cache instances\nbelong to the current application and can be accessed using their names.\n\n@param string $name The name of the cache instance to retrieve or create. Default is 'default'.\n@return Cache The cache instance associated with the specified name.",
-        "line": 1436
+        "signature": "function cache( string|array $name = 'default', int|string|DateTimeInterface|Carbon|DateInterval|null $expire = null, ): Cache",
+        "description": "Resolve a cache namespace, or store an array of values in the default namespace.\nBoth forms return the cache repository; expiration applies to array writes.",
+        "doc": "Resolve a cache namespace, or store an array of values in the default namespace.\nBoth forms return the cache repository; expiration applies to array writes.",
+        "line": 1430
       },
       {
         "name": "lock",
         "signature": "function lock(?string $key = null, int $seconds = 10, string $name = 'default', ?string $store = null): \\Spark\\Cache\\LockHandle|Cache",
         "description": "Create a lock handle, or resolve a cache namespace when no key is supplied.\nAcquire explicitly with get()/block(); each handle has an independent owner.",
         "doc": "Create a lock handle, or resolve a cache namespace when no key is supplied.\nAcquire explicitly with get()/block(); each handle has an independent owner.",
-        "line": 1447
+        "line": 1445
       },
       {
         "name": "__",
         "signature": "function __(string $text, $arg = null, array $args = [], array $args2 = []): string",
         "description": "Translates a given text using the application's translator service.\n\nThis function wraps the translator's `translate` method, allowing\nfor text translation with optional pluralization and argument substitution.",
         "doc": "Translates a given text using the application's translator service.\n\nThis function wraps the translator's `translate` method, allowing\nfor text translation with optional pluralization and argument substitution.\n\n@param string $text The text to be translated.\n@param $arg The number to determine pluralization or replace placeholder in the translated text.\n@param array $args Optional arguments for replacing placeholders in the text.\n@param array $args2 Optional arguments for replacing plural placeholders in the translated text.\n\n@return string The translated text or original text if translation is unavailable.",
-        "line": 1471
+        "line": 1469
       },
       {
         "name": "vite",
         "signature": "function vite(null|string|array $entrypoints = null, null|string|array $buildDirectoryOrConfig = null): Vite",
         "description": "Create a new Vite instance.\n\nThis function initializes a new Vite instance with the given configuration.\nThe Vite instance provides a convenient interface for interacting with the\ndevelopment server and production build processes.",
         "doc": "Create a new Vite instance.\n\nThis function initializes a new Vite instance with the given configuration.\nThe Vite instance provides a convenient interface for interacting with the\ndevelopment server and production build processes.\n\n@param null|string|array $entrypoints The entry file(s) or configuration for the Vite instance.\n@param null|string|array $buildDirectoryOrConfig The build directory or additional config for the Vite instance.\n\n@return Vite The Vite instance initialized with the given configuration.",
-        "line": 1491
+        "line": 1489
       },
       {
         "name": "input",
         "signature": "function input(null|string|array $filter = null, $default = null): mixed",
         "description": "Retrieve and sanitize input data from the current request.\n\nThis function fetches the input data from the current request and applies\nthe specified filter. The data is then passed through a sanitizer to ensure\nit is safe for further processing.",
         "doc": "Retrieve and sanitize input data from the current request.\n\nThis function fetches the input data from the current request and applies\nthe specified filter. The data is then passed through a sanitizer to ensure\nit is safe for further processing.\n\n@param null|string|array $filter Optional filter to apply to the input data.\n@param mixed $default Default value to return if the filter is a string and the key does not exist.\n@return ($filter is null ? \\Spark\\Http\\Input : mixed) The Sanitizer instance or filtered input value.",
-        "line": 1531
+        "line": 1529
       },
       {
         "name": "validator",
         "signature": "function validator(null|array|string $rules, null|array $attributes = null, null|array $messages = null): Validator",
         "description": "Validates the given data against a set of rules.",
         "doc": "Validates the given data against a set of rules.\n\n@param string|array $rules An array of validation rules to apply.\n@param array|null $attributes An optional array of data to validate.\n@param array|null $messages An optional array of custom error messages.\n@return Validator Returns a validator object.",
-        "line": 1546
+        "line": 1544
       },
       {
         "name": "_e",
         "signature": "function _e(string $text, $arg = null, array $args = [], array $args2 = []): string",
         "description": "Escapes a translated string for safe HTML output.\n\nThis function first translates the provided text using the application's\ntranslation service, with optional pluralization and argument substitution.\nThe translated text is then escaped to ensure it is safe for rendering\nin HTML, converting special characters to HTML entities.",
         "doc": "Escapes a translated string for safe HTML output.\n\nThis function first translates the provided text using the application's\ntranslation service, with optional pluralization and argument substitution.\nThe translated text is then escaped to ensure it is safe for rendering\nin HTML, converting special characters to HTML entities.\n\n@param string $text The text to be translated and escaped.\n@param mixed $arg An optional argument for pluralization or placeholder replacement.\n@param array $args Optional arguments for replacing placeholders in the text.\n@param array $args2 Optional arguments for replacing plural placeholders in the translated text.\n\n@return string The translated and escaped text, safe for HTML output.",
-        "line": 1574
+        "line": 1572
       },
       {
         "name": "cookie",
         "signature": "function cookie(string $name, mixed $value = null, int|array $expiresOrOptions = 0): mixed",
         "description": "Retrieve or set a cookie value.",
         "doc": "Retrieve or set a cookie value.\n\n@param string $name Cookie name\n@param mixed $value Cookie value (null to get, any value to set)\n@param int|array $expiresOrOptions Expiration time in seconds OR array of setcookie options\n@return mixed Cookie value when getting, bool when setting",
-        "line": 1591
+        "line": 1589
       },
       {
         "name": "errors",
         "signature": "function errors(null|array|string $field = null): \\Spark\\Http\\InputErrors|bool",
         "description": "Get the errors from the current request.",
         "doc": "Get the errors from the current request.\n\n@param null|array|string $field The field name to retrieve the error messages for.\n                                 If null, all error object will be returned.\n@return ($field is null ? \\Spark\\Http\\InputErrors : bool) An object containing the error messages from the current request.",
-        "line": 1634
+        "line": 1632
       },
       {
         "name": "old",
         "signature": "function old(string $field, null|string $default = null): null|string",
         "description": "Retrieve the old value of a given field from the previous request.",
         "doc": "Retrieve the old value of a given field from the previous request.\n\n@param string $field The field name to retrieve the old value for.\n@param null|string $default The default value to return if the field does not exist.\n@return null|string The old value of the field from the previous request, or the default value if not found.",
-        "line": 1648
+        "line": 1646
       },
       {
         "name": "mailer",
         "signature": "function mailer(null|string|array $to = null, ?string $subject = null, ?string $body = null, ?bool $isHtml = null, ?string $template = null, ?array $context = null, null|string|array $from = null, null|string|array $reply = null, array $config = []): Mail",
         "description": "Send an email using the Mail utility class.\n\nThis function sends an email using the Mail utility class. The parameters\nare passed directly to the Mail utility class methods.",
         "doc": "Send an email using the Mail utility class.\n\nThis function sends an email using the Mail utility class. The parameters\nare passed directly to the Mail utility class methods.\n\n@param null|string|array $to The recipient(s) of the email.\n@param null|string $subject The subject of the email.\n@param null|string $body The body content of the email.\n@param null|bool $isHtml Whether the email content is HTML or plain text.\n@param null|string $template The template to use for the email body.\n@param null|array $context The context data to pass to the template.\n@param null|string|array $from The sender(s) of the email.\n@param null|string|array $reply The reply-to address(es) for the email.\n@param array $config Additional configuration options for the Mail instance.\n@return Mail The instance of the Mail utility class",
-        "line": 1672
+        "line": 1670
       },
       {
         "name": "abort",
         "signature": "function abort(string|int $error, ?string $message = null, ?int $code = null): void",
         "description": "Abort the current request with a given HTTP status code.",
         "doc": "Abort the current request with a given HTTP status code.\n\n@param string|int $error The error name of the error view or the HTTP status code.\n@param string|null $message An optional message to display in the error view.\n@param int|null $code The HTTP status code.\n\n@return void",
-        "line": 1730
+        "line": 1728
       },
       {
         "name": "abort_if",
         "signature": "function abort_if(bool $condition, string|int $error, ?string $message = null, ?int $code = null): void",
         "description": "Abort the current request if a given condition is true.",
         "doc": "Abort the current request if a given condition is true.\n\n@param bool $condition The condition to evaluate.\n@param string|int $error The error name of the error view or the HTTP status code.\n@param string|null $message An optional message to display in the error view.\n@param int|null $code The HTTP status code.\n\n@return void",
-        "line": 1754
+        "line": 1752
       },
       {
         "name": "abort_unless",
         "signature": "function abort_unless(bool $condition, string|int $error, ?string $message = null, ?int $code = null): void",
         "description": "Abort the current request if a given condition is false.",
         "doc": "Abort the current request if a given condition is false.\n\n@param bool $condition The condition to evaluate.\n@param string|int $error The error name of the error view or the HTTP status code.\n@param string|null $message An optional message to display in the error view.\n@param int|null $code The HTTP status code.\n\n@return void",
-        "line": 1773
+        "line": 1771
       },
       {
         "name": "command",
         "signature": "function command(null|string $name = null, null|string|array|callable $callback = null, string $description = ''): Commands",
         "description": "Retrieves the Commands instance and optionally adds a new command.\n\nThis function fetches the Commands instance and, if arguments are provided,\nadds a new command using the provided arguments.",
         "doc": "Retrieves the Commands instance and optionally adds a new command.\n\nThis function fetches the Commands instance and, if arguments are provided,\nadds a new command using the provided arguments.\n\n@param null|string $name The name of the command to add.\n@param null|string|array|callable $callback The callback to execute for the command\n@param string $description An optional description for the command.\n@return Commands The Commands instance.",
-        "line": 1793
+        "line": 1791
       },
       {
         "name": "hashing",
         "signature": "function hashing(): Hash",
         "description": "Retrieves the Hash instance.\n\nThis function returns the Hash instance, which provides methods\nfor hashing, validating, encrypting, and decrypting strings.",
         "doc": "Retrieves the Hash instance.\n\nThis function returns the Hash instance, which provides methods\nfor hashing, validating, encrypting, and decrypting strings.\n\n@return Hash The Hash instance.",
-        "line": 1817
+        "line": 1815
       },
       {
         "name": "hasher",
         "signature": "function hasher(): Hash",
         "description": "Alias for the hashing() function.\n\nThis function is an alias for the hashing() function, providing\nthe same functionality of retrieving the Hash instance.",
         "doc": "Alias for the hashing() function.\n\nThis function is an alias for the hashing() function, providing\nthe same functionality of retrieving the Hash instance.\n\n@return Hash The Hash instance.",
-        "line": 1832
+        "line": 1830
       },
       {
         "name": "passcode",
         "signature": "function passcode(string $password, null|string $hash = null): bool|string",
         "description": "Hashes or verifies a password.\n\nThis function hashes a given password or verifies it against an existing hash.\nIf a hash is provided, it checks if the password matches the hash and returns\na boolean result. If no hash is provided, it generates and returns a new hash\nfor the password.",
         "doc": "Hashes or verifies a password.\n\nThis function hashes a given password or verifies it against an existing hash.\nIf a hash is provided, it checks if the password matches the hash and returns\na boolean result. If no hash is provided, it generates and returns a new hash\nfor the password.\n\n@param string $password The password to be hashed or verified.\n@param string|null $hash An optional existing hash to verify against.\n@return bool|string Returns true if the password matches the hash, false if it does not match,\n                    or a new hash string if no hash is provided.",
-        "line": 1852
+        "line": 1850
       },
       {
         "name": "bcrypt",
         "signature": "function bcrypt(string $password, null|string $hash = null): bool|string",
         "description": "Hashes or verifies a password using the bcrypt algorithm.\n\nThis function hashes a given password using the bcrypt algorithm or verifies it against an existing bcrypt hash.\nIf a hash is provided, it checks if the password matches the hash and returns a boolean result.\nIf no hash is provided, it generates and returns a new bcrypt hash for the password.",
         "doc": "Hashes or verifies a password using the bcrypt algorithm.\n\nThis function hashes a given password using the bcrypt algorithm or verifies it against an existing bcrypt hash.\nIf a hash is provided, it checks if the password matches the hash and returns a boolean result.\nIf no hash is provided, it generates and returns a new bcrypt hash for the password.\n\n@param string $password The password to be hashed or verified.\n@param string|null $hash An optional existing bcrypt hash to verify against.\n@return bool|string Returns true if the password matches the hash, false if it does not match,\n                    or a new bcrypt hash string if no hash is provided.",
-        "line": 1871
+        "line": 1869
       },
       {
         "name": "encrypt",
         "signature": "function encrypt(string|array|Arrayable $value): string",
         "description": "Encrypts a given value.",
         "doc": "Encrypts a given value.\n\n@param string|array|Arrayable $value The value to encrypt.\n@return string The encrypted value.",
-        "line": 1888
+        "line": 1886
       },
       {
         "name": "decrypt",
         "signature": "function decrypt(string $value): string|array",
         "description": "Decrypts a given value.",
         "doc": "Decrypts a given value.\n\n@param string $value The value to decrypt.\n@return string|array The decrypted value, or an associative array if the decrypted value is JSON.",
-        "line": 1905
+        "line": 1903
       },
       {
         "name": "http",
         "signature": "function http( string $method = Request::METHOD_GET, null|string $url = null, array $params = [], array $headers = [], array $options = [], int $retry = 0 ): \\Spark\\Http\\Client\\Contracts\\HttpContract|\\Spark\\Http\\Client\\Contracts\\HttpResponseContract",
         "description": "Retrieves the HTTP instance and optionally makes a request.\n\nThis function fetches the HTTP instance and, if a URL is provided,\nmakes a request using the provided parameters and configuration.",
         "doc": "Retrieves the HTTP instance and optionally makes a request.\n\nThis function fetches the HTTP instance and, if a URL is provided,\nmakes a request using the provided parameters and configuration.\n\n@param string $method Optional. The HTTP method to use for the request. Default is 'GET'.\n@param string|null $url Optional. The URL to make the request to.\n@param array $params Optional. The query parameters for the request.\n@param array $headers Optional. The headers for the request.\n@param array $options Optional. Additional options for the HTTP request.\n@param int $retry Optional. The number of times to retry the request in case of failure. Default is 0 (no retries).\n@return ($url is null ? \\Spark\\Http\\Client\\Contracts\\HttpContract : \\Spark\\Http\\Client\\Contracts\\HttpResponseContract) \n     The HTTP instance or the response from the request.",
-        "line": 1938
+        "line": 1936
       },
       {
         "name": "image",
         "signature": "function image(string $imageSource): Image",
         "description": "Retrieves the Image instance and optionally creates a new image.\n\nThis function fetches the Image instance and, if an image source is provided,\ncreates a new image using the provided image source.",
         "doc": "Retrieves the Image instance and optionally creates a new image.\n\nThis function fetches the Image instance and, if an image source is provided,\ncreates a new image using the provided image source.\n\n@param string $imageSource The source path of the image to be loaded.\n@return Image The Image instance.",
-        "line": 1969
+        "line": 1967
       },
       {
         "name": "paginator",
         "signature": "function paginator(int $total = 0, int $limit = 10, string $keyword = 'page', array $data = []): Paginator",
         "description": "Retrieves the Paginator instance and optionally creates a new pagination.\n\nThis function fetches the Paginator instance and, if parameters are provided,\ncreates a new pagination using the provided parameters.",
         "doc": "Retrieves the Paginator instance and optionally creates a new pagination.\n\nThis function fetches the Paginator instance and, if parameters are provided,\ncreates a new pagination using the provided parameters.\n\n@param int $total The total number of items.\n@param int $limit The number of items per page.\n@param string $keyword The URL parameter keyword for the page.\n@param array $data The data array for pagination.\n@return Paginator The Paginator instance.",
-        "line": 1988
+        "line": 1986
       },
       {
         "name": "storage",
         "signature": "function storage(?string $name = null): \\Spark\\Storage\\Storage",
         "description": "Resolve the default or a named storage from config/storage.php.",
         "doc": "Resolve the default or a named storage from config/storage.php.",
-        "line": 2000
+        "line": 1998
       },
       {
         "name": "uploader",
         "signature": "function uploader( null|string $uploadTo = null, null|string $uploadDir = null, null|array $extensions = null, null|int $maxSize = 2048, null|array|float $resize = null, null|array $resizes = null, null|int $compress = null, null|UploaderDriverInterface $driver = null ): Uploader",
         "description": "Retrieves the Uploader instance and optionally sets up a new upload.\n\nThis function fetches the Uploader instance and, if parameters are provided,\nsets up a new upload using the provided parameters.",
         "doc": "Retrieves the Uploader instance and optionally sets up a new upload.\n\nThis function fetches the Uploader instance and, if parameters are provided,\nsets up a new upload using the provided parameters.\n\n@param string|null $uploadTo Optional. The upload destination path. Default is null.\n@param string|null $uploadDir Optional. The upload directory path. Default is the value of the 'upload_dir' configuration.\n@param null|array $extensions Optional. The array of allowed file extensions. Default is an empty array.\n@param int|null $maxSize Optional. The maximum allowed file size in KB. Default is 2048 (2MB).\n@param null|array|float $resize Optional. The resize configuration array. Default is an empty array.\n@param array|null $resizes Optional. The resizes configuration array. Default is an empty array.\n@param int|null $compress Optional. The compression ratio for images. Default is null.\n@param UploaderDriverInterface|null $driver Optional. The custom uploader driver instance. Default is null.\n@return Uploader The Uploader instance.",
-        "line": 2023
+        "line": 2021
       },
       {
         "name": "now",
         "signature": "function now(DateTimeZone|string|null $timezone = null): Carbon",
         "description": "Get the current date and time as a DateTime object.\n\nThis function returns the current date and time as a DateTime object,\nwhich can be used for various date and time operations.",
         "doc": "Get the current date and time as a DateTime object.\n\nThis function returns the current date and time as a DateTime object,\nwhich can be used for various date and time operations.\n\n@param DateTimeZone|string|null $timezone An optional timezone identifier to set the timezone for the DateTime object. If null, the default timezone will be used.\n@return Carbon The current date and time.",
-        "line": 2058
+        "line": 2056
       },
       {
         "name": "carbon",
         "signature": "function carbon(Carbon|DateTimeInterface|float|int|string|null $time = 'now', DateTimeZone|string|null $timezone = null): Carbon",
         "description": "Create a Carbon DateTime instance from a given datetime string or timestamp.\n\nThis function accepts either a string representation of a date and time or\na Unix timestamp (as an integer or string). It returns a Carbon DateTime\ninstance initialized with the provided datetime.",
         "doc": "Create a Carbon DateTime instance from a given datetime string or timestamp.\n\nThis function accepts either a string representation of a date and time or\na Unix timestamp (as an integer or string). It returns a Carbon DateTime\ninstance initialized with the provided datetime.\n\n@param Carbon|DateTimeInterface|float|int|string|null $time The datetime string or Unix timestamp to convert.\n@param DateTimeZone|string|null $timezone An optional timezone identifier or DateTimeZone instance to set the timezone for the Carbon instance.\n@return Carbon A Carbon DateTime instance representing the provided datetime.",
-        "line": 2076
+        "line": 2074
       },
       {
         "name": "fm",
         "signature": "function fm(): File",
         "description": "Retrieves the File instance.\n\nThis function returns the File instance, which provides methods\nfor managing files and directories.",
         "doc": "Retrieves the File instance.\n\nThis function returns the File instance, which provides methods\nfor managing files and directories.\n\n@return File The File instance.",
-        "line": 2091
+        "line": 2089
       },
       {
         "name": "tracer",
         "signature": "function tracer(): Tracer",
         "description": "Retrieves the Tracer instance.\n\nThis function returns the Tracer instance, which provides methods\nfor tracing and logging application events.",
         "doc": "Retrieves the Tracer instance.\n\nThis function returns the Tracer instance, which provides methods\nfor tracing and logging application events.\n\n@return Tracer The Tracer instance.",
-        "line": 2106
+        "line": 2104
       },
       {
         "name": "is_cli",
         "signature": "function is_cli(): bool",
         "description": "Determine if the current execution environment is CLI.\n\nThis function checks if the PHP script is being executed from the command line interface (CLI)\nby comparing the PHP SAPI name to 'cli'.",
         "doc": "Determine if the current execution environment is CLI.\n\nThis function checks if the PHP script is being executed from the command line interface (CLI)\nby comparing the PHP SAPI name to 'cli'.\n\n@return bool True if the script is running in CLI mode, false otherwise.",
-        "line": 2125
+        "line": 2123
       },
       {
         "name": "is_web",
         "signature": "function is_web(): bool",
         "description": "Determine if the current execution environment is web (not CLI).\n\nThis function checks if the PHP script is being executed in a web server\nenvironment by negating the result of the is_cli() function.",
         "doc": "Determine if the current execution environment is web (not CLI).\n\nThis function checks if the PHP script is being executed in a web server\nenvironment by negating the result of the is_cli() function.\n\n@return bool True if the script is running in a web environment, false otherwise.",
-        "line": 2140
+        "line": 2138
       },
       {
         "name": "is_debug_mode",
         "signature": "function is_debug_mode(): bool",
         "description": "Determine if the application is running in debug mode.\n\nThis function checks the application's configuration to see if\ndebug mode is enabled, which is typically used for development\nand troubleshooting purposes.",
         "doc": "Determine if the application is running in debug mode.\n\nThis function checks the application's configuration to see if\ndebug mode is enabled, which is typically used for development\nand troubleshooting purposes.\n\n@return bool True if the application is in debug mode, false otherwise.",
-        "line": 2156
+        "line": 2154
       },
       {
         "name": "tracer_log",
         "signature": "function tracer_log(string $message): void",
         "description": "Log a message using the Tracer instance.\n\nThis function logs a message using the Tracer instance, which provides\nmethods for tracing and logging application events.",
         "doc": "Log a message using the Tracer instance.\n\nThis function logs a message using the Tracer instance, which provides\nmethods for tracing and logging application events.\n\n@param string $message The message to be logged.\n@return void",
-        "line": 2172
+        "line": 2170
       },
       {
         "name": "pipeline",
         "signature": "function pipeline($payload = null): Pipeline",
         "description": "Create a new Pipeline instance.\n\nThis function initializes a new Pipeline instance with the given payload.\nThe Pipeline instance provides a convenient interface for processing\nthe payload through a series of stages.",
         "doc": "Create a new Pipeline instance.\n\nThis function initializes a new Pipeline instance with the given payload.\nThe Pipeline instance provides a convenient interface for processing\nthe payload through a series of stages.\n\n@param mixed $payload The initial payload to be processed by the pipeline.\n\n@return Pipeline The Pipeline instance initialized with the given payload.",
-        "line": 2190
+        "line": 2188
       },
       {
         "name": "concurrency",
         "signature": "function concurrency(null|array $tasks = null): mixed",
         "description": "Create a new Concurrency instance or run tasks concurrently.\n\nThis function either creates a new Concurrency instance or runs\nthe provided tasks concurrently using the Concurrency class.",
         "doc": "Create a new Concurrency instance or run tasks concurrently.\n\nThis function either creates a new Concurrency instance or runs\nthe provided tasks concurrently using the Concurrency class.\n\n@param null|array $tasks An optional array of tasks to run concurrently.\n@return Concurrency|array The Concurrency instance or the results of the concurrent tasks.",
-        "line": 2206
+        "line": 2204
       },
       {
         "name": "service",
         "signature": "function service(string $abstract, mixed $default = null): mixed",
         "description": "Resolve a service from the application container.\n\nReturns the default value when the application instance has not been\ncreated yet, or when the container returns null for the given abstract.\nIf the default is a Closure, it is invoked and its result is returned.",
         "doc": "Resolve a service from the application container.\n\nReturns the default value when the application instance has not been\ncreated yet, or when the container returns null for the given abstract.\nIf the default is a Closure, it is invoked and its result is returned.\n\n@template TClass of object\n@template TDefault\n\n@param  string|class-string<TClass>  $abstract  Service ID or class name to resolve.\n@param  TDefault|(\\Closure(): TDefault)  $default  Fallback value, or a closure that produces it.\n@return ($abstract is class-string<TClass> ? TClass|TDefault : mixed)",
-        "line": 2231
+        "line": 2229
       }
     ]
   },
