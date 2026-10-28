@@ -19808,105 +19808,105 @@
     "file": "Queue/Queue.php",
     "name": "Spark\\Queue\\Queue",
     "kind": "class",
-    "sha256": "430e0895230814cbd0ea689541bf50039de568a60d9fc70ad17341bd9b0b02f5",
+    "sha256": "cf03ef7a592992dac4df62c40c926b752caf62d8d9ba50dd2010244655f1a3a0",
     "methods": [
       {
         "name": "__construct",
         "signature": "public function __construct(?array $config = null, private ?string $connectionName = null)",
         "description": "",
         "doc": "",
-        "line": 36
+        "line": 31
       },
       {
         "name": "push",
         "signature": "public function push(JobContract $job, string $queue = 'default'): void",
         "description": "Push a job onto the queue.",
         "doc": "Push a job onto the queue.\n\n@param JobContract $job The job to push onto the queue.\n@param string $queue The name of the queue to push the job onto.",
-        "line": 54
+        "line": 49
       },
       {
         "name": "pushOnce",
         "signature": "public function pushOnce(JobContract $job, string $queue = 'default'): void",
         "description": "Push a job onto the queue only if it doesn't already exist.",
         "doc": "Push a job onto the queue only if it doesn't already exist.\n\n@param JobContract $job The job to push onto the queue.\n@param string $queue The name of the queue to push the job onto.",
-        "line": 65
+        "line": 60
       },
       {
         "name": "clearAllJobs",
         "signature": "public function clearAllJobs(): void",
         "description": "Clear all jobs from the queue, including pending, processing, and failed jobs.",
         "doc": "Clear all jobs from the queue, including pending, processing, and failed jobs.",
-        "line": 73
+        "line": 68
       },
       {
         "name": "clearRepeatedJobs",
         "signature": "public function clearRepeatedJobs(): void",
         "description": "Clear all jobs from the queue, including pending and processing jobs, but not failed jobs.",
         "doc": "Clear all jobs from the queue, including pending and processing jobs, but not failed jobs.",
-        "line": 81
+        "line": 76
       },
       {
         "name": "clearFailedJobs",
         "signature": "public function clearFailedJobs(): void",
         "description": "Clear all failed jobs from the queue.",
         "doc": "Clear all failed jobs from the queue.",
-        "line": 89
+        "line": 84
       },
       {
         "name": "removeJobById",
         "signature": "public function removeJobById(int $id): bool",
         "description": "Remove a job from the queue by its ID.",
         "doc": "Remove a job from the queue by its ID.\n\n@param int $id The ID of the job to remove.\n@return bool True if the job was removed, false otherwise.",
-        "line": 100
+        "line": 95
       },
       {
         "name": "removeQueue",
         "signature": "public function removeQueue(string $name): bool",
         "description": "Remove a queue by its name.",
         "doc": "Remove a queue by its name.\n\n@param string $name The name of the queue to remove.\n@return bool True if the queue was removed, false otherwise.",
-        "line": 111
+        "line": 106
       },
       {
         "name": "restart",
         "signature": "public function restart(): void",
         "description": "Signal running workers to exit after their current job finishes.",
         "doc": "Signal running workers to exit after their current job finishes.",
-        "line": 117
+        "line": 112
       },
       {
         "name": "work",
         "signature": "public function work( bool $once = false, int $timeout = 3600, int $sleep = 3, int $delay = 5, int $tries = 3, array|string $queue = 'default' ): void",
         "description": "Start the queue worker to process jobs.",
         "doc": "Start the queue worker to process jobs.\n\n@param bool $once Whether to process only one job and exit (default is false).\n@param int $timeout Worker lifetime in seconds, checked between jobs; 0 runs indefinitely.\n@param int $sleep The number of seconds to sleep between job checks (default is 3).\n@param int $delay The number of seconds to delay before retrying a failed job (default is 5).\n@param int $tries The maximum number of attempts for a job before marking it as failed (default is 3).\n@param array|string $queue The name(s) of the queue(s) to process (default is 'default').",
-        "line": 132
+        "line": 127
       },
       {
         "name": "getJobs",
         "signature": "public function getJobs( array|string|null $queue = null, array|string|null $status = null, int $from = 0, int $to = 500, ): array",
         "description": "Get jobs from the queue with optional filtering by queue name and status.",
         "doc": "Get jobs from the queue with optional filtering by queue name and status.\n\n@param array|string|null $queue The name(s) of the queue(s) to filter by (default is null for all queues).\n@param array|string|null $status The status(es) of the jobs to filter by (default is null for all statuses).\n@param int $from The starting index for pagination (default is 0).\n@param int $to The ending index for pagination (default is 500).\n@return array An array of jobs matching the specified criteria.",
-        "line": 264
+        "line": 258
       },
       {
         "name": "getFailedJobs",
         "signature": "public function getFailedJobs(int $from = 0, int $to = 500): array",
         "description": "Get failed jobs from the queue with optional pagination.",
         "doc": "Get failed jobs from the queue with optional pagination.\n\n@param int $from The starting index for pagination (default is 0).\n@param int $to The ending index for pagination (default is 500).\n@return array An array of failed jobs.",
-        "line": 280
+        "line": 274
       },
       {
         "name": "retryFailedJobs",
         "signature": "public function retryFailedJobs(): void",
         "description": "Retry all failed jobs in the queue.",
         "doc": "Retry all failed jobs in the queue.",
-        "line": 288
+        "line": 282
       },
       {
         "name": "getConnectionName",
         "signature": "public function getConnectionName(): ?string",
         "description": "",
         "doc": "",
-        "line": 360
+        "line": 354
       }
     ]
   },
@@ -19914,7 +19914,7 @@
     "file": "Queue/QueueManager.php",
     "name": "Spark\\Queue\\QueueManager",
     "kind": "class",
-    "sha256": "09880df49fef8a05fc82240428451fec38eb82f3f19b0ed31ebffe3329e49a7d",
+    "sha256": "d312eeb36c8fa96e8c0048f24698a3a692143b000f68cd989da80885d63c3dea",
     "methods": [
       {
         "name": "__construct",
@@ -19953,7 +19953,7 @@
       },
       {
         "name": "restart",
-        "signature": "public function restart(): void",
+        "signature": "public static function restart(): void",
         "description": "Signal all workers without opening a queue transport.",
         "doc": "Signal all workers without opening a queue transport.",
         "line": 78
@@ -19963,14 +19963,50 @@
         "signature": "public function __call(string $method, array $arguments): mixed",
         "description": "",
         "doc": "",
-        "line": 84
+        "line": 83
       },
       {
         "name": "resolveConfig",
         "signature": "public static function resolveConfig(array $config, ?string $name = null): array",
         "description": "@internal Resolve configuration without constructing an unrelated default connection.",
         "doc": "@internal Resolve configuration without constructing an unrelated default connection.",
-        "line": 90
+        "line": 89
+      }
+    ]
+  },
+  {
+    "file": "Queue/RestartSignal.php",
+    "name": "Spark\\Queue\\RestartSignal",
+    "kind": "class",
+    "sha256": "4fbc7a563503b2c20d1c1cabb5ee34d15eb24cb0412fd0c2ad8f229951ad58d6",
+    "methods": [
+      {
+        "name": "__construct",
+        "signature": "public function __construct(private readonly string $file)",
+        "description": "",
+        "doc": "",
+        "line": 13
+      },
+      {
+        "name": "configuredPath",
+        "signature": "public static function configuredPath(): string",
+        "description": "",
+        "doc": "",
+        "line": 21
+      },
+      {
+        "name": "requested",
+        "signature": "public function requested(): bool",
+        "description": "",
+        "doc": "",
+        "line": 26
+      },
+      {
+        "name": "request",
+        "signature": "public function request(): void",
+        "description": "",
+        "doc": "",
+        "line": 32
       }
     ]
   },
@@ -27605,6 +27641,28 @@
     ]
   },
   {
+    "file": "Translator/Formatter.php",
+    "name": "Spark\\Translator\\Formatter",
+    "kind": "class",
+    "sha256": "ffd23983cc5421b4c9870b4c5c9d1a149415d5de439b65e04bf7984aedb5e90b",
+    "methods": [
+      {
+        "name": "format",
+        "signature": "public static function format( TranslatorContract $translator, string $text, mixed $arg = null, array $args = [], array $args2 = [], ?string $locale = null ): string",
+        "description": "Resolve a string with named, positional, printf, or plural arguments.",
+        "doc": "Resolve a string with named, positional, printf, or plural arguments.",
+        "line": 20
+      },
+      {
+        "name": "replace",
+        "signature": "public static function replace(string|array $line, array $replace): string|array",
+        "description": ":name  :NAME  :Name — longest placeholder wins, replaced values are never re-processed.",
+        "doc": ":name  :NAME  :Name — longest placeholder wins, replaced values are never re-processed.",
+        "line": 65
+      }
+    ]
+  },
+  {
     "file": "Translator/PluralRules.php",
     "name": "Spark\\Translator\\PluralRules",
     "kind": "class",
@@ -27630,133 +27688,133 @@
     "file": "Translator/Translator.php",
     "name": "Spark\\Translator\\Translator",
     "kind": "class",
-    "sha256": "ad8082fe930b371cf8095554270482ee85c4e953cb676109cbe13ea86ab0ad27",
+    "sha256": "27328d86f11fa023bdc21fd0ac752a51132d8b1306acb4885af1ef67216eb90a",
     "methods": [
       {
         "name": "__construct",
         "signature": "public function __construct(string|array|null $paths = null, ?string $locale = null, ?string $fallback = null)",
         "description": "",
         "doc": "",
-        "line": 58
+        "line": 55
       },
       {
         "name": "getLocale",
         "signature": "public function getLocale(): string",
         "description": "",
         "doc": "",
-        "line": 72
+        "line": 69
       },
       {
         "name": "setLocale",
         "signature": "public function setLocale(string $locale): void",
         "description": "",
         "doc": "",
-        "line": 77
+        "line": 74
       },
       {
         "name": "getFallback",
         "signature": "public function getFallback(): ?string",
         "description": "",
         "doc": "",
-        "line": 83
+        "line": 80
       },
       {
         "name": "setFallback",
         "signature": "public function setFallback(?string $locale): void",
         "description": "",
         "doc": "",
-        "line": 88
+        "line": 85
       },
       {
         "name": "withLocale",
         "signature": "public function withLocale(string $locale): static",
         "description": "Scoped copy for long-running workers (Swoole / ReactPHP): never call\nsetLocale() on a shared instance when requests run concurrently.",
         "doc": "Scoped copy for long-running workers (Swoole / ReactPHP): never call\nsetLocale() on a shared instance when requests run concurrently.",
-        "line": 100
+        "line": 97
       },
       {
         "name": "get",
         "signature": "public function get(string $key, array $replace = [], ?string $locale = null, bool $fallback = true): string|array",
         "description": "Resolve: locale → parent locale (en_GB → en) → fallback → the key itself.",
         "doc": "Resolve: locale → parent locale (en_GB → en) → fallback → the key itself.",
-        "line": 112
+        "line": 109
       },
       {
         "name": "has",
         "signature": "public function has(string $key, ?string $locale = null, bool $fallback = true): bool",
         "description": "",
         "doc": "",
-        "line": 125
+        "line": 122
       },
       {
         "name": "choice",
         "signature": "public function choice(string $key, int|float|array|\\Countable $number, array $replace = [], ?string $locale = null): string",
         "description": "",
         "doc": "",
-        "line": 130
+        "line": 127
       },
       {
         "name": "format",
         "signature": "public function format(string $text, mixed $arg = null, array $args = [], array $args2 = [], ?string $locale = null): string",
         "description": "Resolve a string with named, positional, printf, or plural arguments.",
         "doc": "Resolve a string with named, positional, printf, or plural arguments.",
-        "line": 151
+        "line": 148
       },
       {
         "name": "handleMissingKeysUsing",
         "signature": "public function handleMissingKeysUsing(?callable $callback): static",
         "description": "",
         "doc": "",
-        "line": 189
+        "line": 153
       },
       {
         "name": "addPath",
         "signature": "public function addPath(string $path, bool $prepend = false): static",
         "description": "Add a lang directory. $prepend = lowest priority (package defaults).",
         "doc": "Add a lang directory. $prepend = lowest priority (package defaults).",
-        "line": 200
+        "line": 164
       },
       {
         "name": "addLanguageFile",
         "signature": "public function addLanguageFile(string $file, bool $prepend = false, ?string $locale = null): void",
         "description": "Add an extra flat file (returns an array) for a locale.",
         "doc": "Add an extra flat file (returns an array) for a locale.",
-        "line": 209
+        "line": 173
       },
       {
         "name": "addLines",
         "signature": "public function addLines(array $lines, ?string $locale = null, string $group = '*'): void",
         "description": "",
         "doc": "",
-        "line": 222
+        "line": 186
       },
       {
         "name": "all",
         "signature": "public function all(?string $locale = null, string $group = '*'): array",
         "description": "",
         "doc": "",
-        "line": 233
+        "line": 197
       },
       {
         "name": "flush",
         "signature": "public function flush(): void",
         "description": "Drop every cache and runtime line (use after deploys / in dev watchers of long-running workers).",
         "doc": "Drop every cache and runtime line (use after deploys / in dev watchers of long-running workers).",
-        "line": 240
+        "line": 204
       },
       {
         "name": "getLoadedFiles",
         "signature": "public function getLoadedFiles(): array",
         "description": "",
         "doc": "",
-        "line": 245
+        "line": 209
       },
       {
         "name": "hasLoadedFiles",
         "signature": "public function hasLoadedFiles(): bool",
         "description": "",
         "doc": "",
-        "line": 250
+        "line": 214
       }
     ]
   },

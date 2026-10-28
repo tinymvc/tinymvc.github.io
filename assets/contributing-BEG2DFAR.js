@@ -26,6 +26,8 @@ For framework/application PHP changes, lint changed files and run the applicable
 
 Each guide is a Markdown file. Page titles, descriptions, groups, and order live in the navigation manifest. Keep examples complete enough to follow, name required application classes, and link to related topics.
 
+Lead with what the feature does and how to use it. Update existing sections instead of appending task summaries, test totals, or internal implementation notes. Keep limitations that affect correct use; put migration steps in the upgrade guide.
+
 When an API changes, review the implementation, update its guide and examples, then regenerate the API snapshot. The workflow below keeps the Markdown, navigation, and source reference together. Existing frozen versions should continue to describe their original release.
 
 ## Licensing and attribution

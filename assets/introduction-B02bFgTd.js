@@ -25,7 +25,7 @@ Nova and Orbit are ready-configured application starters. FireLine and Inertia a
 
 - **HTTP:** named and resource routes, middleware, request input, validation, responses, sessions, authentication, gates, CSRF, CORS, and throttling.
 - **Data:** PDO connections, a fluent query builder, models, casts, relationships, migrations, schema definitions, and pagination.
-- **Services:** a container, providers, facades, events, pipelines, concurrency, SQLite or Redis cache, locks, and queues.
+- **Services:** a container, providers, facades, events, pipelines, concurrency, cache, distributed locks, and queues.
 - **Developer tools:** the \`spark\` CLI, code generators, Vite integration, debugging tools, and a plain PHP test runner.
 - **Utilities:** collections, strings, dates, URLs, translations, uploads, files, images, mail, and an HTTP client.
 

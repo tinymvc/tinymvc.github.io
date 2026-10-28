@@ -39,6 +39,7 @@ After changing configuration or compiled-template behavior:
 \`\`\`bash
 php spark config:clear
 php spark view:clear
+php spark cache:clear
 \`\`\`
 
 Use cache clearing deliberately according to your invalidation plan. Restart long-running workers so they load the new code and config. Do not regenerate the application key as a routine deployment step.
@@ -57,7 +58,7 @@ Measure latency, database time, memory, and error rates with your actual workloa
 
 ## Verify a release
 
-Review the [recorded framework test results and coverage limits](./testing.md#verified-framework-test-results), then run your application tests against the intended runtime and database. The framework regression suite does not validate your application configuration, migrations, external providers, or production workload.
+Review the [framework test instructions](./testing.md#verified-framework-test-results), then run your application tests against the intended runtime and database, including its migrations and external integrations.
 
 Check a public page, a JSON endpoint, login/logout, a protected write with CSRF, asset loading, upload access, and a queued job. Confirm debug output is off and expected logs are being written. Keep a tested rollback plan for both code and schema changes.
 

@@ -103,13 +103,13 @@ For example, \`onlyTrashed()->forceDelete()\` permanently deletes the selected a
 
 The development skill requires readable Laravel-style PHP formatting while using Spark's real APIs: four spaces, one statement per line, expanded long arrays and chains, and blank lines between logical steps. It discourages compressed method bodies, nested ternaries, redundant wrappers, and unnecessary service layers. Newly written code should follow these conventions without reformatting unrelated files.
 
-The application-patterns reference demonstrates: direct typed controller actions, inline validation for small actions or form requests for larger rule sets, focused domain services, reusable model scopes, and explicit response resources. Its examples are self-contained and use a neutral application domain. Service injection and stateless static helpers are both supported where they match the application. These examples live in the installed TinyCore skill; keep application-specific additions in your project instructions.
+The application-patterns reference covers typed controller actions, validation, domain services, model scopes, and response resources. Follow the application's existing conventions for dependency injection and helpers.
 
 For efficient work, trace one nearby feature and its tests, then inspect only the relevant installed methods and reference sections. Route binding does not establish ownership. \`validate()\` and no-argument \`validated()\` return Spark's \`Input\` object; call \`all()\` when a plain array is required. Eager-load the relations/counts a resource needs and use \`whenLoaded()\` / \`whenCounted()\` to avoid hidden serialization queries.
 
 Use Spark's validation, resources, relationships, scopes, support helpers, and services before adding custom equivalents. Verify each method against the installed package. Laravel formatting is a style choice, not a promise of Eloquent or Illuminate compatibility.
 
-The skill also requires checking model return values before chaining. Use global \`tap()\` when retaining a model after actions, and \`pipe()\` when returning a transformed value. Explicitly handle failed writes when success matters; \`tap()\` ignores callback return values. See [Models](./models.md#model-action-return-values-tap-and-pipe) and [Helpers](./helpers.md#tap-and-pipe).
+Check model return values before chaining and handle failed writes. See [Models](./models.md#model-action-return-values-tap-and-pipe) and [Helpers](./helpers.md#tap-and-pipe) for \`tap()\` and \`pipe()\`.
 
 ## Advanced work and exact APIs
 
@@ -122,7 +122,7 @@ php vendor/tinymvc/tinycore/skills/tinymvc-spark/scripts/api-lookup.php upsert
 php vendor/tinymvc/tinycore/skills/tinymvc-spark/scripts/api-lookup.php transaction --file=Database/
 \`\`\`
 
-The tool returns bounded signature/source-location results. Follow traits, inheritance and facade forwarding when interpreting them. The skill intentionally does not bundle the documentation’s large \`api.json\` snapshot: an application can install a different version. Keep the browsable [API reference](./api-reference.md) in the documentation and use installed source to settle version-specific behavior. The lookup script ships with TinyCore and needs no separate copying or application bootstrapping.
+The tool returns matching signatures and source locations. Follow traits, inheritance, and facade forwarding when interpreting them. Browse the [API reference](./api-reference.md) for discovery; use installed source to confirm version-specific behavior.
 
 ## Verify the result
 
@@ -143,6 +143,4 @@ The assistant's handoff should identify the behavior changed, tests actually run
 Framework maintainers update \`skills/tinymvc-spark/SKILL.md\` and its affected references in the [TinyCore repository](https://github.com/tinymvc/tinycore) alongside API and behavior changes. Those updates ship in the same TinyCore release. Skeleton keeps only the stable entry point, so framework skill updates do not require another Skeleton release. Keep application-specific guidance in the application's \`AGENTS.md\`; vendor files are reference only during application development.
 
 When adopting a new TinyCore release, Composer updates the framework and its bundled guidance together. Review the [upgrade notes](./upgrade-notes.md) and re-run the relevant application tests. Existing versioned documentation should continue to describe its own release.
-
-The skill also includes focused references for dependency injection and event/pipeline composition (\`container-pipelines.md\`), execution choices and concurrency failure handling (\`concurrency.md\`), and request locale/timezone boundaries (\`localization-dates.md\`). Its query reference documents nullable single-row lookups and the migration from false checks. These references are linked from \`SKILL.md\` so complex work can load the relevant contracts without loading the entire guide.
 `;export{e as default};
