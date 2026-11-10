@@ -3,6 +3,7 @@ const e=`## Choose the right repository
 | Project | Repository |
 | --- | --- |
 | Framework implementation | [tinymvc/tinycore](https://github.com/tinymvc/tinycore) |
+| Support classes and helpers | [tinymvc/laravel-supports](https://github.com/tinymvc/laravel-supports) |
 | Base application starter | [tinymvc/skeleton](https://github.com/tinymvc/skeleton) |
 | Inertia adapter | [tinymvc/inertia-php](https://github.com/tinymvc/inertia-php) |
 | Orbit admin starter | [tinymvc/orbit](https://github.com/tinymvc/orbit) |
@@ -48,7 +49,7 @@ From the documentation project root:
 
 Article titles come from navigation, so start Markdown sections with \`##\` instead of repeating an H1. Link to another guide with \`./models.md\`, or a section with \`./soft-deletes.md#restore-records\`; the renderer keeps readers in the selected documentation version. Keep published slugs stable so bookmarks continue working.
 
-A new article needs both its Markdown file and a navigation entry. Its \`sources\` list uses paths relative to TinyCore’s \`src/\`; a trailing slash maps a directory. These mappings help the source checker identify guides affected by a framework change. They do not automatically rewrite prose.
+A new article needs both its Markdown file and a navigation entry. Use paths relative to TinyCore’s \`src/\` or prefix support paths with \`laravel-supports/src/\`. A trailing slash maps a directory. These mappings help the source checker identify guides affected by a framework change. They do not automatically rewrite prose.
 
 ## Validate a documentation change
 
@@ -66,7 +67,7 @@ npm run docs:smoke-storage
 npm run build
 \`\`\`
 
-The source and smoke commands expect sibling \`tinycore/\` and \`skeleton/\` checkouts. You can pass another TinyCore \`src\` directory to \`docs:check-source\` / \`docs:sync-api\`, and the framework/database PHP smoke scripts accept source and skeleton paths. The storage smoke script accepts a source path, uses synthetic credentials and a temporary loopback HTTP server, and requires PHP cURL, SimpleXML, and permission to bind a local port. It does not contact a real bucket. The build and navigation checks work with the committed content/reference snapshots alone.
+The source and smoke commands expect sibling \`tinycore/\` and \`skeleton/\` checkouts. Run \`composer install\` in TinyCore before the smoke checks. The source commands read the sibling \`laravel-supports/src\` checkout or the package installed in TinyCore. To specify both source directories, use \`npm run docs:sync-api -- <tinycore-src> <laravel-supports-src>\` or pass the same arguments to \`docs:check-source\`. The storage smoke script accepts a source path, uses synthetic credentials and a temporary loopback HTTP server, and requires PHP cURL, SimpleXML, and permission to bind a local port. It does not contact a real bucket. The build and navigation checks work with the committed content/reference snapshots alone.
 
 \`docs:check-source\` reports changed source files and affected guides. After reviewing those changes and updating examples, run \`npm run docs:sync-api\` to refresh **current** \`api.json\` and \`sources.json\`, then repeat the relevant checks. Never use a snapshot refresh as a substitute for reviewing changed behavior.
 
@@ -80,7 +81,7 @@ Keep editing \`current\` until you are ready to preserve a release. Freeze it wi
 npm run docs:version -- v3 "TinyMVC v3" YOUR_VERIFIED_TINYCORE_TAG_OR_COMMIT
 \`\`\`
 
-Replace the last argument with the actual reviewed TinyCore tag or commit; it is used for source links. The command copies current Markdown, navigation, API declarations, and source hashes into a separate version directory and adds it to \`versions.json\`. It does not check out that ref or regenerate documentation from it. Verify the current snapshot matches that release before freezing.
+Replace the last argument with the actual reviewed TinyCore tag or commit; it is used for source links. The command copies current Markdown, navigation, API declarations, and source hashes into a separate version directory and adds it to \`versions.json\`. It does not check out that ref or regenerate documentation from it. Verify the snapshot and its \`supportRef\` in \`versions.json\` match the reviewed releases before freezing.
 
 Version IDs use forms such as \`v3\`, \`v4\`, or \`v5\`; the command rejects an existing ID rather than overwriting it. The selector appears when multiple versions exist. \`defaultVersion\` decides where the plain Docs link opens. Within each version, the first navigation entry is its landing page. Preserve Introduction first, with AI-assisted development after Application lifecycle in the getting-started sequence.
 

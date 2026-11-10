@@ -18,7 +18,7 @@ Deploy \`vendor/\`, application code, public assets, and the complete Vite build
 
 ## Environment and storage
 
-Set the production \`APP_URL\`, \`APP_DEBUG=false\`, database credentials, cache/queue drivers, and mail configuration. Preserve \`APP_KEY\` across releases. Ensure the PHP process can write the configured storage and SQLite locations without making the whole project world-writable.
+Set the production \`APP_URL\`, \`APP_DEBUG=false\`, database credentials, cache/queue/session drivers, and mail configuration. Preserve \`APP_KEY\` across releases. Ensure the PHP process can write the storage directory and any configured SQLite files without making the whole project world-writable.
 
 If public uploads are intended, run \`php spark storage:link\` and verify the resulting public URL. Keep private files outside publicly linked locations.
 
@@ -48,7 +48,7 @@ Use cache clearing deliberately according to your invalidation plan. Restart lon
 
 Run \`php spark queue:work\` under a process supervisor with the intended queue name and explicit worker settings. Capture output and monitor failures. Repeating jobs need both registration and an active worker.
 
-Use Redis or another shared architecture when multiple hosts must share cache, locks, queue state, and throttling. Local SQLite files on separate machines do not provide shared state.
+Use a shared database or Redis when multiple hosts need the same cache entries, locks, jobs, sessions, or throttle counters.
 
 ## Performance
 

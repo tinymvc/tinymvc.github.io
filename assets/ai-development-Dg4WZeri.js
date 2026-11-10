@@ -61,7 +61,7 @@ If \`vendor/\` is missing, install the project's locked dependencies with \`comp
 
 ## Work against your installed version
 
-Ask the assistant to check \`composer.json\`, the locked or installed TinyCore version, and the relevant files under \`vendor/tinymvc/tinycore/src\`. A constraint such as \`^4.0\` permits multiple releases and does not identify the installed API.
+Ask the assistant to check \`composer.json\`, the locked or installed TinyCore version, and the relevant files under \`vendor/tinymvc/tinycore/src\`. Support classes and value helpers live in \`vendor/tinymvc/laravel-supports/src\`. A constraint such as \`^4.0\` permits multiple releases and does not identify the installed API.
 
 The current documentation may describe a newer implementation than your application. A neighboring TinyCore checkout can also differ from the installed package. Resolve those differences before using a method, rather than silently upgrading dependencies or editing vendor files.
 
@@ -109,7 +109,7 @@ For efficient work, trace one nearby feature and its tests, then inspect only th
 
 Use Spark's validation, resources, relationships, scopes, support helpers, and services before adding custom equivalents. Verify each method against the installed package. Laravel formatting is a style choice, not a promise of Eloquent or Illuminate compatibility.
 
-Check model return values before chaining and handle failed writes. See [Models](./models.md#model-action-return-values-tap-and-pipe) and [Helpers](./helpers.md#tap-and-pipe) for \`tap()\` and \`pipe()\`.
+Check model return values before chaining and handle failed writes. See [Models](./models.md#model-action-return-values-tap-and-with) and [Helpers](./helpers.md#tap-and-with) for \`tap()\` and \`with()\`.
 
 ## Advanced work and exact APIs
 

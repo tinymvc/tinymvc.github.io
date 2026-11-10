@@ -36,7 +36,7 @@ class TrimName implements \\Spark\\Contracts\\PipeInterface
 }
 \`\`\`
 
-Pass \`TrimName::class\` to \`through()\`. The container resolves class dependencies. \`pipe()\` aliases pipe addition; \`when()\` and \`unless()\` conditionally add pipes.
+Pass \`TrimName::class\` to \`through()\`. The container resolves class dependencies. \`$pipeline->pipe(...)\` adds stages. Use \`when()\` and \`unless()\` to add them conditionally.
 
 ## Execute and collect
 
